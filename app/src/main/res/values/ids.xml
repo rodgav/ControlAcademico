@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="mat_norm" type="id">Matricula Normal</item>
+    <item name="mat_anorm" type="id">Matricula Anormal</item>
+</resources>

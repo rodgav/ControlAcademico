@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group1"
+        android:visible="false"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/llamar"
+            android:icon="@drawable/rasistencia"
+            android:title="@string/llaasis" />
+        <item
+            android:id="@+id/registrar"
+            android:icon="@drawable/rnotas"
+            android:title="@string/ingrenota" />
+        <item
+            android:id="@+id/asisten"
+            android:icon="@drawable/masistencia"
+            android:title="@string/asistencia" />
+        <item
+            android:id="@+id/nota"
+            android:icon="@drawable/mnotas"
+            android:title="@string/nota" />
+        <item
+            android:id="@+id/matr"
+            android:icon="@drawable/matriculados"
+            android:title="@string/matr" />
+        <item
+            android:id="@+id/regval"
+            android:icon="@drawable/rvaloraciones"
+            android:title="@string/regval" />
+        <item
+            android:id="@+id/valo"
+            android:icon="@drawable/mvaloraciones"
+            android:title="@string/valo" />
+    </group>
+    <group
+        android:id="@+id/group2"
+        android:visible="false"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/regasig"
+            android:icon="@drawable/asignaturas"
+            android:title="@string/regasig" />
+        <item
+            android:id="@+id/regasigd"
+            android:icon="@drawable/asignaturas"
+            android:title="@string/regasigd" />
+        <item
+            android:id="@+id/regsemest"
+            android:icon="@drawable/rasignaturas"
+            android:title="@string/regsemes" />
+        <item
+            android:id="@+id/actest"
+            android:icon="@drawable/asignaturas"
+            android:title="@string/act_est" />
+        <item
+            android:id="@+id/actmat"
+            android:icon="@drawable/asignaturas"
+            android:title="@string/actmat" />
+    </group>
+    <group
+        android:id="@+id/group3"
+        android:visible="false"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/mostrarasistencia"
+            android:icon="@drawable/masistencia"
+            android:title="@string/mostras" />
+        <item
+            android:id="@+id/mostrarnota"
+            android:icon="@drawable/rnotas"
+            android:title="@string/mostrno" />
+        <item
+            android:id="@+id/asignaturas"
+            android:icon="@drawable/asignaturas"
+            android:title="@string/curso" />
+        <item
+            android:id="@+id/horario"
+            android:icon="@drawable/horario"
+            android:title="@string/horario" />
+        <item
+            android:id="@+id/matrin"
+            android:icon="@drawable/matricularse"
+            android:title="@string/mat_n" />
+        <item
+            android:id="@+id/matria"
+            android:icon="@drawable/matricularse"
+            android:title="@string/mat_a" />
+    </group>
+
+
+    <item android:title="@string/contacto">
+        <menu>
+            <item
+                android:id="@+id/contacto"
+                android:icon="@drawable/contacto"
+                android:title="@string/paginaFB" />
+            <item
+                android:id="@+id/cerrar"
+                android:icon="@drawable/cerrar"
+                android:title="@string/cerrar" />
+        </menu>
+    </item>
+
+</menu>

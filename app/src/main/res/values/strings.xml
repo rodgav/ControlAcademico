@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Control Academico</string>
+    <string name="action_settings">Settings</string>
+    <string name="año">2017-2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Estamos trabajando en esta caracteristica</string>
+    <string name="Comprobar">Comprobar Asistencia</string>
+    <string name="normal">Normal</string>
+    <string name="anormal">Anormal</string>
+    <string name="Comprobarn">Comprobar Notas</string>
+    <string name="codigo">Codigo</string>
+    <string name="baucher">Baucher</string>
+    <string name="matricularse">Matricularse</string>
+    <string name="semestre">Semestre:</string>
+    <string name="escuela">Escuela Profesional</string>
+    <string name="facultad">Facultad</string>
+    <string name="matriculan">Matriculados normalmente</string>
+    <string name="matriculaa">Matriculados anormalmente</string>
+    <string name="asignatura">Asignatura:</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="login">INICIAR SESION</string>
+    <string name="register">REGISTRARME</string>
+    <string name="nombre">Nombres</string>
+    <string name="apellidom">Apellido Materno</string>
+    <string name="apellidop">Apellido Paterno</string>
+    <string name="verificacion">Codigo de verificación</string>
+    <string name="correo">Correo</string>
+    <string name="documento">N° Documento</string>
+    <string name="nacimiento">Fecha de Nacimiento</string>
+    <string name="telefono">N° Telefono</string>
+    <string name="registrar">REGISTRAR</string>
+    <string name="registro">REGISTRO DE USUARIOS</string>
+    <string name="genero">Genero: </string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="tcodumento">Tipo de Documento</string>
+    <string name="logins">Iniciando Sesion</string>
+    <string name="refrehs">Ocurrio un Problema  Touchme Please</string>
+    <string name="enviar">Enviar</string>
+    <string name="enviado">Enviado</string>
+    <string name="tm">Tipo de matricula:</string>
+    <string name="unidad">Unidad:</string>
+    <string name="valoracion">Examen, Practica, etc…</string>
+    <string name="peso">0% - 100%</string>
+
+    //menu docente
+    <string name="llaasis">Llamar Asistencia</string>
+    <string name="asistencia">Asistencia</string>
+    <string name="ingrenota">Ingresar Notas</string>
+    <string name="nota">Notas</string>
+    <string name="regval">Registrar Valoracion</string>
+    <string name="valo">Valoraciones</string>
+    <string name="contacto">Contacto</string>
+    <string name="paginaFB">Pagina de FB</string>
+    <string name="cerrar">Cerrar Sesión</string>
+    <string name="matr">Mostrar Matriculados</string>
+
+
+    //menu secretaria
+    <string name="regasig">Registrar Asignaturas</string>
+    <string name="matri">Matriculas</string>
+    <string name="regasigd">Asignaturas Docentes</string>
+    <string name="regsemes">Registrar Semestres</string>
+
+    //menu estudiante
+    <string name="mostras">Mostrar Asistencia</string>
+    <string name="mostrno">Mostrar Notas</string>
+    <string name="curso">Asignaturas</string>
+    <string name="horario">Horarios</string>
+
+    //menu manual
+    <string name="asismanual">Asistencia Manual</string>
+    <string name="notasmanual">Nota Mnual</string>
+    <string name="eliminar">Eliminar</string>
+
+    <string name="title_activity_navigation">Control Academico</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="lnacimiento">Lugar de Nacimiento</string>
+    <string name="dep">Departamentos</string>
+    <string name="prov">Provincias</string>
+    <string name="distr">Distritos</string>
+    <string name="sede">Sede</string>
+    <string name="mat_a">Matricula Anormal</string>
+    <string name="mat_n">Matricula Normal</string>
+    <string name="activar">activar</string>
+    <string name="modificar">modificar</string>
+    <string name="act_us">Activar Usuario</string>
+    <string name="act_est">Activar Estudiantes</string>
+    <string name="actmat">Activar Matriculas</string>
+</resources>
