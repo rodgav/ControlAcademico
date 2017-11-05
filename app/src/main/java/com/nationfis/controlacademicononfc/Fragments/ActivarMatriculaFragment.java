@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.u
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQueryTextListener,SwipeRefreshLayout.OnRefreshListener {
 
 
     public ActivarMatriculaFragment() {
@@ -32,6 +33,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
     private SearchView searchView;
     private Switch switch0;
     private String accion,ep,anioa,sede;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
         estudiantes = (ListView)view.findViewById(R.id.estudiantes);
         searchView = (SearchView)view.findViewById(R.id.sv);
         switch0 = (Switch) view.findViewById(R.id.switch0);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         anioa = getResources().getString(R.string.año);
 
@@ -48,6 +51,13 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
         ep = preferences.getString("ep","");
         sede = preferences.getString("sede","");
 
+        swipeRefreshLayout.setOnRefreshListener(ActivarMatriculaFragment.this);
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                descargar("");
+            }
+        });
         return view;
     }
 
@@ -63,7 +73,9 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
         }else{
             accion = MD5.encrypt("mn");
         }
-        new MostrarEstudiantes(getActivity(),urla,accion,s,estudiantes,ep,anioa,sede).execute();
+        estudiantes.setAdapter(null);
+        swipeRefreshLayout.setRefreshing(true);
+        new MostrarEstudiantes(getActivity(),urla,accion,s,estudiantes,ep,anioa,sede,swipeRefreshLayout).execute();
     }
 
     @Override
@@ -71,5 +83,10 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
     public boolean onQueryTextChange(String s) {
         descargar(s);
         return false;
+    }
+
+    @Override
+    public void onRefresh() {
+        descargar("");
     }
 }

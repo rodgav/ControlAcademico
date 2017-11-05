@@ -2,6 +2,7 @@ package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarEstudiantes;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,7 +25,8 @@ public class MostrarEstudiantes extends AsyncTask<Void,Void,String> {
     private String urla,accion,s1,ep,anioa,sede;
     private Context c;
     private ListView estudiantes;
-    public MostrarEstudiantes(Context c, String urla, String accion, String s1, ListView estudiantes,String ep,String anioa,String sede) {
+    private SwipeRefreshLayout swipeRefreshLayout;
+    public MostrarEstudiantes(Context c, String urla, String accion, String s1, ListView estudiantes, String ep, String anioa, String sede, SwipeRefreshLayout swipeRefreshLayout) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
@@ -33,6 +35,7 @@ public class MostrarEstudiantes extends AsyncTask<Void,Void,String> {
         this.ep = ep;
         this.anioa = anioa;
         this.sede = sede;
+        this.swipeRefreshLayout = swipeRefreshLayout;
     }
 
     @Override
@@ -45,8 +48,9 @@ public class MostrarEstudiantes extends AsyncTask<Void,Void,String> {
         super.onPostExecute(s);
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
+            swipeRefreshLayout.setRefreshing(false);
         }else{
-            new AnalizarEstudiantes(c,s,estudiantes,accion).execute();
+            new AnalizarEstudiantes(c,s,estudiantes,accion,swipeRefreshLayout).execute();
         }
     }
 

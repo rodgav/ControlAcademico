@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.u
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTextListener{
+public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTextListener,SwipeRefreshLayout.OnRefreshListener{
 
 
     public ActivarEstudiantes() {
@@ -29,6 +30,7 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
 
     private ListView estudiantes;
     private SearchView searchView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private String accion = MD5.encrypt("estudiantes"),ep,anioa,sede;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,11 +40,18 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
         estudiantes = (ListView)view.findViewById(R.id.estudiantes);
         searchView = (SearchView)view.findViewById(R.id.sv);
         anioa = getResources().getString(R.string.año);
+        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         searchView.setOnQueryTextListener(ActivarEstudiantes.this);
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         ep = preferences.getString("ep","");
         sede = preferences.getString("sede","");
-
+        swipeRefreshLayout.setOnRefreshListener(ActivarEstudiantes.this);
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                descargar("");
+            }
+        });
 
         return view;
     }
@@ -54,7 +63,9 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
     }
 
     private void descargar(String s) {
-        new MostrarEstudiantes(getActivity(),urla,accion,s,estudiantes,ep,anioa,sede).execute();
+        estudiantes.setAdapter(null);
+        swipeRefreshLayout.setRefreshing(true);
+        new MostrarEstudiantes(getActivity(),urla,accion,s,estudiantes,ep,anioa,sede,swipeRefreshLayout).execute();
     }
 
     @Override
@@ -63,4 +74,8 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
         return false;
     }
 
+    @Override
+    public void onRefresh() {
+        descargar("");
+    }
 }

@@ -30,15 +30,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:padding="10dp"
-            app:defaultQueryHint="Codigo" />
+            android:padding="10dp" />
 
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
         <ListView
             android:id="@+id/estudiantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </ListView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 </RelativeLayout>

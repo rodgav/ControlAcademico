@@ -2,6 +2,7 @@ package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarEstudiantes;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,13 +21,15 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
     private Context c;
     private String s,accion;
     private ListView estudiantes;
+    private SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<Estudiantes> estudiantes1 = new ArrayList<>();
     ArrayList<Matriculas> matriculas1 = new ArrayList<>();
-    public AnalizarEstudiantes(Context c, String s, ListView estudiantes,String accion) {
+    public AnalizarEstudiantes(Context c, String s, ListView estudiantes, String accion, SwipeRefreshLayout swipeRefreshLayout) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;
         this.accion = accion;
+        this.swipeRefreshLayout = swipeRefreshLayout;
     }
 
     @Override
@@ -148,6 +151,7 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
+        swipeRefreshLayout.setRefreshing(false);
         if (integer==0){
             Toast.makeText(c,"No se pudieron cargar",Toast.LENGTH_SHORT).show();
         }else {
