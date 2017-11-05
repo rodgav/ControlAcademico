@@ -55,11 +55,11 @@ public class LoginActvity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() >= 0) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+            getSupportFragmentManager().beginTransaction().commit();
+        }else {
             super.onBackPressed();
-            getFragmentManager().popBackStack();
-        } else {
-            finish();
         }
     }
 }
