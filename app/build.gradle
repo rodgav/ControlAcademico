@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'cafinal1'
             keyPassword '$i$tema$31ena$'
-            storeFile file('C:/Users/Sam/AndroidStudioProjects/keys/cafinal.jks')
+            storeFile file('C:/Users/cafinal.jks')
             storePassword '$i$tema$31ena$'
         }
     }
