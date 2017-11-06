@@ -15,8 +15,8 @@ android {
         applicationId "com.nationfis.controlacademicononfc"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 3
-        versionName "4.0b"
+        versionCode 4
+        versionName "5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

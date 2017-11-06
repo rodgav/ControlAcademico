@@ -58,6 +58,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
                 descargar("");
             }
         });
+
         return view;
     }
 

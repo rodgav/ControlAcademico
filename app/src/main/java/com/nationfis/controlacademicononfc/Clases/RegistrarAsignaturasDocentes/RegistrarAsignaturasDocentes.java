@@ -24,13 +24,15 @@ import java.net.HttpURLConnection;
 
 public class RegistrarAsignaturasDocentes extends AsyncTask<Void,Void,String>{
     private ProgressDialog pd;
-    private String urla,codio,codigo1;
+    private String urla,codio,codigo1,sede,anioa;
     private Context c;
-    public RegistrarAsignaturasDocentes(Context c, String urla, String codio, String codigo1) {
+    public RegistrarAsignaturasDocentes(Context c, String urla, String codio, String codigo1, String sede, String anioa) {
         this.c = c;
         this.urla = urla;
         this.codigo1 = codigo1;
         this.codio = codio;
+        this.sede = sede;
+        this.anioa = anioa;
     }
 
     @Override
@@ -66,7 +68,7 @@ public class RegistrarAsignaturasDocentes extends AsyncTask<Void,Void,String>{
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueAsignaturasDocentes(codio,codigo1).packageData());
+            bw.write(new EmpaqueAsignaturasDocentes(codio,codigo1,sede,anioa).packageData());
             bw.flush();
             bw.close();
             os.close();

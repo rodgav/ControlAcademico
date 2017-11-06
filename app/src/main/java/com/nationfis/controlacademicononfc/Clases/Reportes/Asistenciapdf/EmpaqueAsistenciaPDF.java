@@ -1,4 +1,4 @@
-package com.nationfis.controlacademicononfc.Clases.RegistrarAsignaturasDocentes;
+package com.nationfis.controlacademicononfc.Clases.Reportes.Asistenciapdf;
 
 import com.kosalgeek.android.md5simply.MD5;
 
@@ -10,28 +10,22 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 
 /**
- * Created by Sam on 02/05/2017.
+ * Created by GlobalTIC's on 5/11/2017.
  */
 
-public class EmpaqueAsignaturasDocentes {
-    private String codio,codigo1,sede,anioa;
-    public EmpaqueAsignaturasDocentes(String codio, String codigo1,String sede, String anioa) {
-        this.codigo1 = codigo1;
-        this.codio = codio;
-        this.sede = sede;
-        this.anioa = anioa;
+public class EmpaqueAsistenciaPDF {
+    String asig,fecha;
+    public EmpaqueAsistenciaPDF(String asig, String fecha) {
+        this.asig = asig;
+        this.fecha = fecha;
     }
-
     String packageData() {
         JSONObject jo = new JSONObject();
         StringBuffer sb = new StringBuffer();
-        String accion= MD5.encrypt("registrarasigdoc");
+
         try {
-            jo.put("accion",accion);
-            jo.put("1",codigo1);
-            jo.put("2",codio);
-            jo.put("3",sede);
-            jo.put("4",anioa);
+            jo.put("1",asig);
+            jo.put("2",fecha);
             Boolean primer = true;
             Iterator i = jo.keys();
             do {

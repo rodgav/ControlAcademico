@@ -1,6 +1,8 @@
 package com.nationfis.controlacademicononfc.Fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,6 +35,7 @@ public class RegistrarAsignaturasDocentesFragments extends Fragment implements V
     //private String urla1 = "http://nationfis.hol.es/nonfc/regasignd.php";
     private EditText codigo;
     private DatosDatos da;
+    private String sede,anioa;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +49,10 @@ public class RegistrarAsignaturasDocentesFragments extends Fragment implements V
         codigo = (EditText)view.findViewById(R.id.codigo);
         Button registrar = (Button)view.findViewById(R.id.registrar);
         String accion = MD5.encrypt("facultades");
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        sede = preferences.getString("sede","");
+        anioa =  getResources().getString(R.string.año);
         new RecibirFacultades(getActivity(),urla,facultades,escuelas,semestres,asignaturas,matricula1,accion).execute();
         registrar.setOnClickListener(RegistrarAsignaturasDocentesFragments.this);
         da = new DatosDatos();
@@ -67,7 +74,7 @@ public class RegistrarAsignaturasDocentesFragments extends Fragment implements V
         if (codigo1.length() <= 0 ){
             Toast.makeText(getActivity(),"Rellene los campos porfavor",Toast.LENGTH_SHORT).show();
         }else {
-            new RegistrarAsignaturasDocentes(getActivity(), urla, codio, codigo1).execute();
+            new RegistrarAsignaturasDocentes(getActivity(), urla, codio, codigo1,sede,anioa).execute();
         }
     }
 }

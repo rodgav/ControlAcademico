@@ -17,6 +17,7 @@ import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
 import com.nationfis.controlacademicononfc.Clases.EnviarAsistencia.RegistrarAsistencia;
 import com.nationfis.controlacademicononfc.Clases.ListViews.ComprobarAsistencia.ComprobarAsistencia;
+import com.nationfis.controlacademicononfc.Clases.Reportes.Asistenciapdf.DescargarAsistenciaPDF;
 import com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes.RecibirAsignaturasDocentes;
 import com.nationfis.controlacademicononfc.R;
 
@@ -48,6 +49,7 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         estudiantesa = (ListView)view.findViewById(R.id.estudiantesa);
         Spinner asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
         Button registrar = (Button)view.findViewById(R.id.registrar);
+        Button descargar = (Button)view.findViewById(R.id.descargar);
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         //String urla="http://nationfis.hol.es/nonfc/asignaturad.php";
         String tipo = "comprobar";
@@ -62,6 +64,7 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
 
         new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,estudiantes,estudiantesa,tipo,sede,anioa).execute();
         registrar.setOnClickListener(ComprobarAsistenciaFragment.this);
+        descargar.setOnClickListener(ComprobarAsistenciaFragment.this);
         swipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
@@ -74,7 +77,16 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
                 estudiantesa.setAdapter(null);
                 registrar();
                 break;
+            case  R.id.descargar:
+                descargar();
+                break;
         }
+    }
+
+    private void descargar() {
+        String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
+        String asig = da.getAsignaturasd();
+        new DescargarAsistenciaPDF(getActivity(),urla1,asig,fecha).execute();
     }
 
     private void llenar() {

@@ -179,7 +179,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     }
     private String convertirfoto(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70,stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 70,stream);
         byte[] byteFormat = stream.toByteArray();
         String imgString = Base64.encodeToString(byteFormat,Base64.NO_WRAP);
         return imgString;
