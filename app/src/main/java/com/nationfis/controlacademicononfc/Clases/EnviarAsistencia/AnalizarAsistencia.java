@@ -1,32 +1,28 @@
 package com.nationfis.controlacademicononfc.Clases.EnviarAsistencia;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nationfis.controlacademicononfc.Clases.ListViews.ComprobarAsistencia.ComprobarAsistencia;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
-/**
+/*
  * Created by SamGM on 23/04/2017.
  */
 
 public class AnalizarAsistencia extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
-    ArrayList<String>mensajes=new ArrayList<>();
-    public AnalizarAsistencia(Context c, String s) {
+    private ArrayList<String>mensajes=new ArrayList<>();
+    AnalizarAsistencia(Context c, String s) {
         this.c=c;
         this.s=s;
     }

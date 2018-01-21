@@ -1,6 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases;
 
-/**
+/*
  * Created by SamGM on 22/04/2017.
  */
 

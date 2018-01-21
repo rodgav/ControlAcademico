@@ -30,18 +30,19 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
     }
 
     private ListView estudiantes;
-    private SearchView searchView;
     private Switch switch0;
-    private String accion,ep,anioa,sede;
+    private String ep;
+    private String anioa;
+    private String sede;
     private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activar_matricula, container, false);
-        estudiantes = (ListView)view.findViewById(R.id.estudiantes);
-        searchView = (SearchView)view.findViewById(R.id.sv);
-        switch0 = (Switch) view.findViewById(R.id.switch0);
+        estudiantes = view.findViewById(R.id.estudiantes);
+        SearchView searchView =  view.findViewById(R.id.sv);
+        switch0 =  view.findViewById(R.id.switch0);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         anioa = getResources().getString(R.string.año);
@@ -69,6 +70,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
     }
 
     private void descargar(String s) {
+        String accion;
         if (switch0.isChecked()){
             accion = MD5.encrypt("ma");
         }else{
@@ -76,7 +78,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
         }
         estudiantes.setAdapter(null);
         swipeRefreshLayout.setRefreshing(true);
-        new MostrarEstudiantes(getActivity(),urla,accion,s,estudiantes,ep,anioa,sede,swipeRefreshLayout).execute();
+        new MostrarEstudiantes(getActivity(),urla, accion,s,estudiantes,ep,anioa,sede,swipeRefreshLayout).execute();
     }
 
     @Override

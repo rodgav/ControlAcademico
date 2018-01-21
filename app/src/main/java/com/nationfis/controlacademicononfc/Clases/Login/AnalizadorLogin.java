@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Login;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,11 +20,12 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-/**
+/*
  * Created by SamGM on 13/04/2017.
  */
 
 class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String nombres,apellidop,apellidm,image,correo,tdoc,ndoc,codigo,tipoid,
             genero,ntelefono,fnacimiento,lnacimiento,activo,ep,sede,nombre,nombredocumento,

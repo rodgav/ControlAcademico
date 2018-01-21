@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.RegistrarMatricula;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -10,15 +11,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by SamGM on 22/04/2017.
  */
 
 public class AnalizadorMatricula extends AsyncTask<Void,Void,Integer>{
-    Context c;
-    String s;
+    @SuppressLint("StaticFieldLeak")
+    private Context c;
+    private String s;
     private ArrayList<String>mensaje = new ArrayList<>();
-    public AnalizadorMatricula(Context c, String s) {
+    AnalizadorMatricula(Context c, String s) {
         this.s = s;
         this.c = c;
     }

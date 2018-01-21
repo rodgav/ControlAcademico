@@ -29,7 +29,7 @@ import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
-/**
+/*
  * Created by Sam on 25/04/2017.
  */
 
@@ -41,9 +41,9 @@ public class AdaptadorComprobarAsistencia extends BaseAdapter {
     //private String urla ="http://nationfis.hol.es/nonfc/actualizarasis.php";
     private String fecha,asistio,tipo;
     private DatosDatos datosDatos;
-    SharedPreferences preferences;
+    private SharedPreferences preferences;
 
-    public AdaptadorComprobarAsistencia(Context c, ArrayList<AsistenciaCA> asistenciaCAs,String tipo) {
+    AdaptadorComprobarAsistencia(Context c, ArrayList<AsistenciaCA> asistenciaCAs, String tipo) {
         this.asistenciaCAs = asistenciaCAs;
         this.c = c;
         this.datosDatos = new DatosDatos();
@@ -72,10 +72,10 @@ public class AdaptadorComprobarAsistencia extends BaseAdapter {
         if (view==null){
             view = inflater.inflate(R.layout.custom_estudiantes_pasar_asistencia,viewGroup,false);
         }
-        TextView nombre = (TextView)view.findViewById(R.id.nombre);
-        TextView codigo = (TextView)view.findViewById(R.id.codigo);
-        ImageView foto = (ImageView)view.findViewById(R.id.foto);
-        final TextView asistio1 = (TextView)view.findViewById(R.id.asistio);
+        TextView nombre = view.findViewById(R.id.nombre);
+        TextView codigo = view.findViewById(R.id.codigo);
+        ImageView foto = view.findViewById(R.id.foto);
+        final TextView asistio1 = view.findViewById(R.id.asistio);
 
         AsistenciaCA asistencia1 = asistenciaCAs.get(i);
         nombre.setText(asistencia1.getNombre());
@@ -97,11 +97,11 @@ public class AdaptadorComprobarAsistencia extends BaseAdapter {
                 public void onClick(View view) {
                     final Dialog d = new Dialog(c);
                     d.setContentView(R.layout.dialog_asistencia);
-                    TextView nombre1 = (TextView) d.findViewById(R.id.nombre);
-                    final TextView codigo1 = (TextView) d.findViewById(R.id.codigo);
-                    Spinner asistencia2 = (Spinner) d.findViewById(R.id.asistencia);
-                    ImageView foto1 = (ImageView) d.findViewById(R.id.foto);
-                    Button enviar = (Button) d.findViewById(R.id.enviar);
+                    TextView nombre1 =  d.findViewById(R.id.nombre);
+                    final TextView codigo1 =  d.findViewById(R.id.codigo);
+                    Spinner asistencia2 =  d.findViewById(R.id.asistencia);
+                    ImageView foto1 =  d.findViewById(R.id.foto);
+                    Button enviar =  d.findViewById(R.id.enviar);
 
                     nombre1.setText(asistenciaCAs.get(i).getNombre());
                     codigo1.setText(asistenciaCAs.get(i).getCodigo());
@@ -110,7 +110,7 @@ public class AdaptadorComprobarAsistencia extends BaseAdapter {
                     Bitmap bitmap1 = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     foto1.setImageBitmap(bitmap1);
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, asis);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, asis);
                     asistencia2.setAdapter(adapter);
                     asistencia2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override

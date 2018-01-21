@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.Departamento;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -17,17 +18,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 19/08/2017.
  */
 
 public class AnalizadorDepartamentos extends AsyncTask<Void,Void,Integer> {
-    ArrayList<String> nod = new ArrayList<>();
-    ArrayList<String>idd = new ArrayList<>();
+    private ArrayList<String> nod = new ArrayList<>();
+    private ArrayList<String>idd = new ArrayList<>();
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String urla,accion2,accion3,s;
+    @SuppressLint("StaticFieldLeak")
     private Spinner departamento,provincia,distrito;
-    public AnalizadorDepartamentos(Context c, String urla, String accion2, String accion3, Spinner departamento, Spinner provincia, Spinner distrito, String s) {
+    AnalizadorDepartamentos(Context c, String urla, String accion2, String accion3, Spinner departamento, Spinner provincia, Spinner distrito, String s) {
         this.c = c;
         this.urla = urla;
         this.accion2 = accion2;
@@ -49,7 +52,7 @@ public class AnalizadorDepartamentos extends AsyncTask<Void,Void,Integer> {
         if (integer ==0){
             Toast.makeText(c,"No se pudo analizar los datos",Toast.LENGTH_SHORT).show();
         }else {
-            ArrayAdapter<String> a = new ArrayAdapter<String>(c,android.R.layout.simple_expandable_list_item_1,nod);
+            ArrayAdapter<String> a = new ArrayAdapter<>(c,android.R.layout.simple_expandable_list_item_1,nod);
             departamento.setAdapter(a);
 
             departamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

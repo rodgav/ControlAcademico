@@ -35,11 +35,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_login, container, false);
-        pass = (EditText)view.findViewById(R.id.pass);
-        user = (EditText)view.findViewById(R.id.user);
-        refresh = (TextView) view.findViewById(R.id.refresh);
-        Button reg = (Button)view.findViewById(R.id.button2);
-        Button log = (Button)view.findViewById(R.id.button);
+        pass = view.findViewById(R.id.pass);
+        user = view.findViewById(R.id.user);
+        refresh =  view.findViewById(R.id.refresh);
+        Button reg = view.findViewById(R.id.button2);
+        Button log = view.findViewById(R.id.button);
 
         reg.setOnClickListener(LoginFragment.this);
         log.setOnClickListener(LoginFragment.this);

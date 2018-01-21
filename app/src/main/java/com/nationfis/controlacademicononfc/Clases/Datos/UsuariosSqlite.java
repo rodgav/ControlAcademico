@@ -2,12 +2,11 @@ package com.nationfis.controlacademicononfc.Clases.Datos;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
-/**
+/*
  * Created by Sam on 19/04/2017.
  */
 
@@ -32,7 +31,7 @@ public class UsuariosSqlite extends SQLiteOpenHelper {
         statement.bindString(4,tipo);
         statement.executeInsert();
     }
-    public void deleteData(String codigo){
+    void deleteData(String codigo){
         String sql ="DELETE FROM USERS WHERE codigo=?";
         SQLiteStatement statement = databasew.compileStatement(sql);
         statement.clearBindings();

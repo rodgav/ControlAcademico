@@ -39,12 +39,11 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
     }
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-    private ListView asistencia,estudiantesa;
-    private String fecha1,codigo;
+    private ListView asistencia;
+    private String codigo;
     private String tipo="ver";
     private TextView fecha;
-    private Spinner asignaturas;
-    private String nivel,sede,anioa;
+    private String nivel;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
     private Button enviar;
@@ -56,27 +55,27 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         nivel = preferences.getString("a","");
         codigo = preferences.getString("codigo","");
-        sede = preferences.getString("sede","");
-        anioa =  getResources().getString(R.string.año);
+        String sede = preferences.getString("sede", "");
+        String anioa = getResources().getString(R.string.año);
 
         if(Objects.equals(nivel, "e4e4564027d73a4325024d948d167e93")){
             view = inflater.inflate(R.layout.fragment_mostrar_asistencia_estudiante, container, false);
-            asistencia = (ListView)view.findViewById(R.id.asistencia);
-            fecha = (TextView)view.findViewById(R.id.fecha);
-            enviar = (Button)view.findViewById(R.id.enviar);
+            asistencia = view.findViewById(R.id.asistencia);
+            fecha = view.findViewById(R.id.fecha);
+            enviar = view.findViewById(R.id.enviar);
             fecha.setText(sdf.format(calendar.getTime()));
-            swipeRefreshLayout =(SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+            swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
 
 
         }else if (Objects.equals(nivel,"ac99fecf6fcb8c25d18788d14a5384ee")){
             view = inflater.inflate(R.layout.fragment_mostrar_asistencia, container, false);
-            asistencia = (ListView)view.findViewById(R.id.asistencia);
-            fecha = (TextView)view.findViewById(R.id.fecha);
-            asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
-            enviar = (Button)view.findViewById(R.id.enviar);
+            asistencia = view.findViewById(R.id.asistencia);
+            fecha = view.findViewById(R.id.fecha);
+            Spinner asignaturas =  view.findViewById(R.id.asignaturas);
+            enviar = view.findViewById(R.id.enviar);
             fecha.setText(sdf.format(calendar.getTime()));
-            swipeRefreshLayout =(SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
-                new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,asistencia,estudiantesa,tipo,sede,anioa).execute();
+            swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
+                new RecibirAsignaturasDocentes(getActivity(),urla,codigo, asignaturas,asistencia,asistencia,tipo, sede, anioa).execute();
         }
         fecha.setOnClickListener(MostrarAsistenciaFragment.this);
         enviar.setOnClickListener(MostrarAsistenciaFragment.this);
@@ -113,11 +112,11 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
     }
 
     private void enviare() {
-        fecha1 = fecha.getText().toString();
+        String fecha1 = fecha.getText().toString();
         String accion= MD5.encrypt("mostrarasis1");
         //String urla = "http://nationfis.hol.es/nonfc/verasistencia.php";
         swipeRefreshLayout.setRefreshing(true);
-        new ComprobarAsistencia(getActivity(), urla,codigo,fecha1,asistencia,tipo,accion,swipeRefreshLayout).execute();
+        new ComprobarAsistencia(getActivity(), urla,codigo, fecha1,asistencia,tipo,accion,swipeRefreshLayout).execute();
     }
     private void date() {
         new DatePickerDialog(getActivity(),d,calendar.get(Calendar.YEAR),

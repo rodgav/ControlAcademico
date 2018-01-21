@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarActivo;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -15,16 +16,18 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-/**
+/*
  * Created by Sam on 20/08/2017.
  */
 
 public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
     private String mensaje,s,activoid;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
+    @SuppressLint("StaticFieldLeak")
     private TextView activado;
-    public AnalizarActualizarActivo(Context c, String s, Dialog d, TextView activado, String activoid) {
+    AnalizarActualizarActivo(Context c, String s, Dialog d, TextView activado, String activoid) {
         this.c = c;
         this.s = s;
         this.d = d;

@@ -30,10 +30,9 @@ public class MostrarValoraciones extends Fragment implements View.OnClickListene
     public MostrarValoraciones() {
         // Required empty public constructor
     }
-    private Spinner asignaturas,unidades;
-    private Button registrar;
+
     private ListView valores;
-    private String codigo,sede,anioa;
+    private String codigo;
     private DatosDatos datosDatos = new DatosDatos();
 
     @Override
@@ -42,19 +41,19 @@ public class MostrarValoraciones extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mostrar_valoraciones, container, false);
 
-        asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
-        unidades = (Spinner)view.findViewById(R.id.unidades);
-        registrar = (Button)view.findViewById(R.id.registrar);
-        valores = (ListView)view.findViewById(R.id.valores);
+        Spinner asignaturas =  view.findViewById(R.id.asignaturas);
+        Spinner unidades =  view.findViewById(R.id.unidades);
+        Button registrar =  view.findViewById(R.id.registrar);
+        valores = view.findViewById(R.id.valores);
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo = preferences.getString("codigo","");
-        sede = preferences.getString("sede","");
-        anioa =  getResources().getString(R.string.año);
+        String sede = preferences.getString("sede", "");
+        String anioa = getResources().getString(R.string.año);
         String accion=MD5.encrypt("unidades");
         String tipo="solo";
 
-        new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,valores,valores,tipo,sede,anioa).execute();
-        new RecibirUnidades(getActivity(),urla,unidades,accion).execute();
+        new RecibirAsignaturasDocentes(getActivity(),urla,codigo, asignaturas,valores,valores,tipo, sede, anioa).execute();
+        new RecibirUnidades(getActivity(),urla, unidades,accion).execute();
         registrar.setOnClickListener(MostrarValoraciones.this);
         return view;
     }

@@ -1,6 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.Asignaturas;
 
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Spinner;
@@ -17,13 +17,15 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by SamGM on 22/04/2017.
  */
 
 public class RecibirAsignaturas extends AsyncTask<Void,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String urla,s1;
+    @SuppressLint("StaticFieldLeak")
     private Spinner asignatura;
     public RecibirAsignaturas(Context c, String urla, String s, Spinner asignatura) {
         this.c = c;
@@ -66,26 +68,20 @@ public class RecibirAsignaturas extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer repuesta = new StringBuffer();
-                if (br!=null){
-                    while((linea=br.readLine())!=null){
-                        repuesta.append(linea+"n");
-                    }
-                }else {
-                    return null;
+                StringBuilder repuesta = new StringBuilder();
+                while((linea=br.readLine())!=null){
+                    repuesta.append(linea).append("n");
                 }
                 return repuesta.toString();
             }else {
                 return String.valueOf(resp);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }catch (NullPointerException e){
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
         return null;

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarValoraciones;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,14 +19,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by Sam on 18/06/2017.
  */
 
 public class ActualizarValoraciones extends AsyncTask<Void,Void,String> {
     private String urla,accion,codasi,coduni,codval,codigo,peso2;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
+    @SuppressLint("StaticFieldLeak")
     private TextView peso;
     private ProgressDialog pd;
     public ActualizarValoraciones(Context c, String urla, String accion, String codasi, String coduni, String codval, String codigo,
@@ -81,17 +84,13 @@ public class ActualizarValoraciones extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuesta = new StringBuffer();
-                if (br!=null){
-                    while ((linea=br.readLine())!=null){
-                        respuesta.append(linea+"n");
-                    }
-                }else {
-                    return null;
+                StringBuilder respuesta = new StringBuilder();
+                while ((linea=br.readLine())!=null){
+                    respuesta.append(linea).append("n");
                 }
                 return respuesta.toString();
             }else {

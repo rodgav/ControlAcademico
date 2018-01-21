@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-/**
+/*
  * Created by Sam on 11/06/2017.
  */
 

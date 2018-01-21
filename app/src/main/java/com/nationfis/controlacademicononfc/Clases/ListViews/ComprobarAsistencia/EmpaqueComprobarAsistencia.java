@@ -12,9 +12,9 @@ import java.util.Iterator;
  * Created by Sam on 25/04/2017.
  */
 
-public class EmpaqueComprobarAsistencia {
+class EmpaqueComprobarAsistencia {
     private String s,fecha,accion;
-    public EmpaqueComprobarAsistencia(String s,String fecha,String accion) {
+    EmpaqueComprobarAsistencia(String s, String fecha, String accion) {
         this.s=s;
         this.fecha= fecha;
         this.accion = accion;
@@ -22,7 +22,7 @@ public class EmpaqueComprobarAsistencia {
 
     String packageData() {
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try {
             jo.put("accion",accion);
             jo.put("s",s);
@@ -42,9 +42,7 @@ public class EmpaqueComprobarAsistencia {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (i.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

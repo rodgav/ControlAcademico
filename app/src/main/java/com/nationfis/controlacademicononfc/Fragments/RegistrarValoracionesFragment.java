@@ -33,11 +33,8 @@ public class RegistrarValoracionesFragment extends Fragment implements View.OnCl
         // Required empty public constructor
     }
     private EditText nombre,peso;
-    private Spinner unidad, asignatura;
-    private Button enviar;
     private ListView estudiantes, estudiante;
-    private String tipo="solo";
-    private String codigo,sede,anioa;
+    private String codigo;
     DatosDatos datosDatos = new DatosDatos();
 
     @Override
@@ -45,22 +42,22 @@ public class RegistrarValoracionesFragment extends Fragment implements View.OnCl
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registrar_valoraciones, container, false);
-        nombre = (EditText)view.findViewById(R.id.nombre);
-        peso = (EditText)view.findViewById(R.id.peso);
-        unidad = (Spinner)view.findViewById(R.id.unidad);
-        asignatura = (Spinner)view.findViewById(R.id.asignatura);
-        enviar =(Button)view.findViewById(R.id.enviar);
+        nombre = view.findViewById(R.id.nombre);
+        peso = view.findViewById(R.id.peso);
+        Spinner unidad =  view.findViewById(R.id.unidad);
+        Spinner asignatura =  view.findViewById(R.id.asignatura);
+        Button enviar =  view.findViewById(R.id.enviar);
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        tipo = preferences.getString("a","");
+        String tipo = preferences.getString("a", "");
 
         codigo = preferences.getString("codigo","");
-        sede = preferences.getString("sede","");
-        anioa =  getResources().getString(R.string.año);
+        String sede = preferences.getString("sede", "");
+        String anioa = getResources().getString(R.string.año);
         //String urla="http://nationfis.hol.es/nonfc/asignaturad.php";
         String accion= MD5.encrypt("unidades");
 
-        new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignatura,estudiantes,estudiante,tipo,sede,anioa).execute();
-        new RecibirUnidades(getActivity(),urla,unidad,accion).execute();
+        new RecibirAsignaturasDocentes(getActivity(),urla,codigo, asignatura,estudiantes,estudiante, tipo, sede, anioa).execute();
+        new RecibirUnidades(getActivity(),urla, unidad,accion).execute();
         enviar.setOnClickListener(RegistrarValoracionesFragment.this);
 
         return view;

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.Unidad;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -16,18 +17,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 27/05/2017.
  */
 
 public class AnalizadorUnidades extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
+    @SuppressLint("StaticFieldLeak")
     private Spinner unidad;
     private ArrayList<String> idu = new ArrayList<>();
     private ArrayList<String>nou = new ArrayList<>();
     private DatosDatos datosDatos;
-    public AnalizadorUnidades(Context c, String s, Spinner unidad) {
+    AnalizadorUnidades(Context c, String s, Spinner unidad) {
         this.c = c;
         this.s = s;
         this.unidad = unidad;
@@ -45,7 +48,7 @@ public class AnalizadorUnidades extends AsyncTask<Void,Void,Integer> {
         if (integer==0){
             Toast.makeText(c,"No se pudo analizar",Toast.LENGTH_SHORT).show();
         }else {
-            ArrayAdapter<String> a = new ArrayAdapter<String>(c,android.R.layout.simple_list_item_1,nou);
+            ArrayAdapter<String> a = new ArrayAdapter<>(c,android.R.layout.simple_list_item_1,nou);
             unidad.setAdapter(a);
             unidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

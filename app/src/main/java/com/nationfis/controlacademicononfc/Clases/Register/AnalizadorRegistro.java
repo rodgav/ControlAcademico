@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Register;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.TextView;
@@ -13,13 +14,15 @@ import org.json.JSONObject;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
-/**
+/*
  * Created by SamGM on 14/04/2017.
  */
 
 class AnalizadorRegistro extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s,codigo1,contraseña1;
+    @SuppressLint("StaticFieldLeak")
     private TextView refresh;
     private String mensaje;
     AnalizadorRegistro(Context c, String s, String codigo1, String contraseña1, TextView refresh) {

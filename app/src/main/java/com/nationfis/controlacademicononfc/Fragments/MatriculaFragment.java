@@ -29,30 +29,32 @@ public class MatriculaFragment extends Fragment implements View.OnClickListener{
     public MatriculaFragment() {
         // Required empty public constructor
     }
-    private EditText baucher,sed;
+    private EditText baucher;
     private TextView año;
     private String matricula1 = "matriculan";
     DatosDatos datosDatos;
-    private String usuario,ep,seden,sede;
+    private String usuario;
+    private String ep;
+    private String sede;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_matricula, container, false);
-        baucher = (EditText)view.findViewById(R.id.baucher);
-        sed = (EditText)view.findViewById(R.id.sede);
-        EditText codigo = (EditText) view.findViewById(R.id.codigo);
-        año = (TextView)view.findViewById(R.id.año);
-        Button matricula = (Button)view.findViewById(R.id.matricula);
-        Spinner semestre = (Spinner) view.findViewById(R.id.semestre);
+        baucher = view.findViewById(R.id.baucher);
+        EditText sed =  view.findViewById(R.id.sede);
+        EditText codigo =  view.findViewById(R.id.codigo);
+        año = view.findViewById(R.id.año);
+        Button matricula = view.findViewById(R.id.matricula);
+        Spinner semestre =  view.findViewById(R.id.semestre);
         //String urla = "http://nationfis.hol.es/nonfc/facultad.php";
         datosDatos = new DatosDatos();
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         usuario = preferences.getString("codigo","");
         ep = preferences.getString("ep","");
         sede = preferences.getString("sede","");
-        seden = preferences.getString("seden","");
+        String seden = preferences.getString("seden", "");
         codigo.setText(usuario);
         sed.setText(seden);
         new RecibirSemestres(getActivity(),urla,ep,semestre,semestre,matricula1).execute();

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.Semestres;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -20,18 +21,20 @@ import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
-/**
+/*
  * Created by SamGM on 22/04/2017.
  */
 
 public class AnalizadorSemestres extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
+    @SuppressLint("StaticFieldLeak")
     private Spinner semestre,asignatura;
     private String s,matricula1;
     private ArrayList<String>nos = new ArrayList<>();
     private ArrayList<String>ids = new ArrayList<>();
     private DatosDatos datosDatos;
-    public AnalizadorSemestres(Context c, String s, Spinner semestre,Spinner asignatura,String matricula1) {
+    AnalizadorSemestres(Context c, String s, Spinner semestre, Spinner asignatura, String matricula1) {
         this.c = c;
         this.s = s;
         this.semestre = semestre;
@@ -72,7 +75,7 @@ public class AnalizadorSemestres extends AsyncTask<Void,Void,Integer> {
         if (integer==0){
             Toast.makeText(c,"No se analizaron los datos",Toast.LENGTH_SHORT).show();
         }else {
-            ArrayAdapter<String> a = new ArrayAdapter<String>(c,android.R.layout.simple_list_item_1,nos);
+            ArrayAdapter<String> a = new ArrayAdapter<>(c,android.R.layout.simple_list_item_1,nos);
             semestre.setAdapter(a);
             datosDatos = new DatosDatos();
 

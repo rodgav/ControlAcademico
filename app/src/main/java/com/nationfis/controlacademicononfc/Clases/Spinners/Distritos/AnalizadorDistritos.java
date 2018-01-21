@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.Distritos;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -16,17 +17,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 19/08/2017.
  */
 
 public class AnalizadorDistritos extends AsyncTask<Void,Void,Integer>{
-    ArrayList<String> nod = new ArrayList<>();
-    ArrayList<String>idd = new ArrayList<>();
+    private ArrayList<String> nod = new ArrayList<>();
+    private ArrayList<String>idd = new ArrayList<>();
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
+    @SuppressLint("StaticFieldLeak")
     private Spinner distrito;
-    public AnalizadorDistritos(Context c, Spinner distrito, String s) {
+    AnalizadorDistritos(Context c, Spinner distrito, String s) {
         this.c = c;
         this.distrito = distrito;
         this.s = s;
@@ -43,7 +46,7 @@ public class AnalizadorDistritos extends AsyncTask<Void,Void,Integer>{
         if (integer ==0){
             Toast.makeText(c,"No se pudo analizar los datos",Toast.LENGTH_SHORT).show();
         }else {
-            ArrayAdapter<String> a = new ArrayAdapter<String>(c,android.R.layout.simple_expandable_list_item_1,nod);
+            ArrayAdapter<String> a = new ArrayAdapter<>(c,android.R.layout.simple_expandable_list_item_1,nod);
             distrito.setAdapter(a);
 
             distrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

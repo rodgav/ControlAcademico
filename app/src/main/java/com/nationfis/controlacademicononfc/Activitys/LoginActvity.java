@@ -16,18 +16,17 @@ import com.nationfis.controlacademicononfc.Fragments.LoginFragment;
 import com.nationfis.controlacademicononfc.R;
 
 public class LoginActvity extends AppCompatActivity {
-    private String tipo,nombre,codigo,image,tipos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_actvity);
 
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
-        tipo = preferences.getString("a","");
-        nombre = preferences.getString("nombre","");
-        codigo = preferences.getString("codigo","");
-        image = preferences.getString("image","");
-        tipos = preferences.getString("tipos","");
+        String tipo = preferences.getString("a", "");
+        String nombre = preferences.getString("nombre", "");
+        String codigo = preferences.getString("codigo", "");
+        String image = preferences.getString("image", "");
+        String tipos = preferences.getString("tipos", "");
 
         UsuariosSqlite usuariosSqlite = new UsuariosSqlite(LoginActvity.this,"UsersDB.sqlite",null,1);
         usuariosSqlite.queryData("CREATE TABLE IF NOT EXISTS USERS(Id INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR , codigo VARCHAR unique, image VARCHAR, tipo VARCHAR)");
@@ -38,6 +37,7 @@ public class LoginActvity extends AppCompatActivity {
             if(tipo.length()>0 || nombre.length()>0 || codigo.length()>0 || image.length()>0 || tipos.length()>0){
                 Intent intent = new Intent(this,NavigationActivity.class);
                 startActivity(intent);
+                finish();
             }else if(cursor.moveToFirst()){
                 Fragment fragment = new LoginForOneTouch();
                 FragmentManager fragmentManager = getSupportFragmentManager();

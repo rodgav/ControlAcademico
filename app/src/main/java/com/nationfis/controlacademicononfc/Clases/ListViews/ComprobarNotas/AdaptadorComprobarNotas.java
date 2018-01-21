@@ -26,7 +26,7 @@ import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
-/**
+/*
  * Created by Sam on 06/06/2017.
  */
 
@@ -35,9 +35,9 @@ public class AdaptadorComprobarNotas extends BaseAdapter {
     private String tipo;
     private Context c;
     private ArrayList<NotasCN>notaCNs;
-    DatosDatos da;
-    SharedPreferences preferences;
-    public AdaptadorComprobarNotas(Context c, ArrayList<NotasCN> notaCNs, String tipo) {
+    private DatosDatos da;
+    private SharedPreferences preferences;
+    AdaptadorComprobarNotas(Context c, ArrayList<NotasCN> notaCNs, String tipo) {
         this.c = c;
         this.tipo = tipo;
         this.notaCNs = notaCNs;
@@ -67,10 +67,10 @@ public class AdaptadorComprobarNotas extends BaseAdapter {
             if (view==null){
                 view = inflater.inflate(R.layout.custom_notas_docentes,viewGroup,false);
             }
-            ImageView foto = (ImageView)view.findViewById(R.id.foto);
-            TextView nombre = (TextView)view.findViewById(R.id.nombre);
-            TextView codigo = (TextView)view.findViewById(R.id.codigo);
-            final TextView nota = (TextView)view.findViewById(R.id.nota);
+            ImageView foto = view.findViewById(R.id.foto);
+            TextView nombre = view.findViewById(R.id.nombre);
+            TextView codigo = view.findViewById(R.id.codigo);
+            final TextView nota = view.findViewById(R.id.nota);
             NotasCN notas = notaCNs.get(i);
             nombre.setText(notas.getNombre());
             codigo.setText(notas.getCodigo());
@@ -85,11 +85,11 @@ public class AdaptadorComprobarNotas extends BaseAdapter {
                 public void onClick(View view) {
                     final Dialog d = new Dialog(c);
                     d.setContentView(R.layout.dialog_notas);
-                    ImageView foto1 = (ImageView)d.findViewById(R.id.foto);
-                    TextView nombre1 = (TextView)d.findViewById(R.id.nombre);
-                    final TextView codigo1 = (TextView)d.findViewById(R.id.codigo);
-                    final EditText nota1 = (EditText)d.findViewById(R.id.nota);
-                    Button registrar1 = (Button)d.findViewById(R.id.registrar);
+                    ImageView foto1 =d.findViewById(R.id.foto);
+                    TextView nombre1 = d.findViewById(R.id.nombre);
+                    final TextView codigo1 = d.findViewById(R.id.codigo);
+                    final EditText nota1 = d.findViewById(R.id.nota);
+                    Button registrar1 = d.findViewById(R.id.registrar);
 
                     nombre1.setText(notaCNs.get(i).getNombre());
                     codigo1.setText(notaCNs.get(i).getCodigo());
@@ -129,11 +129,11 @@ public class AdaptadorComprobarNotas extends BaseAdapter {
             if (view==null){
                 view = inflater.inflate(R.layout.custom_notas_estudiantes,viewGroup,false);
             }
-            ImageView foto = (ImageView)view.findViewById(R.id.foto);
-            TextView nombre = (TextView)view.findViewById(R.id.nombre);
-            TextView nombrepeso = (TextView)view.findViewById(R.id.nombrepeso);
-            TextView nota = (TextView)view.findViewById(R.id.nota);
-            TextView peso = (TextView)view.findViewById(R.id.peso);
+            ImageView foto = view.findViewById(R.id.foto);
+            TextView nombre = view.findViewById(R.id.nombre);
+            TextView nombrepeso = view.findViewById(R.id.nombrepeso);
+            TextView nota = view.findViewById(R.id.nota);
+            TextView peso = view.findViewById(R.id.peso);
             NotasCN notas = notaCNs.get(i);
             nombre.setText(notas.getNombre());
             nombrepeso.setText(notas.getCodigo());

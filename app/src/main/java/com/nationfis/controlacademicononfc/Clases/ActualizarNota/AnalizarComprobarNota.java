@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarNota;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -13,17 +14,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
+/*
  * Created by Sam on 06/06/2017.
  */
 
 public class AnalizarComprobarNota extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
     private String s,nota2;
+    @SuppressLint("StaticFieldLeak")
     private TextView nota;
-    ArrayList<String> mensaje1 = new ArrayList<>();
-    public AnalizarComprobarNota(Context c, String s, Dialog d, TextView nota,String nota2) {
+    private ArrayList<String> mensaje1 = new ArrayList<>();
+    AnalizarComprobarNota(Context c, String s, Dialog d, TextView nota, String nota2) {
         this.c=c;
         this.s = s;
         this.d = d;

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasEstudiantes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -16,18 +17,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 11/06/2017.
  */
 
 public class AnalizarAsignaturasEstudiantes extends AsyncTask<Void,Void,Integer>{
     private String s;
+    @SuppressLint("StaticFieldLeak")
     private Spinner asignaturas;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
-    ArrayList<String> noa = new ArrayList<>();
-    ArrayList<String>ida = new ArrayList<>();
+    private ArrayList<String> noa = new ArrayList<>();
+    private ArrayList<String>ida = new ArrayList<>();
     private DatosDatos datosDatos;
-    public AnalizarAsignaturasEstudiantes(Context c, String s, Spinner asignaturas) {
+    AnalizarAsignaturasEstudiantes(Context c, String s, Spinner asignaturas) {
         this.s = s;
         this.c = c;
         this.asignaturas = asignaturas;
@@ -39,7 +42,7 @@ public class AnalizarAsignaturasEstudiantes extends AsyncTask<Void,Void,Integer>
         if (integer == 0){
             Toast.makeText(c,"No se pudo analizar",Toast.LENGTH_SHORT).show();
         }else {
-            ArrayAdapter<String> a = new ArrayAdapter<String>(c,android.R.layout.simple_list_item_1,noa);
+            ArrayAdapter<String> a = new ArrayAdapter<>(c,android.R.layout.simple_list_item_1,noa);
             asignaturas.setAdapter(a);
             datosDatos = new DatosDatos();
             asignaturas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

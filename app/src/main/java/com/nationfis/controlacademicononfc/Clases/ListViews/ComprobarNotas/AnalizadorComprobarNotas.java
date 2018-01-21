@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.ComprobarNotas;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
@@ -14,16 +15,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
+/*
  * Created by Sam on 06/06/2017.
  */
 
 public class AnalizadorComprobarNotas extends AsyncTask<Void,Void,Integer>{
     private String s,tipo;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
+    @SuppressLint("StaticFieldLeak")
     private ListView notas;
     private ArrayList<NotasCN> notaCNs = new ArrayList<>();
-    public AnalizadorComprobarNotas(Context c, String s, ListView notas, String tipo) {
+    AnalizadorComprobarNotas(Context c, String s, ListView notas, String tipo) {
         this.c = c;
         this.s = s;
         this.notas = notas;

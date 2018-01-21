@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Login;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -19,14 +20,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by SamGM on 13/04/2017.
  */
 
 public class ComprobarLogin extends AsyncTask<Void,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
     private String usuario,contraseña,urla;
+    @SuppressLint("StaticFieldLeak")
     private TextView refresh;
     public ComprobarLogin(Context c, String urla, String usuario, String password,TextView refresh) {
         this.c = c;
@@ -77,18 +80,14 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int responseCode = con.getResponseCode();
-            if(responseCode==con.HTTP_OK){
+            if(responseCode== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String line;
-                StringBuffer response = new StringBuffer();
-                if(br!=null){
-                    while ((line=br.readLine())!=null){
-                        response.append(line+"n");
-                    }
-                }else{
-                    return  null;
+                StringBuilder response = new StringBuilder();
+                while ((line=br.readLine())!=null){
+                    response.append(line).append("n");
                 }
                 return response.toString();
             }else{

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -17,27 +18,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
-/**
+/*
  * Created by SamGM on 22/04/2017.
  */
 
 public class AnalizadorAsignaturasDocentes extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String s, tipo, fecha,sede,anioa;
+    private String s, tipo,sede,anioa;
+    @SuppressLint("StaticFieldLeak")
     private Spinner asignaturas;
+    @SuppressLint("StaticFieldLeak")
     private ListView estudiantes, estudiantesa;
     private ArrayList<String> noa = new ArrayList<>();
     private ArrayList<String> ida = new ArrayList<>();
     private DatosDatos datosDatos = new DatosDatos();
-    public AnalizadorAsignaturasDocentes(Context c, String s, Spinner asignaturas, ListView estudiantes, ListView estudiantesa,
-                                         String tipo,String sede, String anioa) {
+    AnalizadorAsignaturasDocentes(Context c, String s, Spinner asignaturas, ListView estudiantes, ListView estudiantesa,
+                                  String tipo, String sede, String anioa) {
         this.c = c;
         this.s = s;
         this.asignaturas = asignaturas;
@@ -64,7 +66,7 @@ public class AnalizadorAsignaturasDocentes extends AsyncTask<Void,Void,Integer> 
         if (integer ==0){
             Toast.makeText(c,"Nose pudo analizar",Toast.LENGTH_SHORT).show();
         }else {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,android.R.layout.simple_list_item_1,noa);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(c,android.R.layout.simple_list_item_1,noa);
             asignaturas.setAdapter(adapter);
             asignaturas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -72,9 +74,7 @@ public class AnalizadorAsignaturasDocentes extends AsyncTask<Void,Void,Integer> 
                     //Toast.makeText(c,ida.get(i),Toast.LENGTH_SHORT).show();
                     String asignaturasd = ida.get(i);
                     datosDatos.setAsignaturasd(asignaturasd);
-                    Calendar ca = Calendar.getInstance();
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                    fecha = df.format(ca.getTime());
+
                     if (Objects.equals(tipo,"manual")){
                         estudiantes.setAdapter(null);
                         estudiantesa.setAdapter(null);

@@ -1,21 +1,18 @@
 package com.nationfis.controlacademicononfc.Clases.Reportes.Asistenciapdf;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.PowerManager;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.BuildConfig;
 import com.nationfis.controlacademicononfc.Clases.Conexion;
-import com.nationfis.controlacademicononfc.Activitys.NavigationActivity;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,12 +23,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by GlobalTIC's on 5/11/2017.
  */
 
 public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
     private String urla1, asig, fecha;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private PowerManager.WakeLock mWakeLock;
     private ProgressDialog mProgressDialog;
@@ -59,9 +57,13 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
         // take CPU lock to prevent CPU from going off if the user
         // presses the power button during download
         PowerManager pm = (PowerManager) c.getSystemService(Context.POWER_SERVICE);
+        /*mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                getClass().getName());
+        mWakeLock.acquire();*/
+        assert pm != null;
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 getClass().getName());
-        mWakeLock.acquire();
+        mWakeLock.acquire(10*60*1000L /*10 minutes*/);
         mProgressDialog.show();
     }
 
@@ -157,8 +159,7 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
                     input.close();
             } catch (IOException ignored) {
             }
-            if (con != null)
-                con.disconnect();
+            con.disconnect();
         }
         return null;
     }

@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by SamGM on 14/04/2017.
  */
 
@@ -40,7 +40,7 @@ class EmpaqueRegistro {
     String packageData(){
         String accion= MD5.encrypt("registrar");
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try {
             jo.put("accion",accion);
             jo.put("nombre1",nombre1);
@@ -75,9 +75,7 @@ class EmpaqueRegistro {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (it.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

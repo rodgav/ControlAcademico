@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.RegistrarValoraciones;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -10,15 +11,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 28/05/2017.
  */
 
 public class AnalizadorRegistroValoraciones extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
     private ArrayList<String> mensaje1=new ArrayList<>();
-    public AnalizadorRegistroValoraciones(Context c, String s) {
+    AnalizadorRegistroValoraciones(Context c, String s) {
         this.c = c;
         this.s = s;
     }

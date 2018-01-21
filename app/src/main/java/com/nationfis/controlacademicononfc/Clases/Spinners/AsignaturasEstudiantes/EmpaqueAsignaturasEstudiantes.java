@@ -7,20 +7,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by Sam on 11/06/2017.
  */
 
-public class EmpaqueAsignaturasEstudiantes {
+class EmpaqueAsignaturasEstudiantes {
     private String codigo,accion;
-    public EmpaqueAsignaturasEstudiantes(String codigo, String accion) {
+    EmpaqueAsignaturasEstudiantes(String codigo, String accion) {
         this.codigo = codigo;
         this.accion = accion;
     }
 
     String packageData() {
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try {
             jo.put("accion",accion);
             jo.put("1",codigo);
@@ -39,9 +39,7 @@ public class EmpaqueAsignaturasEstudiantes {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (i.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

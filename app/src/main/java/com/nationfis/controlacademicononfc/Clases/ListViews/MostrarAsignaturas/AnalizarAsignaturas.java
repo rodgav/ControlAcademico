@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarAsignaturas;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
@@ -13,16 +14,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 18/06/2017.
  */
 
 public class AnalizarAsignaturas extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
+    @SuppressLint("StaticFieldLeak")
     private ListView estudiantes;
-    ArrayList<AsignaturasA> asignatura = new ArrayList<>();
-    public AnalizarAsignaturas(Context c, String s, ListView estudiantes) {
+    private ArrayList<AsignaturasA> asignatura = new ArrayList<>();
+    AnalizarAsignaturas(Context c, String s, ListView estudiantes) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;

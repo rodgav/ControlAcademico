@@ -1,6 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.ComprobarAsistencia;
 
-/**
+/*
  * Created by Sam on 28/04/2017.
  */
 
@@ -30,11 +30,11 @@ public class AsistenciaCA {
         return foto;
     }
 
-    public void setAsistio(String asistio) {
+    void setAsistio(String asistio) {
         this.asistio = asistio;
     }
 
-    public String getAsistio() {
+    String getAsistio() {
         return asistio;
     }
 }

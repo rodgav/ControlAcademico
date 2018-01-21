@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Register;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -17,13 +18,15 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by SamGM on 14/04/2017.
  */
 
 public class EnviarRegistro extends AsyncTask<Void,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
+    @SuppressLint("StaticFieldLeak")
     private TextView refresh;
     private String urla,nombre1,apellidop1,apellidom1,correo1,documento1,sexo1,codigo1,contraseña1,verificacion1,
             telefono1,fecha1,foto1,tdocumento1,lnacimiento,activo,escuela,sede;
@@ -72,18 +75,14 @@ public class EnviarRegistro extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int respuesta = con.getResponseCode();
-            if(respuesta==con.HTTP_OK){
+            if(respuesta== HttpURLConnection.HTTP_OK){
                 InputStream is =con.getInputStream();
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuestast = new StringBuffer();
-                if(br!=null){
-                    while ((linea=br.readLine())!=null){
-                        respuestast.append(linea+"n");
-                    }
-                }else {
-                    return null;
+                StringBuilder respuestast = new StringBuilder();
+                while ((linea=br.readLine())!=null){
+                    respuestast.append(linea).append("n");
                 }
                 return respuestast.toString();
             }else{

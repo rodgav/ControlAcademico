@@ -25,25 +25,25 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment {
     public MostrarMatriculadosAsignaturaFragment() {
         // Required empty public constructor
     }
-    private String codigo,sede,anioa;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  =  inflater.inflate(R.layout.fragment_mostrar_matriculados_asignatura, container, false);
 
-        ListView estudiantes = (ListView)view.findViewById(R.id.estudiantes);
-        ListView estudiantesa = (ListView)view.findViewById(R.id.estudiantesa);
-        Spinner asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
+        ListView estudiantes = view.findViewById(R.id.estudiantes);
+        ListView estudiantesa = view.findViewById(R.id.estudiantesa);
+        Spinner asignaturas = view.findViewById(R.id.asignaturas);
         //String urla="http://nationfis.hol.es/nonfc/asignaturad.php";
         String tipo = "manual";
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        codigo = preferences.getString("codigo","");
-        sede = preferences.getString("sede","");
-        anioa =  getResources().getString(R.string.año);
+        String codigo = preferences.getString("codigo", "");
+        String sede = preferences.getString("sede", "");
+        String anioa = getResources().getString(R.string.año);
 
-        new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,estudiantes,estudiantesa,tipo,sede,anioa).execute();
+        new RecibirAsignaturasDocentes(getActivity(),urla, codigo,asignaturas,estudiantes,estudiantesa,tipo, sede, anioa).execute();
         //Toast.makeText(getActivity(),sede+" "+anioa,Toast.LENGTH_SHORT).show();
         return view;
     }

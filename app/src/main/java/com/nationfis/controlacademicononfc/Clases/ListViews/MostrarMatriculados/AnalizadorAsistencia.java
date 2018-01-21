@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarMatriculados;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
@@ -14,16 +15,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-/**
+/*
  * Created by SamGM on 23/04/2017.
  */
 
 public class AnalizadorAsistencia extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
+    @SuppressLint("StaticFieldLeak")
     private ListView estudiantes;
-    ArrayList<Asistencia>asistencia = new ArrayList<>();
-    public AnalizadorAsistencia(Context c, String s, ListView estudiantes) {
+    private ArrayList<Asistencia>asistencia = new ArrayList<>();
+    AnalizadorAsistencia(Context c, String s, ListView estudiantes) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.RegistrarAsignaturasDocentes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -10,15 +11,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 02/05/2017.
  */
 
 public class AnalizarRegistroAsignaturaDocentes extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
     private ArrayList<String>mensaje1 = new ArrayList<>();
-    public AnalizarRegistroAsignaturaDocentes(Context c, String s) {
+    AnalizarRegistroAsignaturaDocentes(Context c, String s) {
         this.c = c;
         this.s = s;
     }

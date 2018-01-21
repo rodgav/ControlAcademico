@@ -6,7 +6,7 @@ package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarAsignaturas;
 
 public class AsignaturasA {
     private String modo,nombrea,codigo,nombre,foto,activo;
-    public void setModo(String modo) {
+    void setModo(String modo) {
         this.modo = modo;
     }
 
@@ -26,7 +26,7 @@ public class AsignaturasA {
         this.foto = foto;
     }
 
-    public String getModo() {
+    String getModo() {
         return modo;
     }
 

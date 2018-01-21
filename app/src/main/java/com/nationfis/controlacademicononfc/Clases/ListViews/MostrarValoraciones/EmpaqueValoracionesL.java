@@ -11,9 +11,9 @@ import java.util.Iterator;
  * Created by Sam on 18/06/2017.
  */
 
-public class EmpaqueValoracionesL {
+class EmpaqueValoracionesL {
     private String codiasi,codiuni,accion,codigo;
-    public EmpaqueValoracionesL(String codiasi, String codiuni, String accion,String codigo) {
+    EmpaqueValoracionesL(String codiasi, String codiuni, String accion,String codigo) {
         this.codiasi = codiasi;
         this.codiuni = codiuni;
         this.accion = accion;
@@ -22,7 +22,7 @@ public class EmpaqueValoracionesL {
 
     String packageData() {
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try {
             jo.put("accion",accion);
             jo.put("1",codiasi);
@@ -43,9 +43,7 @@ public class EmpaqueValoracionesL {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (i.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

@@ -34,13 +34,11 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.u
 public class CustomAdapterUsuario extends BaseAdapter {
     private ArrayList<UsuariosUsuarios> usuarioslist;
     private Context c;
-    private int usuarios;
     private LayoutInflater inflater;
     private UsuariosSqlite usuariosSqlite;
-    public CustomAdapterUsuario(Context c, int usuarios, ArrayList<UsuariosUsuarios> usuarioslist) {
+    public CustomAdapterUsuario(Context c, ArrayList<UsuariosUsuarios> usuarioslist) {
         this.c = c;
         this.usuarioslist = usuarioslist;
-        this.usuarios = usuarios;
         inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -64,10 +62,10 @@ public class CustomAdapterUsuario extends BaseAdapter {
         if (view==null){
             view = inflater.inflate(R.layout.usuarios,viewGroup,false);
         }
-        TextView tipo = (TextView)view.findViewById(R.id.tipo);
-        TextView nombre = (TextView)view.findViewById(R.id.nombre);
-        ImageView imagen = (ImageView)view.findViewById(R.id.imagen);
-        final ImageButton menu = (ImageButton)view.findViewById(R.id.menu);
+        TextView tipo = view.findViewById(R.id.tipo);
+        TextView nombre = view.findViewById(R.id.nombre);
+        ImageView imagen = view.findViewById(R.id.imagen);
+        final ImageButton menu = view.findViewById(R.id.menu);
 
         UsuariosUsuarios usuariosUsuarios = usuarioslist.get(position);
         tipo.setText(usuariosUsuarios.getTipo());
@@ -81,12 +79,12 @@ public class CustomAdapterUsuario extends BaseAdapter {
             public void onClick(View view) {
                 Dialog d = new Dialog(c);
                 d.setContentView(R.layout.dialoglogin);
-                TextView nombre = (TextView)d.findViewById(R.id.nombre);
-                TextView tipo = (TextView)d.findViewById(R.id.tipo);
-                final TextView refresh = (TextView)d.findViewById(R.id.refresh);
-                ImageView imagen = (ImageView)d.findViewById(R.id.imagen);
-                Button ingresar = (Button)d.findViewById(R.id.ingresar);
-                final EditText password = (EditText)d.findViewById(R.id.password);
+                TextView nombre = d.findViewById(R.id.nombre);
+                TextView tipo = d.findViewById(R.id.tipo);
+                final TextView refresh = d.findViewById(R.id.refresh);
+                ImageView imagen = d.findViewById(R.id.imagen);
+                Button ingresar = d.findViewById(R.id.ingresar);
+                final EditText password = d.findViewById(R.id.password);
                 nombre.setText(usuarioslist.get(position).getNombre());
                 tipo.setText(usuarioslist.get(position).getTipo());
                 String imagen1 = usuarioslist.get(position).getImagen();

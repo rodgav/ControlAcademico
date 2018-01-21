@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.EnviarAsistencia;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -15,12 +16,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by SamGM on 23/04/2017.
  */
 
 public class RegistrarAsistencia extends AsyncTask<Void,Void,String> {
     //private ProgressDialog pd;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String urla,coda,codd,fecha,accion;
     public RegistrarAsistencia(Context c, String urla, String coda,String codd,String fecha,String accion) {
@@ -50,17 +52,13 @@ public class RegistrarAsistencia extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuesta = new StringBuffer();
-                if (br!=null){
-                    while ((linea=br.readLine())!=null) {
-                        respuesta.append(linea + "n");
-                    }
-                }else {
-                    return null;
+                StringBuilder respuesta = new StringBuilder();
+                while ((linea=br.readLine())!=null) {
+                    respuesta.append(linea).append("n");
                 }
                 return respuesta.toString();
             }else {

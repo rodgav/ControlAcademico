@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.Departamento;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Spinner;
@@ -16,13 +17,15 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by Sam on 19/08/2017.
  */
 
 public class RecibirDepartamentos extends AsyncTask<Void,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String urla,accion1,accion2,accion3;
+    @SuppressLint("StaticFieldLeak")
     private Spinner departamento,provincia,distrito;
     public RecibirDepartamentos(Context c, String urla, Spinner departamento, Spinner provincia, Spinner distrito, String accion1,String accion2,String accion3) {
         this.c = c;
@@ -63,19 +66,15 @@ public class RecibirDepartamentos extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuesta = new StringBuffer();
-                if (br!=null){
-                    while ((linea = br.readLine())!=null){
-                        respuesta.append(linea+"n");
-                    }
-                    br.close();
-                }else {
-                    return null;
+                StringBuilder respuesta = new StringBuilder();
+                while ((linea = br.readLine())!=null){
+                    respuesta.append(linea).append("n");
                 }
+                br.close();
                 return respuesta.toString();
             }else {
                 return String.valueOf(resp);

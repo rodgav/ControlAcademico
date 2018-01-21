@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.TipoMatricula;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -16,18 +17,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by SamGM on 23/04/2017.
  */
 
 public class AnalizadorTipoMatricula extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
+    @SuppressLint("StaticFieldLeak")
     private Spinner tipom;
     private ArrayList<String>idm = new ArrayList<>();
     private ArrayList<String>nom = new ArrayList<>();
     private DatosDatos datosDatos;
-    public AnalizadorTipoMatricula(Context c, String s, Spinner tipom) {
+    AnalizadorTipoMatricula(Context c, String s, Spinner tipom) {
         this.c = c;
         this.s = s;
         this.tipom = tipom;
@@ -44,7 +47,7 @@ public class AnalizadorTipoMatricula extends AsyncTask<Void,Void,Integer> {
         if (integer==0){
             Toast.makeText(c,"No se pudo analizar",Toast.LENGTH_SHORT).show();
         }else {
-            ArrayAdapter<String> a = new ArrayAdapter<String>(c,android.R.layout.simple_list_item_1,nom);
+            ArrayAdapter<String> a = new ArrayAdapter<>(c,android.R.layout.simple_list_item_1,nom);
             tipom.setAdapter(a);
             tipom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

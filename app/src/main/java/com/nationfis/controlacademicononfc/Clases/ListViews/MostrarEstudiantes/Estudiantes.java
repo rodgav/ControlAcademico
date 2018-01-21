@@ -1,6 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarEstudiantes;
 
-/**
+/*
  * Created by Sam on 20/08/2017.
  */
 
@@ -15,7 +15,7 @@ public class Estudiantes {
         this.foto = foto;
     }
 
-    public void setCorreo(String correo) {
+    void setCorreo(String correo) {
         this.correo = correo;
     }
 
@@ -35,7 +35,7 @@ public class Estudiantes {
         return documento;
     }
 
-    public void setDocumento(String documento) {
+    void setDocumento(String documento) {
         this.documento = documento;
     }
 
@@ -67,7 +67,7 @@ public class Estudiantes {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    void setGenero(String genero) {
         this.genero = genero;
     }
 
@@ -75,7 +75,7 @@ public class Estudiantes {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -83,7 +83,7 @@ public class Estudiantes {
         return nacimiento;
     }
 
-    public void setNacimiento(String nacimiento) {
+    void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
 
@@ -115,7 +115,7 @@ public class Estudiantes {
         return documentoid;
     }
 
-    public void setDocumentoid(String documentoid) {
+    void setDocumentoid(String documentoid) {
         this.documentoid = documentoid;
     }
 
@@ -123,7 +123,7 @@ public class Estudiantes {
         return tipoid;
     }
 
-    public void setTipoid(String tipoid) {
+    void setTipoid(String tipoid) {
         this.tipoid = tipoid;
     }
 
@@ -131,7 +131,7 @@ public class Estudiantes {
         return generoid;
     }
 
-    public void setGeneroid(String generoid) {
+    void setGeneroid(String generoid) {
         this.generoid = generoid;
     }
 
@@ -139,7 +139,7 @@ public class Estudiantes {
         return lnacimientoid;
     }
 
-    public void setLnacimientoid(String lnacimientoid) {
+    void setLnacimientoid(String lnacimientoid) {
         this.lnacimientoid = lnacimientoid;
     }
 
@@ -147,7 +147,7 @@ public class Estudiantes {
         return epid;
     }
 
-    public void setEpid(String epid) {
+    void setEpid(String epid) {
         this.epid = epid;
     }
 
@@ -155,7 +155,7 @@ public class Estudiantes {
         return documenton;
     }
 
-    public void setDocumenton(String documenton) {
+    void setDocumenton(String documenton) {
         this.documenton = documenton;
     }
 
@@ -171,7 +171,7 @@ public class Estudiantes {
         return nsede;
     }
 
-    public void setNsede(String nsede) {
+    void setNsede(String nsede) {
         this.nsede = nsede;
     }
 }

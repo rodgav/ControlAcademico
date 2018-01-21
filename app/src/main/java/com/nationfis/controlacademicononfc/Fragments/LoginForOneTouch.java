@@ -32,15 +32,15 @@ public class LoginForOneTouch extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login_for_one_touch, container, false);
-        ListView usuarios = (ListView)view.findViewById(R.id.usuarios);
-        Button ingresar = (Button)view.findViewById(R.id.ingresaro);
-        Button registrar = (Button)view.findViewById(R.id.registraro);
+        ListView usuarios = view.findViewById(R.id.usuarios);
+        Button ingresar = view.findViewById(R.id.ingresaro);
+        Button registrar = view.findViewById(R.id.registraro);
 
 
         UsuariosSqlite usuariosSqlite = new UsuariosSqlite(getActivity(),"UsersDB.sqlite",null,1);
         ArrayList<UsuariosUsuarios> usuarioslist = new ArrayList<>();
         usuarioslist.clear();
-        CustomAdapterUsuario adapterUsuario = new CustomAdapterUsuario(getActivity(),R.layout.usuarios,usuarioslist);
+        CustomAdapterUsuario adapterUsuario = new CustomAdapterUsuario(getActivity(), usuarioslist);
 
         Cursor cursor = usuariosSqlite.getData("SELECT * FROM USERS");
         while (cursor.moveToNext()){

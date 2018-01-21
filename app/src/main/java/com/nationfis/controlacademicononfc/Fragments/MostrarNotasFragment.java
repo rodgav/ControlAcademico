@@ -36,12 +36,12 @@ public class MostrarNotasFragment extends Fragment implements View.OnClickListen
     public MostrarNotasFragment() {
         // Required empty public constructor
     }
-    private Spinner asignaturas,unidades,valores;
-    private Button registrar,normal,anormal;
-    private ImageButton cargarva;
+    private Spinner asignaturas;
+    private Spinner valores;
+    private Button registrar;
     private ListView notas;
-    private TextView textView19;
-    private String nivel,codigo,sede,anioa;
+    private String nivel;
+    private String codigo;
     private DatosDatos datosDatos = new DatosDatos();
     private View view;
     @Override
@@ -50,39 +50,39 @@ public class MostrarNotasFragment extends Fragment implements View.OnClickListen
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         nivel = preferences.getString("a","");
         codigo = preferences.getString("codigo","");
-        sede = preferences.getString("sede","");
-        anioa =  getResources().getString(R.string.año);
+        String sede = preferences.getString("sede", "");
+        String anioa = getResources().getString(R.string.año);
         // Inflate the layout for this fragment
+        Spinner unidades;
         if (Objects.equals(nivel,"e4e4564027d73a4325024d948d167e93")){
             view = inflater.inflate(R.layout.fragment_mostrar_notas_estudiante,container,false);
-            asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
-            unidades = (Spinner)view.findViewById(R.id.unidades);
-            registrar = (Button)view.findViewById(R.id.registrar);
-            normal = (Button)view.findViewById(R.id.normal);
-            anormal = (Button)view.findViewById(R.id.anormal);
-            notas = (ListView)view.findViewById(R.id.notas);
+            asignaturas = view.findViewById(R.id.asignaturas);
+            unidades = view.findViewById(R.id.unidades);
+            registrar = view.findViewById(R.id.registrar);
+            Button normal =  view.findViewById(R.id.normal);
+            Button anormal =  view.findViewById(R.id.anormal);
+            notas = view.findViewById(R.id.notas);
 
             String accion= MD5.encrypt("unidades");
             normal.setOnClickListener(MostrarNotasFragment.this);
             anormal.setOnClickListener(MostrarNotasFragment.this);
-            new RecibirUnidades(getActivity(),urla,unidades,accion).execute();
+            new RecibirUnidades(getActivity(),urla, unidades,accion).execute();
 
         }else if (Objects.equals(nivel,"ac99fecf6fcb8c25d18788d14a5384ee")){
             view = inflater.inflate(R.layout.fragment_mostrar_notas, container, false);
-            asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
-            unidades = (Spinner)view.findViewById(R.id.unidades);
-            valores = (Spinner)view.findViewById(R.id.valores);
-            registrar = (Button)view.findViewById(R.id.registrar);
-            notas = (ListView)view.findViewById(R.id.notas);
-            cargarva = (ImageButton)view.findViewById(R.id.cargarva);
-            textView19 = (TextView)view.findViewById(R.id.textView19);
+            asignaturas = view.findViewById(R.id.asignaturas);
+            unidades = view.findViewById(R.id.unidades);
+            valores = view.findViewById(R.id.valores);
+            registrar = view.findViewById(R.id.registrar);
+            notas = view.findViewById(R.id.notas);
+            ImageButton cargarva =  view.findViewById(R.id.cargarva);
 
 
                 String accion=MD5.encrypt("unidades");
                 String tipo="solo";
                 cargarva.setOnClickListener(MostrarNotasFragment.this);
-                new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,notas,notas,tipo,sede,anioa).execute();
-                new RecibirUnidades(getActivity(),urla,unidades,accion).execute();
+                new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,notas,notas,tipo, sede, anioa).execute();
+                new RecibirUnidades(getActivity(),urla, unidades,accion).execute();
         }
         registrar.setOnClickListener(MostrarNotasFragment.this);
         return view;

@@ -7,19 +7,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by Sam on 27/05/2017.
  */
 
 public class EmpaqueTipoMatricula {
     private String accion;
-    public EmpaqueTipoMatricula(String accion) {
+    EmpaqueTipoMatricula(String accion) {
         this.accion = accion;
     }
 
     String packageData() {
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try {
             jo.put("accion",accion);
             Boolean primer = true;
@@ -37,9 +37,7 @@ public class EmpaqueTipoMatricula {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (i.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

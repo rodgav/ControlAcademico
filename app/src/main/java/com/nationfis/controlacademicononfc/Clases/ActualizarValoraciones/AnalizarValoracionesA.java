@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarValoraciones;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,17 +15,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-/**
+/*
  * Created by Sam on 18/06/2017.
  */
 
 public class AnalizarValoracionesA extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private  String s,peso2;
     private Dialog d;
+    @SuppressLint("StaticFieldLeak")
     private TextView peso;
-    ArrayList<String> mensaje1 = new ArrayList<>();
-    public AnalizarValoracionesA(Context c, String s, Dialog d, TextView peso, String peso2) {
+    private ArrayList<String> mensaje1 = new ArrayList<>();
+    AnalizarValoracionesA(Context c, String s, Dialog d, TextView peso, String peso2) {
         this.c = c;
         this.s = s;
         this.d = d;

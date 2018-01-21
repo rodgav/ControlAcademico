@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by SamGM on 13/04/2017.
  */
 
@@ -22,7 +22,7 @@ class EmpaqueLogin {
 
     String packageData() {
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String accion= MD5.encrypt("login");
         try{
             jo.put("accion",accion);
@@ -43,9 +43,7 @@ class EmpaqueLogin {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (it.hasNext());
             return sb.toString();
-        }catch (JSONException e){
-            e.printStackTrace();
-        }catch (UnsupportedEncodingException e){
+        }catch (JSONException | UnsupportedEncodingException e){
             e.printStackTrace();
         }
         return null;

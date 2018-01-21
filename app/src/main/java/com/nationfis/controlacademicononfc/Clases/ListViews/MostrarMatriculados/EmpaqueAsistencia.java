@@ -7,13 +7,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by SamGM on 23/04/2017.
  */
 
-public class EmpaqueAsistencia {
+class EmpaqueAsistencia {
     private String s,accion,sede,anioa;
-    public EmpaqueAsistencia(String s,String accion,String sede, String anioa) {
+    EmpaqueAsistencia(String s, String accion, String sede, String anioa) {
         this.s = s;
         this.accion = accion;
         this.sede = sede;
@@ -43,9 +43,7 @@ public class EmpaqueAsistencia {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (i.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

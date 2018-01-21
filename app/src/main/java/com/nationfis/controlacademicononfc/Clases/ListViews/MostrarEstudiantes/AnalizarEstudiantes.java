@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarEstudiantes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,18 +14,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
+/*
  * Created by Sam on 20/08/2017.
  */
 
 public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s,accion;
+    @SuppressLint("StaticFieldLeak")
     private ListView estudiantes;
+    @SuppressLint("StaticFieldLeak")
     private SwipeRefreshLayout swipeRefreshLayout;
-    ArrayList<Estudiantes> estudiantes1 = new ArrayList<>();
-    ArrayList<Matriculas> matriculas1 = new ArrayList<>();
-    public AnalizarEstudiantes(Context c, String s, ListView estudiantes, String accion, SwipeRefreshLayout swipeRefreshLayout) {
+    private ArrayList<Estudiantes> estudiantes1 = new ArrayList<>();
+    private ArrayList<Matriculas> matriculas1 = new ArrayList<>();
+    AnalizarEstudiantes(Context c, String s, ListView estudiantes, String accion, SwipeRefreshLayout swipeRefreshLayout) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;

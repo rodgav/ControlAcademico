@@ -18,7 +18,7 @@ import com.nationfis.controlacademicononfc.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
+/*
  * Created by Sam on 18/06/2017.
  */
 
@@ -26,7 +26,7 @@ public class AdaptadorAsignaturas extends BaseAdapter{
     private LayoutInflater inflater;
     private Context c;
     private ArrayList<AsignaturasA>asignatura;
-    public AdaptadorAsignaturas(Context c, ArrayList<AsignaturasA> asignatura) {
+    AdaptadorAsignaturas(Context c, ArrayList<AsignaturasA> asignatura) {
         inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.c = c;
         this.asignatura = asignatura;
@@ -52,12 +52,12 @@ public class AdaptadorAsignaturas extends BaseAdapter{
         if (view==null){
             view = inflater.inflate(R.layout.custom_asignaturas,viewGroup,false);
         }
-        TextView nombre = (TextView)view.findViewById(R.id.nombre);
-        TextView codigo = (TextView)view.findViewById(R.id.codigo);
-        ImageView foto = (ImageView)view.findViewById(R.id.foto);
-        TextView nombrea = (TextView)view.findViewById(R.id.nombrea);
-        TextView modo = (TextView)view.findViewById(R.id.modo);
-        TextView activo = (TextView)view.findViewById(R.id.activo);
+        TextView nombre = view.findViewById(R.id.nombre);
+        TextView codigo = view.findViewById(R.id.codigo);
+        ImageView foto = view.findViewById(R.id.foto);
+        TextView nombrea = view.findViewById(R.id.nombrea);
+        TextView modo = view.findViewById(R.id.modo);
+        TextView activo = view.findViewById(R.id.activo);
 
         AsignaturasA asignatura1 = asignatura.get(i);
         nombre.setText(asignatura1.getNombre());

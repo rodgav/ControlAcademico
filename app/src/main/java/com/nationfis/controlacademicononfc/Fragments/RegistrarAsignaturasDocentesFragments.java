@@ -30,7 +30,7 @@ public class RegistrarAsignaturasDocentesFragments extends Fragment implements V
     public RegistrarAsignaturasDocentesFragments() {
         // Required empty public constructor
     }
-    private String matricula1 = "matriculaa";
+
     //private String urla = "http://nationfis.hol.es/nonfc/facultad.php";
     //private String urla1 = "http://nationfis.hol.es/nonfc/regasignd.php";
     private EditText codigo;
@@ -42,18 +42,19 @@ public class RegistrarAsignaturasDocentesFragments extends Fragment implements V
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registrar_asignaturas_docentes_fragments, container, false);
-        Spinner facultades = (Spinner)view.findViewById(R.id.facultades);
-        Spinner escuelas = (Spinner)view.findViewById(R.id.escuelas);
-        Spinner semestres = (Spinner)view.findViewById(R.id.semestres);
-        Spinner asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
-        codigo = (EditText)view.findViewById(R.id.codigo);
-        Button registrar = (Button)view.findViewById(R.id.registrar);
+        Spinner facultades = view.findViewById(R.id.facultades);
+        Spinner escuelas = view.findViewById(R.id.escuelas);
+        Spinner semestres = view.findViewById(R.id.semestres);
+        Spinner asignaturas = view.findViewById(R.id.asignaturas);
+        codigo = view.findViewById(R.id.codigo);
+        Button registrar = view.findViewById(R.id.registrar);
         String accion = MD5.encrypt("facultades");
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         sede = preferences.getString("sede","");
         anioa =  getResources().getString(R.string.año);
-        new RecibirFacultades(getActivity(),urla,facultades,escuelas,semestres,asignaturas,matricula1,accion).execute();
+        String matricula1 = "matriculaa";
+        new RecibirFacultades(getActivity(),urla,facultades,escuelas,semestres,asignaturas, matricula1,accion).execute();
         registrar.setOnClickListener(RegistrarAsignaturasDocentesFragments.this);
         da = new DatosDatos();
         return view;

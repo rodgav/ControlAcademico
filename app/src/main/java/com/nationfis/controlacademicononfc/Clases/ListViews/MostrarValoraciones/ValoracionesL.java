@@ -1,6 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarValoraciones;
 
-/**
+/*
  * Created by Sam on 18/06/2017.
  */
 
@@ -18,7 +18,7 @@ public class ValoracionesL {
         this.nombrea = nombrea;
     }
 
-    public void setNombreu(String nombreu) {
+    void setNombreu(String nombreu) {
         this.nombreu = nombreu;
     }
 
@@ -34,7 +34,7 @@ public class ValoracionesL {
         return nombrea;
     }
 
-    public String getNombreu() {
+    String getNombreu() {
         return nombreu;
     }
 

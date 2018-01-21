@@ -1,13 +1,11 @@
 package com.nationfis.controlacademicononfc.Clases;
 
-import android.content.Context;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
+/*
  * Created by SamGM on 13/04/2017.
  */
 

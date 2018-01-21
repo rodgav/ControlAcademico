@@ -35,8 +35,8 @@ public class AsignaturasFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_asignaturas, container, false);
-        estudiantes = (ListView)view.findViewById(R.id.estudiantes);
-        estudiantesa = (ListView)view.findViewById(R.id.estudiantesa);
+        estudiantes = view.findViewById(R.id.estudiantes);
+        estudiantesa = view.findViewById(R.id.estudiantesa);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo = preferences.getString("codigo","");

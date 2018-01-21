@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarValoraciones;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ListView;
@@ -13,16 +14,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 18/06/2017.
  */
 
 public class AnalizarValoracionesL extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
+    @SuppressLint("StaticFieldLeak")
     private ListView valores;
     private ArrayList<ValoracionesL> valoracionesLs = new ArrayList<>();
-    public AnalizarValoracionesL(Context c, String s, ListView valores) {
+    AnalizarValoracionesL(Context c, String s, ListView valores) {
         this.c = c;
         this.s = s;
         this.valores = valores;

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarNota;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,7 +8,6 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nationfis.controlacademicononfc.Clases.ActualizarAsistencia.EmpaqueActualizarAsistencia;
 import com.nationfis.controlacademicononfc.Clases.Conexion;
 
 import java.io.BufferedReader;
@@ -19,15 +19,17 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by Sam on 06/06/2017.
  */
 
 public class ActualizarNota extends AsyncTask<Void,Void,String>{
     private String urla,accion,nota2,codval,codasi,coduni,codigo2,codigo3;
     private ProgressDialog pd;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
+    @SuppressLint("StaticFieldLeak")
     private TextView nota;
     public ActualizarNota(Context c, String urla, String accion, String nota2, String codval,
                           String codasi, String coduni, String codigo2, Dialog d, TextView nota,String codigo3) {
@@ -83,17 +85,13 @@ public class ActualizarNota extends AsyncTask<Void,Void,String>{
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuesta = new StringBuffer();
-                if (br!=null){
-                    while ((linea=br.readLine())!=null){
-                        respuesta.append(linea+"n");
-                    }
-                }else {
-                    return null;
+                StringBuilder respuesta = new StringBuilder();
+                while ((linea=br.readLine())!=null){
+                    respuesta.append(linea+"n");
                 }
                 return respuesta.toString();
             }else {

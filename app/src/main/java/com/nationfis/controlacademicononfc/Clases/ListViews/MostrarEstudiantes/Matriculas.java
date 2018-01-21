@@ -1,6 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarEstudiantes;
 
-/**
+/*
  * Created by Sam on 30/08/2017.
  */
 
@@ -12,15 +12,15 @@ public class Matriculas {
         return recibo;
     }
 
-    public void setRecibo(String recibo) {
+    void setRecibo(String recibo) {
         this.recibo = recibo;
     }
 
-    public String getUser() {
+    String getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    void setUser(String user) {
         this.user = user;
     }
 
@@ -80,19 +80,19 @@ public class Matriculas {
         this.nombre = nombre;
     }
 
-    public String getNombresemestre() {
+    String getNombresemestre() {
         return nombresemestre;
     }
 
-    public void setNombresemestre(String nombresemestre) {
+    void setNombresemestre(String nombresemestre) {
         this.nombresemestre = nombresemestre;
     }
 
-    public String getNombreescuela() {
+    String getNombreescuela() {
         return nombreescuela;
     }
 
-    public void setNombreescuela(String nombreescuela) {
+    void setNombreescuela(String nombreescuela) {
         this.nombreescuela = nombreescuela;
     }
 
@@ -100,7 +100,7 @@ public class Matriculas {
         return matriculanombre;
     }
 
-    public void setMatriculanombre(String matriculanombre) {
+    void setMatriculanombre(String matriculanombre) {
         this.matriculanombre = matriculanombre;
     }
 
@@ -108,7 +108,7 @@ public class Matriculas {
         return nombredistrito;
     }
 
-    public void setNombredistrito(String nombredistrito) {
+    void setNombredistrito(String nombredistrito) {
         this.nombredistrito = nombredistrito;
     }
 

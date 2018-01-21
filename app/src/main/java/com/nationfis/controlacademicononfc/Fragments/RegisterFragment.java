@@ -48,7 +48,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private ImageView foto;
     private String tdocumento1 ;
     private TextView refresh;
-    private Spinner facultades,escuelas,departamento,provincia,distrito;
     private String[] tdocumentos = {"DNI", "CARNET EXT.", "RUC", "PASAPORTE", "P. NAC","OTROS"};
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -63,48 +62,48 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        refresh = (TextView) view.findViewById(R.id.refresh);
-        masculino = (CheckBox)view.findViewById(R.id.maculino);
-        femenino = (CheckBox) view.findViewById(R.id.femenino);
-        fecha = (EditText) view.findViewById(R.id.fecha);
-        nombre = (EditText)view.findViewById(R.id.nombre);
-        apellidop = (EditText)view.findViewById(R.id.apellidop);
-        apellidom = (EditText)view.findViewById(R.id.apellidom);
-        correo = (EditText)view.findViewById(R.id.correo);
-        dni = (EditText)view.findViewById(R.id.dni);
-        codigo = (EditText)view.findViewById(R.id.codigo);
-        contraseña = (EditText)view.findViewById(R.id.contraseña);
-        verificacion = (EditText)view.findViewById(R.id.verificacion);
-        telefono = (EditText)view.findViewById(R.id.telefono);
-        foto = (ImageView) view.findViewById(R.id.foto);
-        Button registrar = (Button) view.findViewById(R.id.register);
-        Spinner spdocumento = (Spinner) view.findViewById(R.id.spdni);
-        Spinner sedes = (Spinner) view.findViewById(R.id.sedes);
-        facultades = (Spinner)view.findViewById(R.id.facultades);
-        escuelas = (Spinner)view.findViewById(R.id.escuelas);
-        departamento = (Spinner)view.findViewById(R.id.departamento);
-        provincia = (Spinner)view.findViewById(R.id.provincia);
-        distrito = (Spinner)view.findViewById(R.id.distrito);
+        refresh =  view.findViewById(R.id.refresh);
+        masculino = view.findViewById(R.id.maculino);
+        femenino =  view.findViewById(R.id.femenino);
+        fecha =  view.findViewById(R.id.fecha);
+        nombre = view.findViewById(R.id.nombre);
+        apellidop = view.findViewById(R.id.apellidop);
+        apellidom = view.findViewById(R.id.apellidom);
+        correo = view.findViewById(R.id.correo);
+        dni = view.findViewById(R.id.dni);
+        codigo = view.findViewById(R.id.codigo);
+        contraseña = view.findViewById(R.id.contraseña);
+        verificacion = view.findViewById(R.id.verificacion);
+        telefono = view.findViewById(R.id.telefono);
+        foto =  view.findViewById(R.id.foto);
+        Button registrar =  view.findViewById(R.id.register);
+        Spinner spdocumento =  view.findViewById(R.id.spdni);
+        Spinner sedes =  view.findViewById(R.id.sedes);
+        Spinner facultades =  view.findViewById(R.id.facultades);
+        Spinner escuelas =  view.findViewById(R.id.escuelas);
+        Spinner departamento =  view.findViewById(R.id.departamento);
+        Spinner provincia =  view.findViewById(R.id.provincia);
+        Spinner distrito =  view.findViewById(R.id.distrito);
 
         fecha.setText(sdf.format(calendar.getTime()));
 
         String accion= MD5.encrypt("facultades");
         String matricula1 = "regsemest";
-        new RecibirFacultades(getActivity(),urla,facultades,escuelas,facultades,escuelas,matricula1,accion).execute();
+        new RecibirFacultades(getActivity(),urla, facultades, escuelas, facultades, escuelas,matricula1,accion).execute();
         String accion1=MD5.encrypt("departamentos");
         String accion2 = MD5.encrypt("provincias");
         String accion3 = MD5.encrypt("distritos");
-        new RecibirDepartamentos(getActivity(),urla,departamento,provincia,distrito,accion1,accion2,accion3).execute();
+        new RecibirDepartamentos(getActivity(),urla, departamento, provincia, distrito,accion1,accion2,accion3).execute();
         String accion0 = MD5.encrypt("sede");
         new RecibirSede(getActivity(),urla,accion0,sedes).execute();
 
 
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, tdocumentos);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, tdocumentos);
         spdocumento.setAdapter(adaptador);
         spdocumento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String nombrei = (String) ((Spinner)adapterView).getSelectedItem();
+                String nombrei = (String) (adapterView).getSelectedItem();
 
                 tdocumento1 = Integer.toString(i+1);
                 Toast.makeText(getActivity(),nombrei,Toast.LENGTH_SHORT).show();
@@ -173,6 +172,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
             Bundle bundle = data.getExtras();
+            assert bundle != null;
             Bitmap imagen = (Bitmap) bundle.get("data");
             foto.setImageBitmap(imagen);
         }
@@ -181,8 +181,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 70,stream);
         byte[] byteFormat = stream.toByteArray();
-        String imgString = Base64.encodeToString(byteFormat,Base64.NO_WRAP);
-        return imgString;
+        return Base64.encodeToString(byteFormat,Base64.NO_WRAP);
     }
 
     private void registrarnuevo() {

@@ -27,7 +27,7 @@ public class RegistrarSemestreFragment extends Fragment implements View.OnClickL
     public RegistrarSemestreFragment() {
         // Required empty public constructor
     }
-    private String matricula1 = "regsemest";
+
     //private String urla = "http://nationfis.hol.es/nonfc/facultad.php";
     //private String urla1 = "http://nationfis.hol.es/nonfc/regsemes.php";
     private DatosDatos datosDatos;
@@ -37,15 +37,16 @@ public class RegistrarSemestreFragment extends Fragment implements View.OnClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registrar_semestre, container, false);
-        semestre = (EditText)view.findViewById(R.id.semestre);
-        Spinner facultades = (Spinner)view.findViewById(R.id.facultades);
-        Spinner escuelas = (Spinner)view.findViewById(R.id.escuelas);
-        Spinner semestres = (Spinner)view.findViewById(R.id.semestres);
-        Spinner asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
-        Button enviar = (Button)view.findViewById(R.id.enviar);
+        semestre = view.findViewById(R.id.semestre);
+        Spinner facultades = view.findViewById(R.id.facultades);
+        Spinner escuelas = view.findViewById(R.id.escuelas);
+        Spinner semestres = view.findViewById(R.id.semestres);
+        Spinner asignaturas = view.findViewById(R.id.asignaturas);
+        Button enviar = view.findViewById(R.id.enviar);
         datosDatos = new DatosDatos();
         String accion= MD5.encrypt("facultades");
-        new RecibirFacultades(getActivity(),urla,facultades,escuelas,semestres,asignaturas,matricula1,accion).execute();
+        String matricula1 = "regsemest";
+        new RecibirFacultades(getActivity(),urla,facultades,escuelas,semestres,asignaturas, matricula1,accion).execute();
         enviar.setOnClickListener(RegistrarSemestreFragment.this);
         return view;
     }

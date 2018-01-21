@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.EnviarNotas;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -10,15 +11,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Sam on 29/05/2017.
  */
 
 public class AnalizarNota extends AsyncTask<Void,Void,Integer>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
-    ArrayList<String> mensajes=new ArrayList<>();
-    public AnalizarNota(Context c, String s) {
+    private ArrayList<String> mensajes=new ArrayList<>();
+    AnalizarNota(Context c, String s) {
         this.c = c;
         this.s = s;
     }

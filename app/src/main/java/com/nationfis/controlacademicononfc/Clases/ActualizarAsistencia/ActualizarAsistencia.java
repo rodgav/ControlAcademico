@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarAsistencia;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,14 +19,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by Sam on 26/04/2017.
  */
 
 public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
     private Dialog d;
+    @SuppressLint("StaticFieldLeak")
     private TextView asisti;
     private String urla,asistio,codigodoc,codigoasig,codigoest,fecha;
     public ActualizarAsistencia(Context c, String urla, String asistio, String codigodoc, String codigoasig, String codigoest,

@@ -33,11 +33,10 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
     public ComprobarNotasFragment() {
         // Required empty public constructor
     }
-    private Spinner asignaturas,unidades,valores;
-    private ImageButton cargarva;
-    private Button registrar;
+
+    private Spinner valores;
     private ListView notas;
-    private String codigo,sede,anioa;
+    private String codigo;
     private DatosDatos datosDatos = new DatosDatos();
 
     @Override
@@ -45,22 +44,22 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comprobar_notas, container, false);
-        asignaturas = (Spinner)view.findViewById(R.id.asignaturas);
-        unidades = (Spinner)view.findViewById(R.id.unidades);
-        valores = (Spinner)view.findViewById(R.id.valores);
-        cargarva = (ImageButton)view.findViewById(R.id.cargarva);
-        registrar = (Button)view.findViewById(R.id.registrar);
-        notas = (ListView)view.findViewById(R.id.notas);
+        Spinner asignaturas =  view.findViewById(R.id.asignaturas);
+        Spinner unidades =  view.findViewById(R.id.unidades);
+        valores = view.findViewById(R.id.valores);
+        ImageButton cargarva =  view.findViewById(R.id.cargarva);
+        Button registrar =  view.findViewById(R.id.registrar);
+        notas = view.findViewById(R.id.notas);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo = preferences.getString("codigo","");
-        sede = preferences.getString("sede","");
-        anioa =  getResources().getString(R.string.año);
+        String sede = preferences.getString("sede", "");
+        String anioa = getResources().getString(R.string.año);
         String accion= MD5.encrypt("unidades");
         String tipo="solo";
 
-        new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,notas,notas,tipo,sede,anioa).execute();
-        new RecibirUnidades(getActivity(),urla,unidades,accion).execute();
+        new RecibirAsignaturasDocentes(getActivity(),urla,codigo, asignaturas,notas,notas,tipo, sede, anioa).execute();
+        new RecibirUnidades(getActivity(),urla, unidades,accion).execute();
 
         cargarva.setOnClickListener(ComprobarNotasFragment.this);
         registrar.setOnClickListener(ComprobarNotasFragment.this);

@@ -9,14 +9,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by Sam on 26/04/2017.
  */
 
-public class EmpaqueActualizarAsistencia {
+class EmpaqueActualizarAsistencia {
     private String asistio,codigodoc,codigoasig,codigoest,fecha;
 
-    public EmpaqueActualizarAsistencia(String asistio, String codigodoc, String codigoasig, String codigoest,String fecha) {
+    EmpaqueActualizarAsistencia(String asistio, String codigodoc, String codigoasig, String codigoest, String fecha) {
         this.asistio = asistio;
         this.codigodoc = codigodoc;
         this.codigoasig = codigoasig;
@@ -27,7 +27,7 @@ public class EmpaqueActualizarAsistencia {
 
     String packageData() {
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String accion= MD5.encrypt("actualizarasis");
         try {
             jo.put("accion",accion);
@@ -51,9 +51,7 @@ public class EmpaqueActualizarAsistencia {
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (i.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;

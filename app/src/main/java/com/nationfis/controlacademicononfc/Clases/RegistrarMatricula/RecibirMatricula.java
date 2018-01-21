@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.RegistrarMatricula;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,12 +17,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by SamGM on 22/04/2017.
  */
 
 public class RecibirMatricula extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String urla,baucher1,codigo1,matricula1,anio,escuela,an,tipom,activo,sede;
     public RecibirMatricula(Context c, String urla, String baucher1, String codigo1, String matricula1,
@@ -57,17 +59,13 @@ public class RecibirMatricula extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int respuesta = con.getResponseCode();
-            if (respuesta==con.HTTP_OK){
+            if (respuesta== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuestat = new StringBuffer();
-                if (br!=null){
-                    while ((linea=br.readLine())!=null){
-                        respuestat.append(linea+"n");
-                    }
-                }else {
-                    return  null;
+                StringBuilder respuestat = new StringBuilder();
+                while ((linea=br.readLine())!=null){
+                    respuestat.append(linea).append("n");
                 }
                 return respuestat.toString();
             }else {

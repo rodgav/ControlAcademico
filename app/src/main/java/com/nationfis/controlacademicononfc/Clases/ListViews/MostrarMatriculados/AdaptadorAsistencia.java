@@ -18,7 +18,7 @@ import com.nationfis.controlacademicononfc.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
+/*
  * Created by SamGM on 23/04/2017.
  */
 
@@ -26,7 +26,7 @@ public class AdaptadorAsistencia extends BaseAdapter {
     private LayoutInflater inflater;
     private Context c;
     private ArrayList<Asistencia>asistencia;
-    public AdaptadorAsistencia(Context c, ArrayList<Asistencia> asistencia) {
+    AdaptadorAsistencia(Context c, ArrayList<Asistencia> asistencia) {
         inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.c = c;
         this.asistencia = asistencia;
@@ -52,10 +52,10 @@ public class AdaptadorAsistencia extends BaseAdapter {
         if (view==null){
             view = inflater.inflate(R.layout.custom_estudiantes_pasar_asistencia,viewGroup,false);
         }
-        TextView nombre = (TextView)view.findViewById(R.id.nombre);
-        TextView codigo = (TextView)view.findViewById(R.id.codigo);
-        ImageView foto = (ImageView)view.findViewById(R.id.foto);
-        TextView activo = (TextView)view.findViewById(R.id.activo);
+        TextView nombre = view.findViewById(R.id.nombre);
+        TextView codigo = view.findViewById(R.id.codigo);
+        ImageView foto = view.findViewById(R.id.foto);
+        TextView activo = view.findViewById(R.id.activo);
 
         Asistencia asistencia1 = asistencia.get(i);
         nombre.setText(asistencia1.getNombre());

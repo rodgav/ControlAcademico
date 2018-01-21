@@ -1,9 +1,9 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasEstudiantes;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,14 +18,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by Sam on 11/06/2017.
  */
 
 public class RecibirAsignaturasEstudiantes extends AsyncTask<Void,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String urla,codigo,accion;
     private ProgressDialog pd;
+    @SuppressLint("StaticFieldLeak")
     private Spinner asignaturas;
     public RecibirAsignaturasEstudiantes(Context c, String urla, String codigo, String accion, Spinner asignaturas) {
         this.c = c;
@@ -73,26 +75,20 @@ public class RecibirAsignaturasEstudiantes extends AsyncTask<Void,Void,String> {
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer repuesta = new StringBuffer();
-                if (br!=null){
-                    while((linea=br.readLine())!=null){
-                        repuesta.append(linea+"n");
-                    }
-                }else {
-                    return null;
+                StringBuilder repuesta = new StringBuilder();
+                while((linea=br.readLine())!=null){
+                    repuesta.append(linea).append("n");
                 }
                 return repuesta.toString();
             }else {
                 return String.valueOf(resp);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }catch (NullPointerException e){
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
         return null;

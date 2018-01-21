@@ -1,6 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ListViews.ComprobarNotas;
 
-/**
+/*
  * Created by Sam on 06/06/2017.
  */
 

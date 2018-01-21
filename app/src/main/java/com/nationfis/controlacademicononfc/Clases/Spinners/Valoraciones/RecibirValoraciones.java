@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Spinners.Valoraciones;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -17,14 +18,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by Sam on 28/05/2017.
  */
 
 public class RecibirValoraciones extends AsyncTask<Void,Void,String>{
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
     private String urla,codiasi,codiuni,accion,codigo;
+    @SuppressLint("StaticFieldLeak")
     private Spinner valores;
     public RecibirValoraciones(Context c, String urla, String codiasi, String codiuni, String accion, Spinner valores,String codigo) {
         this.c = c;
@@ -74,17 +77,13 @@ public class RecibirValoraciones extends AsyncTask<Void,Void,String>{
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuesta = new StringBuffer();
-                if (br!=null){
-                    while ((linea=br.readLine())!=null){
-                        respuesta.append(linea+"n");
-                    }
-                }else {
-                    return null;
+                StringBuilder respuesta = new StringBuilder();
+                while ((linea=br.readLine())!=null){
+                    respuesta.append(linea).append("n");
                 }
                 return respuesta.toString();
             }else {

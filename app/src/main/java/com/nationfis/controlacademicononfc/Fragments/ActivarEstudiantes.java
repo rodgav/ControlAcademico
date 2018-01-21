@@ -29,7 +29,6 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
     }
 
     private ListView estudiantes;
-    private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String accion = MD5.encrypt("estudiantes"),ep,anioa,sede;
     @Override
@@ -37,10 +36,10 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activar_estudiantes, container, false);
-        estudiantes = (ListView)view.findViewById(R.id.estudiantes);
-        searchView = (SearchView)view.findViewById(R.id.sv);
+        estudiantes = view.findViewById(R.id.estudiantes);
+        SearchView searchView =  view.findViewById(R.id.sv);
         anioa = getResources().getString(R.string.año);
-        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         searchView.setOnQueryTextListener(ActivarEstudiantes.this);
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         ep = preferences.getString("ep","");

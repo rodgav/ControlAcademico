@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -44,8 +45,6 @@ import com.nationfis.controlacademicononfc.R;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private String tipo,nombre,image,tipos,sede,epn;
-    private Bitmap foto;
     //public static final String urla = "https://nationfis.000webhostapp.com/controlacademico/entrada.php";
     public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
     //public static String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
@@ -54,7 +53,7 @@ public class NavigationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -65,21 +64,21 @@ public class NavigationActivity extends AppCompatActivity
         fragmentTransaction.commit();
 
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
-        tipo = preferences.getString("a","");
-        nombre = preferences.getString("nombre","");
-        image = preferences.getString("image","");
-        tipos = preferences.getString("tipos","");
-        sede = preferences.getString("seden","");
-        epn = preferences.getString("epn","");
+        String tipo = preferences.getString("a", "");
+        String nombre = preferences.getString("nombre", "");
+        String image = preferences.getString("image", "");
+        String tipos = preferences.getString("tipos", "");
+        String sede = preferences.getString("seden", "");
+        String epn = preferences.getString("epn", "");
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
 
         switch (tipo) {
@@ -98,25 +97,25 @@ public class NavigationActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
         View view = navigationView.getHeaderView(0);
-        TextView nombret = (TextView)view.findViewById(R.id.nombre);
-        TextView ep = (TextView) view.findViewById(R.id.ep);
-        TextView tipot = (TextView) view.findViewById(R.id.tipo);
-        TextView sedet = (TextView) view.findViewById(R.id.sede);
-        ImageView fotot = (ImageView) view.findViewById(R.id.foto);
+        TextView nombret = view.findViewById(R.id.nombre);
+        TextView ep =  view.findViewById(R.id.ep);
+        TextView tipot =  view.findViewById(R.id.tipo);
+        TextView sedet =  view.findViewById(R.id.sede);
+        ImageView fotot =  view.findViewById(R.id.foto);
 
         nombret.setText(nombre);
         tipot.setText(tipos);
         sedet.setText(sede);
         ep.setText(epn);
         byte[] byteImage = Base64.decode(image, Base64.DEFAULT);
-        foto = BitmapFactory.decodeByteArray( byteImage, 0, byteImage.length);
+        Bitmap foto = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
         fotot.setImageBitmap(foto);
 
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (drawer.isDrawerOpen(GravityCompat.END)) {  /*Closes the Appropriate Drawer*/
@@ -179,7 +178,7 @@ public class NavigationActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -268,6 +267,7 @@ public class NavigationActivity extends AppCompatActivity
                 Intent intent = new Intent(NavigationActivity.this,LoginActvity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 break;
         }
         if(fragmentTransaction){
@@ -276,7 +276,7 @@ public class NavigationActivity extends AppCompatActivity
             //getSupportActionBar().setTitle(item.getTitle());
             setTitle(item.getTitle());
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

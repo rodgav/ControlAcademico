@@ -29,17 +29,17 @@ import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
-/**
+/*
  * Created by Sam on 30/08/2017.
  */
 
 public class AdaptadorMatriculas extends BaseAdapter {
     private Context c;
-    ArrayList<Matriculas> matriculas1;
+    private ArrayList<Matriculas> matriculas1;
     private LayoutInflater inflater;
     private String activoid,accion;
     private String asis [] = {"DESHABILITAR","HABILITAR"};
-    public AdaptadorMatriculas(Context c, ArrayList<Matriculas> matriculas1, String accion) {
+    AdaptadorMatriculas(Context c, ArrayList<Matriculas> matriculas1, String accion) {
         inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.c = c;
         this.matriculas1 = matriculas1;
@@ -66,13 +66,13 @@ public class AdaptadorMatriculas extends BaseAdapter {
         if (view==null){
             view = inflater.inflate(R.layout.custom_matriculas_activar,viewGroup,false);
         }
-        TextView nombre = (TextView)view.findViewById(R.id.nombre);
-        TextView codigo = (TextView)view.findViewById(R.id.codigo);
-        TextView ep = (TextView)view.findViewById(R.id.ep);
-        final TextView semestre = (TextView)view.findViewById(R.id.semestre);
-        ImageView foto = (ImageView)view.findViewById(R.id.foto);
-        final TextView activado = (TextView)view.findViewById(R.id.activado);
-        final ImageButton menu = (ImageButton)view.findViewById(R.id.menu);
+        TextView nombre = view.findViewById(R.id.nombre);
+        TextView codigo = view.findViewById(R.id.codigo);
+        TextView ep = view.findViewById(R.id.ep);
+        final TextView semestre = view.findViewById(R.id.semestre);
+        ImageView foto = view.findViewById(R.id.foto);
+        final TextView activado = view.findViewById(R.id.activado);
+        final ImageButton menu = view.findViewById(R.id.menu);
 
         Matriculas matriculas = matriculas1.get(i);
         nombre.setText(matriculas.getNombre());
@@ -106,13 +106,13 @@ public class AdaptadorMatriculas extends BaseAdapter {
                         if (idm == R.id.activar){
                             final Dialog d = new Dialog(c);
                             d.setContentView(R.layout.dialog_activar_matriculas);
-                            TextView nombre1 = (TextView) d.findViewById(R.id.nombre);
-                            TextView ep1 = (TextView) d.findViewById(R.id.ep);
-                            TextView semestre1 = (TextView) d.findViewById(R.id.semestre);
-                            final TextView codigo1 = (TextView) d.findViewById(R.id.codigo);
-                            Spinner activo = (Spinner) d.findViewById(R.id.activo);
-                            ImageView foto1 = (ImageView) d.findViewById(R.id.foto);
-                            Button enviar = (Button) d.findViewById(R.id.enviar);
+                            TextView nombre1 =  d.findViewById(R.id.nombre);
+                            TextView ep1 =  d.findViewById(R.id.ep);
+                            TextView semestre1 =  d.findViewById(R.id.semestre);
+                            final TextView codigo1 =  d.findViewById(R.id.codigo);
+                            Spinner activo =  d.findViewById(R.id.activo);
+                            ImageView foto1 =  d.findViewById(R.id.foto);
+                            Button enviar =  d.findViewById(R.id.enviar);
 
                             nombre1.setText(matriculas1.get(i).getNombre());
                             codigo1.setText(matriculas1.get(i).getUser());
@@ -123,7 +123,7 @@ public class AdaptadorMatriculas extends BaseAdapter {
                             Bitmap bitmap1 = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                             foto1.setImageBitmap(bitmap1);
 
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, asis);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, asis);
                             activo.setAdapter(adapter);
                             activo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override

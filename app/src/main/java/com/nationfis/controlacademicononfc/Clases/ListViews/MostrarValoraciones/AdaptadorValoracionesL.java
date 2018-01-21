@@ -30,7 +30,7 @@ public class AdaptadorValoracionesL extends BaseAdapter {
     private DatosDatos datosDatos;
     private Context c;
     private SharedPreferences preferences;
-    public AdaptadorValoracionesL(Context c, ArrayList<ValoracionesL> valoracionesLs) {
+    AdaptadorValoracionesL(Context c, ArrayList<ValoracionesL> valoracionesLs) {
         this.c = c;
         this.valoracionesLs = valoracionesLs;
         this.datosDatos = new DatosDatos();
@@ -58,10 +58,10 @@ public class AdaptadorValoracionesL extends BaseAdapter {
         if (view==null){
             view = inflater.inflate(R.layout.custom_valoraciones,viewGroup,false);
         }
-        TextView nombre = (TextView)view.findViewById(R.id.nombre);
-        final TextView peso = (TextView)view.findViewById(R.id.peso);
-        TextView nombrea = (TextView)view.findViewById(R.id.asig);
-        TextView nombreu = (TextView)view.findViewById(R.id.unid);
+        TextView nombre = view.findViewById(R.id.nombre);
+        final TextView peso = view.findViewById(R.id.peso);
+        TextView nombrea = view.findViewById(R.id.asig);
+        TextView nombreu = view.findViewById(R.id.unid);
 
         final ValoracionesL va = valoracionesLs.get(i);
         nombre.setText(va.getNombre());
@@ -73,11 +73,11 @@ public class AdaptadorValoracionesL extends BaseAdapter {
             public void onClick(View view) {
                 final Dialog d = new Dialog(c);
                 d.setContentView(R.layout.dialog_valoraciones);
-                TextView nombre1 = (TextView) d.findViewById(R.id.nombre1);
-                final EditText peso1 = (EditText) d.findViewById(R.id.peso1);
-                TextView asig1 = (TextView) d.findViewById(R.id.asig1);
-                TextView unid1 = (TextView) d.findViewById(R.id.unid1);
-                Button registrar = (Button) d.findViewById(R.id.registrar);
+                TextView nombre1 =  d.findViewById(R.id.nombre1);
+                final EditText peso1 = d.findViewById(R.id.peso1);
+                TextView asig1 =  d.findViewById(R.id.asig1);
+                TextView unid1 =  d.findViewById(R.id.unid1);
+                Button registrar =  d.findViewById(R.id.registrar);
 
                 nombre1.setText(valoracionesLs.get(i).getNombre());
                 peso1.setText(valoracionesLs.get(i).getPeso());

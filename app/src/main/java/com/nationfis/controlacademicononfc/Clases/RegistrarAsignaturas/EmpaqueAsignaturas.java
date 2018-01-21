@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 public class EmpaqueAsignaturas{
     private String nombre1,semestre;
-    public EmpaqueAsignaturas(String nombre1, String semestre) {
+    EmpaqueAsignaturas(String nombre1, String semestre) {
         this.nombre1 = nombre1;
         this.semestre = semestre;
     }
@@ -42,9 +42,7 @@ public class EmpaqueAsignaturas{
                 sb.append(URLEncoder.encode(value,"UTF-8"));
             }while (i.hasNext());
             return sb.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;
