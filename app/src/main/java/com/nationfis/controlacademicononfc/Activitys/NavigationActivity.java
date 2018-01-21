@@ -46,8 +46,10 @@ public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private String tipo,nombre,image,tipos,sede,epn;
     private Bitmap foto;
-    public static final String urla = "https://nationfis.000webhostapp.com/controlacademico/entrada.php";
-
+    //public static final String urla = "https://nationfis.000webhostapp.com/controlacademico/entrada.php";
+    public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
+    //public static String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
+    public static String urla1 = "http://192.168.1.38/controlacademico/reportes/asistencia.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,10 +1,15 @@
 package com.nationfis.controlacademicononfc.Fragments;
 
 
+import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.kosalgeek.android.md5simply.MD5;
+import com.kosalgeek.android.md5simply.MainActivity;
+import com.nationfis.controlacademicononfc.BuildConfig;
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
 import com.nationfis.controlacademicononfc.Clases.EnviarAsistencia.RegistrarAsistencia;
 import com.nationfis.controlacademicononfc.Clases.ListViews.ComprobarAsistencia.ComprobarAsistencia;
@@ -21,10 +29,12 @@ import com.nationfis.controlacademicononfc.Clases.Reportes.Asistenciapdf.Descarg
 import com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes.RecibirAsignaturasDocentes;
 import com.nationfis.controlacademicononfc.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla1;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,7 +94,6 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
     }
 
     private void descargar() {
-        String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
         String asig = da.getAsignaturasd();
         new DescargarAsistenciaPDF(getActivity(),urla1,asig,fecha).execute();
     }

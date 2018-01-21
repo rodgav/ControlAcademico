@@ -90,5 +90,6 @@
     <string name="act_us">Activar Usuario</string>
     <string name="act_est">Activar Estudiantes</string>
     <string name="actmat">Activar Matriculas</string>
-    <string name="descargar">DESCARGAR</string>
+    <string name="descargar">DESCARGAR PDF</string>
+    <string name="ver">VER PDF</string>
 </resources>

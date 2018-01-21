@@ -1,14 +1,21 @@
 package com.nationfis.controlacademicononfc.Clases.Reportes.Asistenciapdf;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.PowerManager;
+import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
+import com.nationfis.controlacademicononfc.BuildConfig;
 import com.nationfis.controlacademicononfc.Clases.Conexion;
+import com.nationfis.controlacademicononfc.Activitys.NavigationActivity;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -63,10 +70,25 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
         super.onPostExecute(s);
         mWakeLock.release();
         mProgressDialog.dismiss();
-        if (s != null)
-            Toast.makeText(c,"Download error: "+s, Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(c,"File downloaded", Toast.LENGTH_SHORT).show();
+        if (s != null) {
+            Toast.makeText(c, "Error en la descarga" + s, Toast.LENGTH_LONG).show();
+        }else {
+            //File pdfFile = new File(Environment.getExternalStorageDirectory() + "/testthreepdf/" + "maven.pdf");
+            @SuppressLint("SdCardPath") File pdfFile = new File("/sdcard/"+asig+fecha+".pdf");
+            //Uri path = Uri.fromFile(pdfFile);
+            Uri path = FileProvider.getUriForFile(c, BuildConfig.APPLICATION_ID+".provider",pdfFile);
+            //Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+            Intent pdfIntent =  new Intent(Intent.ACTION_VIEW);
+            pdfIntent.setDataAndType(path, "application/pdf");
+            pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            try {
+                c.startActivity(pdfIntent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(c, "No tiene un visualizador pdf", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -135,7 +157,6 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
                     input.close();
             } catch (IOException ignored) {
             }
-
             if (con != null)
                 con.disconnect();
         }
