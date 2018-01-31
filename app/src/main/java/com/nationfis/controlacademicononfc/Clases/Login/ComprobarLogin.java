@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Clases.Conexion;
@@ -29,14 +27,11 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
     private Context c;
     private ProgressDialog pd;
     private String usuario,contraseña,urla;
-    @SuppressLint("StaticFieldLeak")
-    private TextView refresh;
-    public ComprobarLogin(Context c, String urla, String usuario, String password,TextView refresh) {
+    public ComprobarLogin(Context c, String urla, String usuario, String password) {
         this.c = c;
         this.urla = urla;
         this.usuario = usuario;
         this.contraseña = password;
-        this.refresh = refresh;
     }
 
     @Override
@@ -53,7 +48,6 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
         pd.dismiss();
         if(s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
-            refresh.setVisibility(View.VISIBLE);
         }else {
             AnalizadorLogin a= new AnalizadorLogin(c,s);
             a.execute();

@@ -3,10 +3,9 @@ package com.nationfis.controlacademicononfc.Clases.ListViews.ComprobarAsistencia
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.nationfis.controlacademicononfc.Helper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,9 +22,9 @@ public class AnalizadorComprobarAsistencia extends AsyncTask<Void,Void,Integer> 
     private Context c;
     private String s,tipo;
     @SuppressLint("StaticFieldLeak")
-    private ListView estudiantes;
+    private RecyclerView estudiantes;
     private ArrayList<AsistenciaCA>asistenciaCAs = new ArrayList<>();
-    AnalizadorComprobarAsistencia(Context c, String s, ListView estudiantes, String tipo) {
+    AnalizadorComprobarAsistencia(Context c, String s, RecyclerView estudiantes, String tipo) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;
@@ -69,9 +68,8 @@ public class AnalizadorComprobarAsistencia extends AsyncTask<Void,Void,Integer> 
         if (integer==0){
             Toast.makeText(c,"No se cargo la asistencia",Toast.LENGTH_SHORT).show();
         }else {
-            AdaptadorComprobarAsistencia a = new AdaptadorComprobarAsistencia(c,asistenciaCAs,tipo);
+            AdaptadorAsistencia a = new AdaptadorAsistencia(c,asistenciaCAs,tipo);
             estudiantes.setAdapter(a);
-            Helper.getListViewSize(estudiantes);
         }
 
     }

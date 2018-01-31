@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
     }
 
     private Spinner valores;
-    private ListView notas;
+    private RecyclerView notas;
     private String codigo;
     private DatosDatos datosDatos = new DatosDatos();
 
@@ -85,7 +86,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         String codiuni= datosDatos.getUnidades();
         String codival = datosDatos.getValoraciones();
         String tipo = "doc";
-        new ComprobarNotas(getActivity(),urla,notas,codiuni,codiasi,codival,tipo,codigo).execute();
+        //new ComprobarNotas(getActivity(),urla,notas,codiuni,codiasi,codival,tipo,codigo).execute();
     }
 
     private void registra() {

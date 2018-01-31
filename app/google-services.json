@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "958531897929",
+    "firebase_url": "https://controlacademico-65e14.firebaseio.com",
+    "project_id": "controlacademico-65e14",
+    "storage_bucket": "controlacademico-65e14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958531897929:android:759fea93be88d0b5",
+        "android_client_info": {
+          "package_name": "com.nationfis.controlacademicononfc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958531897929-a0g3kefhn27u50lsmcjt88tg4rqe2n3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCokpQFjSgzWBOnmwjtecQy8mBeSwwqgVc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

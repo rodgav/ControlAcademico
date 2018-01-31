@@ -1,7 +1,9 @@
 package com.nationfis.controlacademicononfc.Activitys;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +13,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Fragments.ActivarEstudiantes;
 import com.nationfis.controlacademicononfc.Fragments.ActivarMatriculaFragment;
@@ -43,12 +47,14 @@ import com.nationfis.controlacademicononfc.Fragments.RegistrarValoracionesFragme
 import com.nationfis.controlacademicononfc.R;
 
 
-public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //public static final String urla = "https://nationfis.000webhostapp.com/controlacademico/entrada.php";
     public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
-    //public static String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
-    public static String urla1 = "http://192.168.1.38/controlacademico/reportes/asistencia.php";
+    //public static final String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
+    public static final String urla1 = "http://192.168.1.38/controlacademico/reportes/asistencia.php";
+    public static final String TAG = "controlador de errores: ";
+    public static final String NOTIFICACION = "NOTIFICACION";
+    private BroadcastReceiver broadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +100,14 @@ public class NavigationActivity extends AppCompatActivity
             default:
                 break;
         }
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String datos = intent.getStringExtra("mensaje");
+                Toast.makeText(NavigationActivity.this,datos,Toast.LENGTH_SHORT).show();
+            }
+        };
 
         navigationView.setNavigationItemSelectedListener(this);
         View view = navigationView.getHeaderView(0);
@@ -279,5 +293,17 @@ public class NavigationActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,new IntentFilter(NOTIFICACION));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 }

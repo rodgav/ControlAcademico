@@ -81,7 +81,6 @@ public class CustomAdapterUsuario extends BaseAdapter {
                 d.setContentView(R.layout.dialoglogin);
                 TextView nombre = d.findViewById(R.id.nombre);
                 TextView tipo = d.findViewById(R.id.tipo);
-                final TextView refresh = d.findViewById(R.id.refresh);
                 ImageView imagen = d.findViewById(R.id.imagen);
                 Button ingresar = d.findViewById(R.id.ingresar);
                 final EditText password = d.findViewById(R.id.password);
@@ -100,7 +99,7 @@ public class CustomAdapterUsuario extends BaseAdapter {
                         if (password1.length()<=0){
                             Toast.makeText(c,"Ingrese sus contraseña",Toast.LENGTH_SHORT).show();
                         }else {
-                            new ComprobarLogin(c,urla,codigo,password1,refresh).execute();
+                            new ComprobarLogin(c,urla,codigo,password1).execute();
                         }
                     }
                 });

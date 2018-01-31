@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,8 +29,8 @@ public class EnviarAsistencia extends AsyncTask<Void,Void,String> {
     private Context c;
     private String urla,s,accion,sede,anioa;
     @SuppressLint("StaticFieldLeak")
-    private ListView estudiantes;
-    public EnviarAsistencia(Context c, String urla, String s, ListView estudiantes,String accion,String sede, String anioa) {
+    private RecyclerView estudiantes;
+    public EnviarAsistencia(Context c, String urla, String s, RecyclerView estudiantes, String accion, String sede, String anioa) {
         this.c = c;
         this.urla = urla;
         this.s = s;

@@ -1,19 +1,22 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="5dp"
     tools:context="com.nationfis.controlacademicononfc.Fragments.MostrarNotasFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -22,60 +25,101 @@
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/asignatura" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/asignatura"
+                app:layout_constraintBottom_toTopOf="@+id/asignaturas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/asignaturas"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/unidad" />
+                android:layout_marginBottom="8dp"
+                android:text="@string/unidad"
+                app:layout_constraintBottom_toTopOf="@+id/unidades"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/asignaturas" />
 
             <Spinner
                 android:id="@+id/unidades"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView19"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="@string/valo"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/valores"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/unidades" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/valores"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+            <Spinner
+                android:id="@+id/valores"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toTopOf="@+id/registrar"
+                app:layout_constraintEnd_toStartOf="@+id/cargarva"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-                <ImageButton
-                    android:id="@+id/cargarva"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@android:drawable/stat_notify_sync" />
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/cargarva"
+                android:layout_width="26dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/registrar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/valores"
+                app:layout_constraintTop_toBottomOf="@+id/textView19"
+                app:layout_constraintVertical_bias="0.7"
+                app:srcCompat="@android:drawable/stat_notify_sync" />
+
 
             <Button
                 android:id="@+id/registrar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/mostrno" />
+                android:layout_width="wrap_content"
+                android:layout_height="51dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/mostrno"
+                app:layout_constraintBottom_toTopOf="@+id/notas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cargarva" />
 
-            <ListView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/notas"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registrar" />
 
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

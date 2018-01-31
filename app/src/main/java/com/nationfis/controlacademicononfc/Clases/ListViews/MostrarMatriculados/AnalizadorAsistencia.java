@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Clases.ListViews.MostrarMatriculados
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,9 +25,9 @@ public class AnalizadorAsistencia extends AsyncTask<Void,Void,Integer> {
     private Context c;
     private String s;
     @SuppressLint("StaticFieldLeak")
-    private ListView estudiantes;
+    private RecyclerView estudiantes;
     private ArrayList<Asistencia>asistencia = new ArrayList<>();
-    AnalizadorAsistencia(Context c, String s, ListView estudiantes) {
+    AnalizadorAsistencia(Context c, String s, RecyclerView estudiantes) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;
@@ -76,8 +77,8 @@ public class AnalizadorAsistencia extends AsyncTask<Void,Void,Integer> {
             Toast.makeText(c,"No se pudo cargar los matriculados",Toast.LENGTH_SHORT).show();
         }else {
             AdaptadorAsistencia a = new AdaptadorAsistencia(c,asistencia);
-            estudiantes.setAdapter(a);
-            Helper.getListViewSize(estudiantes);
+            //estudiantes.setAdapter(a);
+            //Helper.getListViewSize(estudiantes);
         }
     }
 }

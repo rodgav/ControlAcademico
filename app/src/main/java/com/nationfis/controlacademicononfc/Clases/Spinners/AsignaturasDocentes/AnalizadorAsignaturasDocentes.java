@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,11 +35,11 @@ public class AnalizadorAsignaturasDocentes extends AsyncTask<Void,Void,Integer> 
     @SuppressLint("StaticFieldLeak")
     private Spinner asignaturas;
     @SuppressLint("StaticFieldLeak")
-    private ListView estudiantes, estudiantesa;
+    private RecyclerView estudiantes, estudiantesa;
     private ArrayList<String> noa = new ArrayList<>();
     private ArrayList<String> ida = new ArrayList<>();
     private DatosDatos datosDatos = new DatosDatos();
-    AnalizadorAsignaturasDocentes(Context c, String s, Spinner asignaturas, ListView estudiantes, ListView estudiantesa,
+    AnalizadorAsignaturasDocentes(Context c, String s, Spinner asignaturas, RecyclerView estudiantes, RecyclerView estudiantesa,
                                   String tipo, String sede, String anioa) {
         this.c = c;
         this.s = s;

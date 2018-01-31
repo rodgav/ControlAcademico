@@ -6,13 +6,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
 import com.nationfis.controlacademicononfc.Clases.EnviarAsistencia.RegistrarAsistencia;
@@ -24,6 +29,7 @@ import com.nationfis.controlacademicononfc.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla1;
 
@@ -35,7 +41,7 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
     private DatosDatos da = new DatosDatos();
     private String fecha;
     private String codigo;
-    private ListView estudiantes,estudiantesa;
+    private RecyclerView estudiantes;
     private SwipeRefreshLayout swipeRefreshLayout;
     public ComprobarAsistenciaFragment() {
         // Required empty public constructor
@@ -48,7 +54,7 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comprobar_asistencia, container, false);
         estudiantes = view.findViewById(R.id.estudiantes);
-        estudiantesa = view.findViewById(R.id.estudiantesa);
+        //estudiantesa = view.findViewById(R.id.estudiantesa);
         Spinner asignaturas = view.findViewById(R.id.asignaturas);
         Button registrar = view.findViewById(R.id.registrar);
         Button descargar = view.findViewById(R.id.descargar);
@@ -63,8 +69,9 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         String sede = preferences.getString("sede", "");
         String anioa = getResources().getString(R.string.año);
 
+        estudiantes.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,estudiantes,estudiantesa,tipo, sede, anioa).execute();
+        new RecibirAsignaturasDocentes(getActivity(),urla,codigo,asignaturas,estudiantes,estudiantes,tipo, sede, anioa).execute();
 
         registrar.setOnClickListener(ComprobarAsistenciaFragment.this);
         descargar.setOnClickListener(ComprobarAsistenciaFragment.this);
@@ -77,7 +84,7 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         switch (view.getId()){
             case R.id.registrar:
                 estudiantes.setAdapter(null);
-                estudiantesa.setAdapter(null);
+                //estudiantesa.setAdapter(null);
                 registrar();
                 break;
             case  R.id.descargar:
@@ -108,6 +115,10 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         String accion1 = MD5.encrypt("asistenciaa");
         String accion2 = MD5.encrypt("asistencian");
         String asig = da.getAsignaturasd();
+        String TOKEN = FirebaseInstanceId.getInstance().getToken();
+        Toast.makeText(getActivity(),TOKEN,Toast.LENGTH_SHORT).show();
+        Log.w(TAG,TOKEN);
+
         RegistrarAsistencia registrarAsistencia = new RegistrarAsistencia(getActivity(),urla,asig,codigo,fecha,accion1);
         registrarAsistencia.execute();
         RegistrarAsistencia registrarAsistencia1 = new RegistrarAsistencia(getActivity(),urla,asig,codigo,fecha,accion2);
@@ -118,7 +129,7 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
     @Override
     public void onRefresh() {
         estudiantes.setAdapter(null);
-        estudiantesa.setAdapter(null);
+        //estudiantesa.setAdapter(null);
         registrar();
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,10 +29,10 @@ public class ComprobarAsistencia extends AsyncTask<Void,Void,String>{
     @SuppressLint("StaticFieldLeak")
     private Context c;
     @SuppressLint("StaticFieldLeak")
-    private ListView estudiantes;
+    private RecyclerView estudiantes;
     @SuppressLint("StaticFieldLeak")
     private SwipeRefreshLayout swipeRefreshLayout;
-    public ComprobarAsistencia(Context c, String urla2, String s, String fecha, ListView estudiantes, String tipo, String accion, SwipeRefreshLayout swipeRefreshLayout) {
+    public ComprobarAsistencia(Context c, String urla2, String s, String fecha, RecyclerView estudiantes, String tipo, String accion, SwipeRefreshLayout swipeRefreshLayout) {
         this.c = c;
         this.urla2 = urla2;
         this.s = s;

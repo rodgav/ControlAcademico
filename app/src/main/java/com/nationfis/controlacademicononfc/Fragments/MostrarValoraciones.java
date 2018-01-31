@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class MostrarValoraciones extends Fragment implements View.OnClickListene
         // Required empty public constructor
     }
 
-    private ListView valores;
+    private RecyclerView valores;
     private String codigo;
     private DatosDatos datosDatos = new DatosDatos();
 
@@ -72,7 +73,7 @@ public class MostrarValoraciones extends Fragment implements View.OnClickListene
         String codiasi= datosDatos.getAsignaturasd();
         String codiuni= datosDatos.getUnidades();
         String accion = MD5.encrypt("mostrarvalolv");
-        MostrarValoracionesL mo = new MostrarValoracionesL(getActivity(),urla,accion,codiasi,codiuni,valores,codigo);
-        mo.execute();
+        //MostrarValoracionesL mo = new MostrarValoracionesL(getActivity(),urla,accion,codiasi,codiuni,valores,codigo);
+        //mo.execute();
     }
 }

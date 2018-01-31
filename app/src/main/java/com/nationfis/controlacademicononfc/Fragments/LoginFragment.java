@@ -37,7 +37,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         View view= inflater.inflate(R.layout.fragment_login, container, false);
         pass = view.findViewById(R.id.pass);
         user = view.findViewById(R.id.user);
-        refresh =  view.findViewById(R.id.refresh);
         Button reg = view.findViewById(R.id.button2);
         Button log = view.findViewById(R.id.button);
 
@@ -69,6 +68,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     }
     private void comprobarlogin(String usuario, String password) {
         //String urla = "http://nationfis.hol.es/nonfc/login.php";
-        new ComprobarLogin(getActivity(), urla,usuario,password,refresh).execute();
+        new ComprobarLogin(getActivity(), urla,usuario,password).execute();
     }
 }

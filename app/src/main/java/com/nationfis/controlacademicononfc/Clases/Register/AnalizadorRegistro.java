@@ -46,7 +46,7 @@ class AnalizadorRegistro extends AsyncTask<Void,Void,Integer>{
                 Toast.makeText(c,mensaje,Toast.LENGTH_SHORT).show();
 
 
-                new ComprobarLogin(c,urla,codigo1,contraseña1,refresh).execute();
+                new ComprobarLogin(c,urla,codigo1,contraseña1).execute();
 
         }else {
             Toast.makeText(c,"No registrado",Toast.LENGTH_SHORT).show();

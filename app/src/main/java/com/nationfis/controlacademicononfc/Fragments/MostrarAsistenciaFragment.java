@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
     }
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-    private ListView asistencia;
+    private RecyclerView asistencia;
     private String codigo;
     private String tipo="ver";
     private TextView fecha;

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -31,9 +32,9 @@ public class RecibirAsignaturasDocentes extends AsyncTask<Void,Void,String>{
     @SuppressLint("StaticFieldLeak")
     private Spinner asignaturas;
     @SuppressLint("StaticFieldLeak")
-    private ListView estudiantes,estudiantesa;
-    public RecibirAsignaturasDocentes(Context c, String urla, String codigo, Spinner asignaturas, ListView estudiantes,
-                                      ListView estudiantesa,String tipo,String sede, String anioa) {
+    private RecyclerView estudiantes,estudiantesa;
+    public RecibirAsignaturasDocentes(Context c, String urla, String codigo, Spinner asignaturas, RecyclerView estudiantes,
+                                      RecyclerView estudiantesa,String tipo,String sede, String anioa) {
         this.c = c;
         this.urla = urla;
         this.codigo = codigo;

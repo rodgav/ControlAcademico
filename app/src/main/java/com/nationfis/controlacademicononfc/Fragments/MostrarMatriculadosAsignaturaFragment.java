@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,8 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  =  inflater.inflate(R.layout.fragment_mostrar_matriculados_asignatura, container, false);
 
-        ListView estudiantes = view.findViewById(R.id.estudiantes);
-        ListView estudiantesa = view.findViewById(R.id.estudiantesa);
+        RecyclerView estudiantes = view.findViewById(R.id.estudiantes);
+        RecyclerView estudiantesa = view.findViewById(R.id.estudiantesa);
         Spinner asignaturas = view.findViewById(R.id.asignaturas);
         //String urla="http://nationfis.hol.es/nonfc/asignaturad.php";
         String tipo = "manual";
