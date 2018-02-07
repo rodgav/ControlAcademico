@@ -9,7 +9,7 @@ public class DatosDatos {
 
     }
     private static String escuel,asignaturas,asignaturase,asignaturasd,facultades,
-            semestres,tiposm,unidades,valoraciones,departamentos,provincias,distrito,sedes;
+            semestres,tiposm,unidades,departamentos,provincias,distrito,sedes,semana;
     public void setEscuel(String escuel) {
         this.escuel = escuel;
     }
@@ -66,14 +66,6 @@ public class DatosDatos {
         return unidades;
     }
 
-    public void setValoraciones(String valoraciones) {
-        this.valoraciones = valoraciones;
-    }
-
-    public String getValoraciones() {
-        return valoraciones;
-    }
-
     public void setAsignaturas(String asignaturas) {
         this.asignaturas = asignaturas;
     }
@@ -112,5 +104,13 @@ public class DatosDatos {
 
     public String getSedes() {
         return sedes;
+    }
+
+    public void setSemana(String semana) {
+        this.semana = semana;
+    }
+
+    public String getSemana() {
+        return semana;
     }
 }

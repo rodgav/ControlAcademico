@@ -4,6 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Clases.Conexion;
@@ -26,12 +30,13 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
-    private String usuario,contraseña,urla;
-    public ComprobarLogin(Context c, String urla, String usuario, String password) {
+    private String usuario,contraseña,urla,TOKEN;
+    public ComprobarLogin(Context c, String urla, String usuario, String password, String TOKEN) {
         this.c = c;
         this.urla = urla;
         this.usuario = usuario;
         this.contraseña = password;
+        this.TOKEN = TOKEN;
     }
 
     @Override
@@ -40,6 +45,9 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
         pd = new ProgressDialog(c,android.R.style.Theme_Translucent_NoTitleBar);
         pd.show();
         pd.setContentView(R.layout.login);
+        TextView titulo = pd.findViewById(R.id.titulo);
+        String i = "Iniciando Sesion";
+        titulo.setText(i);
     }
 
     @Override
@@ -68,7 +76,7 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueLogin(usuario,contraseña).packageData());
+            bw.write(new EmpaqueLogin(usuario,contraseña,TOKEN).packageData());
 
             bw.flush();
             bw.close();

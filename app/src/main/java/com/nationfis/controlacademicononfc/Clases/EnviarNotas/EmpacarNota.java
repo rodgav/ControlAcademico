@@ -12,11 +12,10 @@ import java.util.Iterator;
  */
 
 class EmpacarNota {
-    private String codiasi,codiuni,codival,accion,codigo;
-    EmpacarNota(String codiasi, String codiuni, String codival, String accion, String codigo) {
+    private String codiasi,codiuni,accion,codigo;
+    EmpacarNota(String codiasi, String codiuni, String accion, String codigo) {
         this.codiasi = codiasi;
         this.codiuni = codiuni;
-        this.codival = codival;
         this.accion = accion;
         this.codigo = codigo;
     }
@@ -28,7 +27,6 @@ class EmpacarNota {
             jo.put("accion",accion);
             jo.put("1",codiasi);
             jo.put("2",codiuni);
-            jo.put("3",codival);
             jo.put("4",codigo);
             Boolean primer = true;
             Iterator i = jo.keys();

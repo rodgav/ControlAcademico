@@ -25,14 +25,15 @@ import java.net.HttpURLConnection;
 public class RecibirAsignaturasEstudiantes extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,codigo,accion;
+    private String urla,codigo,accion,anioa;
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Spinner asignaturas;
-    public RecibirAsignaturasEstudiantes(Context c, String urla, String codigo, String accion, Spinner asignaturas) {
+    public RecibirAsignaturasEstudiantes(Context c, String urla, String codigo, String anioa, String accion, Spinner asignaturas) {
         this.c = c;
         this. urla = urla;
         this.codigo = codigo;
+        this.anioa = anioa;
         this.accion = accion;
         this.asignaturas = asignaturas;
     }
@@ -70,7 +71,7 @@ public class RecibirAsignaturasEstudiantes extends AsyncTask<Void,Void,String> {
         }try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueAsignaturasEstudiantes(codigo,accion).packageData());
+            bw.write(new EmpaqueAsignaturasEstudiantes(codigo,anioa,accion).packageData());
             bw.flush();
             bw.close();
             os.close();

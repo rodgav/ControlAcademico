@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
+
 /*
  * Created by Sam on 20/08/2017.
  */
@@ -24,13 +27,11 @@ public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
     private String mensaje,s,activoid;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private Dialog d;
     @SuppressLint("StaticFieldLeak")
     private TextView activado;
-    AnalizarActualizarActivo(Context c, String s, Dialog d, TextView activado, String activoid) {
+    AnalizarActualizarActivo(Context c, String s, TextView activado, String activoid) {
         this.c = c;
         this.s = s;
-        this.d = d;
         this.activado = activado;
         this.activoid = activoid;
     }
@@ -46,7 +47,7 @@ public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
             Toast.makeText(c,"No se pudo analizar",Toast.LENGTH_SHORT).show();
         }else {
             if (Objects.equals(mensaje,"Accion Realizada")){
-                String asi = "activo";
+                String asi = "activado";
                 String falt = "inactivo";
                 if (Objects.equals(activoid,"0")){
                     activado.setText(falt);
@@ -55,7 +56,6 @@ public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
                     activado.setText(asi);
                     activado.setTextColor(ContextCompat.getColor(c, R.color.activo));
                 }
-                d.dismiss();
             }
             Toast.makeText(c,mensaje,Toast.LENGTH_SHORT).show();
         }

@@ -53,6 +53,7 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setCancelable(true);
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
         // take CPU lock to prevent CPU from going off if the user
         // presses the power button during download

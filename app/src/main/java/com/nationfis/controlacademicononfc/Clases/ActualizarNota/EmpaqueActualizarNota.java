@@ -12,11 +12,10 @@ import java.util.Iterator;
  */
 
 class EmpaqueActualizarNota {
-    private String accion,nota2,codval,codasi,coduni,codigo2,codigo3;
-    EmpaqueActualizarNota(String accion, String nota2, String codval, String codasi, String coduni, String codigo2, String codigo3) {
+    private String accion,nota2,codasi,coduni,codigo2,codigo3;
+    EmpaqueActualizarNota(String accion, String nota2, String codasi, String coduni, String codigo2, String codigo3) {
         this.accion = accion;
         this.nota2 = nota2;
-        this.codval = codval;
         this.codasi = codasi;
         this.coduni = coduni;
         this.codigo2 = codigo2;
@@ -32,7 +31,6 @@ class EmpaqueActualizarNota {
             jo.put("1",coduni);
             jo.put("2",codasi);
             jo.put("3",codigo2);
-            jo.put("4",codval);
             jo.put("5",nota2);
             jo.put("6",codigo3);
             Boolean primero = true;

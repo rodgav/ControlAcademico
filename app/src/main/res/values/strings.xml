@@ -93,4 +93,19 @@
     <string name="descargar">DESCARGAR PDF</string>
     <string name="ver">VER PDF</string>
     <string name="todo">TODO</string>
+    <string name="masig">Mostrar Asignaturas</string>
+    <string name="mos_doc">Mostrar Docentes</string>
+    <string name="mos_asig_doc">Mostrar Asignaturas Docentes</string>
+    <string name="mos_hor_doc">Mostrar Horarios Docentes</string>
+    <string name="reghor">Registrar Horario</string>
+    <string name="modperf">Modificar Perfil</string>
+    <string name="cerrard">Cerrar Dialogo</string>
+    <string name="eliminarM">ELIMINAR</string>
+    <string name="txteliminar">Para confirmar la eliminación escriba \"ELIMINAR\"  y luego pulse ELIMINAR</string>
+    <string name="acthor">ACTUALIZAR HORARIO</string>
+    <string name="actasi">ACTUALIZAR ASIGNATURA</string>
+    <string name="act">Actualizar</string>
+    <string name="ini">Inicio:</string>
+    <string name="fin">Fin:</string>
+    <string name="dias">Dias:</string>
 </resources>

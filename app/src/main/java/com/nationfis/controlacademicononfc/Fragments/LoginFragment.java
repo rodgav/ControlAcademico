@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Clases.Login.ComprobarLogin;
 import com.nationfis.controlacademicononfc.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
@@ -29,7 +32,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     public LoginFragment() {
         // Required empty public constructor
     }
-    TextView refresh;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,17 +59,31 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.button:
                 String usuario = user.getText().toString();
-                String password = MD5.encrypt(pass.getText().toString());
-                if(usuario.length()<=0 || password.length()<=0){
-                    Toast.makeText(getActivity(),"Rellene los campos",Toast.LENGTH_SHORT).show();
+                String password = MD5.encrypt(pass.getText().toString().trim());
+                String TOKEN = FirebaseInstanceId.getInstance().getToken();
+                if(usuario.length()<=0 || pass.getText().toString().trim().length()<=0 || TOKEN == null ){
+                    Toast.makeText(getActivity(),"Rellene los campos o no se genero el token ",Toast.LENGTH_SHORT).show();
                 }else {
-                    comprobarlogin(usuario,password);
+                    comprobarlogin(usuario,password,TOKEN);
                 }
                 break;
         }
     }
-    private void comprobarlogin(String usuario, String password) {
+    private void comprobarlogin(String usuario, String password, String TOKEN) {
         //String urla = "http://nationfis.hol.es/nonfc/login.php";
-        new ComprobarLogin(getActivity(), urla,usuario,password).execute();
+        if (TOKEN != null){
+            if (TOKEN.contains("{")){
+                try{
+                    JSONObject jo = new JSONObject(TOKEN);
+                    String nuevotoken = jo.getString("token");
+                    new ComprobarLogin(getActivity(), urla,usuario,password,nuevotoken).execute();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                new ComprobarLogin(getActivity(), urla,usuario,password,TOKEN).execute();
+            }
+        }
+
     }
 }

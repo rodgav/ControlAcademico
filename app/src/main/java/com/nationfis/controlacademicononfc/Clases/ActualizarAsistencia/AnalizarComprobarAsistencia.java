@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,8 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
+
 /*
  * Created by Sam on 26/04/2017.
  */
@@ -21,14 +24,12 @@ public class AnalizarComprobarAsistencia extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s,asistio;
-    private Dialog d;
     @SuppressLint("StaticFieldLeak")
     private TextView asisti;
     private String mensaje;
-    AnalizarComprobarAsistencia(Context c, String s, Dialog d, TextView asisti, String asistio) {
+    AnalizarComprobarAsistencia(Context c, String s, TextView asisti, String asistio) {
         this.c=c;
         this.s = s;
-        this.d = d;
         this.asisti = asisti;
         this.asistio = asistio;
     }
@@ -47,7 +48,6 @@ public class AnalizarComprobarAsistencia extends AsyncTask<Void,Void,Integer> {
                 }else if (Objects.equals(asistio,"1")){
                     asisti.setText(asi);
                 }
-                d.dismiss();
             }
             Toast.makeText(c,mensaje,Toast.LENGTH_SHORT).show();
         }

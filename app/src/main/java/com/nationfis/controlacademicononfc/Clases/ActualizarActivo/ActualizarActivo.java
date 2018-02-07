@@ -26,18 +26,16 @@ import java.net.HttpURLConnection;
 public class ActualizarActivo extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private Dialog d;
     private String urla,accion,activoid,codigo,accion1;
     @SuppressLint("StaticFieldLeak")
     private TextView activado;
     private ProgressDialog pd;
-    public ActualizarActivo(Context c, String urla, String accion,String accion1, String activoid, String codigo, Dialog d, TextView activado) {
+    public ActualizarActivo(Context c, String urla, String accion,String accion1, String activoid, String codigo, TextView activado) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
         this.activoid = activoid;
         this.codigo = codigo;
-        this.d = d;
         this.activado = activado;
         this.accion1 = accion1;
     }
@@ -61,7 +59,7 @@ public class ActualizarActivo extends AsyncTask<Void,Void,String> {
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            new AnalizarActualizarActivo(c,s,d,activado,activoid).execute();
+            new AnalizarActualizarActivo(c,s,activado,activoid).execute();
         }
     }
 

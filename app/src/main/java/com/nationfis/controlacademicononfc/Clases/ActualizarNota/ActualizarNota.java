@@ -24,20 +24,19 @@ import java.net.HttpURLConnection;
  */
 
 public class ActualizarNota extends AsyncTask<Void,Void,String>{
-    private String urla,accion,nota2,codval,codasi,coduni,codigo2,codigo3;
+    private String urla,accion,nota2,codasi,coduni,codigo2,codigo3;
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
     @SuppressLint("StaticFieldLeak")
     private TextView nota;
-    public ActualizarNota(Context c, String urla, String accion, String nota2, String codval,
+    public ActualizarNota(Context c, String urla, String accion, String nota2,
                           String codasi, String coduni, String codigo2, Dialog d, TextView nota,String codigo3) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
         this.nota2 = nota2;
-        this.codval = codval;
         this.codasi = codasi;
         this.coduni = coduni;
         this.codigo2 = codigo2;
@@ -80,7 +79,7 @@ public class ActualizarNota extends AsyncTask<Void,Void,String>{
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueActualizarNota(accion,nota2,codval,codasi,coduni,codigo2,codigo3).packageData());
+            bw.write(new EmpaqueActualizarNota(accion,nota2,codasi,coduni,codigo2,codigo3).packageData());
             bw.flush();
             bw.close();
             os.close();

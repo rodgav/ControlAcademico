@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.nationfis.controlacademicononfc.Clases.Login.ComprobarLogin;
 
 import org.json.JSONArray;
@@ -23,14 +24,12 @@ class AnalizadorRegistro extends AsyncTask<Void,Void,Integer>{
     private Context c;
     private String s,codigo1,contraseña1;
     @SuppressLint("StaticFieldLeak")
-    private TextView refresh;
     private String mensaje;
-    AnalizadorRegistro(Context c, String s, String codigo1, String contraseña1, TextView refresh) {
+    AnalizadorRegistro(Context c, String s, String codigo1, String contraseña1) {
         this.s = s;
         this.c=c;
         this.codigo1 = codigo1;
         this.contraseña1 = contraseña1;
-        this.refresh = refresh;
     }
 
     @Override
@@ -43,10 +42,21 @@ class AnalizadorRegistro extends AsyncTask<Void,Void,Integer>{
         super.onPostExecute(integer);
         if(integer==1){
             //String urla = "http://nationfis.hol.es/nonfc/login.php";
-                Toast.makeText(c,mensaje,Toast.LENGTH_SHORT).show();
-
-
-                new ComprobarLogin(c,urla,codigo1,contraseña1).execute();
+            Toast.makeText(c,mensaje,Toast.LENGTH_SHORT).show();
+            String TOKEN = FirebaseInstanceId.getInstance().getToken();
+            if (TOKEN != null){
+                if (TOKEN.contains("{")){
+                    try{
+                        JSONObject jo = new JSONObject(TOKEN);
+                        String nuevotoken = jo.getString("token");
+                        new ComprobarLogin(c,urla,codigo1,contraseña1,nuevotoken).execute();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    new ComprobarLogin(c,urla,codigo1,contraseña1,TOKEN).execute();
+                }
+            }
 
         }else {
             Toast.makeText(c,"No registrado",Toast.LENGTH_SHORT).show();

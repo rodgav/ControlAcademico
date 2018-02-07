@@ -95,7 +95,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/valores"
                 app:layout_constraintTop_toBottomOf="@+id/textView19"
-                app:layout_constraintVertical_bias="0.7"
                 app:srcCompat="@android:drawable/stat_notify_sync" />
 
 

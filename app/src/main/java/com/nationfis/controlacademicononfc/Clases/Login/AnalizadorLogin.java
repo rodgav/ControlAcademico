@@ -1,12 +1,14 @@
 package com.nationfis.controlacademicononfc.Clases.Login;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.kosalgeek.android.md5simply.MD5;
@@ -19,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
+
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 /*
  * Created by SamGM on 13/04/2017.
@@ -62,6 +66,7 @@ class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
 
                 Toast.makeText(c, "Inicio como " + tipo, Toast.LENGTH_SHORT).show();
                 c.startActivity(intent);
+                ((Activity)(c)).finish();
             }else if (Objects.equals(activo,"0")){
                 AlertDialog.Builder builder = new AlertDialog.Builder(c);
                 builder.setTitle("NECESITA ACTIVAR")
@@ -147,6 +152,7 @@ class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
                 try {
                     UsuariosSqlite usuariosSqlite = new UsuariosSqlite(c,"UsersDB.sqlite",null,1);
                     usuariosSqlite.insertData(nombre,codigo,image,tipo);
+                    usuariosSqlite.close();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

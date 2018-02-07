@@ -1,6 +1,7 @@
 package com.nationfis.controlacademicononfc.Clases.RegistrarAsignaturasDocentes;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -26,13 +27,15 @@ public class RegistrarAsignaturasDocentes extends AsyncTask<Void,Void,String>{
     private String urla,codio,codigo1,sede,anioa;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    public RegistrarAsignaturasDocentes(Context c, String urla, String codio, String codigo1, String sede, String anioa) {
+    private Dialog d;
+    public RegistrarAsignaturasDocentes(Context c, String urla, String codio, String codigo1, String sede, String anioa, Dialog d) {
         this.c = c;
         this.urla = urla;
         this.codigo1 = codigo1;
         this.codio = codio;
         this.sede = sede;
         this.anioa = anioa;
+        this.d = d;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class RegistrarAsignaturasDocentes extends AsyncTask<Void,Void,String>{
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else{
-            new AnalizarRegistroAsignaturaDocentes(c,s).execute();
+            new AnalizarRegistroAsignaturaDocentes(c,s,d).execute();
         }
     }
 

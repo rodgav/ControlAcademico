@@ -5,48 +5,82 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Button;
 import android.widget.Spinner;
 
+import com.kosalgeek.android.md5simply.MD5;
+import com.nationfis.controlacademicononfc.Clases.DatosDatos;
 import com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes.RecibirAsignaturasDocentes;
 import com.nationfis.controlacademicononfc.R;
+import com.nationfis.controlacademicononfc.Views.MostrarMatriculados.EnviarAsistencia;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MostrarMatriculadosAsignaturaFragment extends Fragment {
+public class MostrarMatriculadosAsignaturaFragment extends Fragment implements View.OnClickListener {
 
 
     public MostrarMatriculadosAsignaturaFragment() {
         // Required empty public constructor
     }
-
+    private String sede,anioa;
+    private DatosDatos datosDatos;
+    private RecyclerView estudiantes,estudiantesa;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  =  inflater.inflate(R.layout.fragment_mostrar_matriculados_asignatura, container, false);
 
-        RecyclerView estudiantes = view.findViewById(R.id.estudiantes);
-        RecyclerView estudiantesa = view.findViewById(R.id.estudiantesa);
+        estudiantes = view.findViewById(R.id.estudiantes);
+        estudiantesa = view.findViewById(R.id.estudiantesa);
         Spinner asignaturas = view.findViewById(R.id.asignaturas);
+        Button mostrar = view.findViewById(R.id.mostrar);
         //String urla="http://nationfis.hol.es/nonfc/asignaturad.php";
-        String tipo = "manual";
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         String codigo = preferences.getString("codigo", "");
-        String sede = preferences.getString("sede", "");
-        String anioa = getResources().getString(R.string.año);
+        sede = preferences.getString("sede","");
+        datosDatos = new DatosDatos();
 
-        new RecibirAsignaturasDocentes(getActivity(),urla, codigo,asignaturas,estudiantes,estudiantesa,tipo, sede, anioa).execute();
+        anioa = getResources().getString(R.string.año);
+
+        estudiantes.setLayoutManager(new LinearLayoutManager(getActivity()));
+        estudiantesa.setLayoutManager(new LinearLayoutManager(getActivity()));
+        new RecibirAsignaturasDocentes(getActivity(), urla, codigo, asignaturas).execute();
         //Toast.makeText(getActivity(),sede+" "+anioa,Toast.LENGTH_SHORT).show();
+        mostrar.setOnClickListener(this);
         return view;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.mostrar:
+                if (datosDatos.getAsignaturasd()!=null){
+                    llenarestudiante1(datosDatos.getAsignaturasd());
+                }
+                break;
+
+        }
+    }
+
+    private void llenarestudiante1(String asig) {
+        //String urla = "http://nationfis.hol.es/nonfc/estudiantesn.php";
+        //String urla1 = "http://nationfis.hol.es/nonfc/estudiantesa.php";
+        String accion1 = MD5.encrypt("estudiantesn");
+        String accion2 = MD5.encrypt("estudiantesa");
+        EnviarAsistencia enviarAsistencia = new EnviarAsistencia(getActivity(),urla,asig,estudiantes,accion1,sede,anioa);
+        enviarAsistencia.execute();
+
+        EnviarAsistencia enviarAsistencia1 = new EnviarAsistencia(getActivity(),urla,datosDatos.getAsignaturasd(),estudiantesa,accion2,sede,anioa);
+        enviarAsistencia1.execute();
+    }
 }

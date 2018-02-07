@@ -26,16 +26,18 @@ public class FireBaseServiceNotificacion extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        String mensaje = remoteMessage.getData().get("Objetos");
+        String titulo = remoteMessage.getData().get("titulo");
+        String fecha = remoteMessage.getData().get("fecha");
+        String mensaje = remoteMessage.getData().get("mensaje");
         Notificacion(mensaje);
-        ShowNotificacion();
+        ShowNotificacion(titulo,fecha,mensaje);
     }
     private void Notificacion(String mensaje){
         Intent intent = new Intent(NOTIFICACION);
         intent.putExtra("mensaje",mensaje);
         LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
     }
-    private void ShowNotificacion(){
+    private void ShowNotificacion(String titulo, String fecha, String mensaje){
         Intent intent = new Intent(this, NavigationActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
 
@@ -44,8 +46,9 @@ public class FireBaseServiceNotificacion extends FirebaseMessagingService {
         String NOTIFICATION_CHANNEL_ID = "canal01";
         Builder builder = new Builder(this, NOTIFICATION_CHANNEL_ID);
         builder.setAutoCancel(true);
-        builder.setContentTitle("Notificacion");
-        builder.setContentText("Prueba");
+        builder.setContentTitle("Asignatura: "+titulo);
+        builder.setContentText("Se le registro: "+mensaje);
+        builder.setSubText("fecha: "+fecha);
         builder.setSound(uri);
         //builder.setTicker("ticker");
         builder.setSmallIcon(R.drawable.icon);

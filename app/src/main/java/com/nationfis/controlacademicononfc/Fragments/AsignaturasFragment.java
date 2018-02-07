@@ -5,13 +5,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.kosalgeek.android.md5simply.MD5;
-import com.nationfis.controlacademicononfc.Clases.ListViews.MostrarAsignaturas.MostrarAsignaturas;
+import com.nationfis.controlacademicononfc.Views.MostrarAsignaturas.MostrarAsignaturas;
 import com.nationfis.controlacademicononfc.R;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
@@ -26,7 +27,7 @@ public class AsignaturasFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private ListView estudiantes,estudiantesa;
+    private RecyclerView estudiantes,estudiantesa;
     private String codigo,anioa;
 
 
@@ -41,7 +42,8 @@ public class AsignaturasFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo = preferences.getString("codigo","");
         anioa = getResources().getString(R.string.año);
-
+        estudiantes.setLayoutManager(new LinearLayoutManager(getActivity()));
+        estudiantesa.setLayoutManager(new LinearLayoutManager(getActivity()));
         llenar();
         return view;
     }

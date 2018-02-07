@@ -12,10 +12,11 @@ import java.util.Iterator;
  */
 
 class EmpaqueAsignaturasEstudiantes {
-    private String codigo,accion;
-    EmpaqueAsignaturasEstudiantes(String codigo, String accion) {
+    private String codigo,accion,anioa;
+    EmpaqueAsignaturasEstudiantes(String codigo, String anioa, String accion) {
         this.codigo = codigo;
         this.accion = accion;
+        this.anioa = anioa;
     }
 
     String packageData() {
@@ -24,6 +25,7 @@ class EmpaqueAsignaturasEstudiantes {
         try {
             jo.put("accion",accion);
             jo.put("1",codigo);
+            jo.put("2",anioa);
             Boolean primer = true;
             Iterator i = jo.keys();
             do {

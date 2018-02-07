@@ -6,15 +6,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Switch;
 
 import com.kosalgeek.android.md5simply.MD5;
-import com.nationfis.controlacademicononfc.Clases.ListViews.MostrarEstudiantes.MostrarEstudiantes;
+import com.nationfis.controlacademicononfc.Views.MostrarEstudiantes.MostrarEstudiantes;
 import com.nationfis.controlacademicononfc.R;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
@@ -29,7 +30,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
         // Required empty public constructor
     }
 
-    private ListView estudiantes;
+    private RecyclerView estudiantes;
     private Switch switch0;
     private String ep;
     private String anioa;
@@ -59,7 +60,6 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
                 descargar("");
             }
         });
-
         return view;
     }
 

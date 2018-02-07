@@ -27,6 +27,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.kosalgeek.android.md5simply.MD5;
+import com.nationfis.controlacademicononfc.Clases.EliminarToken.EliminarToken;
 import com.nationfis.controlacademicononfc.Fragments.ActivarEstudiantes;
 import com.nationfis.controlacademicononfc.Fragments.ActivarMatriculaFragment;
 import com.nationfis.controlacademicononfc.Fragments.AsignaturasFragment;
@@ -39,11 +42,8 @@ import com.nationfis.controlacademicononfc.Fragments.MatriculaFragment;
 import com.nationfis.controlacademicononfc.Fragments.MostrarAsistenciaFragment;
 import com.nationfis.controlacademicononfc.Fragments.MostrarMatriculadosAsignaturaFragment;
 import com.nationfis.controlacademicononfc.Fragments.MostrarNotasFragment;
-import com.nationfis.controlacademicononfc.Fragments.MostrarValoraciones;
 import com.nationfis.controlacademicononfc.Fragments.RegistrarAsignaturaFragment;
-import com.nationfis.controlacademicononfc.Fragments.RegistrarAsignaturasDocentesFragments;
 import com.nationfis.controlacademicononfc.Fragments.RegistrarSemestreFragment;
-import com.nationfis.controlacademicononfc.Fragments.RegistrarValoracionesFragment;
 import com.nationfis.controlacademicononfc.R;
 
 
@@ -52,9 +52,10 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
     //public static final String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
     public static final String urla1 = "http://192.168.1.38/controlacademico/reportes/asistencia.php";
-    public static final String TAG = "controlador de errores: ";
+    public static final String TAG = "TAG: ";
     public static final String NOTIFICACION = "NOTIFICACION";
     private BroadcastReceiver broadcastReceiver;
+    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         fragmentTransaction.add(R.id.contenedorn,fragment);
         fragmentTransaction.commit();
 
-        SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         String tipo = preferences.getString("a", "");
         String nombre = preferences.getString("nombre", "");
         String image = preferences.getString("image", "");
@@ -145,6 +146,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         }
     }
@@ -198,6 +200,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         boolean fragmentTransaction = false;
         Fragment fragment = null;
+        Bundle bundle = new Bundle();
         switch (id){
             case R.id.llamar:
                 fragment = new ComprobarAsistenciaFragment();
@@ -223,9 +226,29 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragment = new MatriculaFragment();
                 fragmentTransaction = true;
                 break;
+            case R.id.mosdoc:
+                fragment = new ActivarEstudiantes();
+                fragmentTransaction = true;
+                bundle.putString("accion","mdocentes");
+                fragment.setArguments(bundle);
+                break;
+            case R.id.mosasigdoc:
+                fragment = new ActivarEstudiantes();
+                fragmentTransaction = true;
+                bundle.putString("accion","masigdoc");
+                fragment.setArguments(bundle);
+                break;
+            case R.id.moshordoc:
+                fragment = new ActivarEstudiantes();
+                fragmentTransaction = true;
+                bundle.putString("accion","mhordoc");
+                fragment.setArguments(bundle);
+                break;
             case R.id.actest:
                 fragment = new ActivarEstudiantes();
                 fragmentTransaction = true;
+                bundle.putString("accion","estudiantes");
+                fragment.setArguments(bundle);
                 break;
             case R.id.actmat:
                 fragment = new ActivarMatriculaFragment();
@@ -233,10 +256,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 break;
             case R.id.regasig:
                 fragment = new RegistrarAsignaturaFragment();
-                fragmentTransaction = true;
-                break;
-            case R.id.regasigd:
-                fragment = new RegistrarAsignaturasDocentesFragments();
                 fragmentTransaction = true;
                 break;
             case R.id.regsemest:
@@ -263,25 +282,13 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragment = new HorariosFragment();
                 fragmentTransaction = true;
                 break;
-            case R.id.regval:
-                fragment = new RegistrarValoracionesFragment();
-                fragmentTransaction = true;
-                break;
-            case R.id.valo:
-                fragment = new MostrarValoraciones();
-                fragmentTransaction = true;
-                break;
             case R.id.contacto:
                 break;
             case R.id.cerrar:
-                SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.apply();
-                Intent intent = new Intent(NavigationActivity.this,LoginActvity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+                String codigo = preferences.getString("codigo","");
+                String TOKEN = FirebaseInstanceId.getInstance().getToken();
+                String accion = MD5.encrypt("eliminartoken");
+                new EliminarToken(this,urla,accion,codigo,TOKEN).execute();
                 break;
         }
         if(fragmentTransaction){

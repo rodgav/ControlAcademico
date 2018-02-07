@@ -27,12 +27,11 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
-    private Dialog d;
     @SuppressLint("StaticFieldLeak")
     private TextView asisti;
     private String urla,asistio,codigodoc,codigoasig,codigoest,fecha;
     public ActualizarAsistencia(Context c, String urla, String asistio, String codigodoc, String codigoasig, String codigoest,
-                                String fecha, Dialog d, TextView asisti) {
+                                String fecha, TextView asisti) {
         this.c = c;
         this.urla = urla;
         this.asistio = asistio;
@@ -40,7 +39,6 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
         this.codigoasig = codigoasig;
         this.codigoest = codigoest;
         this.fecha = fecha;
-        this.d = d;
         this.asisti = asisti;
     }
 
@@ -54,6 +52,7 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
         super.onPreExecute();
         pd = new ProgressDialog(c);
         pd.setTitle("Enviando");
+        pd.setCancelable(false);
         pd.setMessage("Espere porfavor");
         pd.show();
     }
@@ -65,7 +64,7 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            AnalizarComprobarAsistencia analizarComprobarAsistencia = new AnalizarComprobarAsistencia(c,s,d,asisti,asistio);
+            AnalizarComprobarAsistencia analizarComprobarAsistencia = new AnalizarComprobarAsistencia(c,s,asisti,asistio);
             analizarComprobarAsistencia.execute();
         }
     }

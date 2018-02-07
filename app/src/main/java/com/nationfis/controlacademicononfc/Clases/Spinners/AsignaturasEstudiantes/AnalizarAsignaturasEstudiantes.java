@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasEstudiant
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 /*
  * Created by Sam on 11/06/2017.
@@ -80,6 +83,7 @@ public class AnalizarAsignaturasEstudiantes extends AsyncTask<Void,Void,Integer>
             return 1;
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.w(TAG,s);
         }
         return 0;
     }

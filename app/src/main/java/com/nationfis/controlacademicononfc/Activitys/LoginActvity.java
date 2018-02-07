@@ -10,16 +10,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.nationfis.controlacademicononfc.Clases.Datos.UsuariosSqlite;
 import com.nationfis.controlacademicononfc.Fragments.LoginForOneTouch;
 import com.nationfis.controlacademicononfc.Fragments.LoginFragment;
 import com.nationfis.controlacademicononfc.R;
 
 public class LoginActvity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_actvity);
+
+        FirebaseInstanceId.getInstance().getToken();
 
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         String tipo = preferences.getString("a", "");
@@ -38,18 +42,21 @@ public class LoginActvity extends AppCompatActivity {
                 Intent intent = new Intent(this,NavigationActivity.class);
                 startActivity(intent);
                 finish();
+                usuariosSqlite.close();
             }else if(cursor.moveToFirst()){
                 Fragment fragment = new LoginForOneTouch();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.contenedor,fragment);
                 fragmentTransaction.commit();
+                usuariosSqlite.close();
             }else{
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment fragment = new LoginFragment();
                 fragmentTransaction.add(R.id.contenedor,fragment);
                 fragmentTransaction.commit();
+                usuariosSqlite.close();
             }
         }
     }

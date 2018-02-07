@@ -28,22 +28,15 @@ public class RecibirAsignaturasDocentes extends AsyncTask<Void,Void,String>{
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,codigo,tipo,sede,anioa;
+    private String urla,codigo;
     @SuppressLint("StaticFieldLeak")
     private Spinner asignaturas;
     @SuppressLint("StaticFieldLeak")
-    private RecyclerView estudiantes,estudiantesa;
-    public RecibirAsignaturasDocentes(Context c, String urla, String codigo, Spinner asignaturas, RecyclerView estudiantes,
-                                      RecyclerView estudiantesa,String tipo,String sede, String anioa) {
+    public RecibirAsignaturasDocentes(Context c, String urla, String codigo, Spinner asignaturas) {
         this.c = c;
         this.urla = urla;
         this.codigo = codigo;
         this.asignaturas = asignaturas;
-        this.estudiantes = estudiantes;
-        this.estudiantesa = estudiantesa;
-        this.tipo = tipo;
-        this.sede = sede;
-        this.anioa = anioa;
     }
 
     @Override
@@ -62,7 +55,7 @@ public class RecibirAsignaturasDocentes extends AsyncTask<Void,Void,String>{
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            AnalizadorAsignaturasDocentes a = new AnalizadorAsignaturasDocentes(c,s,asignaturas,estudiantes,estudiantesa,tipo,sede,anioa);
+            AnalizadorAsignaturasDocentes a = new AnalizadorAsignaturasDocentes(c,s,asignaturas);
             a.execute();
         }
     }

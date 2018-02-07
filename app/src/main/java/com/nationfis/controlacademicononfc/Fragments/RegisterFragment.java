@@ -47,7 +47,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private EditText fecha,nombre,apellidop,apellidom,correo,dni,codigo,contraseña,verificacion,telefono;
     private ImageView foto;
     private String tdocumento1 ;
-    private TextView refresh;
     private String[] tdocumentos = {"DNI", "CARNET EXT.", "RUC", "PASAPORTE", "P. NAC","OTROS"};
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -213,12 +212,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             }
             try {
                 if(nombre1.length() <=0 || apellidop1.length()<=0 || apellidom1.length() <=0 || correo1.length()<=0 || documento1.length()<=0 || sexo1.length()<=0 ||
-                        codigo1.length()<=0 || contraseña1.length()<=0 || verificacion1.length() <= 0 || telefono1.length() <=0 || fecha1.length()<=0 ||
+                        codigo1.length()<=0 || contraseña.getText().toString().trim().length()<=0 || verificacion1.length() <= 0 || telefono1.length() <=0 || fecha1.length()<=0 ||
                         foto1.length()<=0 || tdocumento1.length()<=0 || lnacimiento.length()<=0 || activo.length()<=0 || escuela.length()<=0 || sede.length()<=0){
                     Toast.makeText(getActivity(),"Rellene todos los campos porfavor",Toast.LENGTH_SHORT).show();
                 }else{
                     new EnviarRegistro(getActivity(),urla,nombre1,apellidop1,apellidom1,correo1,documento1,
-                            sexo1,codigo1,contraseña1,verificacion1,telefono1,fecha1,foto1,tdocumento1,refresh,lnacimiento,activo,escuela,sede).execute();
+                            sexo1,codigo1,contraseña1,verificacion1,telefono1,fecha1,foto1,tdocumento1,lnacimiento,activo,escuela,sede).execute();
                 }
             }catch (Exception e){
                 e.printStackTrace();
