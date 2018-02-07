@@ -108,4 +108,5 @@
     <string name="ini">Inicio:</string>
     <string name="fin">Fin:</string>
     <string name="dias">Dias:</string>
+    <string name="vacio">Vacio</string>
 </resources>

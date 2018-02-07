@@ -38,6 +38,8 @@ import com.nationfis.controlacademicononfc.Clases.Spinners.Semana.RecibirSemana;
 import com.nationfis.controlacademicononfc.Clases.Spinners.Semestres.RecibirSemestres;
 import com.nationfis.controlacademicononfc.R;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -485,7 +487,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     d.show();
 
                                     new RecibirAsignaturasDocentes(c,urla,estudiantes1.getCodigo(),asignaturasd).execute();
-                                    new RecibirSemana(urla,accioni,dia,c).execute();
+                                    new RecibirSemana(urla,accioni,dia,c,0).execute();
                                     registrar.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -566,7 +568,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
             }
         }
 
-        void horariodoc(Estudiantes estudiantes) {
+        void horariodoc(final Estudiantes estudiantes) {
             nombre.setText(estudiantes.getNombre());
             codigo.setText(estudiantes.getCodigo());
             ep.setText(estudiantes.getEp());
@@ -585,6 +587,30 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()){
                                 case R.id.modificar:
+                                    Dialog d = new Dialog(c);
+                                    d.setContentView(R.layout.dialog_actualizar_horario);
+                                    TextView nombre = d.findViewById(R.id.nombre);
+                                    Spinner dia = d.findViewById(R.id.dia);
+                                    TextView inicio = d.findViewById(R.id.inicio);
+                                    TextView fin = d.findViewById(R.id.fin);
+                                    Button actualizar = d.findViewById(R.id.actualizar);
+
+                                    String accion =MD5.encrypt("ssemanas");
+                                    int posicion = Integer.valueOf(estudiantes.getIdDia());
+
+                                    nombre.setText(estudiantes.getNombreAsig());
+                                    inicio.setText(estudiantes.getInicio());
+                                    fin.setText(estudiantes.getFin());
+
+
+                                    new RecibirSemana(urla,accion,dia,c,posicion-1).execute();
+
+
+                                    Window window = d.getWindow();
+                                    assert window != null;
+                                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    window.setGravity(Gravity.CENTER);
+                                    d.show();
                                     return true;
 
                                 default:
@@ -612,6 +638,10 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()){
                                 case R.id.modificar:
+                                    Dialog d = new Dialog(c);
+                                    d.setCanceledOnTouchOutside(false);
+                                    TextView nombre = d.findViewById(R.id.nombre);
+
                                     return true;
                                 default:
                                     return false;

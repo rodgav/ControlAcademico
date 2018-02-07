@@ -30,11 +30,13 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
     private String s;
     @SuppressLint("StaticFieldLeak")
     private Spinner semana;
+    private int posicion;
 
-    public AnalizadorSemana(Context c, String s, Spinner semana) {
+    public AnalizadorSemana(Context c, String s, Spinner semana,int posicion) {
         this.c = c;
         this.s = s;
         this.semana = semana;
+        this.posicion = posicion;
     }
 
     private ArrayList<String> ids = new ArrayList<>();
@@ -61,6 +63,7 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
             return 1;
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.w(TAG,s);
         }
         return 0;
     }
@@ -76,7 +79,6 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
             semana.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(c,nos.get(i),Toast.LENGTH_SHORT).show();
                     datosDatos = new DatosDatos();
                     datosDatos.setSemana(ids.get(i));
                 }
@@ -86,6 +88,9 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
 
                 }
             });
+            if (posicion!=0){
+                semana.setSelection(posicion);
+            }
         }
     }
 }
