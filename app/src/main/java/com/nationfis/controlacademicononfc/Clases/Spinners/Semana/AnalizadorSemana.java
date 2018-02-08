@@ -30,13 +30,13 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
     private String s;
     @SuppressLint("StaticFieldLeak")
     private Spinner semana;
-    private int posicion;
+    private int idsr,posicion;
 
-    public AnalizadorSemana(Context c, String s, Spinner semana,int posicion) {
+    AnalizadorSemana(Context c, String s, Spinner semana,int idsr) {
         this.c = c;
         this.s = s;
         this.semana = semana;
-        this.posicion = posicion;
+        this.idsr = idsr;
     }
 
     private ArrayList<String> ids = new ArrayList<>();
@@ -57,6 +57,13 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
                 String codigo = jo.getString("codigo");
+
+                int idsa = Integer.valueOf(codigo);
+
+                if (idsr==idsa){
+                    posicion=i;
+                }
+
                 ids.add(codigo);
                 nos.add(nombre);
             }
@@ -81,6 +88,7 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     datosDatos = new DatosDatos();
                     datosDatos.setSemana(ids.get(i));
+                    datosDatos.setNombreDia(nos.get(i));
                 }
 
                 @Override
@@ -88,7 +96,7 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
 
                 }
             });
-            if (posicion!=0){
+            if (posicion>=0){
                 semana.setSelection(posicion);
             }
         }

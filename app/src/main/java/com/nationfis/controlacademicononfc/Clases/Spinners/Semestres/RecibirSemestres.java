@@ -27,13 +27,16 @@ public class RecibirSemestres extends AsyncTask<Void,Void,String>{
     private String urla,s1,matricula1;
     @SuppressLint("StaticFieldLeak")
     private Spinner semestre,asignatura;
-    public RecibirSemestres(Context c, String urla, String s, Spinner semestre,Spinner asignatura,String matricula1) {
+    private int idsr,idar;
+    public RecibirSemestres(Context c, String urla, String s, Spinner semestre,Spinner asignatura,String matricula1,int idsr, int idar) {
         this.c = c;
         this.urla = urla;
         this.s1=s;
         this.semestre = semestre;
         this.asignatura = asignatura;
         this.matricula1 = matricula1;
+        this.idsr = idsr;
+        this.idar = idar;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class RecibirSemestres extends AsyncTask<Void,Void,String>{
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            AnalizadorSemestres a = new AnalizadorSemestres(c,s,semestre,asignatura,matricula1);
+            AnalizadorSemestres a = new AnalizadorSemestres(c,s,semestre,asignatura,matricula1,idsr,idar);
             a.execute();
         }
     }

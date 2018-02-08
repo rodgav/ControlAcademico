@@ -9,7 +9,8 @@ public class DatosDatos {
 
     }
     private static String escuel,asignaturas,asignaturase,asignaturasd,facultades,
-            semestres,tiposm,unidades,departamentos,provincias,distrito,sedes,semana;
+            semestres,tiposm,unidades,departamentos,provincias,distrito,sedes,semana,
+            asignaturasNombre,nombreDia;
     public void setEscuel(String escuel) {
         this.escuel = escuel;
     }
@@ -112,5 +113,21 @@ public class DatosDatos {
 
     public String getSemana() {
         return semana;
+    }
+
+    public void setAsignaturasNombre(String asignaturasNombre) {
+        this.asignaturasNombre = asignaturasNombre;
+    }
+
+    public String getAsignaturasNombre() {
+        return asignaturasNombre;
+    }
+
+    public void setNombreDia(String nombreDia) {
+        this.nombreDia = nombreDia;
+    }
+
+    public String getNombreDia() {
+        return nombreDia;
     }
 }

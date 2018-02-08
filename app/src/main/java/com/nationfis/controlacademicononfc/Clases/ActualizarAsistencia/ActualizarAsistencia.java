@@ -64,8 +64,7 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            AnalizarComprobarAsistencia analizarComprobarAsistencia = new AnalizarComprobarAsistencia(c,s,asisti,asistio);
-            analizarComprobarAsistencia.execute();
+            new AnalizarComprobarAsistencia(c,s,asisti,asistio).execute();
         }
     }
 

@@ -1,9 +1,11 @@
-package com.nationfis.controlacademicononfc.Clases.Spinners.Asignaturas;
+package com.nationfis.controlacademicononfc.Clases.ActualizarAsignaturasDoc;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Spinner;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Clases.Conexion;
@@ -18,27 +20,32 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
 /*
- * Created by SamGM on 22/04/2017.
+ * Created by GlobalTIC's on 7/02/2018.
  */
 
-public class RecibirAsignaturas extends AsyncTask<Void,Void,String> {
+public class ActualizarAsignaturaDoc extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,s1;
+    private String urla,accion,codigo,anioa,sede,codigoa,nombrea;
+    private Dialog d;
     @SuppressLint("StaticFieldLeak")
-    private Spinner asignatura;
-    private int idar;
-    public RecibirAsignaturas(Context c, String urla, String s, Spinner asignatura ,int idar) {
+    private TextView asignatura;
+    public ActualizarAsignaturaDoc(Context c, String urla, String accion, String codigo, String anioa, String sede, String codigoa, Dialog d, TextView asignatura, String nombrea) {
         this.c = c;
         this.urla = urla;
-        this.s1 = s;
+        this.accion = accion;
+        this.codigo = codigo;
+        this.anioa = anioa;
+        this.sede = sede;
+        this.codigoa = codigoa;
+        this.d = d;
         this.asignatura = asignatura;
-        this.idar = idar;
+        this.nombrea = nombrea;
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
+    protected String doInBackground(Void... voids) {
+        return this.actualizar();
     }
 
     @Override
@@ -47,42 +54,41 @@ public class RecibirAsignaturas extends AsyncTask<Void,Void,String> {
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            AnalizadorAsignaturas a = new AnalizadorAsignaturas(c,s,asignatura,idar);
-            a.execute();
+            new AnalizarActualizarAsignaturaDoc(c,s,asignatura,nombrea).execute();
         }
     }
 
-    @Override
-    protected String doInBackground(Void... voids) {
-        return this.recibir();
-    }
-
-    private String recibir() {
+    private String actualizar() {
         HttpURLConnection con = Conexion.httpURLConnection(urla);
         if (con==null){
             return null;
-        }try {
+        }
+        try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueAsignaturas(s1).packageData());
+            bw.write(new EmpaqueActualizarAsignaturaDoc(accion,codigo,anioa,sede,codigoa).packageData());
             bw.flush();
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp== HttpURLConnection.HTTP_OK){
+            if (resp==HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuilder repuesta = new StringBuilder();
-                while((linea=br.readLine())!=null){
-                    repuesta.append(linea).append("n");
+                StringBuffer respuesta = new StringBuffer();
+                if (br!=null){
+                    while ((linea=br.readLine())!=null){
+                        respuesta.append(linea+"n");
+                    }
+                }else {
+                    return null;
                 }
-                return repuesta.toString();
+                return respuesta.toString();
             }else {
                 return String.valueOf(resp);
             }
 
-        } catch (IOException | NullPointerException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

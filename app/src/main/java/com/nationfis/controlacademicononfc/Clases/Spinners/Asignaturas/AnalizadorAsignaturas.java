@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Clases.Spinners.Asignaturas;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
+
 /*
  * Created by SamGM on 22/04/2017.
  */
@@ -30,10 +33,12 @@ public class AnalizadorAsignaturas extends AsyncTask<Void,Void,Integer>{
     private ArrayList<String>noa = new ArrayList<>();
     private ArrayList<String>ida = new ArrayList<>();
     private DatosDatos datosDatos;
-    AnalizadorAsignaturas(Context c, String s, Spinner asignatura) {
+    private int idar,posicion;
+    AnalizadorAsignaturas(Context c, String s, Spinner asignatura, int idar) {
         this.s = s;
         this.c = c;
         this.asignatura = asignatura;
+        this.idar = idar;
     }
 
     @Override
@@ -50,12 +55,16 @@ public class AnalizadorAsignaturas extends AsyncTask<Void,Void,Integer>{
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     Toast.makeText(c,noa.get(i),Toast.LENGTH_SHORT).show();
                     datosDatos.setAsignaturas(ida.get(i));
+                    datosDatos.setAsignaturasNombre(noa.get(i));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
 
                 }
             });
+            if (posicion>=0){
+                asignatura.setSelection(posicion);
+            }
         }
     }
 
@@ -74,9 +83,16 @@ public class AnalizadorAsignaturas extends AsyncTask<Void,Void,Integer>{
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
                 String codigo = jo.getString("codigo");
+
+                int idaa = Integer.valueOf(codigo);
+                if (idar==idaa){
+                    posicion=i;
+                }
+
                 ida.add(codigo);
                 noa.add(nombre);
             }
+            Log.w(TAG,s);
             return 1;
         } catch (JSONException e) {
             e.printStackTrace();

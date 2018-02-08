@@ -57,7 +57,7 @@ public class MatriculaFragment extends Fragment implements View.OnClickListener{
         String seden = preferences.getString("seden", "");
         codigo.setText(usuario);
         sed.setText(seden);
-        new RecibirSemestres(getActivity(),urla,ep,semestre,semestre,matricula1).execute();
+        new RecibirSemestres(getActivity(),urla,ep,semestre,semestre,matricula1,0,0).execute();
         matricula.setOnClickListener(MatriculaFragment.this);
         return view;
     }

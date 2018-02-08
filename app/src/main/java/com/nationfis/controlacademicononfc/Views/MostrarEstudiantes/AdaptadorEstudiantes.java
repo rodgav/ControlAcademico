@@ -30,7 +30,11 @@ import com.kosalgeek.android.md5simply.MD5;
 import com.loopeer.itemtouchhelperextension.Extension;
 import com.loopeer.itemtouchhelperextension.ItemTouchHelperExtension;
 import com.nationfis.controlacademicononfc.Clases.ActualizarActivo.ActualizarActivo;
+import com.nationfis.controlacademicononfc.Clases.ActualizarAsignaturasDoc.ActualizarAsignaturaDoc;
+import com.nationfis.controlacademicononfc.Clases.ActualizarHorario.ActualizarHorario;
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
+import com.nationfis.controlacademicononfc.Clases.EliminarAsignaturaDoc.EliminarAsignaturaDoc;
+import com.nationfis.controlacademicononfc.Clases.EliminarHorario.EliminarHorario;
 import com.nationfis.controlacademicononfc.Clases.RegistrarAsignaturasDocentes.RegistrarAsignaturasDocentes;
 import com.nationfis.controlacademicononfc.Clases.RegistrarHorario.RegistrarHorario;
 import com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes.RecibirAsignaturasDocentes;
@@ -72,7 +76,9 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
         preferences = c.getSharedPreferences("datos", Context.MODE_PRIVATE);
         da = new DatosDatos();
     }
+    public void remover(){
 
+    }
     @Override
     public CuerpoMatriculas onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
@@ -203,7 +209,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
             viewHolder.mActionViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Dialog d = new Dialog(c);
+                    final Dialog d = new Dialog(c);
                     d.setContentView(R.layout.dialog_eliminar);
                     d.setCanceledOnTouchOutside(false);
 
@@ -215,7 +221,15 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public void onClick(View view) {
                             if (editeliminar.length()>0){
                                 if (Objects.equals(editeliminar.getText().toString(),"ELIMINAR")){
-                                    Toast.makeText(c,"Eliminado con exito",Toast.LENGTH_SHORT).show();
+                                    String codigoa = estudiantes.get(position).getCodigoAsig();
+                                    String idd = estudiantes.get(position).getIdDia();
+                                    String sede = preferences.getString("sede","");
+                                    String inicio = holder.inicio.getText().toString();
+                                    String fin = holder.fin.getText().toString();
+                                    String anioa = c.getResources().getString(R.string.año);
+                                    String accion = MD5.encrypt("");
+                                    new EliminarHorario(c,urla,accion,codigoa,idd,sede,inicio,fin,anioa,d,estudiantes,holder.getAdapterPosition()).execute();
+
                                 }else {
                                     Toast.makeText(c,"No se puede confirmar porfavor escriba ELIMINAR",Toast.LENGTH_SHORT).show();
                                 }
@@ -242,7 +256,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
             viewHolder.mActionViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Dialog d = new Dialog(c);
+                    final Dialog d = new Dialog(c);
                     d.setContentView(R.layout.dialog_eliminar);
                     d.setCanceledOnTouchOutside(false);
 
@@ -254,7 +268,14 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public void onClick(View view) {
                             if (editeliminar.length()>0){
                                 if (Objects.equals(editeliminar.getText().toString(),"ELIMINAR")){
-                                    Toast.makeText(c,"Eliminado con exito",Toast.LENGTH_SHORT).show();
+                                    String codigo = holder.codigo.getText().toString();
+                                    String codigoa = estudiantes.get(position).getCodigoAsig();
+                                    String sede = preferences.getString("sede","");
+                                    String anioa = c.getResources().getString(R.string.año);
+                                    String accion = MD5.encrypt("");
+
+                                    new EliminarAsignaturaDoc(c,urla,accion,codigo,codigoa,sede,anioa,d,estudiantes,holder.getAdapterPosition()).execute();
+                                    notifyItemRemoved(holder.getAdapterPosition());
                                 }else {
                                     Toast.makeText(c,"No se puede confirmar porfavor escriba ELIMINAR",Toast.LENGTH_SHORT).show();
                                 }
@@ -277,6 +298,8 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
     public int getItemCount() {
         return estudiantes.size();
     }
+
+
 
     class CuerpoMatriculas extends RecyclerView.ViewHolder {
 
@@ -445,7 +468,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     nombre.setText(doc);
 
                                     String ep = preferences.getString("ep","");
-                                    new RecibirSemestres(c,urla,ep,semestres,asignaturas,"matriculaa").execute();
+                                    new RecibirSemestres(c,urla,ep,semestres,asignaturas,"matriculaa",0,0).execute();
 
                                     Window window = d.getWindow();
                                     assert window != null;
@@ -587,24 +610,87 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()){
                                 case R.id.modificar:
-                                    Dialog d = new Dialog(c);
+                                    final Dialog d = new Dialog(c);
                                     d.setContentView(R.layout.dialog_actualizar_horario);
+                                    d.setCanceledOnTouchOutside(false);
                                     TextView nombre = d.findViewById(R.id.nombre);
-                                    Spinner dia = d.findViewById(R.id.dia);
-                                    TextView inicio = d.findViewById(R.id.inicio);
-                                    TextView fin = d.findViewById(R.id.fin);
+                                    Spinner sdia = d.findViewById(R.id.dia);
+                                    final TextView iniciod = d.findViewById(R.id.inicio);
+                                    final TextView find = d.findViewById(R.id.fin);
                                     Button actualizar = d.findViewById(R.id.actualizar);
 
                                     String accion =MD5.encrypt("ssemanas");
-                                    int posicion = Integer.valueOf(estudiantes.getIdDia());
+                                    int ids = Integer.valueOf(estudiantes.getIdDia());
 
                                     nombre.setText(estudiantes.getNombreAsig());
-                                    inicio.setText(estudiantes.getInicio());
-                                    fin.setText(estudiantes.getFin());
+                                    iniciod.setText(estudiantes.getInicio());
+                                    find.setText(estudiantes.getFin());
 
 
-                                    new RecibirSemana(urla,accion,dia,c,posicion-1).execute();
+                                    new RecibirSemana(urla,accion,sdia,c,ids).execute();
 
+                                    actualizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            String accion = MD5.encrypt("");
+                                            String codigoa = estudiantes.getCodigoAsig();
+                                            String anioa = c.getResources().getString(R.string.año);
+                                            String sede = preferences.getString("sede","");
+                                            String dia1 = da.getSemana();
+                                            String inicio1 = iniciod.getText().toString();
+                                            String fin1 = find.getText().toString();
+                                            String nombredia = da.getNombreDia();
+                                            new ActualizarHorario(c,urla,accion,codigoa,anioa,sede,dia1,inicio1,fin1,d,dia,nombredia,inicio,fin).execute();
+
+                                        }
+                                    });
+
+                                    iniciod.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            time();
+                                        }
+
+                                        private void time(){
+                                            new TimePickerDialog(c,d1,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true).show();
+                                        }
+                                        TimePickerDialog.OnTimeSetListener d1 = new TimePickerDialog.OnTimeSetListener(){
+
+                                            @Override
+                                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                                calendar.set(Calendar.HOUR_OF_DAY,i);
+                                                calendar.set(Calendar.MINUTE,i1);
+                                                updatetime();
+                                            }
+                                        };
+                                        private void updatetime() {
+                                            iniciod.setText(sdf1.format(calendar.getTime())+":00");
+                                        }
+
+
+                                    });
+                                    find.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            time1();
+                                        }
+                                        private void time1(){
+                                            new TimePickerDialog(c,d2,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true).show();
+                                        }
+                                        TimePickerDialog.OnTimeSetListener d2 = new TimePickerDialog.OnTimeSetListener(){
+
+                                            @Override
+                                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                                calendar.set(Calendar.HOUR_OF_DAY,i);
+                                                calendar.set(Calendar.MINUTE,i1);
+                                                updatetime1();
+                                            }
+                                        };
+                                        private void updatetime1() {
+                                            find.setText(sdf1.format(calendar.getTime())+":00");
+                                        }
+                                    });
 
                                     Window window = d.getWindow();
                                     assert window != null;
@@ -623,7 +709,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
             });
 
         }
-        void asignaturasdoc(Estudiantes estudiantes) {
+        void asignaturasdoc(final Estudiantes estudiantes) {
             nombre.setText(estudiantes.getNombre());
             codigo.setText(estudiantes.getCodigo());
             ep.setText(estudiantes.getEp());
@@ -638,10 +724,38 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()){
                                 case R.id.modificar:
-                                    Dialog d = new Dialog(c);
+                                    final Dialog d = new Dialog(c);
+                                    d.setContentView(R.layout.dialog_actualizar_asignatura);
                                     d.setCanceledOnTouchOutside(false);
-                                    TextView nombre = d.findViewById(R.id.nombre);
+                                    final TextView nombre = d.findViewById(R.id.nombre);
+                                    Spinner semestre = d.findViewById(R.id.semestre);
+                                    Spinner sasignatura = d.findViewById(R.id.asignatura);
+                                    Button actualizar = d.findViewById(R.id.actualizar);
 
+                                    nombre.setText(estudiantes.getNombre());
+                                    int ids = Integer.valueOf(estudiantes.getSemestre());
+                                    int ida = Integer.valueOf(estudiantes.getCodigoAsig());
+                                    String ep = preferences.getString("ep","");
+                                    new RecibirSemestres(c,urla,ep,semestre,sasignatura,"matriculaa",ids,ida).execute();
+
+                                    actualizar.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            String codigo = estudiantes.getCodigo();
+                                            String anioa = c.getResources().getString(R.string.año);
+                                            String sede = preferences.getString("sede","");
+                                            String codigoa = da.getAsignaturas();
+                                            String accion = MD5.encrypt("");
+                                            String nombrea = da.getAsignaturasNombre();
+                                            new ActualizarAsignaturaDoc(c,urla,accion,codigo,anioa,sede,codigoa,d,asignatura,nombrea).execute();
+                                        }
+                                    });
+
+                                    Window window = d.getWindow();
+                                    assert window != null;
+                                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    window.setGravity(Gravity.CENTER);
+                                    d.show();
                                     return true;
                                 default:
                                     return false;
@@ -670,4 +784,5 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
             return accion.getWidth();
         }
     }
+
 }

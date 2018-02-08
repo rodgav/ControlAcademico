@@ -63,7 +63,7 @@ public class MatriculaAFragment extends Fragment implements View.OnClickListener
         codigo.setText(usuario);
         sed.setText(seden);
         String accion1= MD5.encrypt("matricula");
-        new RecibirSemestres(getActivity(),urla,ep,semestre,asignatura,matricula1).execute();
+        new RecibirSemestres(getActivity(),urla,ep,semestre,asignatura,matricula1,0,0).execute();
         new RecibirTipoMatricula(getActivity(),urla,tipom,accion1).execute();
         matricula.setOnClickListener(MatriculaAFragment.this);
         return view;

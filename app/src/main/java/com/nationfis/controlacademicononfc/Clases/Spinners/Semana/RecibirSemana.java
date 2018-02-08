@@ -27,14 +27,14 @@ public class RecibirSemana extends AsyncTask<Void,Void,String> {
     private Spinner semana;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private int posicion;
+    private int idsr;
 
-    public RecibirSemana(String urla, String accion, Spinner semana, Context c,int posicion) {
+    public RecibirSemana(String urla, String accion, Spinner semana, Context c,int idsr) {
         this.urla = urla;
         this.accion = accion;
         this.semana = semana;
         this.c = c;
-        this.posicion = posicion;
+        this.idsr = idsr;
     }
     @Override
     protected void onPostExecute(String s) {
@@ -42,7 +42,7 @@ public class RecibirSemana extends AsyncTask<Void,Void,String> {
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            new AnalizadorSemana(c,s,semana,posicion).execute();
+            new AnalizadorSemana(c,s,semana,idsr).execute();
         }
     }
     @Override

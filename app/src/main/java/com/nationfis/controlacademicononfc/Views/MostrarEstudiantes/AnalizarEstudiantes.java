@@ -180,7 +180,7 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
                     estudiantes.setFoto(foto);
                     estudiantes.setCodigoAsig(codigoa);
                     estudiantes.setNombreAsig(nombrea);
-                    estudiantes.setCodigoSede(codigos);
+                    estudiantes.setSemestre(codigos);
                     estudiantes.setEp(nombree);
 
                     estudiantes1.add(estudiantes);

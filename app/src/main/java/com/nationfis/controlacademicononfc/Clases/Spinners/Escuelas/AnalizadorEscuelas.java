@@ -95,7 +95,7 @@ public class AnalizadorEscuelas extends AsyncTask<Void,Void,Integer>{
                         Toast.makeText(c,noe.get(i),Toast.LENGTH_SHORT).show();
                         String var = ide.get(i);
                         datosDatos.setEscuel(var);
-                        new RecibirSemestres(c,urla,var,semestre,asignatura,matricula1).execute();
+                        new RecibirSemestres(c,urla,var,semestre,asignatura,matricula1,0,0).execute();
                     }
                 }
                 @Override
