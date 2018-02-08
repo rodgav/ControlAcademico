@@ -227,9 +227,9 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     String inicio = holder.inicio.getText().toString();
                                     String fin = holder.fin.getText().toString();
                                     String anioa = c.getResources().getString(R.string.año);
-                                    String accion = MD5.encrypt("");
+                                    String accion = MD5.encrypt("elimhor");
                                     new EliminarHorario(c,urla,accion,codigoa,idd,sede,inicio,fin,anioa,d,estudiantes,holder.getAdapterPosition()).execute();
-
+                                    notifyItemRemoved(holder.getAdapterPosition());
                                 }else {
                                     Toast.makeText(c,"No se puede confirmar porfavor escriba ELIMINAR",Toast.LENGTH_SHORT).show();
                                 }
@@ -272,7 +272,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     String codigoa = estudiantes.get(position).getCodigoAsig();
                                     String sede = preferences.getString("sede","");
                                     String anioa = c.getResources().getString(R.string.año);
-                                    String accion = MD5.encrypt("");
+                                    String accion = MD5.encrypt("elimasigdoc");
 
                                     new EliminarAsignaturaDoc(c,urla,accion,codigo,codigoa,sede,anioa,d,estudiantes,holder.getAdapterPosition()).execute();
                                     notifyItemRemoved(holder.getAdapterPosition());
@@ -633,7 +633,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                         @Override
                                         public void onClick(View view) {
 
-                                            String accion = MD5.encrypt("");
+                                            String accion = MD5.encrypt("acthor");
                                             String codigoa = estudiantes.getCodigoAsig();
                                             String anioa = c.getResources().getString(R.string.año);
                                             String sede = preferences.getString("sede","");
@@ -745,7 +745,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                             String anioa = c.getResources().getString(R.string.año);
                                             String sede = preferences.getString("sede","");
                                             String codigoa = da.getAsignaturas();
-                                            String accion = MD5.encrypt("");
+                                            String accion = MD5.encrypt("actasigdoc");
                                             String nombrea = da.getAsignaturasNombre();
                                             new ActualizarAsignaturaDoc(c,urla,accion,codigo,anioa,sede,codigoa,d,asignatura,nombrea).execute();
                                         }

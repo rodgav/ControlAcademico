@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.EliminarToken;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +20,10 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.T
  */
 
 public class AnalizarEliminarToken extends AsyncTask<Void,Void,Integer> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s,mensaje;
-    public AnalizarEliminarToken(Context c, String s) {
+    AnalizarEliminarToken(Context c, String s) {
         this.c = c;
         this.s = s;
     }

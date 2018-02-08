@@ -1,4 +1,4 @@
-package com.nationfis.controlacademicononfc.Clases.EliminarHorario;
+package com.nationfis.controlacademicononfc.Clases.EliminarAsignaturaDoc;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by GlobalTIC's on 7/02/2018.
  */
 
-public class AnalizarEliminarHorario extends AsyncTask<Void,Void,Integer>{
+public class AnalizarEliminarAsignaturaDoc extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s,mensaje;
@@ -26,7 +26,7 @@ public class AnalizarEliminarHorario extends AsyncTask<Void,Void,Integer>{
     private int adapterPosition;
     private Dialog d;
 
-    AnalizarEliminarHorario(Context c, String s, ArrayList<Estudiantes> estudiantes, int adapterPosition, Dialog d) {
+    AnalizarEliminarAsignaturaDoc(Context c, String s, ArrayList<Estudiantes> estudiantes, int adapterPosition, Dialog d) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;
@@ -38,6 +38,7 @@ public class AnalizarEliminarHorario extends AsyncTask<Void,Void,Integer>{
     protected Integer doInBackground(Void... voids) {
         return this.analizar();
     }
+
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
