@@ -26,11 +26,11 @@ import java.net.HttpURLConnection;
 public class ActualizarAsignaturaDoc extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,codigo,anioa,sede,codigoa,nombrea;
+    private String urla,accion,codigo,anioa,sede,codigoa,nombrea,codigoaant;
     private Dialog d;
     @SuppressLint("StaticFieldLeak")
     private TextView asignatura;
-    public ActualizarAsignaturaDoc(Context c, String urla, String accion, String codigo, String anioa, String sede, String codigoa, Dialog d, TextView asignatura, String nombrea) {
+    public ActualizarAsignaturaDoc(Context c, String urla, String accion, String codigo, String anioa, String sede, String codigoa, Dialog d, TextView asignatura, String nombrea, String codigoaant) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
@@ -41,6 +41,7 @@ public class ActualizarAsignaturaDoc extends AsyncTask<Void,Void,String> {
         this.d = d;
         this.asignatura = asignatura;
         this.nombrea = nombrea;
+        this.codigoaant = codigoaant;
     }
 
     @Override
@@ -66,7 +67,7 @@ public class ActualizarAsignaturaDoc extends AsyncTask<Void,Void,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueActualizarAsignaturaDoc(accion,codigo,anioa,sede,codigoa).packageData());
+            bw.write(new EmpaqueActualizarAsignaturaDoc(accion,codigo,anioa,sede,codigoa,codigoaant).packageData());
             bw.flush();
             bw.close();
             os.close();

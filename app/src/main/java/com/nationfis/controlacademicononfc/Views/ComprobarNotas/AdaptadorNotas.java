@@ -55,8 +55,7 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
         }else if (Objects.equals(tipo,"est")){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_notas_estudiantes,parent,false);
         }
-        CuerpoNotas cuerpoNotas = new CuerpoNotas(view);
-        return cuerpoNotas;
+        return new CuerpoNotas(view);
     }
 
     @Override

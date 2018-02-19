@@ -25,6 +25,15 @@
             android:id="@+id/matr"
             android:icon="@drawable/matriculados"
             android:title="@string/matr" />
+        <item
+            android:id="@+id/mhor"
+            android:icon="@drawable/matriculados"
+            android:title="@string/mhor" />
+        <item
+            android:id="@+id/mosmihord"
+            android:icon="@drawable/matriculados"
+            android:title="@string/mmhor" />
+
     </group>
     <group
         android:id="@+id/group2"
@@ -51,6 +60,10 @@
             android:id="@+id/moshordoc"
             android:icon="@drawable/asignaturas"
             android:title="@string/mos_hor_doc" />
+        <item
+            android:id="@+id/moshor"
+            android:icon="@drawable/matriculados"
+            android:title="@string/mhor" />
         <item
             android:id="@+id/actest"
             android:icon="@drawable/asignaturas"
@@ -88,6 +101,11 @@
             android:id="@+id/matria"
             android:icon="@drawable/matricularse"
             android:title="@string/mat_a" />
+
+        <item
+            android:id="@+id/mosmihore"
+            android:icon="@drawable/matriculados"
+            android:title="@string/mmhor" />
     </group>
 
 

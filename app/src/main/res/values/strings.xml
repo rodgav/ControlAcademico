@@ -109,4 +109,7 @@
     <string name="fin">Fin:</string>
     <string name="dias">Dias:</string>
     <string name="vacio">Vacio</string>
+    <string name="mhor">Mostrar Horario</string>
+    <string name="mmhor">Mostrar mi Horario</string>
+    <string name="most">mostrar</string>
 </resources>

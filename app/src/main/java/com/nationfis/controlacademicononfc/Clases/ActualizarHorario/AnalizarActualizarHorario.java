@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Clases.ActualizarHorario;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
+
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 /*
  * Created by GlobalTIC's on 7/02/2018.
@@ -65,6 +68,7 @@ public class AnalizarActualizarHorario extends AsyncTask<Void,Void,Integer> {
             return 1;
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.w(TAG,s);
         }
         return 0;
     }

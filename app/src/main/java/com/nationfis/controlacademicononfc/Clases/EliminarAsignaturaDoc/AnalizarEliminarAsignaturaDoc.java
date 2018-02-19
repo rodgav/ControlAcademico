@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Views.MostrarEstudiantes.Estudiantes;
@@ -13,6 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 /*
  * Created by GlobalTIC's on 7/02/2018.
@@ -60,6 +63,7 @@ public class AnalizarEliminarAsignaturaDoc extends AsyncTask<Void,Void,Integer> 
         }
         return 1;
     }catch (JSONException e){
+        Log.w(TAG,s);
         e.printStackTrace();
     }
         return 0;

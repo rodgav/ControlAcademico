@@ -218,12 +218,29 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragment = new MostrarNotasFragment();
                 fragmentTransaction = true;
                 break;
-            case R.id.matria:
-                fragment = new MatriculaAFragment();
+            case R.id.matr:
+                fragment = new MostrarMatriculadosAsignaturaFragment();
                 fragmentTransaction = true;
                 break;
-            case R.id.matrin:
-                fragment = new MatriculaFragment();
+            case R.id.mhor:
+                fragment = new HorariosFragment();
+                fragmentTransaction = true;
+                bundle.putString("accion","mhor");
+                fragment.setArguments(bundle);
+                break;
+            case R.id.mosmihord:
+                fragment = new HorariosFragment();
+                fragmentTransaction = true;
+                bundle.putString("accion","mosmihor");
+                fragment.setArguments(bundle);
+                break;
+            //secretaria
+            case R.id.regasig:
+                fragment = new RegistrarAsignaturaFragment();
+                fragmentTransaction = true;
+                break;
+            case R.id.regsemest:
+                fragment = new RegistrarSemestreFragment();
                 fragmentTransaction = true;
                 break;
             case R.id.mosdoc:
@@ -244,6 +261,12 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 bundle.putString("accion","mhordoc");
                 fragment.setArguments(bundle);
                 break;
+            case R.id.moshor:
+                fragment = new HorariosFragment();
+                fragmentTransaction = true;
+                bundle.putString("accion","mhor");
+                fragment.setArguments(bundle);
+                break;
             case R.id.actest:
                 fragment = new ActivarEstudiantes();
                 fragmentTransaction = true;
@@ -254,14 +277,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragment = new ActivarMatriculaFragment();
                 fragmentTransaction =true;
                 break;
-            case R.id.regasig:
-                fragment = new RegistrarAsignaturaFragment();
-                fragmentTransaction = true;
-                break;
-            case R.id.regsemest:
-                fragment = new RegistrarSemestreFragment();
-                fragmentTransaction = true;
-                break;
+            //estudiantes
             case R.id.mostrarasistencia:
                 fragment = new MostrarAsistenciaFragment();
                 fragmentTransaction = true;
@@ -274,14 +290,24 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragment = new AsignaturasFragment();
                 fragmentTransaction = true;
                 break;
-            case R.id.matr:
-                fragment = new MostrarMatriculadosAsignaturaFragment();
-                fragmentTransaction = true;
-                break;
             case R.id.horario:
                 fragment = new HorariosFragment();
                 fragmentTransaction = true;
+                bundle.putString("accion","mhor");
+                fragment.setArguments(bundle);
                 break;
+            case R.id.matrin:
+                fragment = new MatriculaFragment();
+                fragmentTransaction = true;
+                break;
+            case R.id.matria:
+                fragment = new MatriculaAFragment();
+                fragmentTransaction = true;
+                break;
+            case R.id.mosmihore:
+                fragment = new HorariosFragment();
+                fragmentTransaction = true;
+            //contacto
             case R.id.contacto:
                 break;
             case R.id.cerrar:

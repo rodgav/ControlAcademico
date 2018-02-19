@@ -42,8 +42,6 @@ import com.nationfis.controlacademicononfc.Clases.Spinners.Semana.RecibirSemana;
 import com.nationfis.controlacademicononfc.Clases.Spinners.Semestres.RecibirSemestres;
 import com.nationfis.controlacademicononfc.R;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,9 +74,6 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
         preferences = c.getSharedPreferences("datos", Context.MODE_PRIVATE);
         da = new DatosDatos();
     }
-    public void remover(){
-
-    }
     @Override
     public CuerpoMatriculas onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
@@ -101,8 +96,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
 
     @Override
     public void onBindViewHolder(final CuerpoMatriculas holder, @SuppressLint("RecyclerView") final int position) {
-        CuerpoMatriculas cuerpoMatriculas = (CuerpoMatriculas) holder;
-        cuerpoMatriculas.view.setOnClickListener(new View.OnClickListener() {
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -112,7 +106,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
         if (//matriculas
                 Objects.equals(accion, "412566367c67448b599d1b7666f8ccfc") || Objects.equals(accion, "b74df323e3939b563635a2cba7a7afba")) {
 
-            cuerpoMatriculas.bind(estudiantes.get(position));
+            holder.bind(estudiantes.get(position));
 
             ItemSwipeWithActionWidthViewHolder viewHolder;
 
@@ -174,7 +168,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
 
             ItemSwipeWithActionWidthViewHolder viewHolder;
 
-            cuerpoMatriculas.bind1(estudiantes.get(position), accion);
+            holder.bind1(estudiantes.get(position), accion);
 
             viewHolder = (ItemSwipeWithActionWidthViewHolder) holder;
             viewHolder.mActionViewRefresh.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +198,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
         }else if (//horariodoc
                 Objects.equals(accion,"6843023606e501b553a9be96e911df40")){
             ItemSwipeWithActionWidthViewHolder viewHolder;
-            cuerpoMatriculas.horariodoc(estudiantes.get(position));
+            holder.horariodoc(estudiantes.get(position));
             viewHolder = (ItemSwipeWithActionWidthViewHolder) holder;
             viewHolder.mActionViewDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -250,7 +244,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                 Objects.equals(accion,"d36ef148e7d528f45a0c1409762820d7")){
             ItemSwipeWithActionWidthViewHolder viewHolder;
 
-            cuerpoMatriculas.asignaturasdoc(estudiantes.get(position));
+            holder.asignaturasdoc(estudiantes.get(position));
 
             viewHolder = (ItemSwipeWithActionWidthViewHolder) holder;
             viewHolder.mActionViewDelete.setOnClickListener(new View.OnClickListener() {
@@ -641,6 +635,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                             String inicio1 = iniciod.getText().toString();
                                             String fin1 = find.getText().toString();
                                             String nombredia = da.getNombreDia();
+                                            Toast.makeText(c,codigoa+"-"+anioa+"-"+sede+"-"+dia1+"-"+inicio1+"-"+fin1+"-"+nombredia,Toast.LENGTH_LONG).show();
                                             new ActualizarHorario(c,urla,accion,codigoa,anioa,sede,dia1,inicio1,fin1,d,dia,nombredia,inicio,fin).execute();
 
                                         }
@@ -747,7 +742,9 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                             String codigoa = da.getAsignaturas();
                                             String accion = MD5.encrypt("actasigdoc");
                                             String nombrea = da.getAsignaturasNombre();
-                                            new ActualizarAsignaturaDoc(c,urla,accion,codigo,anioa,sede,codigoa,d,asignatura,nombrea).execute();
+                                            String codigoaant = estudiantes.getCodigoAsig();
+                                            Toast.makeText(c,codigo+"-"+anioa+"-"+sede+"-"+codigoa+"-"+nombrea+"-"+codigoaant,Toast.LENGTH_LONG).show();
+                                            new ActualizarAsignaturaDoc(c,urla,accion,codigo,anioa,sede,codigoa,d,asignatura,nombrea,codigoaant).execute();
                                         }
                                     });
 

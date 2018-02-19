@@ -21,9 +21,10 @@ import java.util.Objects;
  * Created by GlobalTIC's on 1/02/2018.
  */
 
-public class AdaptadorAsistencia extends RecyclerView.Adapter<CuerpoMatriculados>{
+public class AdaptadorAsistencia extends RecyclerView.Adapter<CuerpoMatriculados> {
     private Context c;
-    private ArrayList<Asistencia>asistencia;
+    private ArrayList<Asistencia> asistencia;
+
     AdaptadorAsistencia(Context c, ArrayList<Asistencia> asistencia) {
         this.c = c;
         this.asistencia = asistencia;
@@ -31,9 +32,9 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<CuerpoMatriculados
 
     @Override
     public CuerpoMatriculados onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_estudiantes_pasar_asistencia,parent,false);
-        CuerpoMatriculados cuerpoAsistencia = new CuerpoMatriculados(view);
-        return cuerpoAsistencia;    }
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_estudiantes_pasar_asistencia, parent, false);
+        return new CuerpoMatriculados(view);
+    }
 
     @Override
     public void onBindViewHolder(CuerpoMatriculados holder, int position) {
@@ -42,22 +43,22 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<CuerpoMatriculados
         holder.codigo.setText(asistencia1.getCodigo());
         String imagen = asistencia1.getFoto();
         byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray( byteImage, 0, byteImage.length);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
         holder.foto.setImageBitmap(bitmap);
 
         String asi = "activado";
         String falt = "inactivo";
-        if (Objects.equals(asistencia1.getActivo(),"1")){
+        if (Objects.equals(asistencia1.getActivo(), "1")) {
             holder.activo.setText(asi);
-            holder.activo.setTextColor(ContextCompat.getColor(c,R.color.activo));
-        }else {
+            holder.activo.setTextColor(ContextCompat.getColor(c, R.color.activo));
+        } else {
             holder.activo.setText(falt);
-            holder.activo.setTextColor(ContextCompat.getColor(c,R.color.inactivo));
+            holder.activo.setTextColor(ContextCompat.getColor(c, R.color.inactivo));
         }
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                Toast.makeText(c,asistencia.get(pos).getNombre()+" "+asistencia.get(pos).getCodigo(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(c, asistencia.get(pos).getNombre() + " " + asistencia.get(pos).getCodigo(), Toast.LENGTH_SHORT).show();
 
             }
         });

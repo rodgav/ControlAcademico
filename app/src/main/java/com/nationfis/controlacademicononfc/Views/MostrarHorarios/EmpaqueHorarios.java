@@ -1,6 +1,4 @@
-package com.nationfis.controlacademicononfc.Clases.ActualizarAsignaturasDoc;
-
-import com.kosalgeek.android.md5simply.MD5;
+package com.nationfis.controlacademicononfc.Views.MostrarHorarios;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,37 +7,33 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
- * Created by GlobalTIC's on 7/02/2018.
+/*
+ * Created by GlobalTIC's on 13/02/2018.
  */
 
-class EmpaqueActualizarAsignaturaDoc {
-    private String accion,codigo,anioa,sede,codigoa,codigoaant;
-    EmpaqueActualizarAsignaturaDoc(String accion, String codigo, String anioa, String sede, String codigoa,String codigoaant) {
+class EmpaqueHorarios {
+    private String accion, id, sede, anioa;
+    EmpaqueHorarios(String accion, String id, String sede, String anioa) {
         this.accion = accion;
-        this.codigo = codigo;
-        this.anioa = anioa;
+        this.id = id;
         this.sede = sede;
-        this.codigoa = codigoa;
-        this.codigoaant = codigoaant;
+        this.anioa = anioa;
     }
     String packageData() {
         JSONObject jo = new JSONObject();
         StringBuilder sb = new StringBuilder();
         try {
             jo.put("accion",accion);
-            jo.put("1",codigo);
-            jo.put("2",anioa);
-            jo.put("3",sede);
-            jo.put("4",codigoa);
-            jo.put("5",codigoaant);
-            Boolean primero = true;
+            jo.put("1",id);
+            jo.put("2",sede);
+            jo.put("3",anioa);
+            Boolean primer = true;
             Iterator i = jo.keys();
             do {
                 String key = i.next().toString();
                 String value = jo.get(key).toString();
-                if (primero){
-                    primero = false;
+                if (primer){
+                    primer = false;
                 }else {
                     sb.append("&");
                 }
