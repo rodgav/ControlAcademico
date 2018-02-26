@@ -1,4 +1,6 @@
-package com.nationfis.controlacademicononfc.Clases.EnviarNotas;
+package com.nationfis.controlacademicononfc.Views.MostrarHorarios.SpinnerSemestre;
+
+import com.kosalgeek.android.md5simply.MD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,28 +10,22 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 
 /*
- * Created by Sam on 29/05/2017.
+ * Created by GlobalTIC's on 22/02/2018.
  */
 
-class EmpacarNota {
-    private String codiasi,codiuni,accion,codigo,anioa;
-    EmpacarNota(String codiasi, String codiuni, String accion, String codigo, String anioa) {
-        this.codiasi = codiasi;
-        this.codiuni = codiuni;
-        this.accion = accion;
-        this.codigo = codigo;
-        this.anioa = anioa;
+public class EmpaqueSP {
+    private String s1;
+    EmpaqueSP(String s1) {
+        this.s1 = s1;
     }
 
     String packageData() {
         JSONObject jo = new JSONObject();
         StringBuilder sb = new StringBuilder();
+        String accion= MD5.encrypt("semestres");
         try {
             jo.put("accion",accion);
-            jo.put("1",codiasi);
-            jo.put("2",codiuni);
-            jo.put("4",codigo);
-            jo.put("5",anioa);
+            jo.put("s1",s1);
             Boolean primer = true;
             Iterator i = jo.keys();
             do {

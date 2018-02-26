@@ -43,7 +43,10 @@ public class AsignaturasFragment extends Fragment {
         codigo = preferences.getString("codigo","");
         anioa = getResources().getString(R.string.año);
         estudiantes.setLayoutManager(new LinearLayoutManager(getActivity()));
+        estudiantes.setNestedScrollingEnabled(false);
+
         estudiantesa.setLayoutManager(new LinearLayoutManager(getActivity()));
+        estudiantesa.setNestedScrollingEnabled(false);
         llenar();
         return view;
     }

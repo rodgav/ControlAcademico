@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Clases.Conexion;
@@ -26,8 +27,8 @@ public class RecibirHorarios extends AsyncTask<Void, Void, String> {
     private Context c;
     private String urla,accion,id,sede,anioa;
     @SuppressLint("StaticFieldLeak")
-    private RecyclerView horario;
-    public RecibirHorarios(Context c, String urla, String accion, String id, String sede, String anioa, RecyclerView horario) {
+    private TableLayout horario;
+    public RecibirHorarios(Context c, String urla, String accion, String id, String sede, String anioa, TableLayout horario) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

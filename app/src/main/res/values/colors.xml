@@ -7,5 +7,7 @@
     <color name="inactivo">#d71316</color>
     <color name="blanco">#ffffff</color>
     <color name="azul">#1859fc</color>
+    <color name="azulclaro">#3a6ef1</color>
     <color name="negro">#000000</color>
+    <color name="azultr">#19283be9</color>
 </resources>

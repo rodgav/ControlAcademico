@@ -32,7 +32,7 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<CuerpoMatriculados
 
     @Override
     public CuerpoMatriculados onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_estudiantes_pasar_asistencia, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_matriculados, parent, false);
         return new CuerpoMatriculados(view);
     }
 

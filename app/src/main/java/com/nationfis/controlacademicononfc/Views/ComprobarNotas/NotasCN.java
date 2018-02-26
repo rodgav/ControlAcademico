@@ -5,7 +5,7 @@ package com.nationfis.controlacademicononfc.Views.ComprobarNotas;
  */
 
 public class NotasCN {
-    private String nota,codigo,nombre,foto,peso;
+    private String nota,codigo,nombre,foto;
     public void setNota(String nota) {
         this.nota = nota;
     }
@@ -22,9 +22,6 @@ public class NotasCN {
         this.foto = foto;
     }
 
-    public void setPeso(String peso) {
-        this.peso = peso;
-    }
 
     public String getNota() {
         return nota;
@@ -42,7 +39,4 @@ public class NotasCN {
         return foto;
     }
 
-    public String getPeso() {
-        return peso;
-    }
 }

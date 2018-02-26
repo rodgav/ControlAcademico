@@ -1,4 +1,8 @@
-package com.nationfis.controlacademicononfc.Clases.ActualizarValoraciones;
+package com.nationfis.controlacademicononfc.Views.MostrarAllNotas;
+
+/*
+ * Created by GlobalTIC's on 25/02/2018.
+ */
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,38 +11,29 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/*
- * Created by Sam on 18/06/2017.
- */
+class EmpaqueNotas {
+    private String accion,anioa,codigo;
 
-class EmpaqueActualizarValoraciones {
-    private String accion,codasi,coduni,codval,codigo,peso2;
-    EmpaqueActualizarValoraciones(String accion, String codasi, String coduni, String codval, String codigo, String peso2) {
+    EmpaqueNotas(String accion, String anioa, String codigo) {
         this.accion = accion;
-        this.codasi = codasi;
-        this.coduni = coduni;
-        this.codval = codval;
+        this.anioa = anioa;
         this.codigo = codigo;
-        this.peso2 = peso2;
     }
+
     String packageData() {
         JSONObject jo = new JSONObject();
         StringBuilder sb = new StringBuilder();
-
         try {
             jo.put("accion",accion);
-            jo.put("1",codasi);
-            jo.put("2",coduni);
-            jo.put("3",codval);
-            jo.put("4",codigo);
-            jo.put("5",peso2);
-            Boolean primero = true;
+            jo.put("1",anioa);
+            jo.put("2",codigo);
+            Boolean primer = true;
             Iterator i = jo.keys();
             do {
                 String key = i.next().toString();
                 String value = jo.get(key).toString();
-                if (primero){
-                    primero = false;
+                if (primer){
+                    primer = false;
                 }else {
                     sb.append("&");
                 }

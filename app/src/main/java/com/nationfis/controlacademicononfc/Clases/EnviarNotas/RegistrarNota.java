@@ -26,14 +26,15 @@ public class RegistrarNota extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,codiasi,codiuni,codigo;
-    public RegistrarNota(Context c, String urla, String accion, String codiasi, String codiuni,String codigo) {
+    private String urla,accion,codiasi,codiuni,codigo,anioa;
+    public RegistrarNota(Context c, String urla, String accion, String codiasi, String codiuni,String codigo,String anioa) {
         this.c = c;
         this. urla = urla;
         this.accion = accion;
         this.codiasi = codiasi;
         this.codiuni = codiuni;
         this.codigo = codigo;
+        this.anioa = anioa;
     }
 
     @Override
@@ -69,7 +70,7 @@ public class RegistrarNota extends AsyncTask<Void,Void,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpacarNota(codiasi,codiuni,accion,codigo).packageData());
+            bw.write(new EmpacarNota(codiasi,codiuni,accion,codigo,anioa).packageData());
             bw.flush();
             bw.close();
             os.close();

@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /*
  * Created by Sam on 25/04/2017.
@@ -74,22 +75,22 @@ public class AnalizadorComprobarAsistencia extends AsyncTask<Void,Void,Integer> 
         if (integer==0){
             Toast.makeText(c,"No se cargo la asistencia",Toast.LENGTH_SHORT).show();
         }else {
-            AdaptadorAsistencia a = new AdaptadorAsistencia(c,asistenciaCAs,tipo);
-            estudiantes.setAdapter(a);
+            if (Objects.equals(tipo,"pasar")){
+                AdaptadorAsistencia a = new AdaptadorAsistencia(c,asistenciaCAs,tipo);
+                estudiantes.setLayoutManager(new LinearLayoutManager(c));
+                estudiantes.setAdapter(a);
+                estudiantes.addItemDecoration(new DividerItemDecoration(c,DividerItemDecoration.VERTICAL));
 
-            estudiantes.setLayoutManager(new LinearLayoutManager(c));
-
-            estudiantes.setAdapter(a);
-            estudiantes.addItemDecoration(new DividerItemDecoration(c,DividerItemDecoration.VERTICAL));
-
-
-            ItemTouchHelperExtension.Callback mCallback = new ItemTouchHelperCallbackAsistencia();
-
-            ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
-            mItemTouchHelper.attachToRecyclerView(estudiantes);
-
-            a.setItemTouchHelperExtension(mItemTouchHelper);
+                ItemTouchHelperExtension.Callback mCallback = new ItemTouchHelperCallbackAsistencia();
+                ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
+                mItemTouchHelper.attachToRecyclerView(estudiantes);
+                a.setItemTouchHelperExtension(mItemTouchHelper);
+            }else {
+                AdaptadorAsistencia a = new AdaptadorAsistencia(c,asistenciaCAs,tipo);
+                estudiantes.setLayoutManager(new LinearLayoutManager(c));
+                estudiantes.addItemDecoration(new DividerItemDecoration(c,DividerItemDecoration.VERTICAL));
+                estudiantes.setAdapter(a);
+            }
         }
-
     }
 }

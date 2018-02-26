@@ -109,6 +109,7 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
         String fecha1 = fecha.getText().toString();
         String codigoa = da.getAsignaturasd();
         String accion = MD5.encrypt("mostrarasis");
+        String anioa = getActivity().getResources().getString(R.string.año);
         //String urla1="http://nationfis.hol.es/nonfc/asistidos1.php";
         swipeRefreshLayout.setRefreshing(true);
         new ComprobarAsistencia(getActivity(), urla, codigoa, fecha1, asistencia, tipo, accion, swipeRefreshLayout).execute();

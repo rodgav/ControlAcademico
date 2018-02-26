@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.kosalgeek.android.md5simply.MD5;
@@ -34,7 +34,6 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         // Required empty public constructor
     }
 
-    private Spinner valores;
     private RecyclerView notas;
     private String codigo;
     private DatosDatos datosDatos = new DatosDatos();
@@ -46,8 +45,6 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.fragment_comprobar_notas, container, false);
         Spinner asignaturas =  view.findViewById(R.id.asignaturas);
         Spinner unidades =  view.findViewById(R.id.unidades);
-        valores = view.findViewById(R.id.valores);
-        ImageButton cargarva =  view.findViewById(R.id.cargarva);
         Button registrar =  view.findViewById(R.id.registrar);
         notas = view.findViewById(R.id.notas);
 
@@ -60,7 +57,6 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         new RecibirAsignaturasDocentes(getActivity(),urla,codigo, asignaturas).execute();
         new RecibirUnidades(getActivity(),urla, unidades,accion).execute();
 
-        cargarva.setOnClickListener(ComprobarNotasFragment.this);
         registrar.setOnClickListener(ComprobarNotasFragment.this);
         return view;
     }
@@ -79,7 +75,9 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         String codiasi= datosDatos.getAsignaturasd();
         String codiuni= datosDatos.getUnidades();
         String tipo = "doc";
-        new ComprobarNotas(getActivity(),urla,notas,codiuni,codiasi,tipo,codigo).execute();
+        String accion= MD5.encrypt("mnotas");
+        String anioa = getActivity().getResources().getString(R.string.año);
+        new ComprobarNotas(getActivity(),urla,accion,notas,codiuni,codiasi,tipo,codigo,anioa).execute();
     }
 
     private void registra() {
@@ -87,9 +85,10 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         String accion2 = MD5.encrypt("notan");
         String codiasi= datosDatos.getAsignaturasd();
         String codiuni= datosDatos.getUnidades();
-        RegistrarNota registrarNota =new RegistrarNota(getActivity(),urla,accion1,codiasi,codiuni,codigo);
+        String anioa = getActivity().getResources().getString(R.string.año);
+        RegistrarNota registrarNota =new RegistrarNota(getActivity(),urla,accion1,codiasi,codiuni,codigo,anioa);
         registrarNota.execute();
-        RegistrarNota registrarNota1 =new RegistrarNota(getActivity(),urla,accion2,codiasi,codiuni,codigo);
+        RegistrarNota registrarNota1 =new RegistrarNota(getActivity(),urla,accion2,codiasi,codiuni,codigo,anioa);
         registrarNota1.execute();
         llenar();
     }

@@ -79,15 +79,6 @@ public class ComprobarAsistencia extends AsyncTask<Void,Void,String>{
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        /*pd = new ProgressDialog(c);
-        pd.setTitle("Cargando ...");
-        pd.setMessage("Porfavor espere");
-        pd.show();*/
-    }
-
-    @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         //pd.dismiss();

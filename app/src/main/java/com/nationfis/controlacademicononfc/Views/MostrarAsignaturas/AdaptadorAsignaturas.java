@@ -22,10 +22,9 @@ import java.util.Objects;
  */
 
 public class AdaptadorAsignaturas extends RecyclerView.Adapter<CuerpoAsiganturas> {
-    private LayoutInflater inflater;
     private Context c;
     private ArrayList<AsignaturasA>asignatura;
-    public AdaptadorAsignaturas(Context c, ArrayList<AsignaturasA> asignatura) {
+    AdaptadorAsignaturas(Context c, ArrayList<AsignaturasA> asignatura) {
         this.c = c;
         this.asignatura = asignatura;
     }
@@ -33,8 +32,8 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<CuerpoAsiganturas
     @Override
     public CuerpoAsiganturas onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_asignaturas,parent,false);
-        CuerpoAsiganturas cuerpoAsiganturas = new CuerpoAsiganturas(view);
-        return cuerpoAsiganturas;    }
+        return new CuerpoAsiganturas(view);
+    }
 
     @Override
     public void onBindViewHolder(CuerpoAsiganturas holder, int position) {

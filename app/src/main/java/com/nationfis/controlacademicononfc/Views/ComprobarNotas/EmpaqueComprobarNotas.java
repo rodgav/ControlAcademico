@@ -11,13 +11,14 @@ import java.util.Iterator;
  * Created by Sam on 06/06/2017.
  */
 class EmpaqueComprobarNotas {
-    private String codiuni, codiasi, codival, accion;
+    private String accion,codiuni,codiasi,codigo,anioa;
 
-    EmpaqueComprobarNotas(String codiuni, String codiasi, String codival, String accion) {
+    EmpaqueComprobarNotas(String accion, String codiuni, String codiasi, String codigo, String anioa) {
+        this.accion = accion;
         this.codiuni = codiuni;
         this.codiasi = codiasi;
-        this.codival = codival;
-        this.accion = accion;
+        this.codigo = codigo;
+        this.anioa = anioa;
     }
 
     String packageData() {
@@ -31,7 +32,8 @@ class EmpaqueComprobarNotas {
             jo.put("accion", accion);
             jo.put("1", codiuni);
             jo.put("2", codiasi);
-            jo.put("3", codival);
+            jo.put("3", codigo);
+            jo.put("4", anioa);
             Iterator i = jo.keys();
             Boolean primer = true;
             do {

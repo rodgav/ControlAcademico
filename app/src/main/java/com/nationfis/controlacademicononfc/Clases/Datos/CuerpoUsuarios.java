@@ -18,7 +18,7 @@ public class CuerpoUsuarios extends RecyclerView.ViewHolder implements View.OnCl
     TextView tipo,nombre;
     ImageView imagen;
     ImageButton menu;
-    public CuerpoUsuarios(View itemView) {
+    CuerpoUsuarios(View itemView) {
         super(itemView);
         tipo = itemView.findViewById(R.id.tipo);
         nombre = itemView.findViewById(R.id.nombre);
@@ -26,7 +26,7 @@ public class CuerpoUsuarios extends RecyclerView.ViewHolder implements View.OnCl
         menu = itemView.findViewById(R.id.menu);
         itemView.setOnClickListener(this);
     }
-    public void setItemClickListener(ItemClickListener itemClickListener) {
+    void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
     @Override

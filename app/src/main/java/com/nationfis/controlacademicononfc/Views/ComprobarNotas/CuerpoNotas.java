@@ -15,15 +15,13 @@ import com.nationfis.controlacademicononfc.R;
 public class CuerpoNotas extends RecyclerView.ViewHolder implements View.OnClickListener {
     private ItemClickListener itemClickListener;
     ImageView foto;
-    TextView nombre,codigo,nota,nombrepeso,peso;
+    TextView nombre,codigo,nota;
     CuerpoNotas(View itemView) {
         super(itemView);
         foto = itemView.findViewById(R.id.foto);
         nombre = itemView.findViewById(R.id.nombre);
         codigo = itemView.findViewById(R.id.codigo);
         nota = itemView.findViewById(R.id.nota);
-        nombrepeso = itemView.findViewById(R.id.nombrepeso);
-        peso = itemView.findViewById(R.id.peso);
         itemView.setOnClickListener(this);
     }
 

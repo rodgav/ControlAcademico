@@ -1,37 +1,37 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.nationfis.controlacademicononfc.Fragments.HorariosFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nationfis.controlacademicononfc.Fragments.MostrarAllNotas">
 
-<!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/textView31"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal"
-        android:text="Asignaturas \n Normal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/curso"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollvertical"
-        app:layout_constraintEnd_toStartOf="@+id/textView43"
+        app:layout_constraintBottom_toTopOf="@+id/asignaturas"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView43"
-        android:layout_width="0dp"
+    <Spinner
+        android:id="@+id/asignaturas"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal"
-        android:text="Asignaturas \n Cargo"
-        android:textSize="18sp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/scrollvertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView42"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <ScrollView
         android:id="@+id/scrollvertical"
@@ -46,7 +46,7 @@ tools:context="com.nationfis.controlacademicononfc.Fragments.HorariosFragment">
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView42">
+        app:layout_constraintTop_toBottomOf="@+id/asignaturas">
 
         <HorizontalScrollView
             android:id="@+id/scrollhorizontal"

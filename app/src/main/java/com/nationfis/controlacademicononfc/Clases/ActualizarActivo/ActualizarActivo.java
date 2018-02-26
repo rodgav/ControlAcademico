@@ -1,7 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarActivo;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;

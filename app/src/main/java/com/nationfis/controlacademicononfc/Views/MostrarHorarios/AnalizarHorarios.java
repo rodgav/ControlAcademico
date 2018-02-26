@@ -3,14 +3,17 @@ package com.nationfis.controlacademicononfc.Views.MostrarHorarios;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TableLayout;
+
+import com.nationfis.controlacademicononfc.Views.Tabla;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
@@ -19,28 +22,19 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.T
  * Created by GlobalTIC's on 13/02/2018.
  */
 
-public class AnalizarHorarios extends AsyncTask<Void,Void,Integer> {
+public class AnalizarHorarios extends AsyncTask<Void, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
     @SuppressLint("StaticFieldLeak")
-    private RecyclerView horario;
-    private ArrayList<Horarios> horarios = new ArrayList<>();
-    AnalizarHorarios(Context c, String s, RecyclerView horario) {
+    private TableLayout horario;
+
+    AnalizarHorarios(Context c, String s, TableLayout horario) {
         this.c = c;
         this.s = s;
         this.horario = horario;
     }
 
-    @Override
-    protected void onPostExecute(Integer integer) {
-        super.onPostExecute(integer);
-        if (integer!=0){
-            AdaptadorHorario adaptadorHorario = new AdaptadorHorario(c,horarios);
-            horario.setAdapter(adaptadorHorario);
-
-        }
-    }
 
     @Override
     protected Integer doInBackground(Void... voids) {
@@ -51,43 +45,36 @@ public class AnalizarHorarios extends AsyncTask<Void,Void,Integer> {
         try {
             JSONObject jo;
             JSONArray ja = new JSONArray(s);
-            horarios.clear();
-            Horarios horarios1;
 
-            for (int i = 0; i<ja.length();i++){
-                jo=ja.getJSONObject(i);
-                /*String nombre = jo.getString("nombre");
-                String nombrec = jo.getString("nombrec");
-                String inicio = ]jo.getString("inicio");
-                String fin = jo.getString("fin");
+            ArrayList<String> horariosc = new ArrayList<>();
+            String array[] = {"HORA","LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO","DOMINGO"};
+            horariosc.addAll(Arrays.asList(array));
+            new Tabla(c,horario, horariosc,"cabecera").execute();
 
-                horarios1 = new Horarios();
+            for (int i = 0; i < ja.length(); i++) {
+                jo = ja.getJSONObject(i);
+                String inicio = jo.getString("inicio");
+                String nombre1 = jo.getString("nombre1");
+                String nombre2 = jo.getString("nombre2");
+                String nombre3 = jo.getString("nombre3");
+                String nombre4 = jo.getString("nombre4");
+                String nombre5 = jo.getString("nombre5");
+                String nombre6 = jo.getString("nombre6");
+                String nombre7 = jo.getString("nombre7");
 
-                horarios1.setNombre(nombre);
-                horarios1.setNombrec(nombrec);
-                horarios1.setInicio(inicio);
-                horarios1.setFin(fin);
+                ArrayList<String> horarios = new ArrayList<>();
 
-                horarios.add(horarios1);*/
-                horarios1 = new Horarios();
-                switch (jo.getString("inicio")){
-                    case "08:30:00":
-                        horarios1.setNombre(jo.getString("nombre"));
-                        horarios1.setNombrec(jo.getString("nombrec"));
-                        horarios1.setInicio(jo.getString("inicio"));
-                        horarios1.setFin(jo.getString("fin"));
-                        break;
-                    case "10:30:00":
-                        horarios1.setNombre(jo.getString("nombre"));
-                        horarios1.setNombrec(jo.getString("nombrec"));
-                        horarios1.setInicio(jo.getString("inicio"));
-                        horarios1.setFin(jo.getString("fin"));
-                        break;
-                }
+                horarios.add(inicio);
+                horarios.add(nombre1);
+                horarios.add(nombre2);
+                horarios.add(nombre3);
+                horarios.add(nombre4);
+                horarios.add(nombre5);
+                horarios.add(nombre6);
+                horarios.add(nombre7);
 
-                horarios.add(horarios1);
+                new Tabla(c,horario, horarios,"fila").execute();
             }
-            Log.w(TAG,s);
             return 1;
         } catch (JSONException e) {
             e.printStackTrace();

@@ -22,6 +22,10 @@
             android:icon="@drawable/mnotas"
             android:title="@string/nota" />
         <item
+            android:id="@+id/mostrarnotad"
+            android:icon="@drawable/rnotas"
+            android:title="@string/mostrno" />
+        <item
             android:id="@+id/matr"
             android:icon="@drawable/matriculados"
             android:title="@string/matr" />
@@ -43,7 +47,6 @@
             android:id="@+id/regasig"
             android:icon="@drawable/asignaturas"
             android:title="@string/regasig" />
-
         <item
             android:id="@+id/regsemest"
             android:icon="@drawable/rasignaturas"

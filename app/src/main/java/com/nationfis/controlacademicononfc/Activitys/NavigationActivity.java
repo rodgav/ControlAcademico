@@ -39,6 +39,7 @@ import com.nationfis.controlacademicononfc.Fragments.HorariosFragment;
 import com.nationfis.controlacademicononfc.Fragments.MainFragment;
 import com.nationfis.controlacademicononfc.Fragments.MatriculaAFragment;
 import com.nationfis.controlacademicononfc.Fragments.MatriculaFragment;
+import com.nationfis.controlacademicononfc.Fragments.MostrarAllNotas;
 import com.nationfis.controlacademicononfc.Fragments.MostrarAsistenciaFragment;
 import com.nationfis.controlacademicononfc.Fragments.MostrarMatriculadosAsignaturaFragment;
 import com.nationfis.controlacademicononfc.Fragments.MostrarNotasFragment;
@@ -218,6 +219,12 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragment = new MostrarNotasFragment();
                 fragmentTransaction = true;
                 break;
+            case R.id.mostrarnotad:
+                fragment = new MostrarAllNotas();
+                fragmentTransaction = true;
+                bundle.putString("accion","mnotad");
+                fragment.setArguments(bundle);
+                break;
             case R.id.matr:
                 fragment = new MostrarMatriculadosAsignaturaFragment();
                 fragmentTransaction = true;
@@ -283,8 +290,10 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 fragmentTransaction = true;
                 break;
             case R.id.mostrarnota:
-                fragment = new MostrarNotasFragment();
+                fragment = new MostrarAllNotas();
                 fragmentTransaction = true;
+                bundle.putString("accion","mnotae");
+                fragment.setArguments(bundle);
                 break;
             case R.id.asignaturas:
                 fragment = new AsignaturasFragment();

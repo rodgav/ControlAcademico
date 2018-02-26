@@ -1,4 +1,10 @@
-package com.nationfis.controlacademicononfc.Views.ComprobarNotas;
+package com.nationfis.controlacademicononfc.Views.MostrarAllNotas.SpinnerAsignaturas;
+
+/*
+ * Created by GlobalTIC's on 25/02/2018.
+ */
+
+import com.kosalgeek.android.md5simply.MD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,31 +13,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/*
- * Created by Sam on 18/06/2017.
- */
-
-class EmpaqueComprobarNotas1 {
-    private String codiuni,codiasi,accion,codigo;
-    EmpaqueComprobarNotas1(String codiuni, String codiasi, String accion, String codigo) {
-        this.codiuni = codiuni;
-        this.codiasi = codiasi;
-        this.accion = accion;
+class EmpaqueASP {
+    private String codigo;
+    EmpaqueASP(String codigo) {
         this.codigo = codigo;
     }
 
     String packageData() {
-        return this.analizar();
-    }
-
-    private String analizar() {
+        String accion = MD5.encrypt("asignaturasdoc");
         JSONObject jo = new JSONObject();
         StringBuilder sb = new StringBuilder();
         try {
             jo.put("accion",accion);
-            jo.put("1",codiuni);
-            jo.put("2",codiasi);
-            jo.put("4",codigo);
+            jo.put("codigo",codigo);
             Iterator i = jo.keys();
             Boolean primer = true;
             do {

@@ -1,13 +1,18 @@
-package com.nationfis.controlacademicononfc.Views.ComprobarNotas;
+package com.nationfis.controlacademicononfc.Views.MostrarAllNotas;
+
+/*
+ * Created by GlobalTIC's on 25/02/2018.
+ */
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Clases.Conexion;
+import com.nationfis.controlacademicononfc.Views.MostrarAllNotas.SpinnerAsignaturas.AnalizadorASP;
+import com.nationfis.controlacademicononfc.Views.MostrarHorarios.AnalizarHorarios;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,83 +23,63 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/*
- * Created by Sam on 06/06/2017.
- */
-
-public class ComprobarNotas extends AsyncTask<Void, Void, String> {
-    private ProgressDialog pd;
+public class RecibirNotas extends AsyncTask<Void, Void, String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
+    private String urla,accion,anioa,codigo;
     @SuppressLint("StaticFieldLeak")
-    private RecyclerView notas;
-    private String urla, codiuni, codiasi, tipo, codigo, accion,anioa;
+    private TableLayout notas;
 
-    public ComprobarNotas(Context c, String urla, String accion, RecyclerView notas, String codiuni, String codiasi, String tipo, String codigo,String anioa) {
+    public RecibirNotas(Context c, String urla, String accion, String anioa, String codigo, TableLayout notas) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
-        this.notas = notas;
-        this.codiuni = codiuni;
-        this.codiasi = codiasi;
-        this.tipo = tipo;
-        this.codigo = codigo;
         this.anioa = anioa;
+        this.codigo = codigo;
+        this.notas = notas;
     }
 
     @Override
     protected String doInBackground(Void... voids) {
-        return this.comprobar();
+        return this.recibir();
     }
-
-    private String comprobar() {
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        if (s==null){
+            Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
+        }else{
+            new AnalizarNotas(c,s,notas).execute();
+        }
+    }
+    private String recibir() {
         HttpURLConnection con = Conexion.httpURLConnection(urla);
-        if (con == null) {
+        if (con==null){
             return null;
         }
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueComprobarNotas(accion,codiuni,codiasi,codigo,anioa).packageData());
+            bw.write(new EmpaqueNotas(accion,anioa,codigo).packageData());
             bw.flush();
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp == HttpURLConnection.HTTP_OK) {
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
                 StringBuilder respuesta = new StringBuilder();
-                while ((linea = br.readLine()) != null) {
+                while ((linea=br.readLine())!=null){
                     respuesta.append(linea).append("n");
                 }
                 return respuesta.toString();
-            } else {
+            }else {
                 return String.valueOf(resp);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        pd = new ProgressDialog(c);
-        pd.setTitle("Cargando");
-        pd.setMessage("Espere un momento porfavor");
-        pd.show();
-    }
-
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        pd.dismiss();
-        if (s == null) {
-            Toast.makeText(c, "No tiene internet", Toast.LENGTH_SHORT).show();
-        } else {
-            new AnalizadorComprobarNotas(c, s, notas, tipo).execute();
-        }
     }
 }

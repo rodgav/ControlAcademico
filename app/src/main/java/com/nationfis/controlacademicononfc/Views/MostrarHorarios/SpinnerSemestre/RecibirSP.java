@@ -1,11 +1,10 @@
-package com.nationfis.controlacademicononfc.Clases.ActualizarValoraciones;
+package com.nationfis.controlacademicononfc.Views.MostrarHorarios.SpinnerSemestre;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.TextView;
+import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Clases.Conexion;
@@ -20,58 +19,46 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
 /*
- * Created by Sam on 18/06/2017.
+ * Created by GlobalTIC's on 22/02/2018.
  */
 
-public class ActualizarValoraciones extends AsyncTask<Void,Void,String> {
-    private String urla,accion,codasi,coduni,codval,codigo,peso2;
+public class RecibirSP extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private Dialog d;
+    private String urla,s1;
     @SuppressLint("StaticFieldLeak")
-    private TextView peso;
-    private ProgressDialog pd;
-    public ActualizarValoraciones(Context c, String urla, String accion, String codasi, String coduni, String codval, String codigo,
-                                  String peso2, Dialog d, TextView peso) {
+    private Spinner semestre;
+    @SuppressLint("StaticFieldLeak")
+    private TableLayout horarios;
+    public RecibirSP(Context c, String urla, String s, Spinner semestre, TableLayout horarios) {
         this.c = c;
         this.urla = urla;
-        this.accion = accion;
-        this.codasi = codasi;
-        this.coduni = coduni;
-        this.codval = codval;
-        this.codigo = codigo;
-        this.peso2 = peso2;
-        this.d = d;
-        this.peso = peso;
+        this.s1=s;
+        this.semestre = semestre;
+        this.horarios = horarios;
+    }
+
+    @Override
+    protected String doInBackground(Void... voids) {
+        return this.recibir();
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pd = new ProgressDialog(c);
-        pd.setTitle("Cargando");
-        pd.setMessage("Por favor espere un momento");
-        pd.show();
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        pd.dismiss();
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            AnalizarValoracionesA analizarComprobarNota = new AnalizarValoracionesA(c,s,d,peso,peso2);
-            analizarComprobarNota.execute();
+            new AnalizadorSP(c,s,semestre,horarios).execute();
         }
     }
 
-    @Override
-    protected String doInBackground(Void... voids) {
-        return this.actualizar();
-    }
-
-    private String actualizar() {
+    private String recibir() {
         HttpURLConnection con = Conexion.httpURLConnection(urla);
         if (con==null){
             return null;
@@ -79,12 +66,12 @@ public class ActualizarValoraciones extends AsyncTask<Void,Void,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueActualizarValoraciones(accion,codasi,coduni,codval,codigo,peso2).packageData());
+            bw.write(new EmpaqueSP(s1).packageData());
             bw.flush();
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp== HttpURLConnection.HTTP_OK){
+            if(resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
@@ -96,9 +83,10 @@ public class ActualizarValoraciones extends AsyncTask<Void,Void,String> {
             }else {
                 return String.valueOf(resp);
             }
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
         return null;
     }
 }
+

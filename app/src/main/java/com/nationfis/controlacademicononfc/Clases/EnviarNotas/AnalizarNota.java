@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
 /*
  * Created by Sam on 29/05/2017.
@@ -19,7 +18,8 @@ public class AnalizarNota extends AsyncTask<Void,Void,Integer>{
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
-    private ArrayList<String> mensajes=new ArrayList<>();
+    private String mensaje;
+
     AnalizarNota(Context c, String s) {
         this.c = c;
         this.s = s;
@@ -36,7 +36,9 @@ public class AnalizarNota extends AsyncTask<Void,Void,Integer>{
         if (integer==0){
             Toast.makeText(c,"No pasado",Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(c, mensajes.get(0),Toast.LENGTH_SHORT).show();
+            if (mensaje.length()>0){
+                Toast.makeText(c, mensaje,Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -44,11 +46,10 @@ public class AnalizarNota extends AsyncTask<Void,Void,Integer>{
         try {
             JSONObject jo;
             JSONArray ja = new JSONArray(s);
-            mensajes.clear();
+
             for (int i=0;i<ja.length();i++){
                 jo=ja.getJSONObject(i);
-                String mensaje = jo.getString("mensaje");
-                mensajes.add(mensaje);
+                mensaje = jo.getString("mensaje");
             }
             return 1;
         } catch (JSONException e) {

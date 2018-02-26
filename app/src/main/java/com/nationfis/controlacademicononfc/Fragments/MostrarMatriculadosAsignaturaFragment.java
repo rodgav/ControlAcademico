@@ -53,7 +53,9 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment implements V
         anioa = getResources().getString(R.string.año);
 
         estudiantes.setLayoutManager(new LinearLayoutManager(getActivity()));
+        estudiantes.setNestedScrollingEnabled(false);
         estudiantesa.setLayoutManager(new LinearLayoutManager(getActivity()));
+        estudiantesa.setNestedScrollingEnabled(false);
         new RecibirAsignaturasDocentes(getActivity(), urla, codigo, asignaturas).execute();
         //Toast.makeText(getActivity(),sede+" "+anioa,Toast.LENGTH_SHORT).show();
         mostrar.setOnClickListener(this);

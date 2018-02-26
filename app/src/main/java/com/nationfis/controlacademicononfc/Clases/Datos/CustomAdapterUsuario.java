@@ -69,7 +69,7 @@ public class CustomAdapterUsuario extends RecyclerView.Adapter<CuerpoUsuarios> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                Dialog d = new Dialog(c);
+                final Dialog d = new Dialog(c);
                 d.setContentView(R.layout.dialoglogin);
                 TextView nombre = d.findViewById(R.id.nombre);
                 TextView tipo = d.findViewById(R.id.tipo);
@@ -106,8 +106,8 @@ public class CustomAdapterUsuario extends RecyclerView.Adapter<CuerpoUsuarios> {
                                 }else {
                                     new ComprobarLogin(c,urla,codigo,password1,TOKEN).execute();
                                 }
+                                d.dismiss();
                             }
-
                         }
                     }
                 });

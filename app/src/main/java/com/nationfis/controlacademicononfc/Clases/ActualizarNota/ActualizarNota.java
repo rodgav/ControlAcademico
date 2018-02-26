@@ -24,7 +24,7 @@ import java.net.HttpURLConnection;
  */
 
 public class ActualizarNota extends AsyncTask<Void,Void,String>{
-    private String urla,accion,nota2,codasi,coduni,codigo2,codigo3;
+    private String urla,accion,nota2,codasi,coduni,codigo2,codigo3,anioa;
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
@@ -32,7 +32,7 @@ public class ActualizarNota extends AsyncTask<Void,Void,String>{
     @SuppressLint("StaticFieldLeak")
     private TextView nota;
     public ActualizarNota(Context c, String urla, String accion, String nota2,
-                          String codasi, String coduni, String codigo2, Dialog d, TextView nota,String codigo3) {
+                          String codasi, String coduni, String codigo2, Dialog d, TextView nota,String codigo3,String anioa) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
@@ -43,6 +43,7 @@ public class ActualizarNota extends AsyncTask<Void,Void,String>{
         this.d = d;
         this.nota = nota;
         this.codigo3 = codigo3;
+        this.anioa = anioa;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class ActualizarNota extends AsyncTask<Void,Void,String>{
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueActualizarNota(accion,nota2,codasi,coduni,codigo2,codigo3).packageData());
+            bw.write(new EmpaqueActualizarNota(accion,nota2,codasi,coduni,codigo2,codigo3,anioa).packageData());
             bw.flush();
             bw.close();
             os.close();
@@ -90,7 +91,7 @@ public class ActualizarNota extends AsyncTask<Void,Void,String>{
                 String linea;
                 StringBuilder respuesta = new StringBuilder();
                 while ((linea=br.readLine())!=null){
-                    respuesta.append(linea+"n");
+                    respuesta.append(linea).append("n");
                 }
                 return respuesta.toString();
             }else {

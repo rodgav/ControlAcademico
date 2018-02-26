@@ -39,6 +39,7 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
     private String tipo;
     private SharedPreferences preferences;
     private DatosDatos da;
+
     AdaptadorNotas(Context c, ArrayList<NotasCN> notaCNs, String tipo) {
         this.c = c;
         this.tipo = tipo;
@@ -49,33 +50,27 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
 
     @Override
     public CuerpoNotas onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = null;
-        if (Objects.equals(tipo,"doc")){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_notas_docentes,parent,false);
-        }else if (Objects.equals(tipo,"est")){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_notas_estudiantes,parent,false);
-        }
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_notas_docentes, parent, false);
         return new CuerpoNotas(view);
     }
 
     @Override
     public void onBindViewHolder(final CuerpoNotas holder, final int position) {
+        final NotasCN notas = notaCNs.get(position);
+        holder.nombre.setText(notas.getNombre());
+        holder.codigo.setText(notas.getCodigo());
+        holder.nota.setText(notas.getNota());
+        String imagen = notas.getFoto();
+        byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
+        holder.foto.setImageBitmap(bitmap);
         if (Objects.equals(tipo,"doc")){
-            NotasCN notas = notaCNs.get(position);
-            holder.nombre.setText(notas.getNombre());
-            holder.codigo.setText(notas.getCodigo());
-            holder.nota.setText(notas.getNota());
-            String imagen = notas.getFoto();
-            byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray( byteImage, 0, byteImage.length);
-            holder.foto.setImageBitmap(bitmap);
-
             holder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onItemClick(int pos) {
                     final Dialog d = new Dialog(c);
                     d.setContentView(R.layout.dialog_notas);
-                    ImageView foto1 =d.findViewById(R.id.foto);
+                    ImageView foto1 = d.findViewById(R.id.foto);
                     TextView nombre1 = d.findViewById(R.id.nombre);
                     final TextView codigo1 = d.findViewById(R.id.codigo);
                     final EditText nota1 = d.findViewById(R.id.nota);
@@ -86,26 +81,27 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
                     nota1.setText(notaCNs.get(pos).getNota());
                     String imagen = notaCNs.get(pos).getFoto();
                     byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray( byteImage, 0, byteImage.length);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
                     foto1.setImageBitmap(bitmap);
                     registrar1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String codigo3 = preferences.getString("codigo","");
+                            String codigo3 = preferences.getString("codigo", "");
                             String codigo2 = codigo1.getText().toString();
                             String coduni = da.getUnidades();
                             String codasi = da.getAsignaturasd();
                             String nota2 = nota1.getText().toString();
                             String accion = MD5.encrypt("actnot");
-                            if(codigo2.length()<=0 || nota2.length()<=0){
-                                Toast.makeText(c,"Rellene los campos",Toast.LENGTH_SHORT).show();
-                            }else {
+                            String anioa = c.getResources().getString(R.string.año);
+                            if (codigo2.length() <= 0 || nota2.length() <= 0) {
+                                Toast.makeText(c, "Rellene los campos", Toast.LENGTH_SHORT).show();
+                            } else {
                                 int no;
-                                no=Integer.parseInt(nota2);
-                                if (no>=0 && no<=20){
-                                    new ActualizarNota(c,urla,accion,nota2,codasi,coduni,codigo2,d,holder.nota,codigo3).execute();
-                                }else {
-                                    Toast.makeText(c,"Ingrese una nota entre el 0 y el 20",Toast.LENGTH_SHORT).show();
+                                no = Integer.parseInt(nota2);
+                                if (no >= 0 && no <= 20) {
+                                    new ActualizarNota(c, urla, accion, nota2, codasi, coduni, codigo2, d, holder.nota, codigo3,anioa).execute();
+                                } else {
+                                    Toast.makeText(c, "Ingrese una nota entre el 0 y el 20", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -117,30 +113,11 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
                     d.show();
                 }
             });
-        }else if (Objects.equals(tipo,"est")){
-            NotasCN notas = notaCNs.get(position);
-            holder.nombre.setText(notas.getNombre());
-            holder.nombrepeso.setText(notas.getCodigo());
-            holder.nota.setText(notas.getNota());
-            String simb="%";
-            String peso1 = notas.getPeso()+" "+simb;
-            holder.peso.setText(peso1);
-            String imagen = notas.getFoto();
-            byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray( byteImage, 0, byteImage.length);
-            holder.foto.setImageBitmap(bitmap);
-
+        }else {
             holder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onItemClick(int pos) {
-                    int nota1;
-                    int peso1;
-                    double resultado;
-                    nota1 = Integer.parseInt(notaCNs.get(pos).getNota());
-                    peso1 = Integer.parseInt(notaCNs.get(pos).getPeso());
-                    resultado = ((nota1 * peso1)/100);
-                    String resul = String.valueOf(Math.round(resultado));
-                    Toast.makeText(c,resul,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(c,notas.getNota(),Toast.LENGTH_SHORT).show();
                 }
             });
         }
