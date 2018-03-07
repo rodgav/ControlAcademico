@@ -12,8 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueActualizarNota {
-    private String accion,nota2,codasi,coduni,codigo2,codigo3,anioa;
-    EmpaqueActualizarNota(String accion, String nota2, String codasi, String coduni, String codigo2, String codigo3, String anioa) {
+    private String accion,anioa;
+    private Integer nota2,codasi,coduni,codigo2,codigo3;
+    EmpaqueActualizarNota(String accion, Integer nota2, Integer codasi, Integer coduni, Integer codigo2, Integer codigo3, String anioa) {
         this.accion = accion;
         this.nota2 = nota2;
         this.codasi = codasi;

@@ -12,9 +12,10 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 
 class EmpaqueNotas {
-    private String accion,anioa,codigo;
+    private String accion,anioa;
+    private Integer codigo;
 
-    EmpaqueNotas(String accion, String anioa, String codigo) {
+    EmpaqueNotas(String accion, String anioa, Integer codigo) {
         this.accion = accion;
         this.anioa = anioa;
         this.codigo = codigo;

@@ -14,8 +14,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueMatricula {
-    private String baucher1,codigo1,matricula1,anio,escuela,an,tipom,activo,sede;
-    EmpaqueMatricula(String baucher1, String codigo1, String matricula1, String anio, String escuela, String an, String tipom, String activo, String sede) {
+    private String baucher1,anio,matricula1;
+    private Integer codigo1,escuela,an,tipom,activo,sede;
+    EmpaqueMatricula(String baucher1, Integer codigo1, String matricula1, String anio, Integer escuela, Integer an, Integer tipom, Integer activo, Integer sede) {
         this.baucher1 = baucher1;
         this.codigo1 = codigo1;
         this.matricula1 = matricula1;

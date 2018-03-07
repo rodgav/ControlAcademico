@@ -34,10 +34,10 @@ public class MatriculaAFragment extends Fragment implements View.OnClickListener
     private EditText baucher;
     private TextView año;
     private String matricula1 = "matriculaa";
-    DatosDatos datosDatos;
-    private String usuario;
-    private String ep;
-    private String sede;
+    private DatosDatos datosDatos;
+    private Integer usuario;
+    private Integer ep;
+    private Integer sede;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,11 +56,11 @@ public class MatriculaAFragment extends Fragment implements View.OnClickListener
         //String urla1 = "http://nationfis.hol.es/nonfc/tipomatricula.php";
         datosDatos = new DatosDatos();
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        usuario = preferences.getString("codigo","");
-        ep = preferences.getString("ep","");
-        sede = preferences.getString("sede","");
+        usuario = preferences.getInt("codigo",0);
+        ep = preferences.getInt("ep",0);
+        sede = preferences.getInt("sede",0);
         String seden = preferences.getString("seden", "");
-        codigo.setText(usuario);
+        codigo.setText(String.valueOf(usuario));
         sed.setText(seden);
         String accion1= MD5.encrypt("matricula");
         new RecibirSemestres(getActivity(),urla,ep,semestre,asignatura,matricula1,0,0).execute();
@@ -73,9 +73,9 @@ public class MatriculaAFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         String baucher1 = baucher.getText().toString();
         String anio = año.getText().toString();
-        String asignatura = datosDatos.getAsignaturas();
-        String tipom = datosDatos.getTiposm();
-        String activo = "0";
+        Integer asignatura = datosDatos.getAsignaturas();
+        Integer tipom = datosDatos.getTiposm();
+        Integer activo = 0;
         //String urla ="http://nationfis.hol.es/nonfc/matricula.php";
         switch (view.getId()){
             case R.id.matricula:

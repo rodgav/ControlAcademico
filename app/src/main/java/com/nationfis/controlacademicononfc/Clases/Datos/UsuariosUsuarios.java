@@ -6,9 +6,9 @@ package com.nationfis.controlacademicononfc.Clases.Datos;
  */
 
 public class UsuariosUsuarios {
-    private int id;
-    private String nombre,imagen,tipo,codigo;
-    public UsuariosUsuarios(int id, String nombre, String codigo, String imagen,String tipo) {
+    private int id,codigo;
+    private String nombre,imagen,tipo;
+    public UsuariosUsuarios(int id, String nombre, Integer codigo, String imagen,String tipo) {
         this.id = id;
         this.nombre = nombre;
         this.codigo = codigo;
@@ -27,7 +27,7 @@ public class UsuariosUsuarios {
         return id;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 

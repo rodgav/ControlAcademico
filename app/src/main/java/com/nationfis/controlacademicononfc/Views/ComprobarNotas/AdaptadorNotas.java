@@ -58,13 +58,13 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
     public void onBindViewHolder(final CuerpoNotas holder, final int position) {
         final NotasCN notas = notaCNs.get(position);
         holder.nombre.setText(notas.getNombre());
-        holder.codigo.setText(notas.getCodigo());
-        holder.nota.setText(notas.getNota());
+        holder.codigo.setText(String.valueOf(notas.getCodigo()));
+        holder.nota.setText(String.valueOf(notas.getNota()));
         String imagen = notas.getFoto();
         byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
         holder.foto.setImageBitmap(bitmap);
-        if (Objects.equals(tipo,"doc")){
+        if (Objects.equals(tipo, "doc")) {
             holder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onItemClick(int pos) {
@@ -77,8 +77,8 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
                     Button registrar1 = d.findViewById(R.id.registrar);
 
                     nombre1.setText(notaCNs.get(pos).getNombre());
-                    codigo1.setText(notaCNs.get(pos).getCodigo());
-                    nota1.setText(notaCNs.get(pos).getNota());
+                    codigo1.setText(String.valueOf(notaCNs.get(pos).getCodigo()));
+                    nota1.setText(String.valueOf(notaCNs.get(pos).getNota()));
                     String imagen = notaCNs.get(pos).getFoto();
                     byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
@@ -86,20 +86,18 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
                     registrar1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String codigo3 = preferences.getString("codigo", "");
-                            String codigo2 = codigo1.getText().toString();
-                            String coduni = da.getUnidades();
-                            String codasi = da.getAsignaturasd();
-                            String nota2 = nota1.getText().toString();
+                            Integer codigo3 = preferences.getInt("codigo", 0);
+                            Integer codigo2 = Integer.valueOf(codigo1.getText().toString());
+                            Integer coduni = da.getUnidades();
+                            Integer codasi = da.getAsignaturasd();
+                            Integer nota2 = Integer.valueOf(nota1.getText().toString());
                             String accion = MD5.encrypt("actnot");
                             String anioa = c.getResources().getString(R.string.año);
-                            if (codigo2.length() <= 0 || nota2.length() <= 0) {
+                            if (codigo1.getText().toString().trim().length() <= 0 || nota1.getText().toString().trim().length() <= 0) {
                                 Toast.makeText(c, "Rellene los campos", Toast.LENGTH_SHORT).show();
                             } else {
-                                int no;
-                                no = Integer.parseInt(nota2);
-                                if (no >= 0 && no <= 20) {
-                                    new ActualizarNota(c, urla, accion, nota2, codasi, coduni, codigo2, d, holder.nota, codigo3,anioa).execute();
+                                if (nota2 >= 0 && nota2 <= 20) {
+                                    new ActualizarNota(c, urla, accion, nota2, codasi, coduni, codigo2, d, holder.nota, codigo3, anioa).execute();
                                 } else {
                                     Toast.makeText(c, "Ingrese una nota entre el 0 y el 20", Toast.LENGTH_SHORT).show();
                                 }
@@ -113,11 +111,11 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
                     d.show();
                 }
             });
-        }else {
+        } else {
             holder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onItemClick(int pos) {
-                    Toast.makeText(c,notas.getNota(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(c, notas.getNota(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

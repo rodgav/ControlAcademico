@@ -43,16 +43,15 @@ import com.nationfis.controlacademicononfc.Fragments.MostrarAllNotas;
 import com.nationfis.controlacademicononfc.Fragments.MostrarAsistenciaFragment;
 import com.nationfis.controlacademicononfc.Fragments.MostrarMatriculadosAsignaturaFragment;
 import com.nationfis.controlacademicononfc.Fragments.MostrarNotasFragment;
+import com.nationfis.controlacademicononfc.Fragments.PerfilFragment;
 import com.nationfis.controlacademicononfc.Fragments.RegistrarAsignaturaFragment;
 import com.nationfis.controlacademicononfc.Fragments.RegistrarSemestreFragment;
 import com.nationfis.controlacademicononfc.R;
 
 
-public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    //public static final String urla = "https://nationfis.000webhostapp.com/controlacademico/entrada.php";
-    public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
-    //public static final String urla1 = "https://nationfis.000webhostapp.com/controlacademico/reportes/asistencia.php";
-    public static final String urla1 = "http://192.168.1.38/controlacademico/reportes/asistencia.php";
+public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
+    public static final String urla = "https://controlacademicofis.xyz/controlacademico/entrada.php";
+    //public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
     public static final String TAG = "TAG: ";
     public static final String NOTIFICACION = "NOTIFICACION";
     private BroadcastReceiver broadcastReceiver;
@@ -126,6 +125,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         byte[] byteImage = Base64.decode(image, Base64.DEFAULT);
         Bitmap foto = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
         fotot.setImageBitmap(foto);
+        fotot.setOnClickListener(this);
 
     }
 
@@ -320,7 +320,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             case R.id.contacto:
                 break;
             case R.id.cerrar:
-                String codigo = preferences.getString("codigo","");
+                Integer codigo = preferences.getInt("codigo",0);
                 String TOKEN = FirebaseInstanceId.getInstance().getToken();
                 String accion = MD5.encrypt("eliminartoken");
                 new EliminarToken(this,urla,accion,codigo,TOKEN).execute();
@@ -329,7 +329,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         if(fragmentTransaction){
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedorn,fragment).commit();
             item.setChecked(true);
-            //getSupportActionBar().setTitle(item.getTitle());
             setTitle(item.getTitle());
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -347,5 +346,21 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     protected void onPause() {
         super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.foto:
+                Fragment fragment = new PerfilFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.contenedorn,fragment);
+                fragmentTransaction.commit();
+
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
+        }
     }
 }

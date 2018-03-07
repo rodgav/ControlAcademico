@@ -120,7 +120,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         } else {
                             String accion = MD5.encrypt("act");
                             String accion1 = MD5.encrypt("m1");
-                            new ActualizarActivo(c, urla, accion, accion1, "1", estudiantes.get(position).getUser(), holder.activado).execute();
+                            new ActualizarActivo(c, urla, accion, accion1, 1, estudiantes.get(position).getCodigo(), holder.activado).execute();
                         }
                     }
                 });
@@ -132,7 +132,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         } else {
                             String accion = MD5.encrypt("act");
                             String accion1 = MD5.encrypt("m1");
-                            new ActualizarActivo(c, urla, accion, accion1, "0", estudiantes.get(position).getUser(), holder.activado).execute();
+                            new ActualizarActivo(c, urla, accion, accion1, 0, estudiantes.get(position).getCodigo(), holder.activado).execute();
                         }
                     }
                 });
@@ -146,7 +146,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         } else {
                             String accion = MD5.encrypt("act");
                             String accion1 = MD5.encrypt("m2");
-                            new ActualizarActivo(c, urla, accion, accion1, "1", estudiantes.get(position).getUser(), holder.activado).execute();
+                            new ActualizarActivo(c, urla, accion, accion1, 1, estudiantes.get(position).getCodigo(), holder.activado).execute();
                         }
                     }
                 });
@@ -158,7 +158,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         } else {
                             String accion = MD5.encrypt("act");
                             String accion1 = MD5.encrypt("m2");
-                            new ActualizarActivo(c, urla, accion, accion1, "0", estudiantes.get(position).getUser(), holder.activado).execute();
+                            new ActualizarActivo(c, urla, accion, accion1, 0, estudiantes.get(position).getCodigo(), holder.activado).execute();
                         }
                     }
                 });
@@ -179,7 +179,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                     } else {
                         String accion = MD5.encrypt("act");
                         String accion1 = MD5.encrypt("est");
-                        new ActualizarActivo(c, urla, accion, accion1, "1", estudiantes.get(position).getCodigo(), holder.activado).execute();
+                        new ActualizarActivo(c, urla, accion, accion1, 1, estudiantes.get(position).getCodigo(), holder.activado).execute();
                     }
                 }
             });
@@ -191,7 +191,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                     } else {
                         String accion = MD5.encrypt("act");
                         String accion1 = MD5.encrypt("est");
-                        new ActualizarActivo(c, urla, accion, accion1, "0", estudiantes.get(position).getCodigo(), holder.activado).execute();
+                        new ActualizarActivo(c, urla, accion, accion1, 0, estudiantes.get(position).getCodigo(), holder.activado).execute();
                     }
                 }
             });
@@ -215,9 +215,9 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public void onClick(View view) {
                             if (editeliminar.length()>0){
                                 if (Objects.equals(editeliminar.getText().toString(),"ELIMINAR")){
-                                    String codigoa = estudiantes.get(position).getCodigoAsig();
-                                    String idd = estudiantes.get(position).getIdDia();
-                                    String sede = preferences.getString("sede","");
+                                    Integer codigoa = estudiantes.get(position).getCodigoAsig();
+                                    Integer idd = estudiantes.get(position).getIdDia();
+                                    Integer sede = preferences.getInt("sede",0);
                                     String inicio = holder.inicio.getText().toString();
                                     String fin = holder.fin.getText().toString();
                                     String anioa = c.getResources().getString(R.string.año);
@@ -262,9 +262,9 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         public void onClick(View view) {
                             if (editeliminar.length()>0){
                                 if (Objects.equals(editeliminar.getText().toString(),"ELIMINAR")){
-                                    String codigo = holder.codigo.getText().toString();
-                                    String codigoa = estudiantes.get(position).getCodigoAsig();
-                                    String sede = preferences.getString("sede","");
+                                    Integer codigo = Integer.valueOf(holder.codigo.getText().toString());
+                                    Integer codigoa = estudiantes.get(position).getCodigoAsig();
+                                    Integer sede = preferences.getInt("sede",0);
                                     String anioa = c.getResources().getString(R.string.año);
                                     String accion = MD5.encrypt("elimasigdoc");
 
@@ -323,7 +323,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
         //matriculas
         void bind(Estudiantes estudiantes1) {
             nombre.setText(estudiantes1.getNombre());
-            codigo.setText(estudiantes1.getUser());
+            codigo.setText(String.valueOf(estudiantes1.getCodigo()));
             ep.setText(estudiantes1.getNombreescuela());
             semestre.setText(estudiantes1.getNombresemestre());
 
@@ -333,7 +333,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
             foto.setImageBitmap(bitmap);
             String act = "activado";
             String des = "inactivo";
-            if (Objects.equals(estudiantes1.getActivo(), "1")) {
+            if (Objects.equals(estudiantes1.getActivo(), 1)) {
                 activado.setText(act);
                 activado.setTextColor(ContextCompat.getColor(c, R.color.activo));
             } else {
@@ -358,20 +358,18 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
-                            final int idm = menuItem.getItemId();
-                            if (idm == R.id.modificar) {
-                            /*Bundle bundle = new Bundle();
-                            Fragment fragment = new ActualizarPerfilFragment();
-                            fragment.setArguments(bundle);
-                            FragmentManager fragmentManager = ((FragmentActivity) c).getSupportFragmentManager();
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.contenedorn, fragment);
-                            fragmentTransaction.addToBackStack(null).commit();*/
-
-                                return true;
-                            } else {
-                                return onMenuItemClick(menuItem);
+                            switch (menuItem.getItemId()){
+                                case R.id.modificar:
+                                    /*Bundle bundle = new Bundle();
+                                    Fragment fragment = new ActualizarPerfilFragment();
+                                    fragment.setArguments(bundle);
+                                    FragmentManager fragmentManager = ((FragmentActivity) c).getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.contenedorn, fragment);
+                                    fragmentTransaction.addToBackStack(null).commit();*/
+                                    break;
                             }
+                            return false;
                         }
                     });
                     popupMenu.show();
@@ -383,7 +381,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
         //estudiantes
         void bind1(final Estudiantes estudiantes1, final String accion) {
             nombre.setText(estudiantes1.getNombre());
-            codigo.setText(estudiantes1.getCodigo());
+            codigo.setText(String.valueOf(estudiantes1.getCodigo()));
             ep.setText(estudiantes1.getEp());
 
             String imagen = estudiantes1.getFoto();
@@ -392,7 +390,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
             foto.setImageBitmap(bitmap);
             String act = "activado";
             String des = "inactivo";
-            if (Objects.equals(estudiantes1.getActivo(), "1")) {
+            if (Objects.equals(estudiantes1.getActivo(), 1)) {
                 activado.setText(act);
                 activado.setTextColor(ContextCompat.getColor(c, R.color.activo));
             } else {
@@ -419,19 +417,18 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem menuItem) {
-                                final int idm = menuItem.getItemId();
-                                if (idm == R.id.modificar) {
-                            /*Bundle bundle = new Bundle();
-                            Fragment fragment = new ActualizarPerfilFragment();
-                            fragment.setArguments(bundle);
-                            FragmentManager fragmentManager = ((FragmentActivity) c).getSupportFragmentManager();
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.contenedorn, fragment);
-                            fragmentTransaction.addToBackStack(null).commit();*/
-                                    return true;
-                                } else {
-                                    return onMenuItemClick(menuItem);
+                                switch (menuItem.getItemId()){
+                                    case R.id.modificar:
+                                    /*Bundle bundle = new Bundle();
+                                    Fragment fragment = new ActualizarPerfilFragment();
+                                    fragment.setArguments(bundle);
+                                    FragmentManager fragmentManager = ((FragmentActivity) c).getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.contenedorn, fragment);
+                                    fragmentTransaction.addToBackStack(null).commit();*/
+                                        break;
                                 }
+                                return false;
                             }
                         });
                         popupMenu.show();
@@ -461,7 +458,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     String doc = "DOCENTE: "+estudiantes1.getNombre();
                                     nombre.setText(doc);
 
-                                    String ep = preferences.getString("ep","");
+                                    Integer ep = preferences.getInt("ep",0);
                                     new RecibirSemestres(c,urla,ep,semestres,asignaturas,"matriculaa",0,0).execute();
 
                                     Window window = d.getWindow();
@@ -472,8 +469,8 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     registrar.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            String codio = da.getAsignaturas();
-                                            String sede = preferences.getString("sede","");
+                                            Integer codio = da.getAsignaturas();
+                                            Integer sede = preferences.getInt("sede",0);
                                             String anioa = c.getResources().getString(R.string.año);
                                             new RegistrarAsignaturasDocentes(c, urla, codio, estudiantes1.getCodigo(),sede,anioa,d).execute();
                                         }
@@ -508,9 +505,9 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     registrar.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            String asignatura = da.getAsignaturasd();
-                                            String dia1 = da.getSemana();
-                                            String sede = preferences.getString("sede","");
+                                            Integer asignatura = da.getAsignaturasd();
+                                            Integer dia1 = da.getSemana();
+                                            Integer sede = preferences.getInt("sede",0);
                                             String inicio1 = inicio.getText().toString();
                                             String fin1 = fin.getText().toString();
                                             String anio = c.getResources().getString(R.string.año);
@@ -587,7 +584,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
 
         void horariodoc(final Estudiantes estudiantes) {
             nombre.setText(estudiantes.getNombre());
-            codigo.setText(estudiantes.getCodigo());
+            codigo.setText(String.valueOf(estudiantes.getCodigo()));
             ep.setText(estudiantes.getEp());
             semestre.setText(estudiantes.getNombreAsig());
             inicio.setText(estudiantes.getInicio());
@@ -614,7 +611,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     Button actualizar = d.findViewById(R.id.actualizar);
 
                                     String accion =MD5.encrypt("ssemanas");
-                                    int ids = Integer.valueOf(estudiantes.getIdDia());
+                                    int ids = estudiantes.getIdDia();
 
                                     nombre.setText(estudiantes.getNombreAsig());
                                     iniciod.setText(estudiantes.getInicio());
@@ -628,14 +625,14 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                         public void onClick(View view) {
 
                                             String accion = MD5.encrypt("acthor");
-                                            String codigoa = estudiantes.getCodigoAsig();
+                                            Integer codigoa = estudiantes.getCodigoAsig();
                                             String anioa = c.getResources().getString(R.string.año);
-                                            String sede = preferences.getString("sede","");
-                                            String dia1 = da.getSemana();
+                                            Integer sede = preferences.getInt("sede",0);
+                                            Integer dia1 = da.getSemana();
                                             String inicio1 = iniciod.getText().toString();
                                             String fin1 = find.getText().toString();
                                             String nombredia = da.getNombreDia();
-                                            Toast.makeText(c,codigoa+"-"+anioa+"-"+sede+"-"+dia1+"-"+inicio1+"-"+fin1+"-"+nombredia,Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(c,codigoa+"-"+anioa+"-"+sede+"-"+dia1+"-"+inicio1+"-"+fin1+"-"+nombredia,Toast.LENGTH_LONG).show();
                                             new ActualizarHorario(c,urla,accion,codigoa,anioa,sede,dia1,inicio1,fin1,d,dia,nombredia,inicio,fin).execute();
 
                                         }
@@ -706,7 +703,7 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
         }
         void asignaturasdoc(final Estudiantes estudiantes) {
             nombre.setText(estudiantes.getNombre());
-            codigo.setText(estudiantes.getCodigo());
+            codigo.setText(String.valueOf(estudiantes.getCodigo()));
             ep.setText(estudiantes.getEp());
             asignatura.setText(estudiantes.getNombreAsig());
             menu.setOnClickListener(new View.OnClickListener() {
@@ -728,22 +725,21 @@ public class AdaptadorEstudiantes extends RecyclerView.Adapter<AdaptadorEstudian
                                     Button actualizar = d.findViewById(R.id.actualizar);
 
                                     nombre.setText(estudiantes.getNombre());
-                                    int ids = Integer.valueOf(estudiantes.getSemestre());
-                                    int ida = Integer.valueOf(estudiantes.getCodigoAsig());
-                                    String ep = preferences.getString("ep","");
+                                    int ids = estudiantes.getSemestre();
+                                    int ida = estudiantes.getCodigoAsig();
+                                    Integer ep = preferences.getInt("ep",0);
                                     new RecibirSemestres(c,urla,ep,semestre,sasignatura,"matriculaa",ids,ida).execute();
 
                                     actualizar.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            String codigo = estudiantes.getCodigo();
+                                            Integer codigo = estudiantes.getCodigo();
                                             String anioa = c.getResources().getString(R.string.año);
-                                            String sede = preferences.getString("sede","");
-                                            String codigoa = da.getAsignaturas();
+                                            Integer sede = preferences.getInt("sede",0);
+                                            Integer codigoa = da.getAsignaturas();
                                             String accion = MD5.encrypt("actasigdoc");
                                             String nombrea = da.getAsignaturasNombre();
-                                            String codigoaant = estudiantes.getCodigoAsig();
-                                            Toast.makeText(c,codigo+"-"+anioa+"-"+sede+"-"+codigoa+"-"+nombrea+"-"+codigoaant,Toast.LENGTH_LONG).show();
+                                            Integer codigoaant = estudiantes.getCodigoAsig();
                                             new ActualizarAsignaturaDoc(c,urla,accion,codigo,anioa,sede,codigoa,d,asignatura,nombrea,codigoaant).execute();
                                         }
                                     });

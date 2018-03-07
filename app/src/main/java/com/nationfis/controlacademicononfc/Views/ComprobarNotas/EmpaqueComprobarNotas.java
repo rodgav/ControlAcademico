@@ -11,9 +11,9 @@ import java.util.Iterator;
  * Created by Sam on 06/06/2017.
  */
 class EmpaqueComprobarNotas {
-    private String accion,codiuni,codiasi,codigo,anioa;
-
-    EmpaqueComprobarNotas(String accion, String codiuni, String codiasi, String codigo, String anioa) {
+    private String accion,anioa;
+    private Integer codiuni, codiasi, codigo;
+    EmpaqueComprobarNotas(String accion, Integer codiuni, Integer codiasi, Integer codigo, String anioa) {
         this.accion = accion;
         this.codiuni = codiuni;
         this.codiasi = codiasi;

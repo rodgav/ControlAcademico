@@ -1,11 +1,9 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarActivo;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,19 +15,18 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
-
 /*
  * Created by Sam on 20/08/2017.
  */
 
 public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
-    private String mensaje,s,activoid;
+    private String mensaje,s;
     @SuppressLint("StaticFieldLeak")
     private Context c;
     @SuppressLint("StaticFieldLeak")
     private TextView activado;
-    AnalizarActualizarActivo(Context c, String s, TextView activado, String activoid) {
+    private Integer activoid;
+    AnalizarActualizarActivo(Context c, String s, TextView activado, Integer activoid) {
         this.c = c;
         this.s = s;
         this.activado = activado;
@@ -49,10 +46,10 @@ public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
             if (Objects.equals(mensaje,"Accion Realizada")){
                 String asi = "activado";
                 String falt = "inactivo";
-                if (Objects.equals(activoid,"0")){
+                if (Objects.equals(activoid,0)){
                     activado.setText(falt);
                     activado.setTextColor(ContextCompat.getColor(c,R.color.inactivo));
-                }else if (Objects.equals(activoid,"1")){
+                }else if (Objects.equals(activoid,1)){
                     activado.setText(asi);
                     activado.setTextColor(ContextCompat.getColor(c, R.color.activo));
                 }

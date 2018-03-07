@@ -30,7 +30,8 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment implements V
     public MostrarMatriculadosAsignaturaFragment() {
         // Required empty public constructor
     }
-    private String sede,anioa;
+    private String anioa;
+    private Integer sede;
     private DatosDatos datosDatos;
     private RecyclerView estudiantes,estudiantesa;
     @Override
@@ -46,8 +47,8 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment implements V
         //String urla="http://nationfis.hol.es/nonfc/asignaturad.php";
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        String codigo = preferences.getString("codigo", "");
-        sede = preferences.getString("sede","");
+        Integer codigo = preferences.getInt("codigo", 0);
+        sede = preferences.getInt("sede",0);
         datosDatos = new DatosDatos();
 
         anioa = getResources().getString(R.string.año);
@@ -57,7 +58,6 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment implements V
         estudiantesa.setLayoutManager(new LinearLayoutManager(getActivity()));
         estudiantesa.setNestedScrollingEnabled(false);
         new RecibirAsignaturasDocentes(getActivity(), urla, codigo, asignaturas).execute();
-        //Toast.makeText(getActivity(),sede+" "+anioa,Toast.LENGTH_SHORT).show();
         mostrar.setOnClickListener(this);
         return view;
     }
@@ -74,7 +74,7 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment implements V
         }
     }
 
-    private void llenarestudiante1(String asig) {
+    private void llenarestudiante1(Integer asig) {
         //String urla = "http://nationfis.hol.es/nonfc/estudiantesn.php";
         //String urla1 = "http://nationfis.hol.es/nonfc/estudiantesa.php";
         String accion1 = MD5.encrypt("estudiantesn");

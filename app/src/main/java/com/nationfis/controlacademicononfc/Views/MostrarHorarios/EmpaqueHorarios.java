@@ -12,8 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueHorarios {
-    private String accion, id, sede, anioa;
-    EmpaqueHorarios(String accion, String id, String sede, String anioa) {
+    private String accion, anioa;
+    private Integer id, sede;
+    EmpaqueHorarios(String accion, Integer id, Integer sede, String anioa) {
         this.accion = accion;
         this.id = id;
         this.sede = sede;

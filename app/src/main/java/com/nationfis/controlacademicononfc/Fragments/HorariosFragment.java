@@ -34,7 +34,8 @@ public class HorariosFragment extends Fragment implements View.OnClickListener {
     }
 
     private String accion;
-    private String sede, anioa, id;
+    private String anioa;
+    private Integer sede,id;
     private TextView normal, cargo;
     private TableLayout horario;
 
@@ -50,9 +51,9 @@ public class HorariosFragment extends Fragment implements View.OnClickListener {
         }
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        String ep = preferences.getString("ep", "");
-        sede = preferences.getString("sede", "");
-        id = preferences.getString("codigo", "");
+        Integer ep = preferences.getInt("ep", 0);
+        sede = preferences.getInt("sede", 0);
+        id = preferences.getInt("codigo", 0);
         anioa = getResources().getString(R.string.año);
 
 
@@ -93,7 +94,7 @@ public class HorariosFragment extends Fragment implements View.OnClickListener {
 
     private void CambiarColor(TextView color) {
         color.setTextColor(ContextCompat.getColor(getActivity(), R.color.blanco));
-        color.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.azul));
+        color.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
     }
 
     private void RestaurarColor() {

@@ -12,8 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueEliminarToken {
-    private String accion,codigo,token;
-    EmpaqueEliminarToken(String accion, String codigo, String token) {
+    private String accion,token;
+    private Integer codigo;
+    EmpaqueEliminarToken(String accion, Integer codigo, String token) {
         this.accion = accion;
         this.codigo = codigo;
         this.token = token;

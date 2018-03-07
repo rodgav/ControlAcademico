@@ -1,7 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarAsistencia;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -29,16 +28,15 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private TextView asisti;
-    private String urla,asistio,codigodoc,codigoasig,codigoest,fecha;
-    public ActualizarAsistencia(Context c, String urla, String asistio, String codigodoc, String codigoasig, String codigoest,
-                                String fecha, TextView asisti) {
+    private String urla;
+    private Integer asistio,codigodoc,codigoasig,codigoest;
+    public ActualizarAsistencia(Context c, String urla, Integer asistio, Integer codigodoc, Integer codigoasig, Integer codigoest, TextView asisti) {
         this.c = c;
         this.urla = urla;
         this.asistio = asistio;
         this.codigodoc = codigodoc;
         this.codigoasig = codigoasig;
         this.codigoest = codigoest;
-        this.fecha = fecha;
         this.asisti = asisti;
     }
 
@@ -76,22 +74,18 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueActualizarAsistencia(asistio,codigodoc,codigoasig,codigoest,fecha).packageData());
+            bw.write(new EmpaqueActualizarAsistencia(asistio,codigodoc,codigoasig,codigoest).packageData());
             bw.flush();
             bw.close();
             os.close();
             int resp = con.getResponseCode();
-            if (resp==con.HTTP_OK){
+            if (resp== HttpURLConnection.HTTP_OK){
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuesta = new StringBuffer();
-                if (br!=null){
-                    while ((linea=br.readLine())!=null){
-                        respuesta.append(linea+"n");
-                    }
-                }else {
-                    return null;
+                StringBuilder respuesta = new StringBuilder();
+                while ((linea=br.readLine())!=null){
+                    respuesta.append(linea).append("n");
                 }
                 return respuesta.toString();
             }else {

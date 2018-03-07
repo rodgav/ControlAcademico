@@ -11,9 +11,9 @@ import java.util.Iterator;
  * Created by Sam on 18/06/2017.
  */
 class EmpaqueMostrarAsignaturas {
-    private String codigo, accion, anioa;
-
-    EmpaqueMostrarAsignaturas(String codigo, String accion, String anioa) {
+    private String accion, anioa;
+    private Integer codigo;
+    EmpaqueMostrarAsignaturas(Integer codigo, String accion, String anioa) {
         this.codigo = codigo;
         this.accion = accion;
         this.anioa = anioa;

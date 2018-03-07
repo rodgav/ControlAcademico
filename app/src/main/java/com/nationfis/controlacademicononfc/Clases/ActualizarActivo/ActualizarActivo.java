@@ -25,11 +25,12 @@ import java.net.HttpURLConnection;
 public class ActualizarActivo extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,activoid,codigo,accion1;
+    private String urla,accion,accion1;
+    private Integer activoid,codigo;
     @SuppressLint("StaticFieldLeak")
     private TextView activado;
     private ProgressDialog pd;
-    public ActualizarActivo(Context c, String urla, String accion,String accion1, String activoid, String codigo, TextView activado) {
+    public ActualizarActivo(Context c, String urla, String accion,String accion1, Integer activoid, Integer codigo, TextView activado) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

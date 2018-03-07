@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.kosalgeek.android.md5simply.MD5;
@@ -22,8 +21,6 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
-
 /*
  * Created by SamGM on 13/04/2017.
  */
@@ -31,8 +28,9 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.T
 class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String nombres,apellidop,apellidm,image,correo,tdoc,ndoc,codigo,tipoid,
-            genero,ntelefono,fnacimiento,lnacimiento,activo,ep,sede,nombre,nombredocumento,
+    private Integer tdoc,ndoc,codigo,tipoid,genero,ntelefono,activo,ep,sede;
+    private String nombres,apellidop,apellidm,image,correo,
+            fnacimiento,lnacimiento,nombre,nombredocumento,
             tipo,nombregenero,nombredistrito,nombreescuela,nombresede,s;
     AnalizadorLogin(Context c, String s) {
         this.c = c;
@@ -49,25 +47,37 @@ class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
         super.onPostExecute(integer);
         if(integer==1){
 
-            if (Objects.equals(activo,"1")){
+            if (Objects.equals(activo,1)){
                 Intent intent = new Intent(c,NavigationActivity.class);
                 SharedPreferences preferences = c.getSharedPreferences("datos",Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("a", MD5.encrypt(tipo));
-                editor.putString("codigo", codigo);
+                editor.putInt("codigo", codigo);
                 editor.putString("nombre", nombre);
+                editor.putString("nombres",nombres);
+                editor.putString("apellidop",apellidop);
+                editor.putString("apellidom",apellidm);
                 editor.putString("image", image);
                 editor.putString("tipos",tipo);
-                editor.putString("ep",ep);
-                editor.putString("sede",sede);
+                editor.putInt("ep",ep);
+                editor.putInt("sede",sede);
                 editor.putString("seden",nombresede);
                 editor.putString("epn",nombreescuela);
+                editor.putString("tdoc",nombredocumento);
+                editor.putInt("ndoc",ndoc);
+                editor.putString("genero",nombregenero);
+                editor.putString("lnacimiento",nombredistrito);
+                editor.putString("fnacimiento",fnacimiento);
+                editor.putString("correo",correo);
+                editor.putInt("telefono",ntelefono);
+                editor.putInt("activo",activo);
+
                 editor.apply();
 
                 Toast.makeText(c, "Inicio como " + tipo, Toast.LENGTH_SHORT).show();
                 c.startActivity(intent);
                 ((Activity)(c)).finish();
-            }else if (Objects.equals(activo,"0")){
+            }else if (Objects.equals(activo,0)){
                 AlertDialog.Builder builder = new AlertDialog.Builder(c);
                 builder.setTitle("NECESITA ACTIVAR")
                         .setMessage("Complete su registro activando su cuenta," +
@@ -130,17 +140,17 @@ class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
                 apellidm = jo.getString("apellidom");
                 image = jo.getString("imagen");
                 correo = jo.getString("correo");
-                tdoc = jo.getString("tdoc");
-                ndoc = jo.getString("ndoc");
-                codigo = jo.getString("codigo");
-                tipoid = jo.getString("tipoid");
-                genero  = jo.getString("genero");
-                ntelefono  = jo.getString("ntelefono");
+                tdoc = jo.getInt("tdoc");
+                ndoc = jo.getInt("ndoc");
+                codigo = jo.getInt("codigo");
+                tipoid = jo.getInt("tipoid");
+                genero  = jo.getInt("genero");
+                ntelefono  = jo.getInt("ntelefono");
                 fnacimiento  = jo.getString("fnacimiento");
                 lnacimiento  = jo.getString("lnacimiento");
-                activo  = jo.getString("activo");
-                ep = jo.getString("ep");
-                sede = jo.getString("sede");
+                activo  = jo.getInt("activo");
+                ep = jo.getInt("ep");
+                sede = jo.getInt("sede");
                 nombre = jo.getString("nombre");
                 nombredocumento = jo.getString("nombredocumento");
                 tipo = jo.getString("tipo");

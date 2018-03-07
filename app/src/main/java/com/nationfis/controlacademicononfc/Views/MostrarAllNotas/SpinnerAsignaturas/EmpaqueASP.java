@@ -14,8 +14,8 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 
 class EmpaqueASP {
-    private String codigo;
-    EmpaqueASP(String codigo) {
+    private Integer codigo;
+    EmpaqueASP(Integer codigo) {
         this.codigo = codigo;
     }
 

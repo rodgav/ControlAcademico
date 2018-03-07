@@ -7,7 +7,6 @@ package com.nationfis.controlacademicononfc.Views.MostrarAllNotas.SpinnerAsignat
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +24,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
 public class AnalizadorASP extends AsyncTask<Void,Void,Integer> {
@@ -37,7 +35,7 @@ public class AnalizadorASP extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private TableLayout notas;
     private ArrayList<String> noa = new ArrayList<>();
-    private ArrayList<String> ida = new ArrayList<>();
+    private ArrayList<Integer> ida = new ArrayList<>();
     AnalizadorASP(Context c, String s, Spinner asignaturas, TableLayout notas) {
         this.c = c;
         this.s = s;
@@ -66,10 +64,9 @@ public class AnalizadorASP extends AsyncTask<Void,Void,Integer> {
             asignaturas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    String asignaturasd = ida.get(i);
+                    Integer asignaturasd = ida.get(i);
                     String accion = MD5.encrypt("mnotad");
                     String anioa = c.getResources().getString(R.string.año);
-                    Log.w(TAG,accion+anioa+asignaturasd);
                     new RecibirNotas(c,urla,accion,anioa,asignaturasd,notas).execute();
                 }
 
@@ -89,7 +86,7 @@ public class AnalizadorASP extends AsyncTask<Void,Void,Integer> {
             ida.clear();
             for (int i = 0; i<ja.length();i++){
                 jo=ja.getJSONObject(i);
-                String codigo=jo.getString("codigo");
+                Integer codigo = jo.getInt("codigo");
                 String nombre = jo.getString("nombre");
                 noa.add(nombre);
                 ida.add(codigo);

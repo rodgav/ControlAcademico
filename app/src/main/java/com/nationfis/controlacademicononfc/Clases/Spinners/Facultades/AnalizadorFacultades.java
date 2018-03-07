@@ -31,7 +31,7 @@ public class AnalizadorFacultades extends AsyncTask<Void,Void,Integer>{
     @SuppressLint("StaticFieldLeak")
     private Spinner facultad,escuela,semestre,asignatura;
     private ArrayList<String>nof = new ArrayList<>();
-    private ArrayList<String>idf = new ArrayList<>();
+    private ArrayList<Integer>idf = new ArrayList<>();
     AnalizadorFacultades(Context c, String s, Spinner facultad, Spinner escuela, Spinner semestre, Spinner asignatura, String matricula1) {
         this.c = c;
         this.s = s;
@@ -55,7 +55,7 @@ public class AnalizadorFacultades extends AsyncTask<Void,Void,Integer>{
             idf.clear();
             for (int i=0;i<ja.length();i++){
                 jo = ja.getJSONObject(i);
-                String id = jo.getString("codigo");
+                Integer id = jo.getInt("codigo");
                 String nombre = jo.getString("nombre");
 
                 nof.add(nombre);
@@ -81,11 +81,10 @@ public class AnalizadorFacultades extends AsyncTask<Void,Void,Integer>{
             facultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
-                    Toast.makeText(c,nof.get(i),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(c,nof.get(i),Toast.LENGTH_SHORT).show();
                     DatosDatos datosDatos = new DatosDatos();
                     datosDatos.setFacultades(idf.get(i));
-                    RecibirEscuelas recibirEscuelas = new RecibirEscuelas(c,urla,idf.get(i),escuela,semestre,asignatura,matricula1);
-                    recibirEscuelas.execute();
+                    new RecibirEscuelas(c,urla,idf.get(i),escuela,semestre,asignatura,matricula1).execute();
                 }
 
                 @Override

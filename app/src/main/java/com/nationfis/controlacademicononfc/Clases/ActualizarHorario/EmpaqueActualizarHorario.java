@@ -13,8 +13,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueActualizarHorario {
-    private String accion,codigoa,anioa,sede,dia1,inicio1,fin1;
-    EmpaqueActualizarHorario(String accion, String codigoa, String anioa, String sede, String dia1, String inicio1, String fin1) {
+    private String accion,anioa,inicio1,fin1;
+    private Integer codigoa,sede,dia1;
+    EmpaqueActualizarHorario(String accion, Integer codigoa, String anioa, Integer sede, Integer dia1, String inicio1, String fin1) {
         this.accion = accion;
         this.codigoa = codigoa;
         this.anioa = anioa;

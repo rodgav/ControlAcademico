@@ -25,9 +25,10 @@ public class RecibirMatricula extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,baucher1,codigo1,matricula1,anio,escuela,an,tipom,activo,sede;
-    public RecibirMatricula(Context c, String urla, String baucher1, String codigo1, String matricula1,
-                            String anio,String escuela,String an,String tipom,String activo,String sede) {
+    private String urla,baucher1,anio,matricula1;
+    private Integer codigo1,escuela,an,tipom,activo,sede;
+    public RecibirMatricula(Context c, String urla, String baucher1, Integer codigo1, String matricula1,
+                            String anio,Integer escuela,Integer an,Integer tipom,Integer activo,Integer sede) {
         this.c = c;
         this.urla = urla;
         this.baucher1 = baucher1;

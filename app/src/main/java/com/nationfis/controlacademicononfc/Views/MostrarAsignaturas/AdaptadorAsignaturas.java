@@ -39,7 +39,7 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<CuerpoAsiganturas
     public void onBindViewHolder(CuerpoAsiganturas holder, int position) {
         AsignaturasA asignatura1 = asignatura.get(position);
         holder.nombre.setText(asignatura1.getNombre());
-        holder.codigo.setText(asignatura1.getCodigo());
+        holder.codigo.setText(String.valueOf(asignatura1.getCodigo()));
         String imagen = asignatura1.getFoto();
         holder.nombrea.setText(asignatura1.getNombrea());
         holder.modo.setText(asignatura1.getModo());
@@ -48,7 +48,7 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<CuerpoAsiganturas
         holder.foto.setImageBitmap(bitmap);
         String asi = "activado";
         String falt = "inactivo";
-        if (Objects.equals(asignatura1.getActivo(),"1")){
+        if (Objects.equals(asignatura1.getActivo(),1)){
             holder.activo.setText(asi);
             holder.activo.setTextColor(ContextCompat.getColor(c,R.color.activo));
         }else {

@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.EliminarHorario;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -23,13 +24,13 @@ import java.util.ArrayList;
  */
 
 public class EliminarHorario extends AsyncTask<Void,Void,String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,codigoa,idd,sede,inicio,fin,anioa;
+    private String urla,accion,inicio,fin,anioa;
     private Dialog d;
     private ArrayList<Estudiantes>estudiantes;
-    private int adapterPosition;
-
-    public EliminarHorario(Context c, String urla, String accion, String codigoa, String idd, String sede, String inicio, String fin, String anioa, Dialog d, ArrayList<Estudiantes> estudiantes, int adapterPosition) {
+    private int adapterPosition,codigoa,idd,sede;
+    public EliminarHorario(Context c, String urla, String accion, Integer codigoa, Integer idd, Integer sede, String inicio, String fin, String anioa, Dialog d, ArrayList<Estudiantes> estudiantes, Integer adapterPosition) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

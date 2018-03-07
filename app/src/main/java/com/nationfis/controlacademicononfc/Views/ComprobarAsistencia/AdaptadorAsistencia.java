@@ -5,11 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,9 +20,7 @@ import com.nationfis.controlacademicononfc.Clases.ActualizarAsistencia.Actualiza
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
 import com.nationfis.controlacademicononfc.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
@@ -37,6 +33,7 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
     private Context c;
     private ArrayList<AsistenciaCA> asistenciaCAS;
     private String tipo;
+    private Integer a;
     private SharedPreferences preferences;
     private DatosDatos datosDatos;
     private ItemTouchHelperExtension mItemTouchHelperExtension;
@@ -45,10 +42,11 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
         mItemTouchHelperExtension = itemTouchHelperExtension;
     }
 
-    AdaptadorAsistencia(Context c, ArrayList<AsistenciaCA> asistenciaCAs, String tipo) {
+    AdaptadorAsistencia(Context c, ArrayList<AsistenciaCA> asistenciaCAs, String tipo, Integer a) {
         this.c = c;
         this.asistenciaCAS = asistenciaCAs;
         this.tipo = tipo;
+        this.a = a;
         datosDatos = new DatosDatos();
         preferences = c.getSharedPreferences("datos", Context.MODE_PRIVATE);
 
@@ -83,13 +81,10 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
                             if (Objects.equals(holder.asistio.getText().toString(), "asistio")) {
                                 Toast.makeText(c, "La asistencia es asistio", Toast.LENGTH_SHORT).show();
                             } else {
-                                Calendar ca = Calendar.getInstance();
-                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                                String fecha = df.format(ca.getTime());
-                                String codigodoc = preferences.getString("codigo", "");
-                                String codigoasig = datosDatos.getAsignaturasd();
-                                String codigoest = asistenciaCAS.get(position).getCodigo();
-                                new ActualizarAsistencia(c, urla, "1", codigodoc, codigoasig, codigoest, fecha, holder.asistio).execute();
+                                Integer codigodoc = preferences.getInt("codigo", 0);
+                                Integer codigoasig = datosDatos.getAsignaturasd();
+                                Integer codigoest = asistenciaCAS.get(position).getCodigo();
+                                new ActualizarAsistencia(c, urla, 1, codigodoc, codigoasig, codigoest, holder.asistio).execute();
                             }
                         }
                     }
@@ -101,13 +96,10 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
                             if (Objects.equals(holder.asistio.getText().toString(), "falto")) {
                                 Toast.makeText(c, "La asistencia es falto", Toast.LENGTH_SHORT).show();
                             } else {
-                                Calendar ca = Calendar.getInstance();
-                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                                String fecha = df.format(ca.getTime());
-                                String codigodoc = preferences.getString("codigo", "");
-                                String codigoasig = datosDatos.getAsignaturasd();
-                                String codigoest = asistenciaCAS.get(position).getCodigo();
-                                new ActualizarAsistencia(c, urla, "0", codigodoc, codigoasig, codigoest, fecha, holder.asistio).execute();
+                                Integer codigodoc = preferences.getInt("codigo", 0);
+                                Integer codigoasig = datosDatos.getAsignaturasd();
+                                Integer codigoest = asistenciaCAS.get(position).getCodigo();
+                                new ActualizarAsistencia(c, urla, 0, codigodoc, codigoasig, codigoest, holder.asistio).execute();
                             }
                         }
                     }
@@ -138,14 +130,18 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
 
         void bind(AsistenciaCA asistenciaCA) {
             nombre.setText(asistenciaCA.getNombre());
-            codigo.setText(asistenciaCA.getCodigo());
+            if (Objects.equals(a,1)){
+                codigo.setText(String.valueOf(asistenciaCA.getCodigo()));
+            }else {
+                codigo.setText(asistenciaCA.getAsignatura());
+            }
             String imagen = asistenciaCA.getFoto();
             byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
             foto.setImageBitmap(bitmap);
             String asi = "asistio";
             String falt = "falto";
-            if (Objects.equals(asistenciaCA.getAsistio(), "1")) {
+            if (Objects.equals(asistenciaCA.getAsistio(), 1)) {
                 asistio.setText(asi);
             } else {
                 asistio.setText(falt);

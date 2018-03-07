@@ -28,8 +28,9 @@ public class EliminarToken extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,codigo,token;
-    public EliminarToken(Context c, String urla, String accion, String codigo, String token) {
+    private String urla,accion,token;
+    private Integer codigo;
+    public EliminarToken(Context c, String urla, String accion, Integer codigo, String token) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

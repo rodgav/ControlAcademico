@@ -46,9 +46,9 @@ public class FireBaseServiceNotificacion extends FirebaseMessagingService {
         String NOTIFICATION_CHANNEL_ID = "canal01";
         Builder builder = new Builder(this, NOTIFICATION_CHANNEL_ID);
         builder.setAutoCancel(true);
-        builder.setContentTitle("Asignatura: "+titulo);
-        builder.setContentText("Se le registro: "+mensaje);
-        builder.setSubText("fecha: "+fecha);
+        builder.setContentTitle(titulo);
+        builder.setContentText(mensaje);
+        builder.setSubText(fecha);
         builder.setSound(uri);
         //builder.setTicker("ticker");
         builder.setSmallIcon(R.drawable.icon);

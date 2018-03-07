@@ -25,8 +25,9 @@ public class RegistrarAsignaturas extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,nombre1,semestre;
-    public RegistrarAsignaturas(Context c, String urla, String nombre1, String semestre) {
+    private String urla,nombre1;
+    private Integer semestre;
+    public RegistrarAsignaturas(Context c, String urla, String nombre1, Integer semestre) {
         this.c = c;
         this.urla = urla;
         this.nombre1 = nombre1;

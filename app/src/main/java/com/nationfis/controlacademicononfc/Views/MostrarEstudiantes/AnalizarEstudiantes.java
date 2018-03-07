@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.loopeer.itemtouchhelperextension.ItemTouchHelperExtension;
@@ -18,8 +17,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 
 /*
@@ -61,23 +58,22 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
                     String nombre = jo.getString("nombre");
                     String foto = jo.getString("foto");
                     String correo = jo.getString("correo");
-                    String documentoid = jo.getString("documentoid");
-                    String documento = jo.getString("documento");
-                    String codigo = jo.getString("codigo");
-                    String password = jo.getString("password");
-                    String tipoid = jo.getString("tipoid");
-                    String generoid = jo.getString("generoid");
-                    String telefono = jo.getString("telefono");
+                    Integer documentoid = jo.getInt("documentoid");
+                    Integer documento = jo.getInt("documento");
+                    Integer codigo = jo.getInt("codigo");
+                    Integer tipoid = jo.getInt("tipoid");
+                    Integer generoid = jo.getInt("generoid");
+                    Integer telefono = jo.getInt("telefono");
                     String nacimiento = jo.getString("nacimiento");
-                    String lnacimientoid = jo.getString("lnacimientoid");
-                    String activo = jo.getString("activo");
-                    String epid = jo.getString("epid");
+                    Integer lnacimientoid = jo.getInt("lnacimientoid");
+                    Integer activo = jo.getInt("activo");
+                    Integer epid = jo.getInt("epid");
                     String documenton = jo.getString("documenton");
                     String genero = jo.getString("genero");
                     String tipo = jo.getString("tipo");
                     String lnacimiento = jo.getString("lnacimiento");
                     String ep = jo.getString("ep");
-                    String sede = jo.getString("sede");
+                    Integer sede = jo.getInt("sede");
                     String nsede = jo.getString("nsede");
 
                     estudiantes2 = new Estudiantes();
@@ -88,7 +84,6 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
                     estudiantes2.setDocumentoid(documentoid);
                     estudiantes2.setDocumento(documento);
                     estudiantes2.setCodigo(codigo);
-                    estudiantes2.setPassword(password);
                     estudiantes2.setTipoid(tipoid);
                     estudiantes2.setGeneroid(generoid);
                     estudiantes2.setTelefono(telefono);
@@ -119,13 +114,13 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
                 for (int i = 0; i<ja.length();i++){
                     jo=ja.getJSONObject(i);
                     String recibo = jo.getString("recibo");
-                    String user = jo.getString("user");
-                    String semestre = jo.getString("semestre");
+                    Integer user = jo.getInt("user");
+                    Integer semestre = jo.getInt("semestre");
                     String anioa = jo.getString("anioa");
-                    String ep = jo.getString("ep");
-                    String tipom = jo.getString("tipom");
-                    String sede = jo.getString("sede");
-                    String activo = jo.getString("activo");
+                    Integer ep = jo.getInt("ep");
+                    Integer tipom = jo.getInt("tipom");
+                    Integer sede = jo.getInt("sede");
+                    Integer activo = jo.getInt("activo");
                     String nombre = jo.getString("nombre");
                     String nombresemestre = jo.getString("nombresemestre");
                     String nombreescuela = jo.getString("nombreescuela");
@@ -136,10 +131,10 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
                     estudiantes = new Estudiantes();
 
                     estudiantes.setRecibo(recibo);
-                    estudiantes.setUser(user);
+                    estudiantes.setCodigo(user);
                     estudiantes.setSemestre(semestre);
                     estudiantes.setAnioa(anioa);
-                    estudiantes.setEp(ep);
+                    estudiantes.setEpid(ep);
                     estudiantes.setTipom(tipom);
                     estudiantes.setSede(sede);
                     estudiantes.setActivo(activo);
@@ -165,12 +160,12 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
                 estudiantes1.clear();
                 for (int i = 0; i<ja.length();i++){
                     jo=ja.getJSONObject(i);
-                    String codigo = jo.getString("codigo");
+                    Integer codigo = jo.getInt("codigo");
                     String nombre = jo.getString("nombrec");
                     String foto = jo.getString("foto");
-                    String codigoa = jo.getString("codigoa");
+                    Integer codigoa = jo.getInt("codigoa");
                     String nombrea = jo.getString("nombrea");
-                    String codigos = jo.getString("codigos");
+                    Integer codigos = jo.getInt("codigos");
                     String nombree = jo.getString("nombree");
 
                     estudiantes = new Estudiantes();
@@ -201,14 +196,14 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
 
                     String inicio = jo.getString("inicio");
                     String fin = jo.getString("fin");
-                    String codigoa = jo.getString("codigoa");
+                    Integer codigoa = jo.getInt("codigoa");
                     String nombrea = jo.getString("nombrea");
-                    String codigod = jo.getString("codigod");
+                    Integer codigod = jo.getInt("codigod");
                     String nombred = jo.getString("nombred");
                     String nombrec = jo.getString("nombrec");
                     String foto = jo.getString("foto");
                     String nombree = jo.getString("nombree");
-                    String codigo = jo.getString("codigo");
+                    Integer codigo = jo.getInt("codigo");
 
                     estudiantes = new Estudiantes();
 

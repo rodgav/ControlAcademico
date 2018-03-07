@@ -12,8 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueComprobarAsistencia {
-    private String s,fecha,accion;
-    EmpaqueComprobarAsistencia(String s, String fecha, String accion) {
+    private String fecha,accion;
+    private Integer s;
+    EmpaqueComprobarAsistencia(Integer s, String fecha, String accion) {
         this.s=s;
         this.fecha= fecha;
         this.accion = accion;

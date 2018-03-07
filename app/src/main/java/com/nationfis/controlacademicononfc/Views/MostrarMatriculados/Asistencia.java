@@ -5,7 +5,8 @@ package com.nationfis.controlacademicononfc.Views.MostrarMatriculados;
  */
 
 public class Asistencia {
-    private String nombre,foto,codigo,activo;
+    private String nombre,foto;
+    private Integer codigo,activo;
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -14,7 +15,7 @@ public class Asistencia {
         this.foto = foto;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -26,15 +27,15 @@ public class Asistencia {
         return foto;
     }
 
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public String getActivo() {
+    public Integer getActivo() {
         return activo;
     }
 
-    public void setActivo(String activo) {
+    public void setActivo(Integer activo) {
         this.activo = activo;
     }
 }

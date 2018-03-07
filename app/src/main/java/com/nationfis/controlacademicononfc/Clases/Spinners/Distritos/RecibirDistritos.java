@@ -24,10 +24,11 @@ import java.net.HttpURLConnection;
 public class RecibirDistritos extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,id,accion3;
+    private String urla,accion3;
+    private Integer id;
     @SuppressLint("StaticFieldLeak")
     private Spinner distrito;
-    public RecibirDistritos(Context c, String urla, String id, Spinner distrito, String accion3) {
+    public RecibirDistritos(Context c, String urla, Integer id, Spinner distrito, String accion3) {
         this.c = c;
         this.urla = urla;
         this.id = id;

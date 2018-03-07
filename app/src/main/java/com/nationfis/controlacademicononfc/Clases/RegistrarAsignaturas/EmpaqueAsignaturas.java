@@ -9,19 +9,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by Sam on 02/05/2017.
  */
 
-public class EmpaqueAsignaturas{
-    private String nombre1,semestre;
-    EmpaqueAsignaturas(String nombre1, String semestre) {
+class EmpaqueAsignaturas{
+    private String nombre1;
+    private Integer semestre;
+    EmpaqueAsignaturas(String nombre1, Integer semestre) {
         this.nombre1 = nombre1;
         this.semestre = semestre;
     }
     String packageData() {
         JSONObject jo = new JSONObject();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String accion= MD5.encrypt("registrarasig");
         try {
             jo.put("accion",accion);

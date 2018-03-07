@@ -14,8 +14,8 @@ import java.util.Iterator;
  */
 
 class EmpaqueSemestres {
-    private String s1;
-    EmpaqueSemestres(String s1) {
+    private Integer s1;
+    EmpaqueSemestres(Integer s1) {
         this.s1 = s1;
     }
 

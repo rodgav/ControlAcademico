@@ -29,7 +29,7 @@ public class AnalizadorProvincias extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private Spinner provincia,distrito;
     private ArrayList<String> nop = new ArrayList<>();
-    private ArrayList<String>idp = new ArrayList<>();
+    private ArrayList<Integer>idp = new ArrayList<>();
     AnalizadorProvincias(Context c, String urla, String accion3, Spinner provincia, Spinner distrito, String s) {
         this.c = c;
         this.urla = urla;
@@ -55,7 +55,7 @@ public class AnalizadorProvincias extends AsyncTask<Void,Void,Integer> {
             provincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
-                    Toast.makeText(c,nop.get(i),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(c,nop.get(i),Toast.LENGTH_SHORT).show();
                     DatosDatos datosDatos = new DatosDatos();
                     datosDatos.setProvincias(idp.get(i));
                     new RecibirDistritos(c,urla,idp.get(i),distrito,accion3).execute();
@@ -78,7 +78,7 @@ public class AnalizadorProvincias extends AsyncTask<Void,Void,Integer> {
             idp.clear();
             for (int i=0;i<ja.length();i++){
                 jo = ja.getJSONObject(i);
-                String id = jo.getString("codigo");
+                Integer id = jo.getInt("codigo");
                 String nombre = jo.getString("nombre");
 
                 nop.add(nombre);

@@ -112,4 +112,8 @@
     <string name="mhor">Mostrar Horario</string>
     <string name="mmhor">Mostrar mi Horario</string>
     <string name="most">mostrar</string>
+    <string name="mensaje">Mensaje</string>
+    <string name="llamar">Llamar</string>
+    <string name="tipo">Tipo:</string>
+    <string name="activo">Activo:</string>
 </resources>

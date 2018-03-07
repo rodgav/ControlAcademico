@@ -26,13 +26,12 @@ import java.util.ArrayList;
 public class EliminarAsignaturaDoc extends AsyncTask<Void,Void,String>{
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,codigo,codigoa,sede,anioa;
+    private String urla,accion,anioa;
     private Dialog d;
     private ArrayList<Estudiantes>estudiantes;
-    private int adapterPosition;
-
-    public EliminarAsignaturaDoc(Context c, String urla, String accion, String codigo, String codigoa,
-                                 String sede, String anioa, Dialog d, ArrayList<Estudiantes> estudiantes,
+    private Integer adapterPosition,codigo,codigoa,sede;
+    public EliminarAsignaturaDoc(Context c, String urla, String accion, Integer codigo, Integer codigoa,
+                                 Integer sede, String anioa, Dialog d, ArrayList<Estudiantes> estudiantes,
                                  int adapterPosition ) {
         this.c = c;
         this.urla = urla;

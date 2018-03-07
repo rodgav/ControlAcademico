@@ -14,11 +14,12 @@ import java.util.Iterator;
  */
 
 class EmpaqueRegistro {
-    private String nombre1,apellidop1,apellidom1,correo1,documento1,sexo1,codigo1,contraseña1,verificacion1,telefono1,
-            fecha1,foto1,tdocumento1,lnacimiento,activo,escuela,sede;
-    EmpaqueRegistro(String nombre1, String apellidop1, String apellidom1, String correo1, String documento1, String sexo1,
-                    String foto1, String codigo1, String contraseña1, String verificacion1, String telefono1, String fecha1,
-                    String tdocumento1,String lnacimiento,String activo,String escuela,String sede) {
+    private String nombre1,apellidop1,apellidom1,correo1,contraseña1,verificacion1,
+            fecha1,foto1;
+    private Integer documento1,sexo1,codigo1,telefono1,tdocumento1,activo,escuela,sede,lnacimiento;
+    EmpaqueRegistro(String nombre1, String apellidop1, String apellidom1, String correo1, Integer documento1, Integer sexo1,
+                    String foto1, Integer codigo1, String contraseña1, String verificacion1, Integer telefono1, String fecha1,
+                    Integer tdocumento1,Integer lnacimiento,Integer activo,Integer escuela,Integer sede) {
         this.nombre1 = nombre1;
         this.apellidop1 = apellidop1;
         this.apellidom1 = apellidom1;

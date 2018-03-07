@@ -44,8 +44,8 @@ public class AnalizadorAsistencia extends AsyncTask<Void,Void,Integer> {
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
                 String foto = jo.getString("foto");
-                String codigo = jo.getString("codigo");
-                String activo = jo.getString("activo");
+                Integer codigo = jo.getInt("codigo");
+                Integer activo = jo.getInt("activo");
 
                 asistencias = new Asistencia();
 

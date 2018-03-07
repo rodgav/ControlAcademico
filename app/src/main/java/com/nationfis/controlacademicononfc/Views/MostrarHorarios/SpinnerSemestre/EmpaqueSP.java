@@ -13,9 +13,9 @@ import java.util.Iterator;
  * Created by GlobalTIC's on 22/02/2018.
  */
 
-public class EmpaqueSP {
-    private String s1;
-    EmpaqueSP(String s1) {
+class EmpaqueSP {
+    private Integer s1;
+    EmpaqueSP(Integer s1) {
         this.s1 = s1;
     }
 

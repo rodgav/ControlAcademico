@@ -1,11 +1,12 @@
 package com.nationfis.controlacademicononfc.Views.MostrarAsignaturas;
 
-/**
+/*
  * Created by Sam on 18/06/2017.
  */
 
 public class AsignaturasA {
-    private String modo,nombrea,codigo,nombre,foto,activo;
+    private String modo,nombrea,nombre,foto;
+    private Integer codigo,activo;
     void setModo(String modo) {
         this.modo = modo;
     }
@@ -14,7 +15,7 @@ public class AsignaturasA {
         this.nombrea = nombrea;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -34,7 +35,7 @@ public class AsignaturasA {
         return nombrea;
     }
 
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
@@ -46,11 +47,11 @@ public class AsignaturasA {
         return foto;
     }
 
-    public String getActivo() {
+    public Integer getActivo() {
         return activo;
     }
 
-    public void setActivo(String activo) {
+    public void setActivo(Integer activo) {
         this.activo = activo;
     }
 }

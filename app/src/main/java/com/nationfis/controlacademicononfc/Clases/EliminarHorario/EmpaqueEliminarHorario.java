@@ -7,14 +7,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by GlobalTIC's on 7/02/2018.
  */
 
 class EmpaqueEliminarHorario {
-    private String accion,codigoa,idd,sede,inicio,fin,anioa;
-
-    EmpaqueEliminarHorario(String accion, String codigoa, String idd, String sede, String inicio, String fin, String anioa) {
+    private String accion,inicio,fin,anioa;
+    private int codigoa,idd,sede;
+    EmpaqueEliminarHorario(String accion, Integer codigoa, Integer idd, Integer sede, String inicio, String fin, String anioa) {
         this.accion = accion;
         this.codigoa = codigoa;
         this.idd = idd;

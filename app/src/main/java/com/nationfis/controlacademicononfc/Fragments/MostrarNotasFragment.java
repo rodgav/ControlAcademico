@@ -33,14 +33,14 @@ public class MostrarNotasFragment extends Fragment implements View.OnClickListen
     }
 
     private RecyclerView notas;
-    private String codigo;
+    private Integer codigo;
     private DatosDatos datosDatos = new DatosDatos();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        codigo = preferences.getString("codigo", "");
+        codigo = preferences.getInt("codigo", 0);
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_mostrar_notas, container, false);
@@ -64,14 +64,14 @@ public class MostrarNotasFragment extends Fragment implements View.OnClickListen
             case R.id.registrar:
                 String tipo = "doc";
                 String accion = MD5.encrypt("mnotas");
-                String codiasi = datosDatos.getAsignaturasd();
+                Integer codiasi = datosDatos.getAsignaturasd();
                 llenar(tipo, accion, codiasi);
                 break;
         }
     }
 
-    private void llenar(String tipo, String accion, String codiasi) {
-        String codiuni = datosDatos.getUnidades();
+    private void llenar(String tipo, String accion, Integer codiasi) {
+        Integer codiuni = datosDatos.getUnidades();
         String anioa = getActivity().getResources().getString(R.string.año);
         new ComprobarNotas(getActivity(), urla, accion, notas, codiuni, codiasi, tipo, codigo, anioa).execute();
     }

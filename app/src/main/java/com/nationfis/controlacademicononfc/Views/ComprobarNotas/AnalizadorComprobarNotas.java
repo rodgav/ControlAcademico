@@ -58,9 +58,9 @@ public class AnalizadorComprobarNotas extends AsyncTask<Void, Void, Integer> {
             for (int i = 0; i < ja.length(); i++) {
                 jo = ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
-                String codigo = jo.getString("codigo");
+                Integer codigo = jo.getInt("codigo");
                 String foto = jo.getString("foto");
-                String nota = jo.getString("nota");
+                Integer nota = jo.getInt("nota");
 
                 notasCN = new NotasCN();
                 notasCN.setNombre(nombre);

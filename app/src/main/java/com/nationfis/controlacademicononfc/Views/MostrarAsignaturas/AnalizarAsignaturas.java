@@ -44,10 +44,10 @@ public class AnalizarAsignaturas extends AsyncTask<Void,Void,Integer>{
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
                 String foto = jo.getString("foto");
-                String codigo = jo.getString("codigo");
+                Integer codigo = jo.getInt("codigo");
                 String nombrea = jo.getString("nombrea");
                 String modo = jo.getString("modo");
-                String activo = jo.getString("activo");
+                Integer activo = jo.getInt("activo");
 
                 asignaturas = new AsignaturasA();
 

@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +27,9 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
-    private String usuario,contraseña,urla,TOKEN;
-    public ComprobarLogin(Context c, String urla, String usuario, String password, String TOKEN) {
+    private int usuario;
+    private String contraseña,urla,TOKEN;
+    public ComprobarLogin(Context c, String urla, Integer usuario, String password, String TOKEN) {
         this.c = c;
         this.urla = urla;
         this.usuario = usuario;

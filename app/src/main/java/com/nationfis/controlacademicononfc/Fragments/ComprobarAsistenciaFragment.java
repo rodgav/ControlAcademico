@@ -4,14 +4,17 @@ package com.nationfis.controlacademicononfc.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
@@ -25,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
-import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla1;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,15 +36,14 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
 
     private DatosDatos da = new DatosDatos();
     private String fecha;
-    private String codigo;
+    private Integer codigo;
     private RecyclerView estudiantes;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private SharedPreferences preferences;
 
     public ComprobarAsistenciaFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,9 +59,8 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         Calendar ca = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         fecha = df.format(ca.getTime());
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        codigo = preferences.getString("codigo", "");
-
+        preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        codigo = preferences.getInt("codigo", 0);
 
         new RecibirAsignaturasDocentes(getActivity(), urla, codigo, asignaturas).execute();
 
@@ -86,8 +86,10 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
     }
 
     private void descargar() {
-        String asig = da.getAsignaturasd();
-        new DescargarAsistenciaPDF(getActivity(), urla1, asig, fecha).execute();
+        Integer asig = da.getAsignaturasd();
+        Integer ep = preferences.getInt("ep",0);
+        String accion = MD5.encrypt("asistenciapdf");
+        new DescargarAsistenciaPDF(getActivity(), urla,accion, asig, fecha,ep).execute();
     }
 
     private void llenar() {
@@ -95,8 +97,9 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         swipeRefreshLayout.setRefreshing(true);
         String tipo1 = "pasar";
         String accion = MD5.encrypt("mostrarasis");
-        String asig = da.getAsignaturasd();
-        ComprobarAsistencia comprobarAsistencia = new ComprobarAsistencia(getActivity(), urla, asig, fecha, estudiantes, tipo1, accion, swipeRefreshLayout);
+        Integer asig = da.getAsignaturasd();
+        Integer a = 1;
+        ComprobarAsistencia comprobarAsistencia = new ComprobarAsistencia(getActivity(), urla, asig, fecha, estudiantes, tipo1, accion, swipeRefreshLayout,a);
         comprobarAsistencia.execute();
 
     }
@@ -109,11 +112,11 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         //String urla4 = "http://nationfis.hol.es/nonfc/casisnorm.php";
         String accion1 = MD5.encrypt("asistenciaa");
         String accion2 = MD5.encrypt("asistencian");
-        String asig = da.getAsignaturasd();
+        Integer asig = da.getAsignaturasd();
 
-        RegistrarAsistencia registrarAsistencia = new RegistrarAsistencia(getActivity(), urla, asig, codigo, fecha, accion1);
+        RegistrarAsistencia registrarAsistencia = new RegistrarAsistencia(getActivity(), urla, asig, codigo, accion1);
         registrarAsistencia.execute();
-        RegistrarAsistencia registrarAsistencia1 = new RegistrarAsistencia(getActivity(), urla, asig, codigo, fecha, accion2);
+        RegistrarAsistencia registrarAsistencia1 = new RegistrarAsistencia(getActivity(), urla, asig, codigo, accion2);
         registrarAsistencia1.execute();
         llenar();
     }

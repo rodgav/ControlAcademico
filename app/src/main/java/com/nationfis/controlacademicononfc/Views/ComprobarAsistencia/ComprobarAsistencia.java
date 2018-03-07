@@ -24,14 +24,16 @@ import java.net.HttpURLConnection;
 
 public class ComprobarAsistencia extends AsyncTask<Void,Void,String>{
     //private ProgressDialog pd;
-    private String urla2,s,fecha,tipo,accion;
+    private String urla2,fecha,tipo,accion;
+    private Integer s,a;
     @SuppressLint("StaticFieldLeak")
     private Context c;
     @SuppressLint("StaticFieldLeak")
     private RecyclerView estudiantes;
     @SuppressLint("StaticFieldLeak")
     private SwipeRefreshLayout swipeRefreshLayout;
-    public ComprobarAsistencia(Context c, String urla2, String s, String fecha, RecyclerView estudiantes, String tipo, String accion, SwipeRefreshLayout swipeRefreshLayout) {
+    public ComprobarAsistencia(Context c, String urla2, Integer s, String fecha, RecyclerView estudiantes,
+                               String tipo, String accion, SwipeRefreshLayout swipeRefreshLayout,Integer a) {
         this.c = c;
         this.urla2 = urla2;
         this.s = s;
@@ -40,6 +42,7 @@ public class ComprobarAsistencia extends AsyncTask<Void,Void,String>{
         this.tipo = tipo;
         this.accion = accion;
         this.swipeRefreshLayout = swipeRefreshLayout;
+        this.a = a;
     }
 
     @Override
@@ -86,7 +89,7 @@ public class ComprobarAsistencia extends AsyncTask<Void,Void,String>{
         if (s==null ){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            new AnalizadorComprobarAsistencia(c,s,estudiantes,tipo).execute();
+            new AnalizadorComprobarAsistencia(c,s,estudiantes,tipo,a).execute();
         }
     }
 }

@@ -14,8 +14,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueSemestres {
-    private String ep,sem;
-    EmpaqueSemestres(String ep, String sem) {
+    private Integer ep;
+    private String sem;
+    EmpaqueSemestres(Integer ep, String sem) {
         this.ep = ep;
         this.sem = sem;
     }

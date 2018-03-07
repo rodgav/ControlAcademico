@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.Datos;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -40,24 +41,21 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.u
 public class CustomAdapterUsuario extends RecyclerView.Adapter<CuerpoUsuarios> {
     private ArrayList<UsuariosUsuarios> usuarioslist;
     private Context c;
-    private LayoutInflater inflater;
     private UsuariosSqlite usuariosSqlite;
     public CustomAdapterUsuario(Context c, ArrayList<UsuariosUsuarios> usuarioslist) {
         this.c = c;
         this.usuarioslist = usuarioslist;
-        inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
     @Override
     public CuerpoUsuarios onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.usuarios,parent,false);
-        CuerpoUsuarios cuerpoUsuarios = new CuerpoUsuarios(view);
-        return cuerpoUsuarios;
+        return new CuerpoUsuarios(view);
     }
 
     @Override
-    public void onBindViewHolder(CuerpoUsuarios holder, final int position) {
+    public void onBindViewHolder(CuerpoUsuarios holder, @SuppressLint("RecyclerView") final int position) {
 
         UsuariosUsuarios usuariosUsuarios = usuarioslist.get(position);
         holder.tipo.setText(usuariosUsuarios.getTipo());
@@ -82,7 +80,7 @@ public class CustomAdapterUsuario extends RecyclerView.Adapter<CuerpoUsuarios> {
                 byte[] byteImage = Base64.decode(imagen1, Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray( byteImage, 0, byteImage.length);
                 imagen.setImageBitmap(bitmap);
-                final String codigo = usuarioslist.get(pos).getCodigo();
+                final Integer codigo = usuarioslist.get(pos).getCodigo();
                 /*Toast.makeText(c,TOKEN,Toast.LENGTH_SHORT).show();
                 Log.w(TAG,TOKEN);*/
                 ingresar.setOnClickListener(new View.OnClickListener() {

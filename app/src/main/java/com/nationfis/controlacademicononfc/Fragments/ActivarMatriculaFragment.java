@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +31,8 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
 
     private RecyclerView estudiantes;
     private Switch switch0;
-    private String ep;
+    private Integer ep,sede;
     private String anioa;
-    private String sede;
     private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,8 +48,8 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
 
         searchView.setOnQueryTextListener(ActivarMatriculaFragment.this);
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        ep = preferences.getString("ep","");
-        sede = preferences.getString("sede","");
+        ep = preferences.getInt("ep",0);
+        sede = preferences.getInt("sede",0);
 
         swipeRefreshLayout.setOnRefreshListener(ActivarMatriculaFragment.this);
         swipeRefreshLayout.post(new Runnable() {

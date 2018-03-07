@@ -26,7 +26,7 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.u
  */
 
 public class AnalizadorEscuelas extends AsyncTask<Void,Void,Integer>{
-    private ArrayList<String>ide = new ArrayList<>();
+    private ArrayList<Integer>ide = new ArrayList<>();
     private ArrayList<String>noe = new ArrayList<>();
     @SuppressLint("StaticFieldLeak")
     private Context c;
@@ -57,7 +57,7 @@ public class AnalizadorEscuelas extends AsyncTask<Void,Void,Integer>{
              for (int i =0; i<ja.length();i++){
                  jo=ja.getJSONObject(i);
                  String nombre = jo.getString("nombre");
-                 String codigo = jo.getString("codigo");
+                 Integer codigo = jo.getInt("codigo");
                  ide.add(codigo);
                  noe.add(nombre);
              }
@@ -88,12 +88,12 @@ public class AnalizadorEscuelas extends AsyncTask<Void,Void,Integer>{
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (Objects.equals(matricula1,"regsemest")){
-                        Toast.makeText(c,noe.get(i),Toast.LENGTH_SHORT).show();
-                        String var = ide.get(i);
+                        //Toast.makeText(c,noe.get(i),Toast.LENGTH_SHORT).show();
+                        Integer var = ide.get(i);
                         datosDatos.setEscuel(var);
                     }else {
-                        Toast.makeText(c,noe.get(i),Toast.LENGTH_SHORT).show();
-                        String var = ide.get(i);
+                        //Toast.makeText(c,noe.get(i),Toast.LENGTH_SHORT).show();
+                        Integer var = ide.get(i);
                         datosDatos.setEscuel(var);
                         new RecibirSemestres(c,urla,var,semestre,asignatura,matricula1,0,0).execute();
                     }

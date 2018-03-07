@@ -24,13 +24,13 @@ public class RegistrarAsistencia extends AsyncTask<Void,Void,String> {
     //private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,coda,codd,fecha,accion;
-    public RegistrarAsistencia(Context c, String urla, String coda,String codd,String fecha,String accion) {
+    private String urla,accion;
+    private Integer coda,codd;
+    public RegistrarAsistencia(Context c, String urla, Integer coda,Integer codd,String accion) {
         this.c = c;
         this.urla = urla;
         this.coda = coda;
         this.codd = codd;
-        this.fecha = fecha;
         this.accion = accion;
     }
 
@@ -47,7 +47,7 @@ public class RegistrarAsistencia extends AsyncTask<Void,Void,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpacarAsistencia(coda,codd,fecha,accion).packageData());
+            bw.write(new EmpacarAsistencia(coda,codd,accion).packageData());
             bw.flush();
             bw.close();
             os.close();

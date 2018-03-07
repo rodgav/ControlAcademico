@@ -24,11 +24,12 @@ import java.net.HttpURLConnection;
 
 public class RegistrarAsignaturasDocentes extends AsyncTask<Void,Void,String>{
     private ProgressDialog pd;
-    private String urla,codio,codigo1,sede,anioa;
+    private String urla,anioa;
+    private Integer codio,codigo1,sede;
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
-    public RegistrarAsignaturasDocentes(Context c, String urla, String codio, String codigo1, String sede, String anioa, Dialog d) {
+    public RegistrarAsignaturasDocentes(Context c, String urla, Integer codio, Integer codigo1, Integer sede, String anioa, Dialog d) {
         this.c = c;
         this.urla = urla;
         this.codigo1 = codigo1;

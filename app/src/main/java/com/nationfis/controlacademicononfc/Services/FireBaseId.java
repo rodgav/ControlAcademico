@@ -10,6 +10,5 @@ public class FireBaseId extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         super.onTokenRefresh();
-
     }
 }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
+import com.nationfis.controlacademicononfc.Clases.Reportes.Asistenciapdf.DescargarAsistenciaPDF;
 import com.nationfis.controlacademicononfc.Views.ComprobarAsistencia.ComprobarAsistencia;
 import com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes.RecibirAsignaturasDocentes;
 import com.nationfis.controlacademicononfc.R;
@@ -42,23 +43,23 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
     private RecyclerView asistencia;
-    private String codigo;
+    private Integer codigo;
     private String tipo = "ver";
     private TextView fecha;
     private String nivel;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
     private Button enviar;
+    private DatosDatos da;
+    private SharedPreferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
         nivel = preferences.getString("a", "");
-        codigo = preferences.getString("codigo", "");
-        String sede = preferences.getString("sede", "");
-        String anioa = getResources().getString(R.string.año);
+        codigo = preferences.getInt("codigo", 0);
 
         if (Objects.equals(nivel, "e4e4564027d73a4325024d948d167e93")) {
             view = inflater.inflate(R.layout.fragment_mostrar_asistencia_estudiante, container, false);
@@ -71,14 +72,21 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
 
         } else if (Objects.equals(nivel, "ac99fecf6fcb8c25d18788d14a5384ee")) {
             view = inflater.inflate(R.layout.fragment_mostrar_asistencia, container, false);
+
             asistencia = view.findViewById(R.id.asistencia);
             fecha = view.findViewById(R.id.fecha);
             Spinner asignaturas = view.findViewById(R.id.asignaturas);
             enviar = view.findViewById(R.id.enviar);
+            Button descargar = view.findViewById(R.id.descargar);
+
+            da = new DatosDatos();
+
             fecha.setText(sdf.format(calendar.getTime()));
             swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
             asistencia.setLayoutManager(new LinearLayoutManager(getActivity()));
             new RecibirAsignaturasDocentes(getActivity(), urla, codigo, asignaturas).execute();
+
+            descargar.setOnClickListener(MostrarAsistenciaFragment.this);
         }
 
         fecha.setOnClickListener(MostrarAsistenciaFragment.this);
@@ -101,27 +109,34 @@ public class MostrarAsistenciaFragment extends Fragment implements View.OnClickL
             case R.id.fecha:
                 date();
                 break;
+            case R.id.descargar:
+                descargar();
+                break;
         }
     }
 
+    private void descargar() {
+        Integer asig = da.getAsignaturasd();
+        Integer ep = preferences.getInt("ep",0);
+        String accion = MD5.encrypt("asistenciapdf");
+        new DescargarAsistenciaPDF(getActivity(), urla, accion, asig, fecha.getText().toString(),ep).execute();
+    }
     private void enviard() {
-        DatosDatos da = new DatosDatos();
         String fecha1 = fecha.getText().toString();
-        String codigoa = da.getAsignaturasd();
+        Integer codigoa = da.getAsignaturasd();
         String accion = MD5.encrypt("mostrarasis");
-        String anioa = getActivity().getResources().getString(R.string.año);
-        //String urla1="http://nationfis.hol.es/nonfc/asistidos1.php";
+        Integer a = 1;
         swipeRefreshLayout.setRefreshing(true);
-        new ComprobarAsistencia(getActivity(), urla, codigoa, fecha1, asistencia, tipo, accion, swipeRefreshLayout).execute();
+        new ComprobarAsistencia(getActivity(), urla, codigoa, fecha1, asistencia, tipo, accion, swipeRefreshLayout,a).execute();
 
     }
 
     private void enviare() {
         String fecha1 = fecha.getText().toString();
         String accion = MD5.encrypt("mostrarasis1");
-        //String urla = "http://nationfis.hol.es/nonfc/verasistencia.php";
+        Integer a = 2;
         swipeRefreshLayout.setRefreshing(true);
-        new ComprobarAsistencia(getActivity(), urla, codigo, fecha1, asistencia, tipo, accion, swipeRefreshLayout).execute();
+        new ComprobarAsistencia(getActivity(), urla, codigo, fecha1, asistencia, tipo, accion, swipeRefreshLayout,a).execute();
     }
 
     private void date() {

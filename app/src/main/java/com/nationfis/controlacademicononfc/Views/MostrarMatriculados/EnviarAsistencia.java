@@ -26,10 +26,11 @@ public class EnviarAsistencia extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,s,accion,sede,anioa;
+    private String urla,accion,anioa;
+    private Integer s,sede;
     @SuppressLint("StaticFieldLeak")
     private RecyclerView estudiantes;
-    public EnviarAsistencia(Context c, String urla, String s, RecyclerView estudiantes, String accion, String sede, String anioa) {
+    public EnviarAsistencia(Context c, String urla, Integer s, RecyclerView estudiantes, String accion, Integer sede, String anioa) {
         this.c = c;
         this.urla = urla;
         this.s = s;

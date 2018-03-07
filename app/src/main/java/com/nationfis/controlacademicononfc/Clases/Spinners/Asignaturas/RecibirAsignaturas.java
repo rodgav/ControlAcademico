@@ -24,11 +24,12 @@ import java.net.HttpURLConnection;
 public class RecibirAsignaturas extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,s1;
+    private String urla;
+    private Integer s1;
     @SuppressLint("StaticFieldLeak")
     private Spinner asignatura;
-    private int idar;
-    public RecibirAsignaturas(Context c, String urla, String s, Spinner asignatura ,int idar) {
+    private Integer idar;
+    public RecibirAsignaturas(Context c, String urla, Integer s, Spinner asignatura ,Integer idar) {
         this.c = c;
         this.urla = urla;
         this.s1 = s;

@@ -28,16 +28,18 @@ import java.net.HttpURLConnection;
  */
 
 public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
-    private String urla1, asig, fecha;
+    private String urla1,  fecha,accion;
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private PowerManager.WakeLock mWakeLock;
     private ProgressDialog mProgressDialog;
-
-    public DescargarAsistenciaPDF(Context c, String urla1, String asig, String fecha) {
+    private Integer asig,ep;
+    public DescargarAsistenciaPDF(Context c, String urla1, String accion, Integer asig, String fecha, Integer ep) {
         this.urla1 = urla1;
+        this.accion = accion;
         this.asig = asig;
         this.fecha = fecha;
+        this.ep = ep;
         this.c = c;
     }
     @Override
@@ -52,9 +54,7 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
         mProgressDialog.setMessage("Por favor espere");
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setCancelable(true);
         mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
         // take CPU lock to prevent CPU from going off if the user
         // presses the power button during download
         PowerManager pm = (PowerManager) c.getSystemService(Context.POWER_SERVICE);
@@ -115,7 +115,7 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueAsistenciaPDF(asig, fecha).packageData());
+            bw.write(new EmpaqueAsistenciaPDF(accion,asig,fecha,ep).packageData());
             bw.flush();
             bw.close();
             os.close();
@@ -123,7 +123,7 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
             // expect HTTP 200 OK, so we don't mistakenly save error report
             // instead of the file
             if (con.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                return "Server returned HTTP " + con.getResponseCode()
+                return con.getResponseCode()
                         + " " + con.getResponseMessage();
             }
 
@@ -135,7 +135,7 @@ public class DescargarAsistenciaPDF extends AsyncTask<String,Integer,String> {
             input = con.getInputStream();
             output = new FileOutputStream("/sdcard/"+asig+fecha+".pdf");
 
-            byte data[] = new byte[4096];
+            byte data[] = new byte[1024];
             long total = 0;
             int count;
             while ((count = input.read(data)) != -1) {

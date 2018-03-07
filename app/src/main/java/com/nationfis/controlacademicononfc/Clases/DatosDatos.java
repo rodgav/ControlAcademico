@@ -8,110 +8,111 @@ public class DatosDatos {
     public DatosDatos() {
 
     }
-    private static String escuel,asignaturas,asignaturase,asignaturasd,facultades,
-            semestres,tiposm,unidades,departamentos,provincias,distrito,sedes,semana,
+    private static String
             asignaturasNombre,nombreDia;
-    public void setEscuel(String escuel) {
+    private static Integer semestres,asignaturase,departamentos,provincias,distrito,facultades,escuel,
+    sedes,semana,tiposm,unidades,asignaturasd,asignaturas;
+    public void setEscuel(Integer escuel) {
         this.escuel = escuel;
     }
 
-    public String getEscuel() {
+    public Integer getEscuel() {
         return escuel;
     }
 
-    public void setAsignaturase(String asignaturase) {
+    public void setAsignaturase(Integer asignaturase) {
         this.asignaturase = asignaturase;
     }
 
-    public String getAsignaturase() {
+    public Integer getAsignaturase() {
         return asignaturase;
     }
 
-    public void setAsignaturasd(String asignaturasd) {
+    public void setAsignaturasd(Integer asignaturasd) {
         this.asignaturasd = asignaturasd;
     }
 
-    public String getAsignaturasd() {
+    public Integer getAsignaturasd() {
         return asignaturasd;
     }
 
-    public void setFacultades(String facultades) {
+    public void setFacultades(Integer facultades) {
         this.facultades = facultades;
     }
 
-    public String getFacultades() {
+    public Integer getFacultades() {
         return facultades;
     }
 
-    public void setSemestres(String semestres) {
+    public void setSemestres(Integer semestres) {
         this.semestres = semestres;
     }
 
-    public String getSemestres() {
+    public Integer getSemestres() {
         return semestres;
     }
 
-    public void setTiposm(String tiposm) {
+    public void setTiposm(Integer tiposm) {
         this.tiposm = tiposm;
     }
 
-    public String getTiposm() {
+    public Integer getTiposm() {
         return tiposm;
     }
 
-    public void setUnidades(String unidades) {
+    public void setUnidades(Integer unidades) {
         this.unidades = unidades;
     }
 
-    public String getUnidades() {
+    public Integer getUnidades() {
         return unidades;
     }
 
-    public void setAsignaturas(String asignaturas) {
+    public void setAsignaturas(Integer asignaturas) {
         this.asignaturas = asignaturas;
     }
 
-    public String getAsignaturas() {
+    public Integer getAsignaturas() {
         return asignaturas;
     }
 
-    public void setDepartamentos(String departamentos) {
+    public void setDepartamentos(Integer departamentos) {
         this.departamentos = departamentos;
     }
 
-    public String getDepartamentos() {
+    public Integer getDepartamentos() {
         return departamentos;
     }
 
-    public void setProvincias(String provincias) {
+    public void setProvincias(Integer provincias) {
         this.provincias = provincias;
     }
 
-    public String getProvincias() {
+    public Integer getProvincias() {
         return provincias;
     }
 
-    public void setDistrito(String distrito) {
+    public void setDistrito(Integer distrito) {
         this.distrito = distrito;
     }
 
-    public String getDistrito() {
+    public Integer getDistrito() {
         return distrito;
     }
 
-    public void setSedes(String sedes) {
+    public void setSedes(Integer sedes) {
         this.sedes = sedes;
     }
 
-    public String getSedes() {
+    public Integer getSedes() {
         return sedes;
     }
 
-    public void setSemana(String semana) {
+    public void setSemana(Integer semana) {
         this.semana = semana;
     }
 
-    public String getSemana() {
+    public Integer getSemana() {
         return semana;
     }
 

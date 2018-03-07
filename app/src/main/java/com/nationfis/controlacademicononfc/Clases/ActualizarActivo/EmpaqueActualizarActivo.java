@@ -12,8 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueActualizarActivo {
-    private String accion,codigo,activoid,accion1;
-    EmpaqueActualizarActivo(String accion, String accion1, String codigo, String activoid) {
+    private String accion,accion1;
+    private Integer codigo,activoid;
+    EmpaqueActualizarActivo(String accion, String accion1, Integer codigo, Integer activoid) {
         this.accion = accion;
         this.codigo = codigo;
         this.activoid = activoid;

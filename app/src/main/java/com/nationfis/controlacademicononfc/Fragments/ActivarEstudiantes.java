@@ -31,7 +31,8 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
 
     private RecyclerView estudiantes;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private String accion,ep,anioa,sede;
+    private String accion,anioa;
+    private Integer ep,sede;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,8 +49,8 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        ep = preferences.getString("ep","");
-        sede = preferences.getString("sede","");
+        ep = preferences.getInt("ep",0);
+        sede = preferences.getInt("sede",0);
 
         searchView.setOnQueryTextListener(ActivarEstudiantes.this);
         swipeRefreshLayout.setOnRefreshListener(ActivarEstudiantes.this);

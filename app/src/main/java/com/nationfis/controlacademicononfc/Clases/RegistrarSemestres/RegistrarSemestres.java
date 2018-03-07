@@ -25,8 +25,9 @@ public class RegistrarSemestres extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
-    private String urla,ep,sem;
-    public RegistrarSemestres(Context c, String urla, String ep, String sem) {
+    private String urla,sem;
+    private Integer ep;
+    public RegistrarSemestres(Context c, String urla, Integer ep, String sem) {
         this.c = c;
         this.urla = urla;
         this.ep = ep;

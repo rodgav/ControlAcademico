@@ -5,13 +5,14 @@ package com.nationfis.controlacademicononfc.Views.ComprobarAsistencia;
  */
 
 public class AsistenciaCA {
-    private String nombre,codigo,foto,asistio;
+    private String nombre,foto,asignatura;
+    private Integer codigo,asistio;
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -23,7 +24,7 @@ public class AsistenciaCA {
         return nombre;
     }
 
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
@@ -31,11 +32,19 @@ public class AsistenciaCA {
         return foto;
     }
 
-    void setAsistio(String asistio) {
+    void setAsistio(Integer asistio) {
         this.asistio = asistio;
     }
 
-    String getAsistio() {
+    Integer getAsistio() {
         return asistio;
+    }
+
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    public String getAsignatura() {
+        return asignatura;
     }
 }

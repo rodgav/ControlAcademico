@@ -35,7 +35,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
     }
 
     private RecyclerView notas;
-    private String codigo;
+    private Integer codigo;
     private DatosDatos datosDatos = new DatosDatos();
 
     @Override
@@ -49,7 +49,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         notas = view.findViewById(R.id.notas);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        codigo = preferences.getString("codigo","");
+        codigo = preferences.getInt("codigo",0);
         String accion= MD5.encrypt("unidades");
 
         notas.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -72,8 +72,8 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
     }
 
     private void llenar() {
-        String codiasi= datosDatos.getAsignaturasd();
-        String codiuni= datosDatos.getUnidades();
+        Integer codiasi= datosDatos.getAsignaturasd();
+        Integer codiuni= datosDatos.getUnidades();
         String tipo = "doc";
         String accion= MD5.encrypt("mnotas");
         String anioa = getActivity().getResources().getString(R.string.año);
@@ -83,8 +83,8 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
     private void registra() {
         String accion1 = MD5.encrypt("notaa");
         String accion2 = MD5.encrypt("notan");
-        String codiasi= datosDatos.getAsignaturasd();
-        String codiuni= datosDatos.getUnidades();
+        Integer codiasi= datosDatos.getAsignaturasd();
+        Integer codiuni= datosDatos.getUnidades();
         String anioa = getActivity().getResources().getString(R.string.año);
         RegistrarNota registrarNota =new RegistrarNota(getActivity(),urla,accion1,codiasi,codiuni,codigo,anioa);
         registrarNota.execute();

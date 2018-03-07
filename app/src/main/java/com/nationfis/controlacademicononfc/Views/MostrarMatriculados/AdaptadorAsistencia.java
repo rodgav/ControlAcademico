@@ -40,7 +40,7 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<CuerpoMatriculados
     public void onBindViewHolder(CuerpoMatriculados holder, int position) {
         Asistencia asistencia1 = asistencia.get(position);
         holder.nombre.setText(asistencia1.getNombre());
-        holder.codigo.setText(asistencia1.getCodigo());
+        holder.codigo.setText(String.valueOf(asistencia1.getCodigo()));
         String imagen = asistencia1.getFoto();
         byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);
@@ -48,7 +48,7 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<CuerpoMatriculados
 
         String asi = "activado";
         String falt = "inactivo";
-        if (Objects.equals(asistencia1.getActivo(), "1")) {
+        if (Objects.equals(asistencia1.getActivo(), 1)) {
             holder.activo.setText(asi);
             holder.activo.setTextColor(ContextCompat.getColor(c, R.color.activo));
         } else {

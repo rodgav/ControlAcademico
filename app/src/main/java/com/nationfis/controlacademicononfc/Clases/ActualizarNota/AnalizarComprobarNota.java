@@ -22,11 +22,12 @@ public class AnalizarComprobarNota extends AsyncTask<Void,Void,Integer>{
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
-    private String s,nota2;
+    private String s;
     @SuppressLint("StaticFieldLeak")
     private TextView nota;
     private ArrayList<String> mensaje1 = new ArrayList<>();
-    AnalizarComprobarNota(Context c, String s, Dialog d, TextView nota, String nota2) {
+    private Integer nota2;
+    AnalizarComprobarNota(Context c, String s, Dialog d, TextView nota, Integer nota2) {
         this.c=c;
         this.s = s;
         this.d = d;

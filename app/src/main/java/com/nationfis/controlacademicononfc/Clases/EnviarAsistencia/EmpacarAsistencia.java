@@ -12,11 +12,11 @@ import java.util.Iterator;
  */
 
 class EmpacarAsistencia {
-    private String coda,codd,fecha,accion;
-    EmpacarAsistencia(String coda, String codd, String fecha, String accion) {
+    private String accion;
+    private Integer coda,codd;
+    EmpacarAsistencia(Integer coda, Integer codd, String accion) {
         this.coda = coda;
         this.codd = codd;
-        this.fecha = fecha;
         this.accion = accion;
     }
 
@@ -27,7 +27,6 @@ class EmpacarAsistencia {
             jo.put("accion",accion);
             jo.put("coda",coda);
             jo.put("codd",codd);
-            jo.put("fecha",fecha);
             Boolean primer = true;
             Iterator i = jo.keys();
             do {

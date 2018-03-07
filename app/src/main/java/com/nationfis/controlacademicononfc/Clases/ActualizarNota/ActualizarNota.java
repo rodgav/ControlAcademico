@@ -24,15 +24,16 @@ import java.net.HttpURLConnection;
  */
 
 public class ActualizarNota extends AsyncTask<Void,Void,String>{
-    private String urla,accion,nota2,codasi,coduni,codigo2,codigo3,anioa;
+    private String urla,accion,anioa;
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private Dialog d;
     @SuppressLint("StaticFieldLeak")
     private TextView nota;
-    public ActualizarNota(Context c, String urla, String accion, String nota2,
-                          String codasi, String coduni, String codigo2, Dialog d, TextView nota,String codigo3,String anioa) {
+    private Integer nota2,codasi,coduni,codigo2,codigo3;
+    public ActualizarNota(Context c, String urla, String accion, Integer nota2,
+                          Integer codasi, Integer coduni, Integer codigo2, Dialog d, TextView nota,Integer codigo3,String anioa) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

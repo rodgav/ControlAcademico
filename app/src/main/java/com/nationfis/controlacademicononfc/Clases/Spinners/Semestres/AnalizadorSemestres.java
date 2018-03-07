@@ -34,7 +34,7 @@ public class AnalizadorSemestres extends AsyncTask<Void, Void, Integer> {
     private Spinner semestre, asignatura;
     private String s, matricula1;
     private ArrayList<String> nos = new ArrayList<>();
-    private ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<Integer> ids = new ArrayList<>();
     private DatosDatos datosDatos;
     private int idsr, idar, posicion;
 
@@ -63,11 +63,9 @@ public class AnalizadorSemestres extends AsyncTask<Void, Void, Integer> {
             for (int i = 0; i < ja.length(); i++) {
                 jo = ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
-                String codigo = jo.getString("codigo");
+                int codigo = jo.getInt("codigo");
 
-                int idsa = Integer.valueOf(codigo);
-
-                if (idsa == idsr) {
+                if (codigo == idsr) {
                     posicion = i;
                 }
 
@@ -96,11 +94,11 @@ public class AnalizadorSemestres extends AsyncTask<Void, Void, Integer> {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (Objects.equals(matricula1, "matriculaa")) {
-                        Toast.makeText(c, nos.get(i), Toast.LENGTH_SHORT).show();
-                        String var = ids.get(i);
+                        //Toast.makeText(c, nos.get(i), Toast.LENGTH_SHORT).show();
+                        int var = ids.get(i);
                         new RecibirAsignaturas(c, urla, var, asignatura, idar).execute();
                     } else {
-                        Toast.makeText(c, nos.get(i), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(c, nos.get(i), Toast.LENGTH_SHORT).show();
                         datosDatos.setSemestres(ids.get(i));
                     }
                 }

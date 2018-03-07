@@ -12,8 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueAsignaturasEstudiantes {
-    private String codigo,accion,anioa;
-    EmpaqueAsignaturasEstudiantes(String codigo, String anioa, String accion) {
+    private String accion,anioa;
+    private Integer codigo;
+    EmpaqueAsignaturasEstudiantes(Integer codigo, String anioa, String accion) {
         this.codigo = codigo;
         this.accion = accion;
         this.anioa = anioa;

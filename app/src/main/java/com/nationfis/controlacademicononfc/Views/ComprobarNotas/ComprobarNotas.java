@@ -28,9 +28,9 @@ public class ComprobarNotas extends AsyncTask<Void, Void, String> {
     private Context c;
     @SuppressLint("StaticFieldLeak")
     private RecyclerView notas;
-    private String urla, codiuni, codiasi, tipo, codigo, accion,anioa;
-
-    public ComprobarNotas(Context c, String urla, String accion, RecyclerView notas, String codiuni, String codiasi, String tipo, String codigo,String anioa) {
+    private String urla,accion,anioa,tipo;
+    private Integer codiuni, codiasi, codigo;
+    public ComprobarNotas(Context c, String urla, String accion, RecyclerView notas, Integer codiuni, Integer codiasi, String tipo, Integer codigo,String anioa) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

@@ -5,10 +5,11 @@ package com.nationfis.controlacademicononfc.Views.MostrarEstudiantes;
  */
 
 public class Estudiantes {
-    private String correo,documento,codigo,password,tipo,genero,telefono,nacimiento,lnacimiento,
-    documentoid,tipoid,generoid,lnacimientoid,epid,documenton,nsede,inicio,fin,idDia,nombreDia;
-    private String recibo,user,semestre,anioa,ep,tipom,sede,activo,nombre,nombresemestre,nombreescuela,matriculanombre,
-            nombredistrito,foto,codigoAsig,codigoSede,nombreAsig;
+    private String correo,password,genero,nacimiento,lnacimiento,documenton,nsede,inicio,fin,nombreDia;
+    private String recibo,anioa,nombre,nombresemestre,nombreescuela,matriculanombre,
+            nombredistrito,foto,nombreAsig,ep,tipo;
+    private Integer codigoAsig,codigoSede,idDia,codigo,documento,telefono,activo,documentoid,tipoid,generoid,
+            lnacimientoid,epid,semestre,tipom,sede ;
 
     void setCorreo(String correo) {
         this.correo = correo;
@@ -22,19 +23,19 @@ public class Estudiantes {
         return correo;
     }
 
-    public String getDocumento() {
+    public Integer getDocumento() {
         return documento;
     }
 
-    void setDocumento(String documento) {
+    void setDocumento(Integer documento) {
         this.documento = documento;
     }
 
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -62,11 +63,11 @@ public class Estudiantes {
         this.genero = genero;
     }
 
-    public String getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
-    void setTelefono(String telefono) {
+    void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 
@@ -86,43 +87,43 @@ public class Estudiantes {
         this.lnacimiento = lnacimiento;
     }
     
-    public String getDocumentoid() {
+    public Integer getDocumentoid() {
         return documentoid;
     }
 
-    void setDocumentoid(String documentoid) {
+    void setDocumentoid(Integer documentoid) {
         this.documentoid = documentoid;
     }
 
-    public String getTipoid() {
+    public Integer getTipoid() {
         return tipoid;
     }
 
-    void setTipoid(String tipoid) {
+    void setTipoid(Integer tipoid) {
         this.tipoid = tipoid;
     }
 
-    public String getGeneroid() {
+    public Integer getGeneroid() {
         return generoid;
     }
 
-    void setGeneroid(String generoid) {
+    void setGeneroid(Integer generoid) {
         this.generoid = generoid;
     }
 
-    public String getLnacimientoid() {
+    public Integer getLnacimientoid() {
         return lnacimientoid;
     }
 
-    void setLnacimientoid(String lnacimientoid) {
+    void setLnacimientoid(Integer lnacimientoid) {
         this.lnacimientoid = lnacimientoid;
     }
 
-    public String getEpid() {
+    public Integer getEpid() {
         return epid;
     }
 
-    void setEpid(String epid) {
+    void setEpid(Integer epid) {
         this.epid = epid;
     }
 
@@ -150,19 +151,11 @@ public class Estudiantes {
         this.recibo = recibo;
     }
 
-    String getUser() {
-        return user;
-    }
-
-    void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getSemestre() {
+    public Integer getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(String semestre) {
+    public void setSemestre(Integer semestre) {
         this.semestre = semestre;
     }
 
@@ -182,27 +175,27 @@ public class Estudiantes {
         this.ep = ep;
     }
 
-    public String getTipom() {
+    public Integer getTipom() {
         return tipom;
     }
 
-    public void setTipom(String tipom) {
+    public void setTipom(Integer tipom) {
         this.tipom = tipom;
     }
 
-    public String getSede() {
+    public Integer getSede() {
         return sede;
     }
 
-    public void setSede(String sede) {
+    public void setSede(Integer sede) {
         this.sede = sede;
     }
 
-    public String getActivo() {
+    public Integer getActivo() {
         return activo;
     }
 
-    public void setActivo(String activo) {
+    public void setActivo(Integer activo) {
         this.activo = activo;
     }
 
@@ -242,7 +235,7 @@ public class Estudiantes {
         this.nombredistrito = nombredistrito;
     }
 
-    void setCodigoAsig(String codigoAsig) {
+    void setCodigoAsig(Integer codigoAsig) {
         this.codigoAsig = codigoAsig;
     }
 
@@ -250,7 +243,7 @@ public class Estudiantes {
         this.nombreAsig = nombreAsig;
     }
 
-    void setCodigoSede(String codigoSede) {
+    void setCodigoSede(Integer codigoSede) {
         this.codigoSede = codigoSede;
     }
 
@@ -262,11 +255,11 @@ public class Estudiantes {
         return nombredistrito;
     }
 
-    public String getCodigoAsig() {
+    public Integer getCodigoAsig() {
         return codigoAsig;
     }
 
-    public String getCodigoSede() {
+    public Integer getCodigoSede() {
         return codigoSede;
     }
 
@@ -283,7 +276,7 @@ public class Estudiantes {
         this.fin = fin;
     }
 
-    void setIdDia(String idDia) {
+    void setIdDia(Integer idDia) {
         this.idDia = idDia;
     }
 
@@ -299,7 +292,7 @@ public class Estudiantes {
         return fin;
     }
 
-    public String getIdDia() {
+    public Integer getIdDia() {
         return idDia;
     }
 

@@ -12,8 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueProvincias {
-    private String accion2,id;
-    EmpaqueProvincias(String accion2, String id) {
+    private String accion2;
+    private Integer id;
+    EmpaqueProvincias(String accion2, Integer id) {
         this.accion2 = accion2;
         this.id = id;
     }

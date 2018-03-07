@@ -31,7 +31,7 @@ public class AnalizadorAsignaturas extends AsyncTask<Void,Void,Integer>{
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private ArrayList<String>noa = new ArrayList<>();
-    private ArrayList<String>ida = new ArrayList<>();
+    private ArrayList<Integer>ida = new ArrayList<>();
     private DatosDatos datosDatos;
     private int idar,posicion;
     AnalizadorAsignaturas(Context c, String s, Spinner asignatura, int idar) {
@@ -53,7 +53,7 @@ public class AnalizadorAsignaturas extends AsyncTask<Void,Void,Integer>{
             asignatura.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(c,noa.get(i),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(c,noa.get(i),Toast.LENGTH_SHORT).show();
                     datosDatos.setAsignaturas(ida.get(i));
                     datosDatos.setAsignaturasNombre(noa.get(i));
                 }
@@ -82,10 +82,9 @@ public class AnalizadorAsignaturas extends AsyncTask<Void,Void,Integer>{
             for (int i =0; i<ja.length();i++){
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
-                String codigo = jo.getString("codigo");
+                Integer codigo = jo.getInt("codigo");
 
-                int idaa = Integer.valueOf(codigo);
-                if (idar==idaa){
+                if (idar==codigo){
                     posicion=i;
                 }
 

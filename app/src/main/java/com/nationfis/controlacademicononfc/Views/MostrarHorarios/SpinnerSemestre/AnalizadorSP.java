@@ -34,7 +34,7 @@ public class AnalizadorSP extends AsyncTask<Void, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
     private Spinner semestre;
     private ArrayList<String> nos = new ArrayList<>();
-    private ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<Integer> ids = new ArrayList<>();
     @SuppressLint("StaticFieldLeak")
     private TableLayout horarios;
     private SharedPreferences preferences;
@@ -61,7 +61,7 @@ public class AnalizadorSP extends AsyncTask<Void, Void, Integer> {
             for (int i = 0; i < ja.length(); i++) {
                 jo = ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
-                String codigo = jo.getString("codigo");
+                Integer codigo = jo.getInt("codigo");
 
                 nos.add(nombre);
                 ids.add(codigo);
@@ -84,9 +84,9 @@ public class AnalizadorSP extends AsyncTask<Void, Void, Integer> {
             semestre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(c, nos.get(i), Toast.LENGTH_SHORT).show();
-                    String var = ids.get(i);
-                    String sede = preferences.getString("sede","");
+                    //Toast.makeText(c, nos.get(i), Toast.LENGTH_SHORT).show();
+                    Integer var = ids.get(i);
+                    Integer sede = preferences.getInt("sede",0);
                     String anioa = c.getResources().getString(R.string.año);
                     horarios.removeAllViews();
                     new RecibirHorarios(c,urla, MD5.encrypt("mhor"),var,sede,anioa,horarios).execute();

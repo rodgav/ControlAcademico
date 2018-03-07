@@ -27,7 +27,7 @@ public class AnalizadorTipoMatricula extends AsyncTask<Void,Void,Integer> {
     private String s;
     @SuppressLint("StaticFieldLeak")
     private Spinner tipom;
-    private ArrayList<String>idm = new ArrayList<>();
+    private ArrayList<Integer>idm = new ArrayList<>();
     private ArrayList<String>nom = new ArrayList<>();
     private DatosDatos datosDatos;
     AnalizadorTipoMatricula(Context c, String s, Spinner tipom) {
@@ -52,7 +52,7 @@ public class AnalizadorTipoMatricula extends AsyncTask<Void,Void,Integer> {
             tipom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(c,nom.get(i),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(c,nom.get(i),Toast.LENGTH_SHORT).show();
                     datosDatos = new DatosDatos();
                     datosDatos.setTiposm(idm.get(i));
                 }
@@ -74,7 +74,7 @@ public class AnalizadorTipoMatricula extends AsyncTask<Void,Void,Integer> {
             for (int i=1;i<ja.length();i++){
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
-                String codigo = jo.getString("codigo");
+                Integer codigo = jo.getInt("codigo");
                 idm.add(codigo);
                 nom.add(nombre);
             }

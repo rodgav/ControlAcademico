@@ -12,18 +12,23 @@ import java.util.Iterator;
  */
 
 class EmpaqueAsistenciaPDF {
-    private String asig,fecha;
-    EmpaqueAsistenciaPDF(String asig, String fecha) {
+    private String accion,fecha;
+    private Integer asig,ep;
+    EmpaqueAsistenciaPDF(String accion, Integer asig, String fecha,Integer ep) {
+        this.accion = accion;
         this.asig = asig;
         this.fecha = fecha;
+        this.ep = ep;
     }
     String packageData() {
         JSONObject jo = new JSONObject();
         StringBuilder sb = new StringBuilder();
 
         try {
+            jo.put("accion",accion);
             jo.put("1",asig);
             jo.put("2",fecha);
+            jo.put("3",ep);
             Boolean primer = true;
             Iterator i = jo.keys();
             do {

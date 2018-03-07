@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Clases.Register;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
 /*
@@ -22,10 +24,11 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.u
 class AnalizadorRegistro extends AsyncTask<Void,Void,Integer>{
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String s,codigo1,contraseña1;
+    private String s,contraseña1;
     @SuppressLint("StaticFieldLeak")
     private String mensaje;
-    AnalizadorRegistro(Context c, String s, String codigo1, String contraseña1) {
+    private Integer codigo1;
+    AnalizadorRegistro(Context c, String s, Integer codigo1, String contraseña1) {
         this.s = s;
         this.c=c;
         this.codigo1 = codigo1;

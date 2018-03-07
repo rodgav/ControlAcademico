@@ -39,7 +39,7 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
         this.idsr = idsr;
     }
 
-    private ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<Integer> ids = new ArrayList<>();
     private ArrayList<String> nos = new ArrayList<>();
     private DatosDatos datosDatos;
     @Override
@@ -56,11 +56,9 @@ public class AnalizadorSemana extends AsyncTask<Void,Void,Integer> {
             for (int i=0;i<ja.length();i++){
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
-                String codigo = jo.getString("codigo");
+                Integer codigo = jo.getInt("codigo");
 
-                int idsa = Integer.valueOf(codigo);
-
-                if (idsr==idsa){
+                if (idsr==codigo){
                     posicion=i;
                 }
 

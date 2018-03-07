@@ -1,6 +1,5 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarAsignaturasDoc;
 
-import com.kosalgeek.android.md5simply.MD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,13 +8,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 
-/**
+/*
  * Created by GlobalTIC's on 7/02/2018.
  */
 
 class EmpaqueActualizarAsignaturaDoc {
-    private String accion,codigo,anioa,sede,codigoa,codigoaant;
-    EmpaqueActualizarAsignaturaDoc(String accion, String codigo, String anioa, String sede, String codigoa,String codigoaant) {
+    private String accion,anioa;
+    private Integer codigo,sede,codigoa,codigoaant;
+    EmpaqueActualizarAsignaturaDoc(String accion, Integer codigo, String anioa, Integer sede, Integer codigoa,Integer codigoaant) {
         this.accion = accion;
         this.codigo = codigo;
         this.anioa = anioa;

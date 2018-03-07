@@ -26,8 +26,9 @@ public class RegistrarNota extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,codiasi,codiuni,codigo,anioa;
-    public RegistrarNota(Context c, String urla, String accion, String codiasi, String codiuni,String codigo,String anioa) {
+    private String urla,accion,anioa;
+    private Integer codiasi,codiuni,codigo;
+    public RegistrarNota(Context c, String urla, String accion, Integer codiasi, Integer codiuni,Integer codigo,String anioa) {
         this.c = c;
         this. urla = urla;
         this.accion = accion;

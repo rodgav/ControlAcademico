@@ -58,19 +58,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
             case R.id.button:
-                String usuario = user.getText().toString();
-                String password = MD5.encrypt(pass.getText().toString().trim());
                 String TOKEN = FirebaseInstanceId.getInstance().getToken();
-                if(usuario.length()<=0 || pass.getText().toString().trim().length()<=0 || TOKEN == null ){
-                    Toast.makeText(getActivity(),"Rellene los campos o no se genero el token ",Toast.LENGTH_SHORT).show();
+                if(user.getText().toString().trim().length()<=0 || pass.getText().toString().trim().length()<=0 ){
+                    Toast.makeText(getActivity(),"Rellene todos los campos ",Toast.LENGTH_SHORT).show();
                 }else {
+                    Integer usuario = Integer.valueOf(user.getText().toString().trim());
+                    String password = MD5.encrypt(pass.getText().toString().trim());
                     comprobarlogin(usuario,password,TOKEN);
                 }
                 break;
         }
     }
-    private void comprobarlogin(String usuario, String password, String TOKEN) {
-        //String urla = "http://nationfis.hol.es/nonfc/login.php";
+    private void comprobarlogin(Integer usuario, String password, String TOKEN) {
         if (TOKEN != null){
             if (TOKEN.contains("{")){
                 try{
@@ -84,6 +83,5 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 new ComprobarLogin(getActivity(), urla,usuario,password,TOKEN).execute();
             }
         }
-
     }
 }

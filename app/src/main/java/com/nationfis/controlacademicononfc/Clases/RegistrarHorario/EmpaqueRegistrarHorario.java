@@ -13,8 +13,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueRegistrarHorario {
-    private String accioni1,asignatura,dia1,sede,inicio1,fin1,anio;
-    EmpaqueRegistrarHorario(String accioni1, String asignatura, String dia1, String sede, String inicio1, String fin1, String anio) {
+    private String accioni1,inicio1,fin1,anio;
+    private Integer asignatura,dia1,sede;
+    EmpaqueRegistrarHorario(String accioni1, Integer asignatura, Integer dia1, Integer sede, String inicio1, String fin1, String anio) {
         this.accioni1 = accioni1;
         this.asignatura = asignatura;
         this.dia1 = dia1;

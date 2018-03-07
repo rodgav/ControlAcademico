@@ -14,14 +14,12 @@ import java.util.Iterator;
  */
 
 class EmpaqueActualizarAsistencia {
-    private String asistio,codigodoc,codigoasig,codigoest,fecha;
-
-    EmpaqueActualizarAsistencia(String asistio, String codigodoc, String codigoasig, String codigoest, String fecha) {
+    private Integer asistio,codigodoc,codigoasig,codigoest;
+    EmpaqueActualizarAsistencia(Integer asistio, Integer codigodoc, Integer codigoasig, Integer codigoest) {
         this.asistio = asistio;
         this.codigodoc = codigodoc;
         this.codigoasig = codigoasig;
         this.codigoest = codigoest;
-        this.fecha = fecha;
     }
 
 
@@ -35,7 +33,6 @@ class EmpaqueActualizarAsistencia {
             jo.put("3",codigodoc);
             jo.put("4",codigoasig);
             jo.put("2",codigoest);
-            jo.put("5",fecha);
             Boolean primero = true;
             Iterator i = jo.keys();
             do {

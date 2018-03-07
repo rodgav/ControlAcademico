@@ -1,5 +1,6 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarHorario;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -17,18 +18,20 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-/**
+/*
  * Created by GlobalTIC's on 7/02/2018.
  */
 
 public class ActualizarHorario extends AsyncTask<Void, Void, String> {
+    @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla, accion, codigoa, anioa, sede, dia1, inicio1, fin1, nombredia;
+    private String urla, accion, anioa, inicio1, fin1, nombredia;
     private Dialog d;
+    @SuppressLint("StaticFieldLeak")
     private TextView dia,inicio,fin;
-
-    public ActualizarHorario(Context c, String urla, String accion, String codigoa,
-                             String anioa, String sede, String dia1, String inicio1,
+    private Integer codigoa,sede,dia1;
+    public ActualizarHorario(Context c, String urla, String accion, Integer codigoa,
+                             String anioa, Integer sede, Integer dia1, String inicio1,
                              String fin1, Dialog d, TextView dia, String nombredia,
                              TextView inicio, TextView fin) {
         this.c = c;
@@ -80,13 +83,9 @@ public class ActualizarHorario extends AsyncTask<Void, Void, String> {
                 InputStream is = con.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String linea;
-                StringBuffer respuesta = new StringBuffer();
-                if (br != null) {
-                    while ((linea = br.readLine()) != null) {
-                        respuesta.append(linea + "n");
-                    }
-                } else {
-                    return null;
+                StringBuilder respuesta = new StringBuilder();
+                while ((linea = br.readLine()) != null) {
+                    respuesta.append(linea).append("n");
                 }
                 return respuesta.toString();
             } else {

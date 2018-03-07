@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.nationfis.controlacademicononfc.Clases.Datos.CustomAdapterUsuario;
 import com.nationfis.controlacademicononfc.Clases.Datos.UsuariosSqlite;
@@ -48,7 +47,7 @@ public class LoginForOneTouch extends Fragment implements View.OnClickListener{
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
             String nombre = cursor.getString(1);
-            String codigo = cursor.getString(2);
+            Integer codigo = cursor.getInt(2);
             String imagen = cursor.getString(3);
             String tipo = cursor.getString(4);
             usuarioslist.add(new UsuariosUsuarios(id,nombre,codigo,imagen,tipo));

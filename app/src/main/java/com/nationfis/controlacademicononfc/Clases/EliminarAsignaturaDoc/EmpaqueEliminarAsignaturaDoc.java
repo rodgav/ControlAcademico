@@ -12,9 +12,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueEliminarAsignaturaDoc {
-    private String accion,codigo,codigoa,sede,anioa;
-
-    EmpaqueEliminarAsignaturaDoc(String accion, String codigo, String codigoa, String sede, String anioa) {
+    private String accion,anioa;
+    private Integer codigo,codigoa,sede;
+    EmpaqueEliminarAsignaturaDoc(String accion, Integer codigo, Integer codigoa, Integer sede, String anioa) {
         this.accion = accion;
         this.codigo = codigo;
         this.codigoa = codigoa;

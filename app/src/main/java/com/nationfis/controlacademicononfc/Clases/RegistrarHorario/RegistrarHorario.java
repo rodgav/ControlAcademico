@@ -4,14 +4,14 @@ package com.nationfis.controlacademicononfc.Clases.RegistrarHorario;
  * Created by GlobalTIC's on 5/02/2018.
  */
 
-import android.app.Dialog;
+import android.annotation.SuppressLint;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.nationfis.controlacademicononfc.Clases.Conexion;
-import com.nationfis.controlacademicononfc.Clases.Spinners.Semana.AnalizadorSemana;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,10 +24,12 @@ import java.net.HttpURLConnection;
 
 public class RegistrarHorario extends AsyncTask<Void,Void,String> {
     private ProgressDialog pd;
+    @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accioni1,asignatura,dia1,sede,inicio1,fin1,anio;
-    public RegistrarHorario(Context c, String urla, String accioni1, String asignatura,
-                            String dia1, String sede, String inicio1, String fin1, String anio) {
+    private String urla,accioni1,inicio1,fin1,anio;
+    private Integer asignatura,dia1,sede;
+    public RegistrarHorario(Context c, String urla, String accioni1, Integer asignatura,
+                            Integer dia1, Integer sede, String inicio1, String fin1, String anio) {
         this.c = c;
         this.urla = urla;
         this.accioni1 = accioni1;

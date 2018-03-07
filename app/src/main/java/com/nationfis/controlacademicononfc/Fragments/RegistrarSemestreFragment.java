@@ -61,7 +61,7 @@ public class RegistrarSemestreFragment extends Fragment implements View.OnClickL
     }
 
     private void enviar1() {
-        String ep = datosDatos.getEscuel();
+        Integer ep = datosDatos.getEscuel();
         String sem = semestre.getText().toString();
         if(sem.length()<=0){
             Toast.makeText(getActivity(),"Rellene todos los campos porfavor",Toast.LENGTH_SHORT).show();

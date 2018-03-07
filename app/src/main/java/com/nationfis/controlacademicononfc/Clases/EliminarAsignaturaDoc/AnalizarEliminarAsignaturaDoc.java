@@ -29,7 +29,7 @@ public class AnalizarEliminarAsignaturaDoc extends AsyncTask<Void,Void,Integer> 
     private int adapterPosition;
     private Dialog d;
 
-    AnalizarEliminarAsignaturaDoc(Context c, String s, ArrayList<Estudiantes> estudiantes, int adapterPosition, Dialog d) {
+    AnalizarEliminarAsignaturaDoc(Context c, String s, ArrayList<Estudiantes> estudiantes, Integer adapterPosition, Dialog d) {
         this.c = c;
         this.s = s;
         this.estudiantes = estudiantes;

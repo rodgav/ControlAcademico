@@ -30,6 +30,7 @@ public class RecibirFacultades extends AsyncTask<Void,Void,String> {
     private String urla,matricula1,accion;
     @SuppressLint("StaticFieldLeak")
     private Spinner facultad,escuela,semestre,asignatura;
+    //String accion= MD5.encrypt("facultades");
     public RecibirFacultades(Context c, String urla, Spinner facultad, Spinner escuela, Spinner semestre,Spinner asignatura,String matricula1,String accion) {
         this.c = c;
         this.urla = urla;

@@ -1,10 +1,8 @@
 package com.nationfis.controlacademicononfc.Clases.ActualizarAsistencia;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +12,6 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 /*
  * Created by Sam on 26/04/2017.
@@ -23,11 +20,12 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.T
 public class AnalizarComprobarAsistencia extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String s,asistio;
+    private String s;
+    private Integer asistio;
     @SuppressLint("StaticFieldLeak")
     private TextView asisti;
     private String mensaje;
-    AnalizarComprobarAsistencia(Context c, String s, TextView asisti, String asistio) {
+    AnalizarComprobarAsistencia(Context c, String s, TextView asisti, Integer asistio) {
         this.c=c;
         this.s = s;
         this.asisti = asisti;
@@ -43,9 +41,9 @@ public class AnalizarComprobarAsistencia extends AsyncTask<Void,Void,Integer> {
             if (Objects.equals(mensaje,"Asistencia Actualizada")){
                 String asi = "asistio";
                 String falt = "falto";
-                if (Objects.equals(asistio,"0")){
+                if (Objects.equals(asistio,0)){
                     asisti.setText(falt);
-                }else if (Objects.equals(asistio,"1")){
+                }else if (Objects.equals(asistio,1)){
                     asisti.setText(asi);
                 }
             }

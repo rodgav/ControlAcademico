@@ -14,8 +14,9 @@ import java.util.Iterator;
  */
 
 class EmpaqueLogin {
-    private String usuario,contraseña,TOKEN;
-    EmpaqueLogin(String usuario, String contraseña, String TOKEN) {
+    private String contraseña,TOKEN;
+    private int usuario;
+    EmpaqueLogin(Integer usuario, String contraseña, String TOKEN) {
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.TOKEN = TOKEN;

@@ -45,7 +45,7 @@ public class MostrarAllNotas extends Fragment {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
 
-        String codigo;
+        Integer codigo;
         TableLayout notas;
 
         if (Objects.equals(accion,"mnotad")){
@@ -53,14 +53,14 @@ public class MostrarAllNotas extends Fragment {
             Spinner asignaturas = view.findViewById(R.id.asignaturas);
             notas = view.findViewById(R.id.tabla);
 
-            codigo = preferences.getString("codigo","");
+            codigo = preferences.getInt("codigo",0);
 
             new RecibirASP(getActivity(),urla, codigo,asignaturas, notas).execute();
         }else if (Objects.equals(accion,"mnotae")){
             view = inflater.inflate(R.layout.fragment_mostrar_all_notas_est, container, false);
             notas = view.findViewById(R.id.tabla);
 
-            codigo = preferences.getString("codigo","");
+            codigo = preferences.getInt("codigo",0);
             String anioa = getActivity().getResources().getString(R.string.año);
             Log.w(TAG,accion+anioa+codigo);
             new RecibirNotas(getActivity(),urla, MD5.encrypt(accion),anioa, codigo, notas).execute();

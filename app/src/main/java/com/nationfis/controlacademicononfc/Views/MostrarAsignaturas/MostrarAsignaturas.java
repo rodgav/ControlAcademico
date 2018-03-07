@@ -26,10 +26,11 @@ public class MostrarAsignaturas extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private ProgressDialog pd;
-    private String urla,accion,codigo,anioa;
+    private String urla,accion,anioa;
+    private Integer codigo;
     @SuppressLint("StaticFieldLeak")
     private RecyclerView estudiantes;
-    public MostrarAsignaturas(Context c, String urla, String accion, String codigo, RecyclerView estudiantes,String anioa) {
+    public MostrarAsignaturas(Context c, String urla, String accion, Integer codigo, RecyclerView estudiantes,String anioa) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

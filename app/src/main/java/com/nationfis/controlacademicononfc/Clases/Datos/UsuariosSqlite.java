@@ -20,22 +20,22 @@ public class UsuariosSqlite extends SQLiteOpenHelper {
     public void queryData(String sql){
         databasew.execSQL(sql);
     }
-    public void insertData(String nombre,String codigo,String imagen,String tipo){
+    public void insertData(String nombre,Integer codigo,String imagen,String tipo){
         String sql = "INSERT INTO USERS VALUES (NULL,?,?,?,?)";
         SQLiteStatement statement = databasew.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindString(1,nombre);
-        statement.bindString(2,codigo);
+        statement.bindLong(2,codigo);
         statement.bindString(3,imagen);
         statement.bindString(4,tipo);
         statement.executeInsert();
     }
-    void deleteData(String codigo){
-        String sql ="DELETE FROM USERS WHERE codigo=?";
+    void deleteData(Integer codigo){
+        String sql ="DELETE FROM USERS WHERE codigo = ?";
         SQLiteStatement statement = databasew.compileStatement(sql);
         statement.clearBindings();
-        statement.bindString(1,codigo);
+        statement.bindLong(1,codigo);
         statement.executeUpdateDelete();
     }
     public Cursor getData(String sql){

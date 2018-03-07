@@ -28,7 +28,8 @@ public class AsignaturasFragment extends Fragment {
     }
 
     private RecyclerView estudiantes,estudiantesa;
-    private String codigo,anioa;
+    private String anioa;
+    private Integer codigo;
 
 
     @Override
@@ -40,7 +41,7 @@ public class AsignaturasFragment extends Fragment {
         estudiantesa = view.findViewById(R.id.estudiantesa);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        codigo = preferences.getString("codigo","");
+        codigo = preferences.getInt("codigo",0);
         anioa = getResources().getString(R.string.año);
         estudiantes.setLayoutManager(new LinearLayoutManager(getActivity()));
         estudiantes.setNestedScrollingEnabled(false);

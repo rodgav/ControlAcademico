@@ -33,9 +33,9 @@ public class MatriculaFragment extends Fragment implements View.OnClickListener{
     private TextView año;
     private String matricula1 = "matriculan";
     DatosDatos datosDatos;
-    private String usuario;
-    private String ep;
-    private String sede;
+    private Integer usuario;
+    private Integer ep;
+    private Integer sede;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,11 +51,11 @@ public class MatriculaFragment extends Fragment implements View.OnClickListener{
         //String urla = "http://nationfis.hol.es/nonfc/facultad.php";
         datosDatos = new DatosDatos();
         SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
-        usuario = preferences.getString("codigo","");
-        ep = preferences.getString("ep","");
-        sede = preferences.getString("sede","");
+        usuario = preferences.getInt("codigo",0);
+        ep = preferences.getInt("ep",0);
+        sede = preferences.getInt("sede",0);
         String seden = preferences.getString("seden", "");
-        codigo.setText(usuario);
+        codigo.setText(String.valueOf(usuario));
         sed.setText(seden);
         new RecibirSemestres(getActivity(),urla,ep,semestre,semestre,matricula1,0,0).execute();
         matricula.setOnClickListener(MatriculaFragment.this);
@@ -65,10 +65,10 @@ public class MatriculaFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         String baucher1 = baucher.getText().toString();
-        String semestre = datosDatos.getSemestres();
+        Integer semestre = datosDatos.getSemestres();
         //String urla = "http://nationfis.hol.es/nonfc/matricula.php";
-        String tipom = "1";
-        String activo = "0";
+        Integer tipom = 1;
+        Integer activo = 0;
         String anio = año.getText().toString();
         switch (view.getId()){
             case R.id.matricula:

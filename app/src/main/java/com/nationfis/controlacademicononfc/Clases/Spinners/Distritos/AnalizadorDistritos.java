@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class AnalizadorDistritos extends AsyncTask<Void,Void,Integer>{
     private ArrayList<String> nod = new ArrayList<>();
-    private ArrayList<String>idd = new ArrayList<>();
+    private ArrayList<Integer>idd = new ArrayList<>();
     @SuppressLint("StaticFieldLeak")
     private Context c;
     private String s;
@@ -52,7 +52,7 @@ public class AnalizadorDistritos extends AsyncTask<Void,Void,Integer>{
             distrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
-                    Toast.makeText(c,nod.get(i),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(c,nod.get(i),Toast.LENGTH_SHORT).show();
                     DatosDatos datosDatos = new DatosDatos();
                     datosDatos.setDistrito(idd.get(i));
 
@@ -73,7 +73,7 @@ public class AnalizadorDistritos extends AsyncTask<Void,Void,Integer>{
             idd.clear();
             for (int i=0;i<ja.length();i++){
                 jo = ja.getJSONObject(i);
-                String id = jo.getString("codigo");
+                Integer id = jo.getInt("codigo");
                 String nombre = jo.getString("nombre");
 
                 nod.add(nombre);

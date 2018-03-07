@@ -26,11 +26,12 @@ import java.net.HttpURLConnection;
 public class ActualizarAsignaturaDoc extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String urla,accion,codigo,anioa,sede,codigoa,nombrea,codigoaant;
+    private String urla,accion,anioa,nombrea;
     private Dialog d;
     @SuppressLint("StaticFieldLeak")
     private TextView asignatura;
-    public ActualizarAsignaturaDoc(Context c, String urla, String accion, String codigo, String anioa, String sede, String codigoa, Dialog d, TextView asignatura, String nombrea, String codigoaant) {
+    private Integer codigo,sede,codigoa,codigoaant;
+    public ActualizarAsignaturaDoc(Context c, String urla, String accion, Integer codigo, String anioa, Integer sede, Integer codigoa, Dialog d, TextView asignatura, String nombrea, Integer codigoaant) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;

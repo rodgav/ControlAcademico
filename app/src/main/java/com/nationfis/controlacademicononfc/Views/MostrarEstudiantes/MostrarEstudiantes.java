@@ -23,14 +23,15 @@ import java.net.HttpURLConnection;
  */
 
 public class MostrarEstudiantes extends AsyncTask<Void,Void,String> {
-    private String urla,accion,s1,ep,anioa,sede;
+    private String urla,accion,s1,anioa;
+    private Integer ep,sede;
     @SuppressLint("StaticFieldLeak")
     private Context c;
     @SuppressLint("StaticFieldLeak")
     private RecyclerView estudiantes;
     @SuppressLint("StaticFieldLeak")
     private SwipeRefreshLayout swipeRefreshLayout;
-    public MostrarEstudiantes(Context c, String urla, String accion, String s1, RecyclerView estudiantes, String ep, String anioa, String sede, SwipeRefreshLayout swipeRefreshLayout) {
+    public MostrarEstudiantes(Context c, String urla, String accion, String s1, RecyclerView estudiantes, Integer ep, String anioa, Integer sede, SwipeRefreshLayout swipeRefreshLayout) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
