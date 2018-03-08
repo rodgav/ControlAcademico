@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -56,7 +57,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
@@ -94,23 +95,25 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         String accion0 = MD5.encrypt("sede");
         new RecibirSede(getActivity(), urla, accion0, sedes).execute();
 
+        if (getActivity()!=null){
+            ArrayAdapter<String> adaptador = new ArrayAdapter<>(getActivity(),
+                    android.R.layout.simple_list_item_1, tdocumentos);
+            spdocumento.setAdapter(adaptador);
+            spdocumento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    //String nombrei = (String) (adapterView).getSelectedItem();
 
-        ArrayAdapter<String> adaptador = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, tdocumentos);
-        spdocumento.setAdapter(adaptador);
-        spdocumento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String nombrei = (String) (adapterView).getSelectedItem();
+                    tdocumento1 = i + 1;
+                    //Toast.makeText(getActivity(), nombrei, Toast.LENGTH_SHORT).show();
+                }
 
-                tdocumento1 = i + 1;
-                Toast.makeText(getActivity(), nombrei, Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+                }
+            });
+        }
 
         registrar.setOnClickListener(RegisterFragment.this);
         fecha.setOnClickListener(RegisterFragment.this);
@@ -122,6 +125,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     private void date() {
+        if (getActivity()!=null)
         new DatePickerDialog(getActivity(), d, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
@@ -163,6 +167,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private void sacarfoto() {
         Intent tomarfoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //noinspection ConstantConditions
         if (tomarfoto.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(tomarfoto, REQUEST_IMAGE_CAPTURE);
         }
