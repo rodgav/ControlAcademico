@@ -67,7 +67,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
         telefono = view.findViewById(R.id.telefono);
         correo = view.findViewById(R.id.correo);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo.setText(String.valueOf(preferences.getInt("codigo",0)));
         apellidop.setText(preferences.getString("apellidop",""));
         apellidom.setText(preferences.getString("apellidom",""));

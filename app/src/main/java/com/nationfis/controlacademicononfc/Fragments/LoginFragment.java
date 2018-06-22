@@ -2,6 +2,7 @@ package com.nationfis.controlacademicononfc.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -33,7 +34,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         // Required empty public constructor
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_login, container, false);
@@ -52,6 +53,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()){
             case R.id.button2:
                 FragmentManager fragmentManager = getFragmentManager();
+                assert fragmentManager != null;
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment fragment = new RegisterFragment();
                 fragmentTransaction.replace(R.id.contenedor,fragment);

@@ -4,6 +4,7 @@ package com.nationfis.controlacademicononfc.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,8 @@ import android.widget.SearchView;
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Views.MostrarEstudiantes.MostrarEstudiantes;
 import com.nationfis.controlacademicononfc.R;
+
+import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
@@ -34,7 +37,7 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
     private String accion,anioa;
     private Integer ep,sede;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activar_estudiantes, container, false);
@@ -48,7 +51,7 @@ public class ActivarEstudiantes extends Fragment implements SearchView.OnQueryTe
         anioa = getResources().getString(R.string.año);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         ep = preferences.getInt("ep",0);
         sede = preferences.getInt("sede",0);
 
