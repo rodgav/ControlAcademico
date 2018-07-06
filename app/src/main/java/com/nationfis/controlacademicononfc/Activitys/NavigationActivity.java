@@ -49,8 +49,8 @@ import com.nationfis.controlacademicononfc.Fragments.RegistrarSemestreFragment;
 import com.nationfis.controlacademicononfc.R;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
-    public static final String urla = "https://controlacademicofis.xyz/controlacademico/entrada.php";
-    //public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
+    //public static final String urla = "https://controlacademicofis.xyz/controlacademico/entrada.php";
+    public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
     public static final String TAG = "TAG: ";
     public static final String NOTIFICACION = "NOTIFICACION";
     private BroadcastReceiver broadcastReceiver;

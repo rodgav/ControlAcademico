@@ -28,12 +28,12 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
     private Context c;
     private ProgressDialog pd;
     private int usuario;
-    private String contraseña,urla,TOKEN;
+    private String contrasena,urla,TOKEN;
     public ComprobarLogin(Context c, String urla, Integer usuario, String password, String TOKEN) {
         this.c = c;
         this.urla = urla;
         this.usuario = usuario;
-        this.contraseña = password;
+        this.contrasena = password;
         this.TOKEN = TOKEN;
     }
 
@@ -74,7 +74,7 @@ public class ComprobarLogin extends AsyncTask<Void,Void,String> {
         try {
             OutputStream os = con.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-            bw.write(new EmpaqueLogin(usuario,contraseña,TOKEN).packageData());
+            bw.write(new EmpaqueLogin(usuario,contrasena,TOKEN).packageData());
 
             bw.flush();
             bw.close();

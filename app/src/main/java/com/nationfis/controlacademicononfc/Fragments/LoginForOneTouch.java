@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Fragments;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.nationfis.controlacademicononfc.Clases.Datos.UsuariosUsuarios;
 import com.nationfis.controlacademicononfc.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +31,7 @@ public class LoginForOneTouch extends Fragment implements View.OnClickListener{
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login_for_one_touch, container, false);
@@ -77,7 +79,7 @@ public class LoginForOneTouch extends Fragment implements View.OnClickListener{
                 break;
         }
         if(fragmentTransaction){
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment).commit();
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment).commit();
         }
     }
 }

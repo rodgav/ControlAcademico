@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.Gravity;
@@ -48,14 +49,15 @@ public class CustomAdapterUsuario extends RecyclerView.Adapter<CuerpoUsuarios> {
     }
 
 
+    @NonNull
     @Override
-    public CuerpoUsuarios onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CuerpoUsuarios onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.usuarios,parent,false);
         return new CuerpoUsuarios(view);
     }
 
     @Override
-    public void onBindViewHolder(CuerpoUsuarios holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull CuerpoUsuarios holder, @SuppressLint("RecyclerView") final int position) {
 
         UsuariosUsuarios usuariosUsuarios = usuarioslist.get(position);
         holder.tipo.setText(usuariosUsuarios.getTipo());
@@ -97,11 +99,13 @@ public class CustomAdapterUsuario extends RecyclerView.Adapter<CuerpoUsuarios> {
                                     try{
                                         JSONObject jo = new JSONObject(TOKEN);
                                         String nuevotoken = jo.getString("token");
+                                        Toast.makeText(c,nuevotoken,Toast.LENGTH_SHORT).show();
                                         new ComprobarLogin(c,urla,codigo,password1,nuevotoken).execute();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }else {
+                                    Toast.makeText(c,TOKEN,Toast.LENGTH_SHORT).show();
                                     new ComprobarLogin(c,urla,codigo,password1,TOKEN).execute();
                                 }
                                 d.dismiss();

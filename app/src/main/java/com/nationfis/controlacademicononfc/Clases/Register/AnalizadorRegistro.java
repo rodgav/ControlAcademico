@@ -14,7 +14,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
 /*

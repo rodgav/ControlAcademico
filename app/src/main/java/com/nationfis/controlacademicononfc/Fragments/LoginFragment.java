@@ -66,6 +66,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 }else {
                     Integer usuario = Integer.valueOf(user.getText().toString().trim());
                     String password = MD5.encrypt(pass.getText().toString().trim());
+                    Toast.makeText(getActivity(),TOKEN,Toast.LENGTH_SHORT).show();
                     comprobarlogin(usuario,password,TOKEN);
                 }
                 break;

@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,12 +54,14 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
 
     }
 
+    @NonNull
     @Override
-    public CuerpoAsistencia onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CuerpoAsistencia onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_estudiantes_pasar_asistencia, parent, false);
         return new ItemSwipeWithActionWidthViewHolder(view);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(final CuerpoAsistencia holder, @SuppressLint("RecyclerView") final int position) {
         holder.bind(asistenciaCAS.get(position));
@@ -72,6 +76,23 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
 
         if (Objects.equals(tipo, "pasar")) {
 
+            holder.act.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch(event.getAction())
+                    {
+                        case MotionEvent.ACTION_DOWN :
+                            //holder.act.setImageResource(c.getResources().getColor(R.color.inactivo));
+                            holder.act.setBackgroundColor(c.getResources().getColor(R.color.inactivo));
+                            break;
+                        case MotionEvent.ACTION_UP :
+                            holder.act.setBackgroundColor(c.getResources().getColor(R.color.azul));
+
+                            break;
+                    }
+                    return true;
+                }
+            });
             ItemSwipeWithActionWidthViewHolder viewHolder = (ItemSwipeWithActionWidthViewHolder) holder;
 
             viewHolder.mActionViewRefresh.setOnClickListener(
@@ -114,13 +135,14 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
     }
 
     class CuerpoAsistencia extends RecyclerView.ViewHolder {
-        ImageView foto;
+        ImageView foto,act;
         TextView nombre, codigo, asistio;
         View accion, view;
 
         CuerpoAsistencia(View itemView) {
             super(itemView);
             foto = itemView.findViewById(R.id.foto);
+            act = itemView.findViewById(R.id.act);
             nombre = itemView.findViewById(R.id.nombre);
             codigo = itemView.findViewById(R.id.codigo);
             asistio = itemView.findViewById(R.id.asistio);

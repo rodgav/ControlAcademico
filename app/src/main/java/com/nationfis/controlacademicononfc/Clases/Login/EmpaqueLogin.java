@@ -14,11 +14,11 @@ import java.util.Iterator;
  */
 
 class EmpaqueLogin {
-    private String contraseña,TOKEN;
+    private String contrasena,TOKEN;
     private int usuario;
-    EmpaqueLogin(Integer usuario, String contraseña, String TOKEN) {
+    EmpaqueLogin(Integer usuario, String contrasena, String TOKEN) {
         this.usuario = usuario;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.TOKEN = TOKEN;
     }
 
@@ -29,7 +29,7 @@ class EmpaqueLogin {
         try{
             jo.put("accion",accion);
             jo.put("username",usuario);
-            jo.put("password",contraseña);
+            jo.put("password",contrasena);
             jo.put("token",TOKEN);
             Boolean primervalor = true;
             Iterator it = jo.keys();

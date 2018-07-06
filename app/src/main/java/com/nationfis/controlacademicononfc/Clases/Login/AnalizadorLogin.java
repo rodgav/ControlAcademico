@@ -77,7 +77,7 @@ class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
                 Toast.makeText(c, "Inicio como " + tipo, Toast.LENGTH_SHORT).show();
                 c.startActivity(intent);
                 ((Activity)(c)).finish();
-            }else if (Objects.equals(activo,0)){
+            }else if (Objects.equals(activo,0)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(c);
                 builder.setTitle("NECESITA ACTIVAR")
                         .setMessage("Complete su registro activando su cuenta," +
@@ -86,7 +86,7 @@ class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        Intent intent = new Intent(c,LoginActvity.class);
+                                        Intent intent = new Intent(c, LoginActvity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         c.startActivity(intent);
                                     }
@@ -94,14 +94,13 @@ class AnalizadorLogin extends AsyncTask<Void,Void,Integer> {
                         .setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(c,LoginActvity.class);
+                                Intent intent = new Intent(c, LoginActvity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 c.startActivity(intent);
                             }
                         });
                 builder.show();
-            }
-            else{
+            }else{
                 Toast.makeText(c,"Usuario o contraseña incorrectos",Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = c.getSharedPreferences("datos", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();

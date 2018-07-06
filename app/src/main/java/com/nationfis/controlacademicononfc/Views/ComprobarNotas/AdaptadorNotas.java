@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.Gravity;
@@ -48,14 +49,15 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
         this.preferences = c.getSharedPreferences("datos", Context.MODE_PRIVATE);
     }
 
+    @NonNull
     @Override
-    public CuerpoNotas onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CuerpoNotas onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_notas_docentes, parent, false);
         return new CuerpoNotas(view);
     }
 
     @Override
-    public void onBindViewHolder(final CuerpoNotas holder, final int position) {
+    public void onBindViewHolder(@NonNull final CuerpoNotas holder, final int position) {
         final NotasCN notas = notaCNs.get(position);
         holder.nombre.setText(notas.getNombre());
         holder.codigo.setText(String.valueOf(notas.getCodigo()));
