@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +27,14 @@ public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private TextView activado;
     private Integer activoid;
-    AnalizarActualizarActivo(Context c, String s, TextView activado, Integer activoid) {
+    @SuppressLint("StaticFieldLeak")
+    private ImageView act;
+    AnalizarActualizarActivo(Context c, String s, TextView activado, Integer activoid, ImageView act) {
         this.c = c;
         this.s = s;
         this.activado = activado;
         this.activoid = activoid;
+        this.act = act;
     }
 
     @Override
@@ -49,9 +53,11 @@ public class AnalizarActualizarActivo extends AsyncTask<Void,Void,Integer> {
                 if (Objects.equals(activoid,0)){
                     activado.setText(falt);
                     activado.setTextColor(ContextCompat.getColor(c,R.color.inactivo));
+                    act.setImageResource(R.mipmap.error);
                 }else if (Objects.equals(activoid,1)){
                     activado.setText(asi);
                     activado.setTextColor(ContextCompat.getColor(c, R.color.activo));
+                    act.setImageResource(R.mipmap.check);
                 }
             }
             Toast.makeText(c,mensaje,Toast.LENGTH_SHORT).show();

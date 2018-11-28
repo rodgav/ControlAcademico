@@ -6,9 +6,8 @@ import android.os.AsyncTask;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
+import android.util.Log;
 
-import com.loopeer.itemtouchhelperextension.ItemTouchHelperExtension;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +15,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 /*
  * Created by Sam on 25/04/2017.
@@ -43,6 +44,7 @@ public class AnalizadorComprobarAsistencia extends AsyncTask<Void,Void,Integer> 
     }
 
     private Integer analizar() {
+        Log.w(TAG,s);
         if (Objects.equals(a,1)){
             try {
                 JSONObject jo;
@@ -100,25 +102,25 @@ public class AnalizadorComprobarAsistencia extends AsyncTask<Void,Void,Integer> 
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-        if (integer==0){
-            Toast.makeText(c,"No se cargo la asistencia",Toast.LENGTH_SHORT).show();
-        }else {
+        if (integer!=0){
             if (Objects.equals(tipo,"pasar")){
                 AdaptadorAsistencia adaptadorAsistencia = new AdaptadorAsistencia(c,asistenciaCAs,tipo,a);
                 estudiantes.setLayoutManager(new LinearLayoutManager(c));
                 estudiantes.setAdapter(adaptadorAsistencia);
                 estudiantes.addItemDecoration(new DividerItemDecoration(c,DividerItemDecoration.VERTICAL));
 
-                ItemTouchHelperExtension.Callback mCallback = new ItemTouchHelperCallbackAsistencia();
-                ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
-                mItemTouchHelper.attachToRecyclerView(estudiantes);
-                adaptadorAsistencia.setItemTouchHelperExtension(mItemTouchHelper);
+                //ItemTouchHelperExtension.Callback mCallback = new ItemTouchHelperCallbackAsistencia();
+                //ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
+                //mItemTouchHelper.attachToRecyclerView(estudiantes);
+                //adaptadorAsistencia.setItemTouchHelperExtension(mItemTouchHelper);
             }else {
                 AdaptadorAsistencia adaptadorAsistencia = new AdaptadorAsistencia(c,asistenciaCAs,tipo,a);
                 estudiantes.setLayoutManager(new LinearLayoutManager(c));
                 estudiantes.addItemDecoration(new DividerItemDecoration(c,DividerItemDecoration.VERTICAL));
                 estudiantes.setAdapter(adaptadorAsistencia);
             }
-        }
+        }/*else {
+            Toast.makeText(c,"No se cargo la asistencia",Toast.LENGTH_SHORT).show();
+        }*/
     }
 }

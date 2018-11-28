@@ -4,6 +4,7 @@ package com.nationfis.controlacademicononfc.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Views.MostrarAsignaturas.MostrarAsignaturas;
 import com.nationfis.controlacademicononfc.R;
+
+import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
@@ -33,14 +36,14 @@ public class AsignaturasFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_asignaturas, container, false);
         estudiantes = view.findViewById(R.id.estudiantes);
         estudiantesa = view.findViewById(R.id.estudiantesa);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo = preferences.getInt("codigo",0);
         anioa = getResources().getString(R.string.año);
         estudiantes.setLayoutManager(new LinearLayoutManager(getActivity()));

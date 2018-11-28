@@ -70,7 +70,7 @@ public class AdaptadorAsignaturas0 extends BaseAdapter{
         foto.setImageBitmap(bitmap);
         String asi = "activado";
         String falt = "inactivo";
-        if (Objects.equals(asignatura1.getActivo(),"1")){
+        if (Objects.equals(asignatura1.getActivo(),1)){
             activo.setText(asi);
             activo.setTextColor(ContextCompat.getColor(c,R.color.activo));
         }else {

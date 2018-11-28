@@ -20,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +28,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Clases.EliminarToken.EliminarToken;
 import com.nationfis.controlacademicononfc.Fragments.ActivarEstudiantes;
@@ -50,11 +53,13 @@ import com.nationfis.controlacademicononfc.R;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     //public static final String urla = "https://controlacademicofis.xyz/controlacademico/entrada.php";
-    public static final String urla = "http://192.168.1.38/controlacademico/entrada.php";
+    //public static final String urla = "http://192.168.1.75/controlacademico/entrada.php";
+    public static final String urla = "http://hclpcompuserver.com/controlacademico/entrada.php";
     public static final String TAG = "TAG: ";
     public static final String NOTIFICACION = "NOTIFICACION";
     private BroadcastReceiver broadcastReceiver;
     private SharedPreferences preferences;
+    String TOKEN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,13 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( NavigationActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                TOKEN = instanceIdResult.getToken();
+                Log.e("Token", TOKEN);
+            }
+        });
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -320,9 +332,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 break;
             case R.id.cerrar:
                 Integer codigo = preferences.getInt("codigo",0);
-                String TOKEN = FirebaseInstanceId.getInstance().getToken();
+                //String TOKEN = FirebaseInstanceId.getInstance().getToken();
                 String accion = MD5.encrypt("eliminartoken");
-                new EliminarToken(this,urla,accion,codigo,TOKEN).execute();
+                new EliminarToken(this,urla,accion,codigo, TOKEN).execute();
                 break;
         }
         if(fragmentTransaction){
@@ -334,7 +346,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     @Override
     protected void onResume() {
         super.onResume();

@@ -3,8 +3,11 @@ package com.nationfis.controlacademicononfc.Clases.ActualizarAsistencia;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nationfis.controlacademicononfc.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,11 +28,14 @@ public class AnalizarComprobarAsistencia extends AsyncTask<Void,Void,Integer> {
     @SuppressLint("StaticFieldLeak")
     private TextView asisti;
     private String mensaje;
-    AnalizarComprobarAsistencia(Context c, String s, TextView asisti, Integer asistio) {
+    @SuppressLint("StaticFieldLeak")
+    private ImageView act;
+    AnalizarComprobarAsistencia(Context c, String s, TextView asisti, Integer asistio, ImageView act) {
         this.c=c;
         this.s = s;
         this.asisti = asisti;
         this.asistio = asistio;
+        this.act = act;
     }
 
     @Override
@@ -43,8 +49,10 @@ public class AnalizarComprobarAsistencia extends AsyncTask<Void,Void,Integer> {
                 String falt = "falto";
                 if (Objects.equals(asistio,0)){
                     asisti.setText(falt);
+                    act.setImageResource(R.mipmap.error);
                 }else if (Objects.equals(asistio,1)){
                     asisti.setText(asi);
+                    act.setImageResource(R.mipmap.check);
                 }
             }
             Toast.makeText(c,mensaje,Toast.LENGTH_SHORT).show();

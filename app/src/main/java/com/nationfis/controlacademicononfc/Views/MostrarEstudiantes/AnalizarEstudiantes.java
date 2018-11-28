@@ -7,9 +7,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.loopeer.itemtouchhelperextension.ItemTouchHelperExtension;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +17,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
 
 
 /*
@@ -46,6 +48,7 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
     }
 
     private Integer analizar() {
+        //Log.w(TAG,s);
         if (//estudiantes--docentes
                 Objects.equals(accion,"0b97504fc4747fa8098d4899d1d08347") || Objects.equals(accion,"c6dfb15cab81b9a83ade09529ff082db")){
             try {
@@ -186,6 +189,7 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
             }
         }else if (//horariodoc
                 Objects.equals(accion,"6843023606e501b553a9be96e911df40")){
+            Log.w(TAG,s);
             try {
                 Estudiantes estudiantes;
                 JSONObject jo;
@@ -241,12 +245,7 @@ public class AnalizarEstudiantes extends AsyncTask<Void,Void,Integer>{
             estudiantes.setAdapter(a);
             estudiantes.addItemDecoration(new DividerItemDecoration(c,DividerItemDecoration.VERTICAL));
 
-            ItemTouchHelperExtension.Callback mCallback = new ItemTouchHelperCallbackVarios();
-
-            ItemTouchHelperExtension mItemTouchHelper = new ItemTouchHelperExtension(mCallback);
-            mItemTouchHelper.attachToRecyclerView(estudiantes);
-
-            a.setItemTouchHelperExtension(mItemTouchHelper);
+            a.setItemTouchHelperExtension();
         }
     }
 }

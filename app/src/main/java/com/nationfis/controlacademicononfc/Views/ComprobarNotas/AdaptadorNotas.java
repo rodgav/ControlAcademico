@@ -61,7 +61,7 @@ public class AdaptadorNotas extends RecyclerView.Adapter<CuerpoNotas> {
         final NotasCN notas = notaCNs.get(position);
         holder.nombre.setText(notas.getNombre());
         holder.codigo.setText(String.valueOf(notas.getCodigo()));
-        holder.nota.setText(String.valueOf(notas.getNota()));
+        holder.nota.setText(notas.getNota());
         String imagen = notas.getFoto();
         byte[] byteImage = Base64.decode(imagen, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length);

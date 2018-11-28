@@ -9,15 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopeer.itemtouchhelperextension.Extension;
-import com.loopeer.itemtouchhelperextension.ItemTouchHelperExtension;
 import com.nationfis.controlacademicononfc.Clases.ActualizarAsistencia.ActualizarAsistencia;
 import com.nationfis.controlacademicononfc.Clases.DatosDatos;
 import com.nationfis.controlacademicononfc.R;
@@ -38,11 +35,7 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
     private Integer a;
     private SharedPreferences preferences;
     private DatosDatos datosDatos;
-    private ItemTouchHelperExtension mItemTouchHelperExtension;
 
-    void setItemTouchHelperExtension(ItemTouchHelperExtension itemTouchHelperExtension) {
-        mItemTouchHelperExtension = itemTouchHelperExtension;
-    }
 
     AdaptadorAsistencia(Context c, ArrayList<AsistenciaCA> asistenciaCAs, String tipo, Integer a) {
         this.c = c;
@@ -58,12 +51,12 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
     @Override
     public CuerpoAsistencia onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_estudiantes_pasar_asistencia, parent, false);
-        return new ItemSwipeWithActionWidthViewHolder(view);
+        return new CuerpoAsistencia(view);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(final CuerpoAsistencia holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final CuerpoAsistencia holder, @SuppressLint("RecyclerView") final int position) {
         holder.bind(asistenciaCAS.get(position));
 
         holder.view.setOnClickListener(new View.OnClickListener() {
@@ -76,56 +69,22 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
 
         if (Objects.equals(tipo, "pasar")) {
 
-            holder.act.setOnTouchListener(new View.OnTouchListener() {
+            holder.act.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch(event.getAction())
-                    {
-                        case MotionEvent.ACTION_DOWN :
-                            //holder.act.setImageResource(c.getResources().getColor(R.color.inactivo));
-                            holder.act.setBackgroundColor(c.getResources().getColor(R.color.inactivo));
-                            break;
-                        case MotionEvent.ACTION_UP :
-                            holder.act.setBackgroundColor(c.getResources().getColor(R.color.azul));
-
-                            break;
+                public void onClick(View v) {
+                    if (Objects.equals(holder.asistio.getText().toString(), "asistio")){
+                        Integer codigodoc = preferences.getInt("codigo", 0);
+                        Integer codigoasig = datosDatos.getAsignaturasd();
+                        Integer codigoest = asistenciaCAS.get(position).getCodigo();
+                        new ActualizarAsistencia(c, urla, 0, codigodoc, codigoasig, codigoest, holder.asistio,holder.act).execute();
+                    }else if (Objects.equals(holder.asistio.getText().toString(), "falto")){
+                        Integer codigodoc = preferences.getInt("codigo", 0);
+                        Integer codigoasig = datosDatos.getAsignaturasd();
+                        Integer codigoest = asistenciaCAS.get(position).getCodigo();
+                        new ActualizarAsistencia(c, urla, 1, codigodoc, codigoasig, codigoest, holder.asistio,holder.act).execute();
                     }
-                    return true;
                 }
             });
-            ItemSwipeWithActionWidthViewHolder viewHolder = (ItemSwipeWithActionWidthViewHolder) holder;
-
-            viewHolder.mActionViewRefresh.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (Objects.equals(holder.asistio.getText().toString(), "asistio")) {
-                                Toast.makeText(c, "La asistencia es asistio", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Integer codigodoc = preferences.getInt("codigo", 0);
-                                Integer codigoasig = datosDatos.getAsignaturasd();
-                                Integer codigoest = asistenciaCAS.get(position).getCodigo();
-                                new ActualizarAsistencia(c, urla, 1, codigodoc, codigoasig, codigoest, holder.asistio).execute();
-                            }
-                        }
-                    }
-            );
-            viewHolder.mActionViewDelete.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (Objects.equals(holder.asistio.getText().toString(), "falto")) {
-                                Toast.makeText(c, "La asistencia es falto", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Integer codigodoc = preferences.getInt("codigo", 0);
-                                Integer codigoasig = datosDatos.getAsignaturasd();
-                                Integer codigoest = asistenciaCAS.get(position).getCodigo();
-                                new ActualizarAsistencia(c, urla, 0, codigodoc, codigoasig, codigoest, holder.asistio).execute();
-                            }
-                        }
-                    }
-
-            );
         }
     }
 
@@ -165,36 +124,12 @@ public class AdaptadorAsistencia extends RecyclerView.Adapter<AdaptadorAsistenci
             String falt = "falto";
             if (Objects.equals(asistenciaCA.getAsistio(), 1)) {
                 asistio.setText(asi);
+                act.setImageResource(R.mipmap.check);
             } else {
                 asistio.setText(falt);
+                act.setImageResource(R.mipmap.error);
             }
-            /*itemView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                        mItemTouchHelperExtension.startDrag(CuerpoAsistencia.this);
-                    }
-                    return true;
-                }
-            });*/
+
         }
     }
-
-    class ItemSwipeWithActionWidthViewHolder extends CuerpoAsistencia implements Extension {
-
-        View mActionViewDelete;
-        View mActionViewRefresh;
-
-        ItemSwipeWithActionWidthViewHolder(View itemView) {
-            super(itemView);
-            mActionViewDelete = itemView.findViewById(R.id.delete);
-            mActionViewRefresh = itemView.findViewById(R.id.update);
-        }
-
-        @Override
-        public float getActionWidth() {
-            return accion.getWidth();
-        }
-    }
-
 }

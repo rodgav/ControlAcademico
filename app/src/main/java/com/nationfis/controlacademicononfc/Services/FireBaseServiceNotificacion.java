@@ -24,6 +24,11 @@ import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.N
 
 public class FireBaseServiceNotificacion extends FirebaseMessagingService {
     @Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+    }
+
+    @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         String titulo = remoteMessage.getData().get("titulo");

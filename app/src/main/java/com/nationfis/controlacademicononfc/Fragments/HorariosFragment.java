@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class HorariosFragment extends Fragment implements View.OnClickListener {
 
     @SuppressLint("RtlHardcoded")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
@@ -50,7 +51,7 @@ public class HorariosFragment extends Fragment implements View.OnClickListener {
             accion = getArguments().getString("accion", "");
         }
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         Integer ep = preferences.getInt("ep", 0);
         sede = preferences.getInt("sede", 0);
         id = preferences.getInt("codigo", 0);

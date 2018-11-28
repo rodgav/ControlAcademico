@@ -24,6 +24,7 @@ import com.nationfis.controlacademicononfc.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
@@ -57,7 +58,7 @@ public class ComprobarAsistenciaFragment extends Fragment implements View.OnClic
         Calendar ca = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         fecha = df.format(ca.getTime());
-        preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo = preferences.getInt("codigo", 0);
 
         new RecibirAsignaturasDocentes(getActivity(), urla, codigo, asignaturas).execute();

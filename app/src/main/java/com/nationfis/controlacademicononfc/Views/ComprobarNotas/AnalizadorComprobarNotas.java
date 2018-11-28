@@ -60,7 +60,7 @@ public class AnalizadorComprobarNotas extends AsyncTask<Void, Void, Integer> {
                 String nombre = jo.getString("nombre");
                 Integer codigo = jo.getInt("codigo");
                 String foto = jo.getString("foto");
-                Integer nota = jo.getInt("nota");
+                String nota = jo.getString("nota");
 
                 notasCN = new NotasCN();
                 notasCN.setNombre(nombre);

@@ -4,6 +4,7 @@ package com.nationfis.controlacademicononfc.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,8 @@ import android.widget.Switch;
 import com.kosalgeek.android.md5simply.MD5;
 import com.nationfis.controlacademicononfc.Views.MostrarEstudiantes.MostrarEstudiantes;
 import com.nationfis.controlacademicononfc.R;
+
+import java.util.Objects;
 
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
@@ -35,7 +38,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
     private String anioa;
     private SwipeRefreshLayout swipeRefreshLayout;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_activar_matricula, container, false);
@@ -47,7 +50,7 @@ public class ActivarMatriculaFragment extends Fragment implements SearchView.OnQ
         anioa = getResources().getString(R.string.año);
 
         searchView.setOnQueryTextListener(ActivarMatriculaFragment.this);
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         ep = preferences.getInt("ep",0);
         sede = preferences.getInt("sede",0);
 

@@ -3,6 +3,7 @@ package com.nationfis.controlacademicononfc.Views.MostrarAsignaturas;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -29,14 +30,15 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<CuerpoAsiganturas
         this.asignatura = asignatura;
     }
 
+    @NonNull
     @Override
-    public CuerpoAsiganturas onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CuerpoAsiganturas onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_asignaturas,parent,false);
         return new CuerpoAsiganturas(view);
     }
 
     @Override
-    public void onBindViewHolder(CuerpoAsiganturas holder, int position) {
+    public void onBindViewHolder(@NonNull CuerpoAsiganturas holder, int position) {
         AsignaturasA asignatura1 = asignatura.get(position);
         holder.nombre.setText(asignatura1.getNombre());
         holder.codigo.setText(String.valueOf(asignatura1.getCodigo()));

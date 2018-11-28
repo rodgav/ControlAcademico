@@ -46,9 +46,8 @@ public class AnalizarHorarios extends AsyncTask<Void, Void, Integer> {
             JSONObject jo;
             JSONArray ja = new JSONArray(s);
 
-            ArrayList<String> horariosc = new ArrayList<>();
             String array[] = {"HORA","LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO","DOMINGO"};
-            horariosc.addAll(Arrays.asList(array));
+            ArrayList<String> horariosc = new ArrayList<>(Arrays.asList(array));
             new Tabla(c,horario, horariosc,"cabecera").execute();
 
             for (int i = 0; i < ja.length(); i++) {

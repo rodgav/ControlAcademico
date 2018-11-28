@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
     private TextView asisti;
     private String urla;
     private Integer asistio,codigodoc,codigoasig,codigoest;
-    public ActualizarAsistencia(Context c, String urla, Integer asistio, Integer codigodoc, Integer codigoasig, Integer codigoest, TextView asisti) {
+    @SuppressLint("StaticFieldLeak")
+    private ImageView act;
+    public ActualizarAsistencia(Context c, String urla, Integer asistio, Integer codigodoc, Integer codigoasig, Integer codigoest, TextView asisti, ImageView act) {
         this.c = c;
         this.urla = urla;
         this.asistio = asistio;
@@ -38,6 +41,7 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
         this.codigoasig = codigoasig;
         this.codigoest = codigoest;
         this.asisti = asisti;
+        this.act = act;
     }
 
     @Override
@@ -62,7 +66,7 @@ public class ActualizarAsistencia extends AsyncTask<Void,Void,String> {
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            new AnalizarComprobarAsistencia(c,s,asisti,asistio).execute();
+            new AnalizarComprobarAsistencia(c,s,asisti,asistio,act).execute();
         }
     }
 

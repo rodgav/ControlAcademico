@@ -13,21 +13,32 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.nationfis.controlacademicononfc.Clases.Datos.UsuariosSqlite;
 import com.nationfis.controlacademicononfc.Fragments.LoginForOneTouch;
 import com.nationfis.controlacademicononfc.Fragments.LoginFragment;
 import com.nationfis.controlacademicononfc.R;
 
+
 public class LoginActvity extends AppCompatActivity {
     final static int permsRequestCode = 0;
-
+    private InterstitialAd interstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_actvity);
 
-        FirebaseInstanceId.getInstance().getToken();
+        MobileAds.initialize(this, getResources().getString(R.string.interstitial_app_id));
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getResources().getString(R.string.interstitial_ad_unit_id));
+        /*MobileAds.initialize(this, "ca-app-pub-4761500786576152~8215465788");
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");*/
+        AdRequest request = new AdRequest.Builder().build();
+        interstitialAd.loadAd(request);
 
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         //preferences.edit().remove("datos").apply();
@@ -43,7 +54,6 @@ public class LoginActvity extends AppCompatActivity {
         Cursor cursor = usuariosSqlite.getData("SELECT * FROM USERS");
 
         SolicitarPermisos();
-
         if (savedInstanceState == null) {
             if (tipo.length() > 0 || nombre.length() > 0 || codigo != 0 || image.length() > 0 || tipos.length() > 0) {
                 Intent intent = new Intent(this, NavigationActivity.class);
@@ -66,7 +76,16 @@ public class LoginActvity extends AppCompatActivity {
                 usuariosSqlite.close();
             }
         }
+        interstitialAd.setAdListener(new AdListener(){
+            public void onAdLoaded(){
+                if (interstitialAd.isLoaded()) {
+                    //interstitialAd.show();
+                }
+            }
+        });
     }
+
+
 
     private void SolicitarPermisos() {
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {

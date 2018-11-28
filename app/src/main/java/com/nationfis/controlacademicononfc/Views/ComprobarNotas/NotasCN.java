@@ -5,12 +5,12 @@ package com.nationfis.controlacademicononfc.Views.ComprobarNotas;
  */
 
 public class NotasCN {
-    private String nombre,foto;
-    private Integer nota,codigo;
-    public void setNota(Integer nota) {
+    private String nombre,foto,nota;
+    private Integer codigo;
+
+    public void setNota(String nota) {
         this.nota = nota;
     }
-
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
@@ -23,11 +23,9 @@ public class NotasCN {
         this.foto = foto;
     }
 
-
-    public Integer getNota() {
+    public String getNota() {
         return nota;
     }
-
     public Integer getCodigo() {
         return codigo;
     }

@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import com.nationfis.controlacademicononfc.R;
 import com.nationfis.controlacademicononfc.Views.MostrarMatriculados.SpinnerAsignaturas.RecibirASP1;
 
+import java.util.Objects;
+
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
 /**
@@ -39,7 +41,7 @@ public class MostrarMatriculadosAsignaturaFragment extends Fragment {
         Spinner asignaturas = view.findViewById(R.id.asignaturas);
         //String urla="http://nationfis.hol.es/nonfc/asignaturad.php";
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         Integer codigo = preferences.getInt("codigo", 0);
 
 

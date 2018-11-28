@@ -4,6 +4,7 @@ package com.nationfis.controlacademicononfc.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,8 @@ import com.nationfis.controlacademicononfc.Clases.Spinners.AsignaturasDocentes.R
 import com.nationfis.controlacademicononfc.Clases.Spinners.Unidad.RecibirUnidades;
 import com.nationfis.controlacademicononfc.R;
 
+import java.util.Objects;
+
 import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.urla;
 
 /**
@@ -39,7 +42,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
     private DatosDatos datosDatos = new DatosDatos();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_comprobar_notas, container, false);
@@ -48,7 +51,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         Button registrar =  view.findViewById(R.id.registrar);
         notas = view.findViewById(R.id.notas);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences preferences = Objects.requireNonNull(getActivity()).getSharedPreferences("datos", Context.MODE_PRIVATE);
         codigo = preferences.getInt("codigo",0);
         String accion= MD5.encrypt("unidades");
 
@@ -76,7 +79,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         Integer codiuni= datosDatos.getUnidades();
         String tipo = "doc";
         String accion= MD5.encrypt("mnotas");
-        String anioa = getActivity().getResources().getString(R.string.año);
+        String anioa = Objects.requireNonNull(getActivity()).getResources().getString(R.string.año);
         new ComprobarNotas(getActivity(),urla,accion,notas,codiuni,codiasi,tipo,codigo,anioa).execute();
     }
 
@@ -85,7 +88,7 @@ public class ComprobarNotasFragment extends Fragment implements View.OnClickList
         String accion2 = MD5.encrypt("notan");
         Integer codiasi= datosDatos.getAsignaturasd();
         Integer codiuni= datosDatos.getUnidades();
-        String anioa = getActivity().getResources().getString(R.string.año);
+        String anioa = Objects.requireNonNull(getActivity()).getResources().getString(R.string.año);
         RegistrarNota registrarNota =new RegistrarNota(getActivity(),urla,accion1,codiasi,codiuni,codigo,anioa);
         registrarNota.execute();
         RegistrarNota registrarNota1 =new RegistrarNota(getActivity(),urla,accion2,codiasi,codiuni,codigo,anioa);

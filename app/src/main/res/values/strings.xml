@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Control Academico</string>
     <string name="action_settings">Settings</string>
-    <string name="año">2018-1</string>
+    <string name="año">2018-2</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-9824330589085662/1203598476</string>
+    <string name="interstitial_app_id">ca-app-pub-9824330589085662~6803958257</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Estamos trabajando en esta caracteristica</string>

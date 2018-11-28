@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ public class ActualizarActivo extends AsyncTask<Void,Void,String> {
     @SuppressLint("StaticFieldLeak")
     private TextView activado;
     private ProgressDialog pd;
-    public ActualizarActivo(Context c, String urla, String accion,String accion1, Integer activoid, Integer codigo, TextView activado) {
+    @SuppressLint("StaticFieldLeak")
+    private ImageView act;
+    public ActualizarActivo(Context c, String urla, String accion, String accion1, Integer activoid, Integer codigo, TextView activado, ImageView act) {
         this.c = c;
         this.urla = urla;
         this.accion = accion;
@@ -38,6 +41,7 @@ public class ActualizarActivo extends AsyncTask<Void,Void,String> {
         this.codigo = codigo;
         this.activado = activado;
         this.accion1 = accion1;
+        this.act = act;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class ActualizarActivo extends AsyncTask<Void,Void,String> {
         if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
-            new AnalizarActualizarActivo(c,s,activado,activoid).execute();
+            new AnalizarActualizarActivo(c,s,activado,activoid,act).execute();
         }
     }
 

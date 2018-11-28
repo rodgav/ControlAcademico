@@ -6,21 +6,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
+
 
 /*
  * Created by GlobalTIC's on 31/01/2018.
  */
 
-public class AnalizarEliminarToken extends AsyncTask<Void,Void,Integer> {
+public class AnalizarEliminarToken extends AsyncTask<Void, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
     private Context c;
-    private String s,mensaje;
+    private String s, mensaje;
     AnalizarEliminarToken(Context c, String s) {
         this.c = c;
         this.s = s;
@@ -34,7 +37,7 @@ public class AnalizarEliminarToken extends AsyncTask<Void,Void,Integer> {
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-        if(integer==1) {
+        if (integer == 1) {
             if (mensaje != null) {
                 Toast.makeText(c, mensaje, Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = c.getSharedPreferences("datos", Context.MODE_PRIVATE);
@@ -49,17 +52,19 @@ public class AnalizarEliminarToken extends AsyncTask<Void,Void,Integer> {
         }
     }
 
-    private Integer analizar() {try{
-        JSONArray ja = new JSONArray(s);
-        JSONObject jo;
-        for(int i=0;i<ja.length();i++){
-            jo=ja.getJSONObject(i);
-            mensaje=jo.getString("mensaje");
+    private Integer analizar() {
+        Log.w(TAG, s);
+        try {
+            JSONArray ja = new JSONArray(s);
+            JSONObject jo;
+            for (int i = 0; i < ja.length(); i++) {
+                jo = ja.getJSONObject(i);
+                mensaje = jo.getString("mensaje");
+            }
+            return 1;
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        return 1;
-    }catch (JSONException e){
-        e.printStackTrace();
-    }
         return 0;
     }
 }

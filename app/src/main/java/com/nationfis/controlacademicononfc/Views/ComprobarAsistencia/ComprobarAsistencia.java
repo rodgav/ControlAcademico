@@ -86,7 +86,7 @@ public class ComprobarAsistencia extends AsyncTask<Void,Void,String>{
         super.onPostExecute(s);
         //pd.dismiss();
         swipeRefreshLayout.setRefreshing(false);
-        if (s==null ){
+        if (s==null){
             Toast.makeText(c,"No tiene internet",Toast.LENGTH_SHORT).show();
         }else {
             new AnalizadorComprobarAsistencia(c,s,estudiantes,tipo,a).execute();

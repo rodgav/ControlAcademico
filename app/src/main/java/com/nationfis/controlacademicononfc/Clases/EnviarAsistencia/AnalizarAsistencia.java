@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.nationfis.controlacademicononfc.Activitys.NavigationActivity.TAG;
+
 /*
  * Created by SamGM on 23/04/2017.
  */
@@ -34,7 +36,7 @@ public class AnalizarAsistencia extends AsyncTask<Void,Void,Integer>{
         try {
             JSONObject jo;
             JSONArray ja = new JSONArray(s);
-            Log.w("asd",s);
+            Log.w(TAG,s);
             for (int i=0;i<ja.length();i++){
                 jo=ja.getJSONObject(i);
                 mensaje = jo.getString("mensaje");
