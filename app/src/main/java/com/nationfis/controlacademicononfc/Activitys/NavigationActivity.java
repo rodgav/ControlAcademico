@@ -54,7 +54,7 @@ import com.nationfis.controlacademicononfc.R;
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     //public static final String urla = "https://controlacademicofis.xyz/controlacademico/entrada.php";
     //public static final String urla = "http://192.168.1.75/controlacademico/entrada.php";
-    public static final String urla = "http://hclpcompuserver.com/controlacademico/entrada.php";
+    public static final String urla = "http://rsgm.online/controlacademico/entrada.php";
     public static final String TAG = "TAG: ";
     public static final String NOTIFICACION = "NOTIFICACION";
     private BroadcastReceiver broadcastReceiver;
@@ -99,6 +99,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         NavigationView navigationView = findViewById(R.id.nav_view);
 
 
+        assert tipo != null;
         switch (tipo) {
             case "ac99fecf6fcb8c25d18788d14a5384ee":
                 navigationView.getMenu().setGroupVisible(R.id.group1, true);

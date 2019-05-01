@@ -82,7 +82,7 @@ public class AnalizadorAsignaturas extends AsyncTask<Void,Void,Integer>{
             for (int i =0; i<ja.length();i++){
                 jo=ja.getJSONObject(i);
                 String nombre = jo.getString("nombre");
-                Integer codigo = jo.getInt("codigo");
+                int codigo = jo.getInt("codigo");
 
                 if (idar==codigo){
                     posicion=i;

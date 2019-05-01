@@ -149,7 +149,7 @@ public class PerfilFragment extends Fragment implements View.OnClickListener{
     private void Llamar() {
         Intent i = new Intent(Intent.ACTION_CALL);
         i.setData(Uri.parse("tel:" + Integer.valueOf(telefono.getText().toString())));
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         getActivity().startActivity(i);

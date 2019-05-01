@@ -44,7 +44,7 @@ public class LoginActvity extends AppCompatActivity {
         //preferences.edit().remove("datos").apply();
         String tipo = preferences.getString("a", "");
         String nombre = preferences.getString("nombre", "");
-        Integer codigo = preferences.getInt("codigo", 0);
+        int codigo = preferences.getInt("codigo", 0);
         String image = preferences.getString("image", "");
         String tipos = preferences.getString("tipos", "");
 
@@ -55,6 +55,10 @@ public class LoginActvity extends AppCompatActivity {
 
         SolicitarPermisos();
         if (savedInstanceState == null) {
+            assert tipo != null;
+            assert nombre != null;
+            assert image != null;
+            assert tipos != null;
             if (tipo.length() > 0 || nombre.length() > 0 || codigo != 0 || image.length() > 0 || tipos.length() > 0) {
                 Intent intent = new Intent(this, NavigationActivity.class);
                 startActivity(intent);
@@ -108,7 +112,8 @@ public class LoginActvity extends AppCompatActivity {
 
             }
         }*/
-        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CALL_PHONE};
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CALL_PHONE};
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int call = checkSelfPermission(Manifest.permission.CALL_PHONE);
             int rw = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
