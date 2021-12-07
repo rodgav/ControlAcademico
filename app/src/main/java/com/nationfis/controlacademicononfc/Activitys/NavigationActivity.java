@@ -54,7 +54,8 @@ import com.nationfis.controlacademicononfc.R;
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     //public static final String urla = "https://controlacademicofis.xyz/controlacademico/entrada.php";
     //public static final String urla = "http://192.168.1.75/controlacademico/entrada.php";
-    public static final String urla = "http://rsgm.online/controlacademico/entrada.php";
+    //public static final String urla = "http://rsgm.online/controlacademico/entrada.php";
+    public static final String urla = "http://192.168.0.107/APIControlAcademico/entrada.php";
     public static final String TAG = "TAG: ";
     public static final String NOTIFICACION = "NOTIFICACION";
     private BroadcastReceiver broadcastReceiver;
